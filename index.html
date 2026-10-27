@@ -285,6 +285,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
   .reveal{max-height:none!important;opacity:1!important}
   .card{backdrop-filter:none!important}
 }
+.slide.bonus{display:none!important}
 </style>
 </head>
 <body>
@@ -334,7 +335,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 </section>
 
 <section class="slide" data-title="Dulu: punya server sendiri">
-  <div class="kicker"><span class="part">Bab 1</span>Kenapa cloud? · Konsep dasar · dulu</div>
+  <div class="kicker"><span class="part">Bab 1</span>Kenapa cloud? · Dulu</div>
   <h2>Kamu bikin aplikasi <span class="acc">“Kumpulin” 📚⏰</span> — tempat satu kampus ngumpulin tugas. Supaya bisa dipakai <b>24 jam</b>, butuh apa?</h2>
   <p class="mute" style="margin:0">Aplikasi harus jalan di komputer (<b>server</b>) yang <b>nyala 24 jam</b>. Klik semua yang menurutmu dibutuhkan:</p>
   <div class="grid2">
@@ -361,7 +362,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 </section>
 
 <section class="slide" data-title="Lalu AWS hadir">
-  <div class="kicker"><span class="part">Bab 1</span>Kenapa cloud? · Konsep dasar · sekarang</div>
+  <div class="kicker"><span class="part">Bab 1</span>Kenapa cloud? · Sekarang</div>
   <h2>Lalu <span class="acc">cloud</span> hadir: tidak usah beli, <span class="acc">sewa</span> & bayar sesuai pakai ☁️</h2>
   <div class="row" id="scmode">
     <button class="btn on" data-m="kos">1️⃣ Pakai server di kamar kos</button>
@@ -378,7 +379,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 </section>
 
 <section class="slide" data-title="Mau urus sebanyak apa?">
-  <div class="kicker"><span class="part">Bab 1</span>Kenapa cloud? · Pilihan sewa</div>
+  <div class="kicker"><span class="part">Bab 2</span>Cara pakai cloud · Pilihan sewa</div>
   <h2>Mau urus sebanyak apa? Analogi <span class="acc">makan</span></h2>
   <p class="mute" style="margin:0">Klik salah satu. Makin ke kanan, makin <b>sedikit</b> yang kamu urus sendiri.</p>
   <div class="grid4" id="pizzabtns"></div>
@@ -391,7 +392,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 </section>
 
 <section class="slide" data-title="Kenalan: EC2 & S3">
-  <div class="kicker"><span class="part">Bab 1</span>Kenapa cloud? · Kenalan layanan AWS</div>
+  <div class="kicker"><span class="part">Bab 2</span>Cara pakai cloud · Kenalan layanan AWS</div>
   <h2>Kenalan dulu: <span class="acc">EC2</span> & <span class="acc">S3</span> 🖥️🪣</h2>
   <div class="grid2" style="grid-template-columns:1.25fr 1fr">
     <div class="card">
@@ -406,33 +407,36 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
     </div>
     <div class="card">
       <h3>🪣 Amazon S3 — gudang file tanpa batas</h3>
-      <p class="mute" style="margin:.2rem 0 .5rem;font-size:.98rem"><b>S3</b> = <i>Simple Storage Service</i>. Tempat menyimpan tugas, foto, video — berapa pun banyaknya. Bedanya dengan EC2: file di S3 <b>otomatis disalin ke minimal 3 gedung (AZ)</b>.</p>
+      <p class="mute" style="margin:.2rem 0 .5rem;font-size:.98rem"><b>S3</b> = <i>Simple Storage Service</i>. Tempat menyimpan tugas, foto, video — berapa pun banyaknya. Bedanya dengan EC2: kamu <b>tidak mengurus server</b> sama sekali, cukup upload file.</p>
       <button class="btn primary" id="s3up">📤 Upload tugas.pdf</button>
       <div class="grid3" id="s3az" style="margin-top:.6rem"></div>
       <p id="s3msg" class="mute" style="margin:.5rem 0 0;font-size:.92rem"></p>
     </div>
   </div>
   <p class="mute" style="margin:0">💡 EC2 & S3 akan muncul lagi di <b>game arsitek cloud</b> nanti — bersama teman-temannya: Load balancer, Auto Scaling, dan CloudFront. 😉</p>
-  <p class="bridge">👉 Hmm… kalau semua diurus AWS, data kita aman nggak?</p>
+  <p class="bridge">👉 Bayarnya per jam… berarti kayak argo taksi dong?</p>
 </section>
 
-<section class="slide" data-title="Kepercayaan: data kamu aman?">
-  <div class="kicker"><span class="part">Bab 2</span>Bisa dipercaya? · Kenapa orang percaya pada AWS?</div>
-  <h2>Datamu aman? <span class="acc">Dijaga berlapis</span> 🔐🧅</h2>
-  <div class="grid2" style="grid-template-columns:1fr 1fr;align-items:center">
-    <svg id="onion" viewBox="-12 -12 424 424" width="100%" style="max-height:56vh;overflow:visible;animation:zin .8s ease both"></svg>
-    <div>
-      <p class="mute" style="margin-top:0">Klik tiap lapisan, dari luar ke dalam 👆</p>
-      <div class="card"><h3 id="onT">👆 Pilih lapisan</h3><p id="onD" class="mute" style="margin-bottom:0"></p></div>
-      <div class="card" style="margin-top:.8rem">📚 <b>Di “Kumpulin”</b> ada tugas, nilai, dan data pribadimu. Siapa yang menjaganya? <b>Lapisan-lapisan di kiri</b> — dan lapisan terakhir: <b>kamu sendiri</b>.</div>
-      <div class="card hl" style="margin-top:.8rem"><b>Shared responsibility:</b> AWS menjaga keamanan <i>cloud-nya</i> (gedung, hardware, jaringan). Kamu menjaga keamanan <i>yang kamu taruh di cloud</i> (password, izin akses, data yang kamu buka ke publik).</div>
+<section class="slide" data-title="Latihan bersih-bersih">
+  <div class="kicker"><span class="part">Bab 2</span>Cara pakai cloud · Bayar sesuai pakai</div>
+  <h2>Cloud itu kayak argo taksi 🚕 — jalan terus selama resource nyala</h2>
+  <p class="mute" style="margin:0">Meskipun tidak kamu pakai, resource yang masih ada tetap ditagih per jam. Tekan <b>Mulai</b>, lalu matikan semuanya secepat mungkin dengan cara yang benar! <span class="src">(angka rupiah = ilustrasi)</span></p>
+  <div class="grid2">
+    <div class="card" id="cres"></div>
+    <div class="card" style="text-align:center">
+      <p class="mute" style="margin:0" id="chour">Jam ke-0</p>
+      <div class="bill" id="cbill">Rp 0</div>
+      <p id="crate" class="acc" style="margin:.2rem 0"></p>
+      <div class="row" style="justify-content:center"><button class="btn primary" id="cstart">▶️ Mulai argo</button><button class="btn" id="creset">🔄 Ulang</button></div>
+      <p id="cmsg" style="text-align:left"></p>
     </div>
   </div>
-  <p class="bridge">👉 Oke, aman. Tapi gedung-gedung itu sebenarnya ada di mana?</p>
+  <p class="mute" style="margin:0">Di lab nanti, kita praktikkan ini di akun asli: hapus app setelah selesai. 🧹</p>
+  <p class="bridge">👉 Oke, bayar sesuai pakai. Tapi server-server ini sebenarnya ada di mana?</p>
 </section>
 
 <section class="slide" data-title="Infrastruktur global (zoom)">
-  <div class="kicker"><span class="part">Bab 3</span>Di mana datamu tinggal? · Infrastruktur global</div>
+  <div class="kicker"><span class="part">Bab 3</span>Di mana datamu tinggal? · Region & AZ</div>
   <h2>Zoom in: dari peta dunia sampai ke satu server 🔍</h2>
   <div class="crumbs" id="crumbs"></div>
   <div class="grid2" style="grid-template-columns:1.35fr 1fr">
@@ -446,29 +450,21 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 </section>
 
 <section class="slide" data-title="Availability: satu gedung mati?">
-  <div class="kicker"><span class="part">Bab 3</span>Di mana datamu tinggal? · Ketersediaan (availability)</div>
-  <h2>Simulasi: kalau satu gedung mati, tugasmu masih ada?</h2>
-  <p class="mute" style="margin:0">Di dunia nyata, Amazon S3 <b>otomatis</b> menyimpan setiap file di <b>minimal 3 Availability Zone</b> (gedung berbeda). Coba buktikan: <b>1)</b> upload tugas, <b>2)</b> klik satu gedung untuk “mematikannya” (banjir / listrik padam), <b>3)</b> buka tugasmu.</p>
-  <div class="row"><button class="btn primary" id="azup">📤 Upload tugas</button><button class="btn" id="azopen">📲 Buka tugas</button><button class="btn" id="azreset">🔄 Reset</button></div>
-  <div class="grid3" id="azs"></div>
-  <div class="card" style="text-align:center"><div class="status" id="azstat"></div><p class="mute" id="azsub" style="margin:.3rem 0 0"></p></div>
-  <p class="bridge">👉 Kalau dihitung, seberapa ‘selalu nyala’ itu?</p>
-</section>
-
-<section class="slide" data-title="Angka resmi: berapa 9?">
-  <div class="kicker"><span class="part">Bab 3</span>Di mana datamu tinggal? · Angka resmi AWS</div>
-  <h2>File otomatis disalin. Server? <span class="acc">Harus kamu atur sendiri</span> 🏢🏢</h2>
-  <div class="row" id="nsel"></div>
-  <div class="grid2" style="grid-template-columns:1.2fr 1fr">
-    <div class="card" id="nvis" style="min-height:220px"></div>
-    <div class="card" id="ntxt"></div>
+  <div class="kicker"><span class="part">Bab 3</span>Di mana datamu tinggal? · Satu gedung mati</div>
+  <h2>Satu gedung mati: aplikasimu <span class="acc">ikut mati?</span> 🏢💥</h2>
+  <p class="mute" style="margin:0"><b>1)</b> Pilih yang mau dites · <b>2)</b> klik satu gedung (AZ) untuk “mematikannya” (banjir / listrik padam) · <b>3)</b> tekan <b>📲 Buka Kumpulin</b>.</p>
+  <div class="row" id="avsel"></div>
+  <div class="grid2" style="grid-template-columns:1.25fr 1fr">
+    <div><div class="grid3" id="avs"></div><div class="row" style="margin-top:.5rem"><button class="btn primary" id="avopen">📲 Buka Kumpulin</button><button class="btn" id="avreset">🔄 Hidupkan semua gedung</button></div></div>
+    <div class="card" id="avtxt"></div>
   </div>
+  <div class="card" style="text-align:center;padding:.6rem"><div class="status" id="avstat"></div><p class="mute" id="avsub" style="margin:.3rem 0 0"></p></div>
   <p class="src">Sumber: Amazon Compute SLA (EC2: 99,5% per instance; 99,99% untuk instance di 2+ AZ) & Amazon S3 Storage Classes (S3 Standard: data di ≥3 AZ, durability 11 sembilan) — aws.amazon.com, dicek Oktober 2026.</p>
   <p class="bridge">👉 Gedung-gedung ini terhubung kabel. Yuk lihat perjalanan data saat kamu tap “Play”!</p>
 </section>
 
 <section class="slide" data-title="Perjalanan satu klik">
-  <div class="kicker"><span class="part">Bab 3</span>Di mana datamu tinggal? · Jaringan & perjalanan satu klik</div>
+  <div class="kicker"><span class="part">Bab 3</span>Di mana datamu tinggal? · Perjalanan satu klik</div>
   <h2>Kamu tap “Play”… lalu apa yang terjadi? ⚡</h2>
   <div class="row"><button class="btn primary" id="jplay">📤 Upload tugas (sampai server)</button><button class="btn" id="jplay2">🎬 Nonton video populer (cache hit)</button><span class="pill" id="jms">0 ms</span><span class="mute" style="font-size:.9rem">(diperlambat ±1000× supaya kelihatan)</span></div>
   <div class="card" style="padding:.3rem"><svg id="jsvg" viewBox="0 0 1000 250" width="100%" style="max-height:30vh"></svg></div>
@@ -486,38 +482,31 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
     <div class="card" style="padding:.7rem 1rem">
       <b>📏 Makin jauh, makin lama</b>
       <div class="row" id="lpre" style="margin:.4rem 0"></div>
+      <svg id="lsvg" viewBox="0 0 500 70" width="100%" style="margin:.2rem 0"></svg>
       <p style="margin:0;font-size:1.25rem">Jakarta → <b id="ldest">Singapura</b> bolak-balik minimal <b class="acc" id="lrtt"></b></p>
       <p class="mute" id="lnote" style="margin:0;font-size:.95rem"></p>
     </div>
   </div>
-  <p class="bridge">👉 Di tengah jalan tadi ada ⚡ CloudFront. Sebenarnya apa gunanya?</p>
+  <p class="bridge">👉 Paketmu sampai di data center. Tapi aman nggak sih datamu di sana?</p>
 </section>
 
-
-
-
-
-<section class="slide" data-title="Cache: CloudFront">
-  <div class="kicker"><span class="part">Bab 3</span>Di mana datamu tinggal? · Cache</div>
-  <h2>Taruh salinannya <span class="acc">dekat kamu</span>: Amazon CloudFront ⚡📦</h2>
-  <p class="mute" style="margin:0">Server “Kumpulin” ada di <b>Amerika</b> (dulu ditaruh di sana sama kakak tingkat 😅), mahasiswanya di <b>Jakarta</b>. Nyalakan/matikan CloudFront, lalu klik <b>Buka website</b> beberapa kali.</p>
-  <div class="row"><button class="btn on" id="cfon">⚡ CloudFront: ON</button><button class="btn primary" id="cfvis">👤 Buka website</button><button class="btn" id="cfburst">🔥 100 pengunjung sekaligus</button><button class="btn" id="cfinv">🔄 Update konten</button><button class="btn" id="cfreset">🧹 Reset</button></div>
-  <div class="card" style="padding:.4rem"><svg id="cfsvg" viewBox="0 25 900 155" width="100%"></svg></div>
-  <div class="grid4" id="cfstat"></div>
-  <div class="grid2">
-    <div class="card"><p id="cfmsg" style="margin:0">👆 Coba klik <b>Buka website</b>.</p></div>
-    <div class="card"><p style="margin:0">📠 <b>Cache itu seperti tukang fotokopi depan kampus.</b> Cukup <b>satu orang</b> yang ambil materi asli jauh-jauh (ke server di Amerika). Setelah itu salinannya disimpan dekat kamu (CloudFront Jakarta), jadi yang lain tinggal ambil di situ — <b>cepat</b>, dan server asli tidak kewalahan.</p></div>
+<section class="slide" data-title="Kepercayaan: data kamu aman?">
+  <div class="kicker"><span class="part">Bab 4</span>Masuk ke gedung · Dijaga berlapis</div>
+  <h2>Datamu aman? <span class="acc">Dijaga berlapis</span> 🔐🧅</h2>
+  <div class="grid2" style="grid-template-columns:1fr 1fr;align-items:center">
+    <svg id="onion" viewBox="-12 -12 424 424" width="100%" style="max-height:56vh;overflow:visible;animation:zin .8s ease both"></svg>
+    <div>
+      <p class="mute" style="margin-top:0">Klik tiap lapisan, dari luar ke dalam 👆</p>
+      <div class="card"><h3 id="onT">👆 Pilih lapisan</h3><p id="onD" class="mute" style="margin-bottom:0"></p></div>
+      <div class="card" style="margin-top:.8rem">📚 <b>Di “Kumpulin”</b> ada tugas, nilai, dan data pribadimu. Siapa yang menjaganya? <b>Lapisan-lapisan di kiri</b> — dan lapisan terakhir: <b>kamu sendiri</b>.</div>
+      <div class="card hl" style="margin-top:.8rem"><b>Shared responsibility:</b> AWS menjaga keamanan <i>cloud-nya</i> (gedung, hardware, jaringan). Kamu menjaga keamanan <i>yang kamu taruh di cloud</i> (password, izin akses, data yang kamu buka ke publik).</div>
+    </div>
   </div>
-  <p class="src">CloudFront: 750+ Points of Presence di 100+ kota, 50+ negara — termasuk Jakarta (aws.amazon.com/cloudfront/features, dicek Oktober 2026). Angka waktu = ilustrasi.</p>
-  <p class="bridge">👉 Paketmu sampai di data center. Yuk, kita ikut masuk!</p>
+  <p class="bridge">👉 Lapisan paling luar itu gedungnya. Yuk, kita masuk!</p>
 </section>
-
-
-
-
 
 <section class="slide" data-title="Tur: masuk ke data center">
-  <div class="kicker"><span class="part">Bab 4</span>Masuk ke gedung · Tur virtual data center</div>
+  <div class="kicker"><span class="part">Bab 4</span>Masuk ke gedung · Tur & kenalan tim</div>
   <h2>Ayo masuk ke data center 🏢 <span class="mute" style="font-size:1rem">(ilustrasi umum, bukan denah asli)</span></h2>
   <div class="grid2" style="grid-template-columns:1.45fr 1fr">
     <div class="card" style="padding:.5rem">
@@ -525,38 +514,25 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
     </div>
     <div class="card">
       <div class="row"><button class="btn primary" id="tourgo">🚶 Mulai jalan</button><button class="btn" id="tourauto">🎬 Tur otomatis</button><button class="btn" id="tourre">⏮ Ulang</button><button class="btn" id="airbtn">🌬️ Aliran udara</button></div>
-      <p class="pill" id="tourstep" style="margin-top:.8rem">Langkah 0 / 9</p>
+      <p class="pill" id="tourstep" style="margin-top:.8rem">Langkah 0 / 11</p>
       <h3 id="dcT">Siap? Kita mulai dari gerbang depan 🚧</h3>
       <p id="dcD" class="mute">Klik 🚶 untuk berjalan selangkah demi selangkah, 🎬 untuk tur otomatis, atau klik ruangan mana pun di denah.</p>
       <p id="dcF" class="acc"></p>
+      <div id="dcR"></div>
       <div id="ppe" class="row" style="display:none"></div>
     </div>
   </div>
-  <p class="bridge">👉 Gedungnya canggih. Tapi siapa yang kerja di dalamnya setiap hari?</p>
+  <p class="bridge">👉 Kamu sudah ketemu 5 tim. Sebelum ikut kerja, satu hal paling penting…</p>
 </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section class="slide" data-title="Role-role di data center">
-  <div class="kicker"><span class="part">Bab 5</span>Siapa yang menjaga? · Siapa saja yang kerja di DC?</div>
-  <h2>Satu gedung, banyak peran 🧑‍🔧👩‍💻🛡️ <span class="mute" style="font-size:1rem">(klik perannya)</span></h2>
-  <div class="grid4" id="roles" style="grid-template-columns:repeat(5,1fr)"></div>
-  <div class="card fadeup" id="roledet"></div>
-  <p class="bridge">👉 Sekarang jalani satu hari kerja keliling semua tim — dalam bentuk game! 🎮</p>
+<section class="slide" data-title="Safety nomor satu">
+  <div class="kicker"><span class="part">Bab 5</span>Siapa yang menjaga? · Sebelum mulai kerja</div>
+  <h2>🦺 Safety nomor satu — pilih kebiasaan yang benar!</h2>
+  <p class="mute" style="margin:0">Klik semua kebiasaan yang <b>aman & benar</b> — pakai perlengkapan safety, kerja bareng, berani bilang STOP — lalu tekan <b>Cek jawaban</b>.</p>
+  <div class="grid3" id="hz" style="grid-template-columns:repeat(5,1fr)"></div>
+  <div class="row"><button class="btn primary" id="hzchk">✅ Cek jawaban</button><button class="btn" id="hzre">🔄 Ulang</button><span id="hzres"></span></div>
+  <div class="card hl"><p style="margin:0">💬 <i>“Tidak ada deadline, tidak ada server, yang lebih penting dari semua orang <b>pulang dengan selamat</b>.”</i> Siapa pun boleh bilang <b>STOP</b> kalau melihat bahaya.</p></div>
+  <p class="bridge">👉 Siap? Sekarang jalani satu hari kerja keliling semua tim!</p>
 </section>
 
 <section class="slide" data-title="Sehari kerja di data center">
@@ -660,21 +636,11 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
     <div class="card" style="margin-top:.5rem"><p id="hmsg" style="margin:0">Suhu terus naik! Apa yang kamu lakukan? 🤔</p></div>
   </div>
 </div>
-  <p class="bridge">👉 Di atas semua peran itu, ada satu nilai yang paling penting…</p>
-</section>
-
-<section class="slide" data-title="Safety nomor satu">
-  <div class="kicker"><span class="part">Bab 5</span>Siapa yang menjaga? · Nilai yang kami junjung tinggi</div>
-  <h2>🦺 Safety nomor satu — pilih kebiasaan yang benar!</h2>
-  <p class="mute" style="margin:0">Klik semua kebiasaan yang <b>aman & benar</b> — pakai perlengkapan safety, kerja bareng, berani bilang STOP — lalu tekan <b>Cek jawaban</b>.</p>
-  <div class="grid3" id="hz" style="grid-template-columns:repeat(5,1fr)"></div>
-  <div class="row"><button class="btn primary" id="hzchk">✅ Cek jawaban</button><button class="btn" id="hzre">🔄 Ulang</button><span id="hzres"></span></div>
-  <div class="card hl"><p style="margin:0">💬 <i>“Tidak ada deadline, tidak ada server, yang lebih penting dari semua orang <b>pulang dengan selamat</b>.”</i> Siapa pun boleh bilang <b>STOP</b> kalau melihat bahaya.</p></div>
-  <p class="bridge">👉 Kamu sudah lihat sisi gedungnya. Sekarang coba sisi cloud-nya!</p>
+  <p class="bridge">👉 Kamu sudah lihat sisi gedungnya. Sekarang giliranmu deploy di cloud!</p>
 </section>
 
 <section class="slide" data-title="Akun AWS: gimana caranya?">
-  <div class="kicker"><span class="part">Bab 6</span>Sekarang giliranmu · Saatnya coba AWS sungguhan</div>
+  <div class="kicker"><span class="part">Bab 6</span>Let's deploy! · Siapkan akun</div>
   <h2>Butuh akun AWS? Cari jalur yang cocok untukmu 🧭</h2>
   <div class="grid2">
     <div class="card">
@@ -698,7 +664,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 </section>
 
 <section class="slide" data-title="Lab: website online (Amplify)">
-  <div class="kicker"><span class="part">Bab 6</span>Sekarang giliranmu · Lab utama · ±10 menit · AWS Amplify (tanpa coding)</div>
+  <div class="kicker"><span class="part">Bab 6</span>Let's deploy! · Lab utama · ±10 menit · AWS Amplify (tanpa coding)</div>
   <h2>Bikin website pribadimu, lalu online-kan 🌍</h2>
   <div class="grid2">
     <div class="card">
@@ -724,15 +690,14 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
     </div>
   </div>
   <div class="card" style="padding:.6rem 1rem"><b>📋 Langkah di console AWS</b><div id="lab1" class="lab1grid"></div></div>
+  <div class="card" style="padding:.5rem 1rem"><b>🧹 Selesai lab? Matikan argonya:</b> Amplify → app → App settings → General settings → <b>Delete app</b> · cek <b>Billing → Bills</b> · biarkan <b>budget alert</b> tetap aktif sebagai “alarm asap” 🚨</div>
   <p class="bridge">👉 Belum punya akun? Tenang — ayo main jadi arsitek cloud!</p>
 </section>
 
-
-
 <section class="slide" data-title="Game: jadi arsitek cloud">
-  <div class="kicker"><span class="part">Bab 6</span>Sekarang giliranmu · Game · tanpa akun · tanpa biaya</div>
+  <div class="kicker"><span class="part">Bab 6</span>Let's deploy! · Game · tanpa akun · tanpa biaya</div>
   <h2>🏗️ Jadi arsitek cloud: bikin “Kumpulin” yang <span class="acc">anti down</span>!</h2>
-  <p class="mute" style="margin:0">Pilih komponen di kanan, taruh server di AZ, lalu tekan <b>🧪 Uji arsitektur</b>. 🏆 <b>Tantangan:</b> lulus <b>5 ujian</b> dengan tagihan normal ≤ <b>Rp 3.200/jam</b> — makin hemat makin keren <span class="src">(angka ilustrasi)</span>.</p>
+  <p class="mute" style="margin:0">Pilih komponen di kanan, taruh server di AZ, lalu tekan <b>🧪 Uji arsitektur</b>. 🏆 <b>Tantangan:</b> lulus <b>3 ujian</b> dengan tagihan sehemat mungkin <span class="src">(angka ilustrasi)</span>.</p>
   <div class="grid2" style="grid-template-columns:1.45fr 1fr">
     <div class="card" id="arch" style="padding:.8rem;position:relative"></div>
     <div>
@@ -743,24 +708,6 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
     </div>
   </div>
   <div class="card"><p id="amsg" style="margin:0">💡 Klik <b>🖥️ EC2</b>, lalu klik kolom AZ untuk menaruh server. Klik server yang sudah ada untuk tahu dia “tinggal” di mana.</p></div>
-  <p class="bridge">👉 Selesai main… jangan lupa langkah paling penting!</p>
-</section>
-
-<section class="slide" data-title="Latihan bersih-bersih">
-  <div class="kicker"><span class="part">Bab 6</span>Sekarang giliranmu · Latihan · wajib dipahami!</div>
-  <h2>Cloud itu kayak argo taksi 🚕 — jalan terus selama resource nyala</h2>
-  <p class="mute" style="margin:0">Meskipun tidak kamu pakai, resource yang masih ada tetap ditagih per jam. Tekan <b>Mulai</b>, lalu matikan semuanya secepat mungkin dengan cara yang benar! <span class="src">(angka rupiah = ilustrasi)</span></p>
-  <div class="grid2">
-    <div class="card" id="cres"></div>
-    <div class="card" style="text-align:center">
-      <p class="mute" style="margin:0" id="chour">Jam ke-0</p>
-      <div class="bill" id="cbill">Rp 0</div>
-      <p id="crate" class="acc" style="margin:.2rem 0"></p>
-      <div class="row" style="justify-content:center"><button class="btn primary" id="cstart">▶️ Mulai argo</button><button class="btn" id="creset">🔄 Ulang</button></div>
-      <p id="cmsg" style="text-align:left"></p>
-    </div>
-  </div>
-  <div class="card"><b>Di akun asli setelah lab:</b> Amplify → app → App settings → General settings → <b>Delete app</b> · cek <b>Billing → Bills</b> · biarkan <b>budget alert</b> tetap aktif sebagai “alarm asap” 🚨</div>
   <p class="bridge">👉 Masih ingat semuanya? Kuis!</p>
 </section>
 
@@ -791,6 +738,41 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
   <p class="mute" style="max-width:760px"><i>“Website yang kamu deploy hari ini jalan di server nyata, di dalam rack nyata, yang dipasang orang-orang nyata. Suatu hari, mungkin kamu yang memasangnya.”</i></p>
 </section>
 
+<section class="slide bonus" data-title="Angka resmi: berapa 9?">
+  <div class="kicker"><span class="part">Bab 3</span>Di mana datamu tinggal? · Angka resmi AWS</div>
+  <h2>File otomatis disalin. Server? <span class="acc">Harus kamu atur sendiri</span> 🏢🏢</h2>
+  <div class="row" id="nsel"></div>
+  <div class="grid2" style="grid-template-columns:1.2fr 1fr">
+    <div class="card" id="nvis" style="min-height:220px"></div>
+    <div class="card" id="ntxt"></div>
+  </div>
+  <p class="src">Sumber: Amazon Compute SLA (EC2: 99,5% per instance; 99,99% untuk instance di 2+ AZ) & Amazon S3 Storage Classes (S3 Standard: data di ≥3 AZ, durability 11 sembilan) — aws.amazon.com, dicek Oktober 2026.</p>
+  <p class="bridge">👉 Gedung-gedung ini terhubung kabel. Yuk lihat perjalanan data saat kamu tap “Play”!</p>
+</section>
+
+<section class="slide bonus" data-title="Cache: CloudFront">
+  <div class="kicker"><span class="part">Bab 3</span>Di mana datamu tinggal? · Cache</div>
+  <h2>Taruh salinannya <span class="acc">dekat kamu</span>: Amazon CloudFront ⚡📦</h2>
+  <p class="mute" style="margin:0">Server “Kumpulin” ada di <b>Amerika</b> (dulu ditaruh di sana sama kakak tingkat 😅), mahasiswanya di <b>Jakarta</b>. Nyalakan/matikan CloudFront, lalu klik <b>Buka website</b> beberapa kali.</p>
+  <div class="row"><button class="btn on" id="cfon">⚡ CloudFront: ON</button><button class="btn primary" id="cfvis">👤 Buka website</button><button class="btn" id="cfburst">🔥 100 pengunjung sekaligus</button><button class="btn" id="cfinv">🔄 Update konten</button><button class="btn" id="cfreset">🧹 Reset</button></div>
+  <div class="card" style="padding:.4rem"><svg id="cfsvg" viewBox="0 25 900 155" width="100%"></svg></div>
+  <div class="grid4" id="cfstat"></div>
+  <div class="grid2">
+    <div class="card"><p id="cfmsg" style="margin:0">👆 Coba klik <b>Buka website</b>.</p></div>
+    <div class="card"><p style="margin:0">📠 <b>Cache itu seperti tukang fotokopi depan kampus.</b> Cukup <b>satu orang</b> yang ambil materi asli jauh-jauh (ke server di Amerika). Setelah itu salinannya disimpan dekat kamu (CloudFront Jakarta), jadi yang lain tinggal ambil di situ — <b>cepat</b>, dan server asli tidak kewalahan.</p></div>
+  </div>
+  <p class="src">CloudFront: 750+ Points of Presence di 100+ kota, 50+ negara — termasuk Jakarta (aws.amazon.com/cloudfront/features, dicek Oktober 2026). Angka waktu = ilustrasi.</p>
+  <p class="bridge">👉 Paketmu sampai di data center. Yuk, kita ikut masuk!</p>
+</section>
+
+<section class="slide bonus" data-title="Role-role di data center">
+  <div class="kicker"><span class="part">Bab 5</span>Siapa yang menjaga? · Siapa saja yang kerja di DC?</div>
+  <h2>Satu gedung, banyak peran 🧑‍🔧👩‍💻🛡️ <span class="mute" style="font-size:1rem">(klik perannya)</span></h2>
+  <div class="grid4" id="roles" style="grid-template-columns:repeat(5,1fr)"></div>
+  <div class="card fadeup" id="roledet"></div>
+  <p class="bridge">👉 Sekarang jalani satu hari kerja keliling semua tim — dalam bentuk game! 🎮</p>
+</section>
+
 <div id="foot">Materi edukasi berdasarkan informasi publik AWS. Semua gambar data center adalah ilustrasi umum.</div>
 <div id="nav"><button class="btn" id="qrbtn" title="QR code (Q)">📲</button><button class="btn" id="home" title="ke slide 1">🏠</button><button class="btn" id="prev">◀</button><span id="count"></span><button class="btn" id="next">▶</button></div>
 <div id="qrov" style="position:fixed;inset:0;z-index:35;background:rgba(5,10,20,.92);display:none;align-items:center;justify-content:center;flex-direction:column;gap:1rem;cursor:pointer">
@@ -816,7 +798,7 @@ $("#presenter").innerHTML = `<b>${esc(PRESENTER.name)}</b> <span class="mute">·
 $("#presenter2").innerHTML = $("#presenter").innerHTML;
 
 /* ---------- navigation ---------- */
-const slides = $$(".slide");
+const slides = $$(".slide:not(.bonus)");
 let cur = 0;
 const hooks = {}, keyHooks = {};
 function go(n) {
@@ -1046,7 +1028,7 @@ const LAYERS = ["Aplikasi & data — masakannya", "Sistem operasi — resep & ca
 const MODELS = [
   { you: 5, e: "🛒", h: "Masak dari nol", t: "On-premise", full: "“di tempat sendiri”", ex: "server sendiri di kamar kos", d: "Beli kompor, gas, panci, dan bahan, masak sendiri, lalu cuci piring sendiri. Seperti Kumpulin di kamar kos tadi — semua kamu yang urus." },
   { you: 2, e: "🍳", h: "Sewa dapur lengkap", t: "IaaS", full: "Infrastructure as a Service — sewa infrastruktur", ex: "contoh: Amazon EC2", d: "Dapur, kompor, dan gas sudah disediakan. Kamu tinggal bawa resep & masak sendiri. Sama seperti EC2: servernya disewa, sistem operasi & aplikasinya kamu yang urus." },
-  { you: 1, e: "🍱", h: "Pesan katering", t: "PaaS", full: "Platform as a Service — sewa platform siap pakai", ex: "contoh: AWS Amplify (lab kita!)", d: "Kamu cukup pilih menu — alias bawa kode/website-mu — makanan datang siap saji. Server, sistem operasi, dan scaling diurus. Ini yang kita pakai di lab nanti!" },
+  { you: 1, e: "👨‍🍳", h: "Pakai jasa koki", t: "PaaS", full: "Platform as a Service — sewa platform siap pakai", ex: "contoh: AWS Amplify (lab kita!)", d: "Kamu cukup kasih <b>resep</b> (kode/website-mu). Dapur, kompor, sampai masaknya diurus koki. Sama seperti Amplify: kamu upload website, server, sistem operasi, dan scaling diurus AWS. Ini yang kita pakai di lab nanti!" },
   { you: 0, e: "🍽️", h: "Makan di restoran", t: "SaaS", full: "Software as a Service — tinggal pakai aplikasinya", ex: "contoh: email, streaming, chatbot", d: "Tinggal datang, pesan, makan. Semua diurus restorannya — kamu cuma login & pakai." }
 ];
 $("#pizzabtns").innerHTML = MODELS.map((m, i) => `<div class="card role" data-m="${i}" style="padding:.8rem"><div class="e" style="font-size:2.4rem">${m.e}</div><b>${m.h}</b><div class="acc" style="font-weight:700">${m.t}</div><small style="display:block;font-size:.72rem;color:var(--teal)">${m.full}</small><small class="mute">${m.ex}</small></div>`).join("");
@@ -1103,32 +1085,43 @@ $("#onion").onclick = e => {
 };
 onionDraw();
 
-/* ---------- AZ availability sim ---------- */
-const az = { down: [false, false, false], has: false };
-function azRender(serve = -1) {
-  $("#azs").innerHTML = ["a", "b", "c"].map((z, i) => `<div class="azbox ${az.down[i] ? "down" : ""} ${serve === i ? "serve" : ""}" data-i="${i}">
-    <h3>🏢 AZ ${z} ${az.down[i] ? "💥" : "✅"}</h3>
-    <div class="copy">${az.down[i] ? "🚫" : az.has ? `<span class="pop" style="display:inline-block;animation-delay:${i * 250}ms">📄</span>` : ""}</div>
-    <p class="mute" style="margin:.3rem 0 0">${az.down[i] ? "Gedung bermasalah! (klik untuk pulihkan)" : az.has ? "Salinan tugasmu" : "Klik untuk matikan"}</p></div>`).join("");
-  const up = az.down.filter(x => !x).length, s = $("#azstat"), sub = $("#azsub");
-  if (!az.has) { s.textContent = "📤 Upload tugas dulu"; s.style.color = "var(--ink)"; sub.textContent = "Lihat: satu upload langsung jadi 3 salinan di 3 gedung."; }
-  else if (up === 3) { s.textContent = "🟢 Tugasmu aman di 3 lokasi"; s.style.color = "var(--green)"; sub.textContent = "Sekarang coba klik satu AZ untuk “mematikannya”, lalu tekan 📲 Buka tugas."; }
-  else if (up > 0) { s.textContent = "Tugasmu TETAP ADA — dibuka dari gedung lain"; s.style.color = "var(--green)"; sub.textContent = `${3 - up} gedung mati, tapi salinannya masih ada di ${up} gedung lain. Kamu bahkan tidak sadar ada masalah. Saat gedungnya pulih, salinan dibuat ulang otomatis.`; }
-  else { s.textContent = "🔴 Ketiga AZ mati sekaligus = skenario yang sangat-sangat jarang"; s.style.color = "var(--red)"; sub.textContent = "Itulah kenapa AZ dibangun berjauhan, beda listrik, beda jalur fiber. Untuk data super penting, bisa disalin juga ke Region lain."; }
+/* ---------- satu gedung mati: S3 vs EC2 (1 AZ) vs EC2 (2 AZ + LB) ---------- */
+const AVM = [
+  { b: "🪣 File di S3", at: [1, 1, 1], ic: "📄", big: "Otomatis 3 salinan", sub: "durability 99,999999999% (11 sembilan)", col: "var(--green)",
+    t: "<b>S3 otomatis menyalin file-mu ke minimal 3 gedung (AZ).</b> Kamu tidak perlu ngapa-ngapain.<br><span class='mute'>Simpan 10 juta file → rata-rata kehilangan 1 file per ±10.000 tahun.</span>" },
+  { b: "🖥️ 1 server EC2", at: [1, 0, 0], ic: "🖥️", big: "± 3,6 jam / bulan", sub: "boleh mati (SLA 99,5%) ≈ nonton 2 film 🎬", col: "var(--amber)",
+    t: "<b>EC2 TIDAK otomatis disalin.</b> Kalau kamu cuma bikin 1 server, dia tinggal di 1 gedung. Gedungnya bermasalah → aplikasimu ikut mati." },
+  { b: "🖥️🖥️ 2 server EC2 + ⚖️", at: [1, 1, 0], ic: "🖥️", big: "± 4,3 menit / bulan", sub: "boleh mati (SLA 99,99%) ≈ masak mie instan 🍜", col: "var(--green)",
+    t: "<b>Kamu sendiri</b> yang menyalakan 2 server di 2 gedung + <b>load balancer</b>. Satu mati, satunya tetap melayani. Ini yang nanti kamu bangun di <b>game arsitek</b>." }
+];
+const av = { m: 0, down: [false, false, false] };
+function avRender(serve = -1) {
+  const M = AVM[av.m];
+  $$("#avsel button").forEach((b, k) => b.classList.toggle("on", k === av.m));
+  $("#avs").innerHTML = ["a", "b", "c"].map((z, i) => `<div class="azbox ${av.down[i] ? "down" : ""} ${serve === i ? "serve" : ""}" data-i="${i}">
+    <h3>🏢 AZ ${z} ${av.down[i] ? "💥" : "✅"}</h3>
+    <div class="copy">${av.down[i] ? "🚫" : M.at[i] ? `<span class="pop" style="display:inline-block;animation-delay:${i * 200}ms">${M.ic}</span>` : "<span class='mute' style='font-size:.9rem'>kosong</span>"}</div>
+    <p class="mute" style="margin:.3rem 0 0">${av.down[i] ? "Mati! (klik untuk pulihkan)" : "Klik untuk matikan"}</p></div>`).join("");
+  $("#avtxt").innerHTML = `<p style="margin-top:0">${M.t}</p><div class="pop" style="font-size:1.6rem;font-weight:800;color:${M.col}">${M.big}</div><div class="mute">${M.sub}</div>`;
+  const s1 = $("#avstat"); if (serve < 0) { s1.textContent = av.down.some(Boolean) ? "Gedung mati! Tekan 📲 Buka Kumpulin" : "Klik satu gedung untuk mematikannya"; s1.style.color = "var(--ink)"; $("#avsub").textContent = ""; }
 }
-$("#azs").onclick = e => { const b = e.target.closest(".azbox"); if (b) { az.down[+b.dataset.i] = !az.down[+b.dataset.i]; azRender(); } };
-$("#azup").onclick = () => { az.has = true; azRender(); };
-$("#azopen").onclick = e => {
-  if (!az.has) { $("#azstat").textContent = "🤔 Belum ada tugas, upload dulu"; return; }
-  const alive = [0, 1, 2].filter(i => !az.down[i]);
-  if (!alive.length) { azRender(); $("#azstat").textContent = "😵 Gagal membuka… (tapi ini hampir tidak pernah terjadi)"; return; }
-  const pick = alive[Math.random() * alive.length | 0];
-  azRender(pick);
-  $("#azstat").textContent = `✅ Tugas terbuka! Dilayani dari AZ ${"abc"[pick]}`; $("#azstat").style.color = "var(--green)";
-  floatEmoji("📄", e.clientX, e.clientY);
+$("#avsel").innerHTML = AVM.map((c, i) => `<button class="btn" data-i="${i}">${c.b}</button>`).join("");
+$("#avsel").onclick = e => { const b = e.target.closest("button"); if (b) { av.m = +b.dataset.i; avRender(); } };
+$("#avs").onclick = e => { const b = e.target.closest(".azbox"); if (b) { av.down[+b.dataset.i] = !av.down[+b.dataset.i]; avRender(); } };
+$("#avreset").onclick = () => { av.down = [false, false, false]; avRender(); };
+$("#avopen").onclick = e => {
+  const M = AVM[av.m], alive = [0, 1, 2].filter(i => M.at[i] && !av.down[i]), s1 = $("#avstat"), sub = $("#avsub");
+  if (!alive.length) {
+    avRender(); s1.textContent = "🔴 Kumpulin tidak bisa dibuka!"; s1.style.color = "var(--red)";
+    sub.textContent = av.m === 1 ? "Satu-satunya server ada di gedung yang mati. Solusinya: taruh server di 2 gedung + load balancer." : "Semua gedung yang berisi salinan mati sekaligus. Ini sangat-sangat jarang, karena AZ dibangun berjauhan, beda listrik, beda jalur fiber.";
+    return;
+  }
+  const pick = alive[Math.random() * alive.length | 0]; avRender(pick);
+  s1.textContent = `✅ Kumpulin terbuka! Dilayani dari AZ ${"abc"[pick]}`; s1.style.color = "var(--green)";
+  sub.textContent = av.down.some(Boolean) ? "Ada gedung yang mati, tapi kamu bahkan tidak sadar. Itulah gunanya beberapa AZ." : "Semua gedung hidup. Coba matikan satu gedung dulu!";
+  floatEmoji(M.ic, e.clientX, e.clientY);
 };
-$("#azreset").onclick = () => { az.down = [false, false, false]; az.has = false; azRender(); };
-azRender();
+avRender();
 
 /* ---------- S3 vs EC2 availability ---------- */
 const NC = [
@@ -1159,6 +1152,12 @@ function lat(km, name) {
   $("#ldest").textContent = name;
   const r = km * 2 / 200000 * 1000;
   $("#lrtt").textContent = r.toFixed(1).replace(".", ",") + " ms";
+  const X = 40 + Math.log10(km / 100 + 1) / Math.log10(141) * 420, D = Math.max(.5, Math.min(5, r / 40 + .4)).toFixed(2);
+  $("#lsvg").innerHTML = `<line x1="40" y1="35" x2="${X}" y2="35" stroke="#33507f" stroke-width="4" stroke-dasharray="6 5"/>
+    <circle cx="40" cy="35" r="8" fill="#ff9900"/><text x="40" y="62" fill="#e8eef7" font-size="12" text-anchor="middle">Jakarta</text>
+    <circle cx="${X}" cy="35" r="8" fill="#2bd4c5"/><text x="${X}" y="62" fill="#e8eef7" font-size="12" text-anchor="middle">${name}</text>
+    <text x="${(40 + X) / 2}" y="20" fill="#9fb0c8" font-size="11" text-anchor="middle">${km.toLocaleString("id-ID")} km</text>
+    <circle r="6" cy="35" fill="#ffdf6b" style="filter:drop-shadow(0 0 6px #ffdf6b)"><animate attributeName="cx" values="40;${X};40" dur="${D}s" repeatCount="indefinite"/></circle>`;
   $("#lnote").textContent = (r < 2 ? "⚡ Hampir instan." : r < 20 ? "👍 Cepat — enak buat game & video call." : r < 100 ? "😐 Mulai terasa di game online." : "🐢 Terasa lambat.") + " Makanya ada Region di Jakarta 🇮🇩";
 }
 $("#lpre").onclick = e => { const b = e.target.closest("button"); if (b) lat(+b.dataset.k, b.dataset.n); };
@@ -1370,13 +1369,21 @@ const ZONES = {
     const x = 165 + c * 26, y = 45 + r * 42;
     s += `<rect x="${x}" y="${y}" width="19" height="24" rx="2" fill="#2b4672" style="pointer-events:none"/><rect x="${x}" y="${y}" width="19" height="4" fill="#2d6b5f" style="pointer-events:none"/><circle cx="${x + 15}" cy="${y + 16}" r="1.8" fill="#3ddc84" class="blink" style="animation-delay:${Math.random() * 2}s;pointer-events:none"/>`;
   }
-  let a = "";
-  for (let r = 0; r < 6; r++) {
-    const y = 45 + r * 42 + (r % 2 ? 31 : -7);
-    a += `<line class="flow" x1="155" y1="${y}" x2="505" y2="${y}" stroke="${r % 2 ? "#ff5d5d" : "#5aa9ff"}" stroke-width="3"/>`;
+  let a = `<defs><marker id="arB" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5aa9ff"/></marker><marker id="arR" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ff5d5d"/></marker></defs>`;
+  /* lorong (aisle) di antara baris rack: genap = dingin (biru), ganjil = panas (merah) */
+  for (let k = 0; k <= 6; k++) {
+    const y = 36 + k * 42, cold = k % 2 === 0;
+    a += cold ? `<line class="flow" x1="515" y1="${y}" x2="160" y2="${y}" stroke="#5aa9ff" stroke-width="3" marker-end="url(#arB)"/>`
+              : `<line class="flow" x1="160" y1="${y}" x2="515" y2="${y}" stroke="#ff5d5d" stroke-width="3" marker-end="url(#arR)"/>`;
   }
-  a += `<text x="327" y="300" fill="#9fb0c8" font-size="11" text-anchor="middle">biru = lorong dingin (udara masuk) · merah = lorong panas (udara keluar)</text>`;
-  a += `<path d="M515,60 L505,60" stroke="#5aa9ff" stroke-width="3"/>`;
+  /* udara menembus rack: dari lorong dingin (depan rack) ke lorong panas (belakang rack) */
+  for (let r = 0; r < 6; r++) {
+    const yc = 36 + (r % 2 === 0 ? r : r + 1) * 42, yh = 36 + (r % 2 === 0 ? r + 1 : r) * 42;
+    for (const x of (r % 2 ? [290, 450] : [210, 370])) a += `<line x1="${x}" y1="${yc + (yh > yc ? 4 : -4)}" x2="${x}" y2="${yh + (yh > yc ? -6 : 6)}" stroke="url(#gr${yh > yc ? "D" : "U"})" stroke-width="3" marker-end="url(#arR)"/>`;
+  }
+  a += `<defs><linearGradient id="grD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5aa9ff"/><stop offset="1" stop-color="#ff5d5d"/></linearGradient><linearGradient id="grU" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#5aa9ff"/><stop offset="1" stop-color="#ff5d5d"/></linearGradient></defs>`;
+  a += `<rect x="522" y="200" width="106" height="74" rx="8" fill="#0b1526" opacity=".92"/><text x="575" y="218" fill="#ff8f8f" font-size="10" text-anchor="middle">🔥 panas masuk</text><text x="575" y="238" fill="#e8eef7" font-size="10" text-anchor="middle">🔁 didinginkan</text><text x="575" y="258" fill="#8fc4ff" font-size="10" text-anchor="middle">❄️ dingin keluar</text>`;
+  a += `<rect x="150" y="291" width="355" height="24" rx="6" fill="#0b1526" opacity=".92"/><text x="327" y="301" fill="#8fc4ff" font-size="9.5" text-anchor="middle">biru = udara dingin dari pendingin → masuk dari DEPAN rack</text><text x="327" y="312" fill="#ff8f8f" font-size="9.5" text-anchor="middle">merah = udara panas keluar dari BELAKANG rack → kembali ke pendingin</text>`;
   s += `<g id="air" style="display:none;pointer-events:none">${a}</g>`;
   s += `<g id="scan" style="display:none;pointer-events:none"><rect x="-30" y="-30" width="60" height="4" fill="#3ddc84" opacity=".9"><animate attributeName="y" values="-30;26;-30" dur="1.2s" repeatCount="indefinite"/></rect></g>`;
   s += `<rect id="hdoor" x="305" y="316" width="50" height="7" rx="2" fill="#ffc542" style="transition:width .6s,x .6s"/><text x="360" y="321" fill="#ffd79a" font-size="9" style="pointer-events:none">← pintu data hall</text>`;
@@ -1390,6 +1397,7 @@ const TOUR = [
   ["lobby", 205, 365, "🛂 Scan & verifikasi identitas", "Kartu akses di-scan dan identitasmu diverifikasi. Sistem mengecek: kamu boleh masuk area mana saja, dan sampai jam berapa.", "Akses diberikan sesuai kebutuhan kerja, dan bisa dicabut kapan saja.", true],
   ["lobby", 225, 345, "🎒 Pemeriksaan barang bawaan", "Barang yang dibawa masuk & keluar diperiksa dan dicatat. Tamu wajib didampingi karyawan sepanjang waktu.", "Saat pulang pun kamu diperiksa lagi — perangkat & data tidak boleh keluar sembarangan.", true],
   ["lobby", 250, 345, "🦺 Pakai PPE dulu", "Data hall itu <b>berisik</b> (ribuan kipas server!) dan banyak barang berat. Sebelum masuk, wajib pakai perlengkapan keselamatan (PPE). Klik semua perlengkapannya 👇", "Tanpa PPE lengkap, tidak boleh masuk — siapa pun orangnya.", false, false, true],
+  ["dock", 340, 362, "📦 Loading dock", "Semua barang masuk lewat sini: server, perangkat jaringan, dan part pengganti. Setiap kardus di-scan dan dicocokkan dengan daftar kiriman (manifest).", "Barang yang tidak cocok dengan manifest tidak boleh masuk."],
   ["hall", 330, 300, "🚪 Pintu data hall", "Masih ada pintu dan scan tambahan. Hanya orang yang punya tugas di dalam yang bisa lewat.", "Banyak lapisan = satu kartu hilang tidak langsung jadi bencana.", true],
   ["hall", 330, 165, "🗄️ Data hall", "Baris-baris rack dengan server dan switch jaringan (kotak hijau di atas tiap rack). Semua terhubung fiber. Rack disusun membentuk lorong dingin & lorong panas.", "Berisik banget! Untung sudah pakai pelindung telinga 🎧", false, true],
   ["power", 70, 90, "🔋 Ruang listrik & UPS", "Listrik masuk lewat trafo, lalu ke UPS (baterai besar), lalu ke tiap rack. Ada dua jalur listrik supaya satu rusak tidak mematikan server.", "Saat PLN padam, UPS menahan beban sampai generator siap."],
@@ -1397,8 +1405,17 @@ const TOUR = [
   ["cool", 575, 170, "❄️ Sistem pendingin", "Server menghasilkan panas luar biasa. Pendingin menjaga suhu & kelembapan stabil, dengan unit cadangan kalau satu rusak.", "Di lorong dingin terasa sejuk, di lorong panas bisa gerah! 🥵"],
   ["noc", 520, 365, "👀 Ruang monitoring", "Ribuan sensor memantau suhu, listrik, jaringan, dan server 24/7. Ada yang aneh? Tim langsung diberi tahu, banyak masalah diperbaiki otomatis.", "Selesai tur! Saat keluar, kamu & barangmu diperiksa lagi. 👋"]
 ];
-const SAY = ["Selamat datang! Identitas dulu ya 🪪", "Scan kartu… bip! ✅", "Barang bawaanmu dicek dulu 🎒", "Pakai PPE dulu ya! 🦺🎧", "Pintu khusus — butuh akses lagi 🔐", "Wah, berisik! Ini ribuan server 🗄️", "Listrik & baterai cadangan ⚡", "Kalau PLN padam, ini yang nyala ⛽", "Brrr… ini yang bikin server adem ❄️", "Semua dipantau 24 jam 👀 Tur selesai!"];
+const SAY = ["Selamat datang! Identitas dulu ya 🪪", "Scan kartu… bip! ✅", "Barang bawaanmu dicek dulu 🎒", "Pakai PPE dulu ya! 🦺🎧", "Barang masuk dicek di sini 📦", "Pintu khusus — butuh akses lagi 🔐", "Wah, berisik! Ini ribuan server 🗄️", "Listrik & baterai cadangan ⚡", "Kalau PLN padam, ini yang nyala ⛽", "Brrr… ini yang bikin server adem ❄️", "Semua dipantau 24 jam 👀 Tur selesai!"];
 const tw = { x: 70, y: 372, run: 0, i: -1, auto: false };
+/* tim yang ditemui di tiap titik tur (nama = ROLES[i][1]) */
+const TROLE = [["Security"], ["Security"], ["Security"], [], ["Logistik & inventaris", "Deployment"], ["Security"], ["Deployment", "Data Center Technician"], ["Facility team"], ["Facility team"], ["Facility team"], []];
+function tourRoles(i) {
+  const box = $("#dcR"); if (!box) return;
+  const meet = TROLE[i] || [], last = i === TOUR.length - 1;
+  const chip = r => `<div class="card pop" style="padding:.45rem .7rem;margin-top:.4rem"><b>${r[0]} ${r[1]}</b> <span class="mute" style="font-size:.9rem">${r[3]}</span></div>`;
+  box.innerHTML = last ? `<p style="margin:.4rem 0 0"><b>👋 Kamu sudah ketemu 5 tim:</b> ${ROLES.map(r => `${r[0]} ${r[1]}`).join(" · ")}. Di Bab 5, kamu ikut kerja bareng mereka!</p>`
+    : meet.length ? `<p class="mute" style="margin:.4rem 0 0;font-size:.85rem">👋 Tim yang kerja di sini:</p>` + meet.map(n => ROLES.find(r => r[1] === n)).filter(Boolean).map(chip).join("") : "";
+}
 const CORR = 325;
 const PPE = [["🎧", "Pelindung telinga"], ["👟", "Sepatu safety"], ["🧤", "Sarung tangan"]];
 tw.ppe = new Set();
@@ -1458,17 +1475,17 @@ async function tourAt(i) {
   $$("#dcsvg .hot").forEach(g => g.classList.toggle("sel", g.dataset.k === k));
   $("#scan").style.display = "none"; twSay("");
   $("#tourstep").textContent = `Langkah ${i + 1} / ${TOUR.length}`;
-  $("#dcT").textContent = "🚶 Berjalan…"; $("#dcD").textContent = ""; $("#dcF").textContent = "";
-  if (i === 4) { const dr = $("#hdoor"); dr.setAttribute("width", 50); dr.setAttribute("x", 305); }
+  $("#dcT").textContent = "🚶 Berjalan…"; $("#dcD").textContent = ""; $("#dcF").textContent = ""; if ($("#dcR")) $("#dcR").innerHTML = "";
+  if (i === 5) { const dr = $("#hdoor"); dr.setAttribute("width", 50); dr.setAttribute("x", 305); }
   if (i === 1) { $("#gatearm").style.transform = "rotate(80deg)"; await sleep(700); }
   const ok = await twWalk(x, y); if (!ok || ts !== i) return false;
   if (i === 1) setTimeout(() => { $("#gatearm").style.transform = ""; }, 200);
-  if (i === 4) { const dr = $("#hdoor"); setTimeout(() => { dr.setAttribute("width", 4); dr.setAttribute("x", 351); }, 900); }
+  if (i === 5) { const dr = $("#hdoor"); setTimeout(() => { dr.setAttribute("width", 4); dr.setAttribute("x", 351); }, 900); }
   if (scan) { const sc = $("#scan"); sc.setAttribute("transform", `translate(${x},${y})`); sc.style.display = ""; }
   if (air) { $("#air").style.display = ""; $("#airbtn").classList.add("on"); }
   twSay(SAY[i]);
   const p = $("#dcT").parentElement; p.classList.remove("fadeup"); void p.offsetWidth; p.classList.add("fadeup");
-  $("#dcT").textContent = t; $("#dcD").innerHTML = d; $("#dcF").textContent = "💡 " + f;
+  $("#dcT").textContent = t; $("#dcD").innerHTML = d; $("#dcF").textContent = "💡 " + f; tourRoles(i);
   ppeShow(TOUR[i][8] === true);
   $("#tourgo").textContent = i === TOUR.length - 1 ? "🏁 Selesai" : "🚶 Lanjut jalan";
   if (i === TOUR.length - 1) confetti();
@@ -1491,7 +1508,7 @@ $("#tourre").onclick = () => {
 $("#dcsvg").addEventListener("click", e => {
   const g = e.target.closest(".hot"); if (!g) return;
   const i = TOUR.findIndex(t => t[0] === g.dataset.k && !(g.dataset.k === "hall" && !t[7]) && !(g.dataset.k === "lobby" && t[1] !== 205));
-  if (i >= 0) { tw.auto = false; $("#tourauto").classList.remove("on"); tourAt(i > 3 && i < 8 && tw.ppe.size < PPE.length ? 3 : i); }
+  if (i >= 0) { tw.auto = false; $("#tourauto").classList.remove("on"); tourAt(i > 3 && i < 9 && tw.ppe.size < PPE.length ? 3 : i); }
 });
 $("#airbtn").onclick = () => { const a = $("#air"); const on = a.style.display === "none"; a.style.display = on ? "" : "none"; $("#airbtn").classList.toggle("on", on); };
 $("#tourstep").textContent = `Langkah 0 / ${TOUR.length}`;
@@ -2026,7 +2043,7 @@ $("#wZip").onclick = () => dl(makeZip("index.html", siteHtml()), "site.zip");
 
 /* ---------- cloud architect game ---------- */
 const AC = { ec2: 350, lb: 300, db: 800, multi: 800, s3: 50, cf: 150, asg: 0 };
-const AP = [["ec2", "🖥️ EC2", "pilih lalu klik AZ"], ["lb", "⚖️ Load balancer"], ["db", "🗄️ Database"], ["multi", "🔁 DB Multi-AZ"], ["s3", "🪣 S3 (file & video)"], ["cf", "⚡ CloudFront"], ["asg", "📈 Auto Scaling"], ["del", "🗑️ Hapus server"]];
+const AP = [["ec2", "🖥️ EC2", "pilih lalu klik AZ"], ["lb", "⚖️ Load balancer"], ["asg", "📈 Auto Scaling"], ["del", "🗑️ Hapus server"]];
 const ar = {};
 function arInit() { if ($("#atests")) $("#atests").innerHTML = ""; Object.assign(ar, { ec2: { a: 0, b: 0, c: 0 }, lb: false, db: false, multi: false, s3: false, cf: false, asg: false, sel: "ec2", res: [], down: null, busy: false, tips: 0 }); arRender(); arTests(); $("#amsg").innerHTML = "💡 Klik <b>🖥️ EC2</b>, lalu klik kolom AZ untuk menaruh server. Klik server yang sudah ada untuk tahu dia “tinggal” di mana."; }
 const arN = () => ar.ec2.a + ar.ec2.b + ar.ec2.c;
@@ -2045,8 +2062,8 @@ function arRender() {
   };
   $("#arch").innerHTML = `<div class="row" style="display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr;align-items:center;gap:.3rem">
       <div class="pwr live" id="a-users" style="padding:.45rem"><div style="font-size:1.6rem">👥</div><small>Mahasiswa</small></div><div class="wire ${ar.cf || ar.lb ? "on" : ""}"></div>
-      ${slot(ar.cf, "⚡", "CloudFront", "cf")}<div class="wire ${ar.lb ? "on" : ""}"></div>${slot(ar.lb, "⚖️", "Load balancer", "lb")}</div>
-    <div class="card" style="margin-top:.5rem;padding:.5rem;background:#0a1528"><div class="row" style="justify-content:space-between"><b>🏙️ Region Jakarta</b><span class="row">${slot(ar.s3, "🪣", "S3", "s3")}${slot(ar.asg, "📈", "Auto Scaling", "asg")}</span></div>
+      <div></div><div class="wire ${ar.lb ? "on" : ""}"></div>${slot(ar.lb, "⚖️", "Load balancer", "lb")}</div>
+    <div class="card" style="margin-top:.5rem;padding:.5rem;background:#0a1528"><div class="row" style="justify-content:space-between"><b>🏙️ Region Jakarta</b><span class="row">${slot(ar.asg, "📈", "Auto Scaling", "asg")}</span></div>
       <div class="grid3" style="margin-top:.4rem">${["a", "b", "c"].map(col).join("")}</div></div>`;
   $("#arch").insertAdjacentHTML("beforeend", `<svg id="aflow" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible"></svg>`);
   $("#apal").innerHTML = AP.map(([k, n]) => {
@@ -2055,19 +2072,17 @@ function arRender() {
   }).join("");
   $("#ahint").textContent = ar.sel === "ec2" ? "Mode: taruh server → klik kolom AZ." : ar.sel === "del" ? "Mode: hapus → klik server yang mau dihapus." : "";
   const c = arCost();
-  $("#acost").textContent = rp(c) + "/jam"; $("#acost").style.color = c > 3200 ? "var(--red)" : "var(--green)";
-  $("#acm").style.width = Math.min(100, c / 32) + "%"; $("#acm").style.background = c > 3200 ? "var(--red)" : c > 2800 ? "var(--amber)" : "var(--green)";
+  $("#acost").textContent = rp(c) + "/jam"; $("#acost").style.color = c > 1500 ? "var(--red)" : "var(--green)";
+  $("#acm").style.width = Math.min(100, c / 15) + "%"; $("#acm").style.background = c > 1500 ? "var(--red)" : c > 1100 ? "var(--amber)" : "var(--green)";
   const parts = [arN() ? `🖥️ ${arN()} server × ${rp(AC.ec2)} = ${rp(arN() * AC.ec2)}` : "", ar.lb ? `⚖️ ${rp(AC.lb)}` : "", ar.db ? `🗄️ ${rp(AC.db)}` : "", ar.db && ar.multi ? `🔁 +${rp(AC.multi)}` : "", ar.s3 ? `🪣 ${rp(AC.s3)}` : "", ar.cf ? `⚡ ${rp(AC.cf)}` : "", ar.asg ? "📈 gratis" : ""].filter(Boolean);
   $("#abrk").innerHTML = parts.length ? parts.map(x => `<span class="pill" style="margin:.1rem;font-size:.75rem">${x}</span>`).join("") : "";
   const need = ar.cf ? 4 : 8, extra = ar.asg ? Math.max(0, need - arN()) : 0;
   $("#apeak").innerHTML = ar.asg && extra ? `📈 Saat deadline: Auto Scaling menambah <b>${extra} server</b> → +${rp(extra * AC.ec2)}/jam <b>sementara</b>. Kalau ramainya ±2 jam/hari, tambahannya cuma ±${rp(extra * AC.ec2 * 2 * 30)}/bulan — jauh lebih hemat daripada ${need} server menyala terus (+${rp(extra * AC.ec2 * 24 * 30)}/bulan). Auto Scaling-nya gratis; yang dibayar hanya server tambahannya.` : ar.asg ? "📈 Auto Scaling siap menambah server saat ramai (fitur ini gratis — yang dibayar hanya server tambahannya)." : "";
 }
 const AT = [
-  ["👥 Hari biasa · server + load balancer + database", () => !arN() ? "Belum ada server sama sekali!" : !ar.db ? "Tugas & nilai disimpan di mana? Tambahkan 🗄️ Database." : arN() > 1 && !ar.lb ? "2+ server butuh ⚖️ Load balancer untuk membagi pengunjung." : ""],
-  ["⏰ Deadline 23:59 (50×) · Auto Scaling", () => { const need = ar.cf ? 4 : 8; return ar.asg || arN() >= need ? "" : `Server kewalahan! Butuh ${need} server — atau nyalakan 📈 Auto Scaling.${ar.cf ? "" : " ⚡ CloudFront juga bisa mengurangi beban."}`; }],
-  ["💥 AZ-a mati (banjir!) · Multi-AZ", () => ar.ec2.b + ar.ec2.c < 1 ? "Semua server ada di AZ-a → ikut mati. Sebar server ke AZ lain!" : !ar.lb ? "Tanpa ⚖️ Load balancer, pengunjung tidak dialihkan ke AZ yang masih hidup." : !ar.db ? "Belum ada database." : !ar.multi ? "Database cuma di AZ-a → data tugas & nilai tidak bisa diakses. Aktifkan 🔁 Multi-AZ." : ""],
-  ["🎬 Video dibuka dari mana-mana · S3 + CloudFront", () => !ar.s3 ? "Simpan video & file di 🪣 S3 (otomatis tersimpan di ≥3 AZ)." : !ar.cf ? "Tambah ⚡ CloudFront supaya video di-cache dekat mahasiswa." : ""],
-  ["💸 Tagihan ≤ Rp 3.200/jam · hemat", () => arCost() > 3200 ? `Tagihan normal ${rp(arCost())}/jam (${arN()} server × ${rp(AC.ec2)} = ${rp(arN() * AC.ec2)}) — kebanyakan server menyala terus 24 jam! Cukup 1 server per AZ, sisanya biar 📈 Auto Scaling yang menambah hanya saat ramai.` : ""]
+  ["👥 Hari biasa · server + load balancer", () => !arN() ? "Belum ada server sama sekali!" : arN() > 1 && !ar.lb ? "2+ server butuh ⚖️ Load balancer untuk membagi pengunjung." : "", 0],
+  ["💥 AZ-a mati (banjir!) · Multi-AZ", () => ar.ec2.b + ar.ec2.c < 1 ? "Semua server ada di AZ-a → ikut mati. Sebar server ke AZ lain!" : !ar.lb ? "Tanpa ⚖️ Load balancer, pengunjung tidak dialihkan ke AZ yang masih hidup." : "", 2],
+  ["⏰ Deadline 23:59 (50×) · hemat", () => ar.asg ? "" : arN() >= 8 ? `Lolos, tapi boros! ${arN()} server menyala 24 jam = ${rp(arCost())}/jam. Pakai 📈 Auto Scaling: server ditambah hanya saat ramai.` : "Server kewalahan! Nyalakan 📈 Auto Scaling supaya server ditambah otomatis saat ramai.", 1]
 ];
 function arTests() {
   const box = $("#atests");
@@ -2099,17 +2114,17 @@ $("#arun").onclick = async () => {
   if (ar.busy) return; ar.busy = true; ar.res = [];
   for (let i = 0; i < AT.length; i++) {
     ar.res[i] = "run"; arTests();
-    await arAnim(i);
+    await arAnim(AT[i][2]);
     ar.res[i] = AT[i][1](); arTests();
-    if (i === 2) { await sleep(500); arFlood(false); const d2 = $("#a-db2"); if (d2) d2.textContent = "🗄️ DB cadangan"; }
+    if (AT[i][2] === 2) { await sleep(500); arFlood(false); const d2 = $("#a-db2"); if (d2) d2.textContent = "🗄️ DB cadangan"; }
     await sleep(250);
   }
   ar.busy = false;
   const pass = ar.res.filter(r => !r).length;
   let rec = +(localStorage.getItem("archBest") || 0);
-  if (pass === 5 && (!rec || arCost() < rec)) { rec = arCost(); localStorage.setItem("archBest", rec); }
-  $("#amsg").innerHTML = pass === 5 ? `🏆 <b>5/5 — Arsitek bintang lima!</b> ⭐⭐⭐⭐⭐ Kumpulin tahan deadline, tahan banjir, cepat, dan hemat: <b>${rp(arCost())}/jam</b> (rekor di laptop ini: ${rp(rec)}/jam). ${arCost() > 2800 ? "Bisa lebih hemat lagi? 😏 (2 AZ sudah cukup tahan banjir)" : "Ini desain paling hemat! Inilah kerja <b>Solutions Architect</b>."}` : `${"⭐".repeat(pass)}${"☆".repeat(5 - pass)} <b>${pass}/5 lulus.</b> Baca catatan ujian yang ❌, perbaiki, lalu uji lagi!`;
-  if (pass === 5) confetti();
+  if (pass === AT.length && (!rec || arCost() < rec)) { rec = arCost(); localStorage.setItem("archBest", rec); }
+  $("#amsg").innerHTML = pass === AT.length ? `🏆 <b>3/3 — Arsitek cloud!</b> ⭐⭐⭐ Kumpulin tahan deadline, tahan banjir, dan hemat: <b>${rp(arCost())}/jam</b> (rekor di laptop ini: ${rp(rec)}/jam).` : `${pass}/3 ujian lolos. Baca pesan ❌ di daftar ujian, perbaiki, lalu uji lagi. 💪`;
+  if (pass === AT.length) confetti();
 };
 function arFlood(on) {
   const c = $('#arch .azbox[data-z="a"]'); if (!c) return;
@@ -2147,7 +2162,6 @@ async function arAnim(i) {
   if (i === 0) {
     if (!zs.length) { aFloat("❓"); return sleep(900); }
     await arStream((ar.lb ? zs : [zs[0]]).map(aRoute), 6, 1800, "#2bd4c5", 320);
-    if (!ar.db) aFloat("❓", aAZ("a"));
   }
   if (i === 1) {
     const tmp = [], need = ar.cf ? 4 : 8, extra = ar.asg ? Math.max(0, need - arN()) : 0;
@@ -2158,7 +2172,7 @@ async function arAnim(i) {
     if (!ar.asg && arN() < need) zs.forEach(z => { aAZ(z).classList.add("shake"); aFloat("🔥", aAZ(z)); setTimeout(() => aAZ(z) && aAZ(z).classList.remove("shake"), 600); });
     await sleep(600);
     for (const e of tmp.reverse()) { e.style.transition = "opacity .4s"; e.style.opacity = 0; await sleep(120); e.remove(); }
-    cb.textContent = base; cb.style.color = arCost() > 3200 ? "var(--red)" : "var(--green)";
+    cb.textContent = base; cb.style.color = arCost() > 1500 ? "var(--red)" : "var(--green)";
   }
   if (i === 2) {
     arFlood(true); await sleep(500);
@@ -2181,7 +2195,7 @@ async function arAnim(i) {
     await sleep(900);
   }
 }
-const ATIP = ["💡 Mulai dari 1 server + database. Lalu pikirkan: kalau AZ-a banjir, server mana yang masih hidup?", "💡 Cukup 1 server di AZ a + 1 server di AZ b + Load balancer + DB Multi-AZ = tahan satu gedung mati, dan tetap hemat.", "💡 Video & file = S3 + CloudFront. Deadline ramai = Auto Scaling — server ditambah hanya saat dibutuhkan, jadi tagihan normal tetap di bawah Rp 3.200/jam."];
+const ATIP = ["💡 Mulai dari 1 server. Lalu pikirkan: kalau AZ-a banjir, server mana yang masih hidup?", "💡 1 server di AZ a + 1 server di AZ b + ⚖️ Load balancer = tahan satu gedung mati.", "💡 Deadline ramai = 📈 Auto Scaling: server ditambah hanya saat dibutuhkan, jadi tetap hemat."];
 $("#atip").onclick = () => { $("#amsg").innerHTML = ATIP[ar.tips++ % ATIP.length]; };
 $("#areset").onclick = arInit;
 arInit();
@@ -2490,19 +2504,24 @@ function cgMoveRack() {
   });
   g += `<text x="${X(6) + 11}" y="${Y(2) - 3}" fill="#ffc542" font-size="8" text-anchor="middle">slot 07</text>`;
   g += `<rect x="330" y="128" width="28" height="18" rx="3" fill="#22385e"/><text x="344" y="140" fill="#9fb0c8" font-size="7" text-anchor="middle">dock</text>`;
-  g += `<text id="cgmover" x="344" y="132" font-size="16" text-anchor="middle">🗄️</text>`;
-  $("#cgscene").innerHTML = `<b>🗄️ Memindahkan perangkat ke posisinya</b><svg viewBox="0 0 365 150" width="100%" style="margin-top:.3rem">${g}</svg>`;
+  g += `<polyline id="cgpath" points="344,132 344,${Y(3) - 5} ${X(6) + 11},${Y(3) - 5} ${X(6) + 11},${Y(2) + 12}" fill="none" stroke="#ffc542" stroke-width="1.5" stroke-dasharray="4 3" opacity=".7"/>`;
+  g += `<text id="cgworker" x="356" y="136" font-size="13" text-anchor="middle">🧑‍🔧</text><text id="cgmover" x="344" y="132" font-size="16" text-anchor="middle">🗄️</text>`;
+  const sc0 = $("#cgscene"); sc0.style.height = "auto";
+  sc0.innerHTML = `<b>🗄️ Didorong pelan-pelan dari dock ke Baris C · slot 07</b><svg viewBox="0 0 365 150" width="100%" style="margin-top:.3rem;max-height:300px">${g}</svg><div id="cgmovest" class="mute" style="font-size:.85rem">🚶 Lewat lorong, hati-hati di tikungan…</div>`;
   const pts = [[344, 132], [344, Y(3) - 5], [X(6) + 11, Y(3) - 5], [X(6) + 11, Y(2) + 12]];
   let k = 0, t0 = performance.now();
   (function f(t) {
     if (cg.run !== run) return;
-    const a = pts[k], b = pts[k + 1], d = Math.hypot(b[0] - a[0], b[1] - a[1]), r = Math.min(1, Math.max(0, (t - t0) / (d * 14)));
-    const m = $("#cgmover"); m.setAttribute("x", a[0] + (b[0] - a[0]) * r); m.setAttribute("y", a[1] + (b[1] - a[1]) * r);
+    const a = pts[k], b = pts[k + 1], d = Math.hypot(b[0] - a[0], b[1] - a[1]), r = Math.min(1, Math.max(0, (t - t0) / (d * 22)));
+    const m = $("#cgmover"), mx = a[0] + (b[0] - a[0]) * r, my = a[1] + (b[1] - a[1]) * r, dl = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1;
+    m.setAttribute("x", mx); m.setAttribute("y", my);
+    const w = $("#cgworker"); w.setAttribute("x", mx - (b[0] - a[0]) / dl * 13); w.setAttribute("y", my - (b[1] - a[1]) / dl * 13 + 3);
     if (r >= 1) { k++; t0 = t; }
     if (k < pts.length - 1) return requestAnimationFrame(f);
     const sl = $("#cgslot"); sl.setAttribute("fill", "#1d6b4f"); sl.setAttribute("stroke", "#3ddc84"); sl.removeAttribute("stroke-dasharray");
+    $("#cgpath").remove(); $("#cgmovest").innerHTML = "🔒 Rack dikunci ke lantai & diratakan. ✅ Posisi sesuai data teknis.";
     $("#cgckmsg").innerHTML = "✅ <b>Terpasang di Baris C · slot 07</b> sesuai data teknis. Lanjut cabling…";
-    setTimeout(() => { if (cg.run !== run) return; $("#cgpre").style.display = "none"; $("#cg").style.display = ""; cgStage(2); cgMidSheet(); setTimeout(() => cgDraw(), 60); }, 1300);
+    setTimeout(() => { if (cg.run !== run) return; $("#cgpre").style.display = "none"; $("#cg").style.display = ""; cgStage(2); cgMidSheet(); setTimeout(() => cgDraw(), 60); }, 2200);
   })(t0);
 }
 function cgMidSheet(res, msg) {
@@ -2551,7 +2570,7 @@ function cgTest() {
   cgDraw(st);
   if (ok === CN) cgLabel(res);
   else if (dim && ok === CN - 1) {
-    cgMidSheet(res, `🟡 <b>Eth${cg.dirty + 1}</b> cahayanya lemah — konektor kotor! <button class="btn" id="cgclean">🧽 Bersihkan</button>`);
+    cgMidSheet(res, `🟡 <b>Eth${cg.dirty + 1}</b> cahayanya lemah — kabelnya belum terpasang sempurna. <button class="btn" id="cgclean">🔧 Betulkan kabel</button>`);
     $("#cgclean").onclick = () => { cg.cleaned = true; cgTest(); };
   } else cgMidSheet(res, `🔴 ${CN - ok - (dim ? 1 : 0)} kabel bermasalah. Cocokkan lagi dengan data koneksi!`);
 }
@@ -2964,22 +2983,23 @@ $("#e2stop").onclick = () => {
 };
 const s3s = { n: 0 };
 function s3Render() {
-  $("#s3az").innerHTML = ["a", "b", "c"].map((z, k) => `<div class="azbox" style="padding:.5rem;cursor:default"><b>🏢 AZ ${z}</b><div class="copy" style="font-size:1.6rem">${Array.from({ length: s3s.n }, (_, m) => `<span class="pop" style="display:inline-block;animation-delay:${m === s3s.n - 1 ? k * 250 : 0}ms">📄</span>`).join("")}</div></div>`).join("");
+  $("#s3az").style.display = "block";
+  $("#s3az").innerHTML = `<div class="azbox" style="padding:.6rem;cursor:default;text-align:center"><b>🪣 Bucket: tugas-kuliah</b><div class="copy" style="font-size:1.6rem;min-height:2.2rem">${Array.from({ length: s3s.n }, (_, m) => `<span class="pop" style="display:inline-block;animation-delay:${m === s3s.n - 1 ? 0 : 0}ms">📄</span>`).join("")}</div><small class="mute">${s3s.n} file</small></div>`;
 }
 $("#s3up").onclick = () => {
   s3s.n = Math.min(4, s3s.n + 1); s3Render();
-  $("#s3msg").innerHTML = `✅ <b>tugas.pdf</b> tersimpan — otomatis jadi <b>3 salinan di 3 gedung</b>. Kamu tidak perlu mengatur apa-apa.`;
+  $("#s3msg").innerHTML = `✅ <b>tugas.pdf</b> tersimpan. Tidak perlu pilih server, tidak perlu atur disk. Bayar sesuai ukuran file. <span class="mute">(Rahasia S3 yang bikin file-nya susah hilang? Kita lihat di Bab 3.)</span>`;
 };
 e2Render(); s3Render();
 
 /* ---------- story map ---------- */
 const STORY = [
   ["☁️", "Bab 1 · Kenapa cloud?", "Dari punya server sendiri yang repot, sampai AWS hadir.", "Pemanasan"],
-  ["🔐", "Bab 2 · Bisa dipercaya?", "Data kita dijaga berlapis-lapis.", "Kepercayaan: data kamu aman?"],
-  ["🌏", "Bab 3 · Di mana datamu tinggal?", "Region, AZ, jaringan fiber, cache CloudFront, dan perjalanan satu klik.", "Infrastruktur global (zoom)"],
-  ["🏢", "Bab 4 · Masuk ke gedung", "Tur virtual: dari gerbang sampai data hall.", "Tur: masuk ke data center"],
-  ["🧑‍🔧", "Bab 5 · Siapa yang menjaga?", "Peran-peran di DC, lalu game: magang keliling semua tim.", "Role-role di data center"],
-  ["🚀", "Bab 6 · Sekarang giliranmu", "Bikin akun, deploy website, game arsitek cloud, bersih-bersih.", "Akun AWS: gimana caranya?"]
+  ["🍳", "Bab 2 · Cara pakai cloud", "Pilihan sewa, kenalan EC2 & S3, dan bayar sesuai pakai (argo taksi).", "Mau urus sebanyak apa?"],
+  ["🌏", "Bab 3 · Di mana datamu tinggal?", "Region, AZ, satu gedung mati, dan perjalanan satu klik.", "Infrastruktur global (zoom)"],
+  ["🏢", "Bab 4 · Masuk ke gedung", "Dijaga berlapis, lalu tur virtual sambil kenalan dengan 5 tim.", "Kepercayaan: data kamu aman?"],
+  ["🧑‍🔧", "Bab 5 · Siapa yang menjaga?", "Safety dulu, lalu game: magang keliling semua tim.", "Safety nomor satu"],
+  ["🚀", "Bab 6 · Let's deploy!", "Bikin akun, deploy website, dan game arsitek cloud.", "Akun AWS: gimana caranya?"]
 ];
 $("#story").innerHTML = STORY.map((x, i) => `<div class="card story pop" data-t="${esc(x[3])}" style="animation-delay:${i * 120}ms"><div style="font-size:2.4rem">${x[0]}</div><h3>${x[1]}</h3><p class="mute" style="margin:0">${x[2]}</p></div>`).join("");
 $("#story").onclick = e => { const c = e.target.closest(".story"); if (c) go(slides.findIndex(s => s.dataset.title === c.dataset.t)); };
