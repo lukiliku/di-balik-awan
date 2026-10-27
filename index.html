@@ -126,6 +126,7 @@ label{font-size:.9rem;color:var(--mute);display:block;margin:.4rem 0 .2rem}
 .srow.maint{border-color:var(--amber);background:#2a2210}
 .disk{width:34px;height:16px;border-radius:3px;background:#22385e;border:1px solid #33507f;cursor:pointer;position:relative}
 .disk::after{content:"";position:absolute;right:3px;top:5px;width:5px;height:5px;border-radius:50%;background:var(--green)}
+.disk.psu{width:52px;height:18px}.disk.ram{width:12px;height:22px;border-radius:2px}.disk.ram::after{right:3px;top:3px;width:4px;height:4px}
 .disk.bad::after{background:var(--red);animation:blink .6s infinite}
 .disk.empty{background:#05090f;border-style:dashed}.disk.empty::after{display:none}
 .disk.rebuild::after{background:var(--amber);animation:blink .3s infinite}
@@ -617,7 +618,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
   <div id="cgcfg" style="margin-top:.6rem"></div>
 </div>
   <div class="mission" id="m-tech" style="display:none">
-    <h3 style="font-size:1.25rem">🎫 Technician: ada tiket disk rusak — ganti tanpa bikin aplikasi yang sedang jalan ikut mati 💽</h3>
+    <h3 style="font-size:1.25rem">🎫 Technician: ada tiket perbaikan — ganti part rusak tanpa bikin aplikasi yang sedang jalan ikut mati</h3>
   <div class="grid2" style="grid-template-columns:1fr 1.1fr">
     <div class="card" id="tsrv" style="padding:.7rem"></div>
     <div>
@@ -840,7 +841,7 @@ $("#qrov").onclick = () => qrToggle(false);
 $("#mhome").onclick = () => { $("#menu").classList.remove("open"); go(0); };
 $("#mreset").onclick = () => {
   if (!confirm("Reset semua progres (game, checklist, skor) dan mulai dari slide 1?")) return;
-  ["lab1v2", "lab2v2", "c30", "lab0", "lab1", "lab2", "clean"].forEach(k => localStorage.removeItem(k));
+  ["lab1v2", "lab1v3", "lab1v4", "lab2v2", "c30", "lab0", "lab1", "lab2", "clean", "archBest"].forEach(k => localStorage.removeItem(k));
   location.href = location.pathname + "#1"; location.reload();
 };
 const typing = () => ["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement.tagName) && document.activeElement.type !== "range";
@@ -1505,13 +1506,13 @@ const GS = [
   { t: "12:00", e: "🍱", n: "Makan siang", txt: "Perut keroncongan! Mau makan di mana?",
     a: ["Di pantry / kantin", true, "Sip! Makan yang kenyang. ⚡ Energi terisi!", 30], b: ["Bawa nasi bungkus ke data hall", false, "Eits! Makanan & minuman dilarang di data hall — tumpahan + listrik = bahaya.", 30] },
   { t: "12:40", e: "🎮", n: "Istirahat", ps: true, txt: "Masih ada 20 menit istirahat. Tim ngajak main PS! 🎮 Tekan ✕ saat bola masuk zona hijau. 3 kesempatan!" },
-  { t: "14:00", e: "🔧", n: "Technician", m: "tech", txt: "Tiket masuk! Ikut tim Data Center Technician mengganti disk rusak — pakai workflow, tanpa bikin aplikasi yang sedang jalan ikut mati." },
+  { t: "14:00", e: "🔧", n: "Technician", m: "tech", txt: "Tiket masuk! Ikut tim Data Center Technician mengganti part yang rusak (disk, power supply, atau RAM) — pakai workflow, tanpa bikin aplikasi yang sedang jalan ikut mati." },
   { t: "15:30", e: "⚡", n: "Facility", m: "dceo", txt: "🚨 Alarm! Latihan darurat bersama Facility team: listrik PLN padam, lalu ada rack yang kepanasan. Jaga rack tetap menyala!" },
   { t: "16:30", e: "📝", n: "Serah terima", txt: "Shift hampir selesai, tapi masih ada pekerjaan yang belum beres.",
     a: ["Tulis catatan serah terima yang jelas", true, "Mantap! Shift berikutnya tahu persis harus lanjut dari mana."], b: ["Pulang aja, besok lanjut", false, "Shift berikutnya bingung… Kalau tidak dicatat, dianggap tidak pernah terjadi."] },
   { t: "17:00", e: "🏠", n: "Pulang", end: true }
 ];
-const MNAME = { sec: "🛡️ Security · boleh masuk?", log: "📦 Logistik · cocokkan manifest", dep: "🚚 Deployer · deploy new rack network", tech: "🔧 Technician · ganti disk rusak", dceo: "⚡ Facility team · PLN padam & rack panas" };
+const MNAME = { sec: "🛡️ Security · boleh masuk?", log: "📦 Logistik · cocokkan manifest", dep: "🚚 Deployer · deploy new rack network", tech: "🔧 Technician · tiket perbaikan", dceo: "⚡ Facility team · PLN padam & rack panas" };
 const MINIT = { sec: () => { vi = 0; vs = 0; visShow(); }, log: () => lgNew(), dep: () => { cgNew(); setTimeout(cgDraw, 60); }, tech: () => techNew(), dceo: () => pwInit() };
 function gStartMission() {
   const k = GS[G.i].m;
@@ -1688,31 +1689,45 @@ function role(i) {
 $("#roles").onclick = e => { const c = e.target.closest(".role"); if (c) role(+c.dataset.i); };
 role(0);
 
-/* ---------- Technician game (workflow + disk swap) ---------- */
+/* ---------- Technician game (workflow + part swap: disk / PSU / RAM) ---------- */
 const tg = {};
 const SV = n => "S-" + String(n + 1).padStart(2, "0");
+const TT = {
+  disk: { slots: 4, unit: "slot", part: "disk", cls: "", title: "disk rusak", newBtn: "💽 Pasang disk baru",
+    steps: ["⚙️ Workflow: cari lokasi & pindahkan aplikasi ke server lain", "🧤 Pakai gelang anti-statis", "🔍 Cabut disk yang benar (server dengan lampu biru)", "💽 Pasang disk baru", "⚙️ Workflow: rebuild data, tes, kembalikan aplikasi"],
+    wf1: s => [[`📍 Mencari ${s}… ketemu. Lampu locator biru dinyalakan 🔵`, 700, "loc"], [`🛑 Memindahkan aplikasi yang jalan di ${s} ke server lain…`, 900], [`✅ ${s} masuk mode maintenance — aman dikerjakan.`, 200, "maint"]],
+    wf2: s => [["🔄 Rebuild data dari disk lain…", 0, "bar"], ["🧪 Health check disk baru… OK", 600], [`🟢 ${s} kembali menjalankan aplikasi`, 600, "back"]] },
+  psu: { slots: 2, unit: "PSU", part: "power supply", cls: "psu", title: "power supply (PSU) rusak", newBtn: "🔌 Pasang PSU baru",
+    steps: ["⚙️ Workflow: cari lokasi & cek PSU cadangan", "🧤 Pakai gelang anti-statis", "🔍 Cabut PSU yang benar (server dengan lampu biru)", "🔌 Pasang PSU baru", "⚙️ Workflow: cek listrik kembali dobel, tutup tiket"],
+    wf1: s => [[`📍 Mencari ${s}… ketemu. Lampu locator biru dinyalakan 🔵`, 700, "loc"], [`🔋 Cek PSU cadangan di ${s}… sehat, server tetap menyala dari PSU cadangan`, 900], ["✅ Aman diganti SAMBIL MENYALA (hot-swap) — aplikasi tidak perlu dipindah.", 200, "hot"]],
+    wf2: s => [["⚡ Cek PSU baru… tegangan normal", 700], [`🟢 ${s} kembali punya 2 PSU sehat (redundan lagi)`, 600, "back"]] },
+  ram: { slots: 4, unit: "DIMM", part: "RAM", cls: "ram", title: "RAM (memori) error", newBtn: "🧩 Pasang RAM baru",
+    steps: ["⚙️ Workflow: pindahkan aplikasi & MATIKAN server", "🧤 Pakai gelang anti-statis", "🔍 Cabut RAM yang benar (server dengan lampu biru)", "🧩 Pasang RAM baru", "⚙️ Workflow: nyalakan server, tes memori, kembalikan aplikasi"],
+    wf1: s => [[`📍 Mencari ${s}… ketemu. Lampu locator biru dinyalakan 🔵`, 700, "loc"], [`🛑 Memindahkan aplikasi yang jalan di ${s} ke server lain…`, 900], [`🔌 RAM tidak bisa diganti saat menyala → ${s} dimatikan (power off).`, 200, "off"]],
+    wf2: s => [["⏻ Menyalakan server…", 600], ["🧪 Tes memori…", 0, "bar"], [`🟢 ${s} kembali menjalankan aplikasi`, 600, "back"]] }
+};
 function techNew() {
+  const types = Object.keys(TT), ty = types[(types.indexOf(tg.type) + 1 + (Math.random() * (types.length - 1) | 0)) % types.length] || "disk";
+  const T = TT[ty];
   let dec; const sv = Math.random() * 10 | 0; do { dec = Math.random() * 10 | 0; } while (dec === sv);
-  Object.assign(tg, { s: sv, d: Math.random() * 4 | 0, ds: dec, dd: Math.random() * 4 | 0, step: 0, wrong: 0, busy: false, id: 48000 + (Math.random() * 999 | 0) });
+  Object.assign(tg, { type: ty, T, s: sv, d: Math.random() * T.slots | 0, ds: dec, dd: Math.random() * T.slots | 0, step: 0, wrong: 0, busy: false, id: 48000 + (Math.random() * 999 | 0) });
   let h = "";
   for (let s2 = 0; s2 < 10; s2++) {
     h += `<div class="srow" data-row="${s2}"><span class="loc"></span><span class="lbl">${SV(s2)}</span>`;
-    for (let d = 0; d < 4; d++) h += `<span class="disk ${(s2 === tg.s && d === tg.d) || (s2 === tg.ds && d === tg.dd) ? "bad" : ""}" data-s="${s2}" data-d="${d}" title="slot ${d + 1}"></span>`;
-    h += `<span class="mute st" style="font-size:.7rem">melayani ✅</span></div>`;
+    for (let d = 0; d < T.slots; d++) h += `<span class="disk ${T.cls} ${(s2 === tg.s && d === tg.d) || (s2 === tg.ds && d === tg.dd) ? "bad" : ""}" data-s="${s2}" data-d="${d}" title="${T.unit} ${d + 1}"></span>`;
+    h += `<span class="mute st" style="font-size:.7rem">menjalankan aplikasi</span></div>`;
   }
-  $("#tsrv").innerHTML = `<b>🗄️ Rack R-12</b> <span class="mute" style="font-size:.8rem">(ada 2 lampu merah… hati-hati!)</span>` + h;
-  $("#tticket").textContent = `Tiket #${tg.id}: disk rusak di server ${SV(tg.s)}, slot ${tg.d + 1}`;
+  $("#tsrv").innerHTML = `<b>🗄️ Rack R-12</b> <span class="mute" style="font-size:.8rem">· yang terlihat: ${T.part} tiap server · ada 2 lampu merah… hati-hati!</span>` + h;
+  $("#tticket").textContent = `Tiket #${tg.id}: ${T.title} di server ${SV(tg.s)}, ${T.unit} ${tg.d + 1}`;
+  $("#tnew").textContent = T.newBtn;
   $("#twf").textContent = ""; $("#tbar").style.width = "0"; $("#tbar").style.background = "var(--amber)";
-  $("#twf1").disabled = false; $("#tglove").disabled = false; $("#tnew").disabled = true; $("#twf2").disabled = true;
-  $("#tmsg").textContent = "Baca tiketnya, lalu jalankan workflow dulu. 🧐";
+  $("#twf1").disabled = false; $("#tglove").disabled = false; $("#tnew").disabled = true; $("#twf2").disabled = true; $("#twf2").classList.remove("primary");
+  $("#tmsg").textContent = "Baca tiketnya, lalu jalankan workflow dulu.";
+  const mt = $("#mtitle"); if (mt && G.mActive === "tech") mt.textContent = `🎯 Misi: Technician · ganti ${T.part}`;
   techSteps();
 }
 function techSteps() {
-  const S = ["⚙️ Workflow: cari lokasi & pindahkan aplikasi ke server lain", "🧤 Pakai gelang anti-statis", "🔍 Cabut disk yang benar (server dengan lampu biru)", "💽 Pasang disk baru", "⚙️ Workflow: rebuild, tes, kembalikan ke layanan"];
-  $("#tsteps").innerHTML = S.map((x, i) => `<div class="tstep ${i < tg.step ? "done" : i === tg.step ? "cur" : ""}">${i < tg.step ? "✔" : i === tg.step ? "➜" : "·"} ${x}</div>`).join("");
-}
-async function wfLines(lines) {
-  for (const [t, ms, fn] of lines) { $("#twf").textContent += t + "\n"; fn && fn(); await sleep(ms); }
+  $("#tsteps").innerHTML = tg.T.steps.map((x, i) => `<div class="tstep ${i < tg.step ? "done" : i === tg.step ? "cur" : ""}">${i < tg.step ? "✔" : i === tg.step ? "➜" : "·"} ${x}</div>`).join("");
 }
 function techWarn(html, el) {
   tg.wrong++;
@@ -1720,62 +1735,64 @@ function techWarn(html, el) {
   if (el) { el.classList.add("shake"); el.style.outline = "3px solid var(--red)"; setTimeout(() => { el.classList.remove("shake"); el.style.outline = ""; }, 900); }
   const m = $("#tmsg"); m.classList.remove("shake"); void m.offsetWidth; m.classList.add("shake");
 }
+async function techRunWF(lines) {
+  const row = $(`#tsrv [data-row="${tg.s}"]`), st = row.querySelector(".st");
+  for (const [t, ms, fx] of lines) {
+    $("#twf").textContent += t + "\n";
+    if (fx === "loc") row.querySelector(".loc").classList.add("on");
+    if (fx === "maint") { row.classList.add("maint"); st.textContent = "maintenance"; }
+    if (fx === "hot") st.textContent = "tetap jalan (PSU cadangan)";
+    if (fx === "off") { row.classList.add("maint"); st.textContent = "MATI (power off)"; }
+    if (fx === "bar") { for (let p = 0; p <= 100; p += 5) { $("#tbar").style.width = p + "%"; await sleep(60); } $("#tbar").style.background = "var(--green)"; }
+    if (fx === "back") { row.classList.remove("maint"); row.querySelector(".loc").classList.remove("on"); st.textContent = "menjalankan aplikasi"; }
+    await sleep(ms);
+  }
+}
 $("#twf1").onclick = async () => {
   if (tg.step !== 0 || tg.busy) return;
-  tg.busy = true; $("#twf1").disabled = true; $("#twf").textContent = "";
-  const row = $(`#tsrv [data-row="${tg.s}"]`);
-  await wfLines([
-    [`▶ Workflow “ganti disk” untuk tiket #${tg.id}`, 500],
-    [`📍 Mencari ${SV(tg.s)}… ketemu: Rack R-12, unit ${tg.s + 1}. Lampu locator biru dinyalakan 🔵`, 700, () => row.querySelector(".loc").classList.add("on")],
-    [`🛑 Memindahkan aplikasi yang jalan di ${SV(tg.s)} ke server lain…`, 900],
-    [`✅ ${SV(tg.s)} masuk mode maintenance — aman dikerjakan.`, 200, () => { row.classList.add("maint"); row.querySelector(".st").textContent = "maintenance 🛠️"; }]
-  ]);
+  tg.busy = true; $("#twf1").disabled = true; $("#twf").textContent = `▶ Workflow tiket #${tg.id}\n`;
+  await techRunWF(tg.T.wf1(SV(tg.s)));
   tg.step = 1; tg.busy = false; techSteps();
-  $("#tmsg").innerHTML = "👍 Server sudah aman. Sekarang pakai <b>gelang anti-statis</b>.";
+  $("#tmsg").innerHTML = "Server sudah aman dikerjakan. Sekarang pakai <b>gelang anti-statis</b>.";
 };
 $("#tglove").onclick = () => {
   if (tg.step === 0) return techWarn("⚠️ <b>Tunggu!</b> Jalankan workflow dulu — server masih menjalankan aplikasi orang.");
   if (tg.step !== 1) return;
   tg.step = 2; $("#tglove").disabled = true; techSteps();
-  $("#tmsg").innerHTML = "🧤 Siap. Cabut disk yang rusak di server dengan <b>lampu locator biru</b> 🔵.";
+  $("#tmsg").innerHTML = `Siap. Cabut ${tg.T.part} yang rusak di server dengan <b>lampu locator biru</b>.`;
 };
 $("#tsrv").onclick = e => {
   const k = e.target.closest(".disk"); if (!k) return;
-  const s2 = +k.dataset.s, d = +k.dataset.d;
-  if (tg.step === 0) return techWarn(`⛔ <b>STOP!</b> ${SV(s2)} masih menjalankan aplikasi orang (misalnya Kumpulin). Jalankan <b>workflow</b> dulu supaya aplikasinya dipindahkan.`, k);
+  const s2 = +k.dataset.s, d = +k.dataset.d, T = tg.T;
+  if (tg.step === 0) return techWarn(`⛔ <b>STOP!</b> ${SV(s2)} masih menjalankan aplikasi orang. Jalankan <b>workflow</b> dulu.`, k);
   if (tg.step === 1) return techWarn("✋ <b>Pakai gelang anti-statis dulu!</b> Listrik statis dari tubuh bisa merusak komponen.", k);
   if (tg.step !== 2) return;
   if (s2 === tg.s && d === tg.d) {
     k.classList.remove("bad"); k.classList.add("empty"); tg.step = 3; $("#tnew").disabled = false; techSteps();
-    $("#tmsg").innerHTML = "✅ Disk yang benar dicabut. Pasang disk baru!";
+    $("#tmsg").innerHTML = `✅ ${T.part} yang benar dicabut. Pasang yang baru!`;
   } else if (s2 === tg.ds && d === tg.dd) {
-    techWarn(`🚨 <b>SALAH DISK!</b> Itu memang rusak juga, tapi di <b>${SV(s2)}</b> — server itu <b>masih menjalankan aplikasi orang</b> & bukan tiketmu. Cari lampu locator 🔵 di ${SV(tg.s)}!`, k);
+    techWarn(`🚨 <b>SALAH!</b> Itu memang rusak juga, tapi di <b>${SV(s2)}</b> — server itu <b>masih menjalankan aplikasi orang</b> & bukan tiketmu. Cari lampu locator biru di ${SV(tg.s)}!`, k);
   } else if (s2 === tg.s) {
-    techWarn(`⚠️ <b>Server benar, slot salah!</b> Slot ${d + 1} masih sehat. Tiket bilang slot ${tg.d + 1} (lampu merah).`, k);
+    techWarn(`⚠️ <b>Server benar, ${T.unit} salah!</b> ${T.unit} ${d + 1} masih sehat. Tiket bilang ${T.unit} ${tg.d + 1} (lampu merah).`, k);
   } else {
-    techWarn(`🚨 <b>SALAH DISK!</b> ${SV(s2)} slot ${d + 1} itu disk <b>sehat</b> di server yang sedang menjalankan aplikasi orang. Salah cabut = gangguan baru!`, k);
+    techWarn(`🚨 <b>SALAH!</b> ${SV(s2)} ${T.unit} ${d + 1} itu <b>sehat</b> di server yang sedang menjalankan aplikasi orang. Salah cabut = gangguan baru!`, k);
   }
 };
 $("#tnew").onclick = () => {
   if (tg.step !== 3) return;
   const k = $(`#tsrv .disk[data-s="${tg.s}"][data-d="${tg.d}"]`); k.classList.remove("empty"); k.classList.add("rebuild");
   tg.step = 4; $("#tnew").disabled = true; $("#twf2").disabled = false; $("#twf2").classList.add("primary"); techSteps();
-  $("#tmsg").innerHTML = "💽 Disk baru terpasang. Jalankan <b>workflow</b> untuk rebuild & mengembalikan server ke layanan.";
+  $("#tmsg").innerHTML = `${tg.T.part} baru terpasang. Jalankan <b>workflow</b> untuk menyelesaikan tiket.`;
 };
 $("#twf2").onclick = async () => {
   if (tg.step !== 4 || tg.busy) return;
-  tg.busy = true; $("#twf2").disabled = true; $("#twf").textContent = "";
-  const row = $(`#tsrv [data-row="${tg.s}"]`), k = $(`#tsrv .disk[data-s="${tg.s}"][data-d="${tg.d}"]`);
-  $("#twf").textContent = "▶ Workflow “selesaikan ganti disk”\n🔄 Rebuild data dari disk lain…\n";
-  for (let p = 0; p <= 100; p += 5) { $("#tbar").style.width = p + "%"; await sleep(60); }
-  k.classList.remove("rebuild"); $("#tbar").style.background = "var(--green)";
-  await wfLines([
-    ["🧪 Health check disk baru… OK", 600],
-    [`🟢 ${SV(tg.s)} kembali menjalankan aplikasi`, 600, () => { row.classList.remove("maint"); row.querySelector(".loc").classList.remove("on"); row.querySelector(".st").textContent = "melayani ✅"; }],
-    [`🎫 Tiket #${tg.id} ditutup otomatis`, 100]
-  ]);
+  tg.busy = true; $("#twf2").disabled = true; $("#twf").textContent = `▶ Workflow selesaikan tiket #${tg.id}\n`;
+  await techRunWF(tg.T.wf2(SV(tg.s)));
+  $(`#tsrv .disk[data-s="${tg.s}"][data-d="${tg.d}"]`).classList.remove("rebuild");
+  $("#twf").textContent += `🎫 Tiket #${tg.id} ditutup otomatis\n`;
   tg.step = 5; tg.busy = false; techSteps();
-  $("#tmsg").innerHTML = tg.wrong ? `✅ Tiket selesai. Tapi ada <b>${tg.wrong}× peringatan</b> — di dunia nyata itu bisa bikin gangguan. Selalu ikuti workflow & cek dua kali! 🔁` : "🎉 <b>Sempurna!</b> Tanpa satu pun peringatan. Pengguna aplikasi tidak sadar ada disk yang rusak.";
+  const note = tg.type === "psu" ? " Server bahkan tidak perlu dimatikan (hot-swap)." : tg.type === "ram" ? " RAM harus dimatikan dulu — makanya aplikasinya dipindah sebelum server dimatikan." : "";
+  $("#tmsg").innerHTML = (tg.wrong ? `✅ Tiket selesai, tapi ada <b>${tg.wrong}× peringatan</b> — di dunia nyata itu bisa bikin gangguan. Selalu ikuti workflow & cek dua kali!` : "🏆 <b>Sempurna!</b> Tanpa satu pun peringatan.") + note;
   if (!tg.wrong) confetti();
   missionDone("tech", tg.wrong ? 15 : 30);
 };
@@ -1858,12 +1875,12 @@ $("#acq2").onclick = e => { const c = e.target.closest(".chip"); if (c) { ac.b =
 acRender();
 
 /* ---------- checklists (saved locally) ---------- */
-function checklist(el, key, items) {
-  const saved = JSON.parse(localStorage.getItem(key) || "[]");
+function checklist(el, key, items, persist = true) {
+  const saved = persist ? JSON.parse(localStorage.getItem(key) || "[]") : [];
   el.innerHTML = items.map((t, i) => `<label class="check ${saved[i] ? "done" : ""}"><input type="checkbox" ${saved[i] ? "checked" : ""}><span>${t}</span></label>`).join("");
   el.onchange = e => {
     const s = $$("input", el).map(x => x.checked);
-    localStorage.setItem(key, JSON.stringify(s));
+    if (persist) localStorage.setItem(key, JSON.stringify(s));
     e.target.closest(".check").classList.toggle("done", e.target.checked);
     if (s.every(Boolean)) confetti();
   };
@@ -1877,7 +1894,7 @@ checklist($("#lab1"), "lab1v4", [
   "<b>6.</b> Method: <b>Drag and drop</b> → jatuhkan <b>site.zip</b> (atau <i>Choose .zip folder</i>) → <b>Save and deploy</b>.",
   "<b>7.</b> Tunggu status <b>Deployed</b> → klik link <b>Domain</b> (…amplifyapp.com) 🎉 Share ke grup!",
   "<b>8.</b> Lewati “custom domain / firewall / branches” (opsional & bisa berbayar). Selesai? <b>App settings → General settings → Delete app</b>."
-]);
+], false);
 
 
 /* ---------- website builder + zip ---------- */
@@ -2332,29 +2349,75 @@ const RCHK = [["🏷️ Rack ID", "R-NEW-07", "R-NEW-07"], ["📍 Posisi di lant
 function cgReceive() {
   const pre = $("#cgpre"); pre.style.display = ""; $("#cg").style.display = "none"; $("#cgcfg").innerHTML = "";
   const run = cg.run = Math.random();
-  pre.innerHTML = `<div class="card" style="position:relative;height:150px;overflow:hidden;padding:.6rem">
+  pre.innerHTML = `<div class="card" id="cgscene" style="position:relative;height:190px;overflow:hidden;padding:.6rem">
       <b>🚚 Rack baru datang ke loading dock</b>
       <div style="position:absolute;left:0;right:0;bottom:18px;height:4px;background:repeating-linear-gradient(90deg,#4a5670 0 26px,transparent 26px 46px)"></div>
       <div style="position:absolute;right:14px;bottom:26px;text-align:center"><div style="font-size:2rem">🏭</div><small class="mute">Loading dock</small></div>
-      <span id="cgtruck" style="position:absolute;left:-120px;bottom:22px;font-size:3rem;display:inline-block;transform:scaleX(-1);transition:left 2s cubic-bezier(.25,.8,.3,1)">🚚</span>
-      <span id="cgrack" style="position:absolute;right:120px;bottom:26px;font-size:2.4rem;opacity:0;transition:opacity .5s,transform .5s;transform:translateY(-20px)">🗄️</span>
+      <span id="cgtruck" style="position:absolute;left:-120px;bottom:22px;font-size:3rem;display:inline-block;transform:scaleX(-1)">🚚</span>
+      <span id="cgrack" style="position:absolute;right:120px;bottom:26px;font-size:2.6rem;opacity:0">🗄️</span>
     </div>
-    <div class="card" id="cgchk"><b>🔍 Cek rack vs data teknis</b><p class="mute" style="margin:.3rem 0 0">Tunggu truk sampai…</p></div>`;
-  setTimeout(() => { if (cg.run === run) $("#cgtruck").style.left = "calc(100% - 260px)"; }, 150);
-  setTimeout(() => {
+    <div class="card" id="cgchk" style="position:relative;overflow:hidden"><b>🔍 Cek rack vs data teknis</b><p class="mute" style="margin:.3rem 0 0">Tunggu truk sampai…</p></div>`;
+  const tr = $("#cgtruck"), sc = $("#cgscene"), t0 = performance.now(), D = 2600;
+  (function drive(t) {
     if (cg.run !== run) return;
-    const r = $("#cgrack"); r.style.opacity = 1; r.style.transform = "none";
-    cgStage(1); cg.chk = new Set(); cgCheckRender();
-  }, 2400);
+    const end = (sc.clientWidth || 500) - 260, r = Math.min(1, Math.max(0, (t - t0) / D)), e = 1 - Math.pow(1 - r, 3);
+    tr.style.left = (-120 + (end + 120) * e) + "px"; tr.style.bottom = (22 + (r < 1 ? Math.sin(t / 60) : 0)) + "px";
+    if (r < 1) return requestAnimationFrame(drive);
+    const rk = $("#cgrack"); rk.style.transition = "opacity .5s"; rk.style.opacity = 1;
+    cgStage(1); cg.scanned = false; cgCheckRender();
+  })(t0);
 }
-function cgCheckRender() {
-  $("#cgchk").innerHTML = `<b>🔍 Cek rack vs data teknis</b><p class="mute" style="margin:.2rem 0 .4rem;font-size:.85rem">Klik tiap baris untuk mencocokkan rack yang datang dengan data teknis.</p>
-    <table><tr><th>Item</th><th>Data teknis</th><th>Rack yang datang</th></tr>${RCHK.map(([n, a, b], i) => `<tr class="cgck" data-i="${i}" style="cursor:pointer"><td>${cg.chk.has(i) ? "✅" : "⬜"} ${n}</td><td>${a}</td><td>${cg.chk.has(i) ? b : "<span class='mute'>klik untuk cek</span>"}</td></tr>`).join("")}</table>
-    <p id="cgckmsg" style="margin:.4rem 0 0">${cg.chk.size === RCHK.length ? "✅ <b>Rack sesuai data teknis.</b> Rack dipasang di posisinya…" : ""}</p>`;
-  $$("#cgchk .cgck").forEach(tr => tr.onclick = () => {
-    cg.chk.add(+tr.dataset.i); cgCheckRender();
-    if (cg.chk.size === RCHK.length) setTimeout(() => { $("#cgpre").style.display = "none"; $("#cg").style.display = ""; cgStage(2); cgMidSheet(); setTimeout(() => cgDraw(), 60); }, 1300);
+function cgCheckRender(rows = 0) {
+  $("#cgchk").innerHTML = `<b>🔍 Cek rack vs data teknis</b><p class="mute" style="margin:.2rem 0 .4rem;font-size:.85rem">Scan label rack, lalu cocokkan dengan data teknis.</p>
+    <button class="btn primary" id="cgscan" ${cg.scanned ? "disabled" : ""}>📟 Scan rack</button>
+    <table id="cgcktb" style="margin-top:.4rem"><tr><th>Item</th><th>Data teknis</th><th>Rack yang datang</th></tr>${RCHK.map(([n, a, b], i) => `<tr><td>${i < rows ? "✅" : "⬜"} ${n}</td><td>${a}</td><td>${i < rows ? `<span style="color:var(--green)">${b}</span>` : "<span class='mute'>—</span>"}</td></tr>`).join("")}</table>
+    <div id="cglaser" style="position:absolute;left:0;right:0;height:3px;background:#ff3b3b;box-shadow:0 0 12px #ff3b3b;display:none"></div>
+    <div id="cgckmsg" style="margin:.4rem 0 0"></div>`;
+  $("#cgscan").onclick = cgScanRack;
+}
+function cgScanRack() {
+  if (cg.scanned) return;
+  const run = cg.run, L = $("#cglaser"), tb = $("#cgcktb"), top0 = tb.offsetTop, h = tb.offsetHeight, t0 = performance.now(), D = 1700;
+  $("#cgscan").disabled = true; L.style.display = "";
+  let shown = 0;
+  (function sweep(t) {
+    if (cg.run !== run) return;
+    const r = Math.min(1, Math.max(0, (t - t0) / D)), want = Math.min(RCHK.length, Math.floor(r * (RCHK.length + 1)));
+    L.style.top = (top0 + h * r) + "px";
+    if (want > shown) { shown = want; cg.scanned = true; const keep = L.style.top; cgCheckRender(shown); $("#cgscan").disabled = true; const L2 = $("#cglaser"); L2.style.display = ""; L2.style.top = keep; }
+    if (r < 1) return requestAnimationFrame(sweep);
+    $("#cglaser").style.display = "none"; cgCheckRender(RCHK.length);
+    $("#cgckmsg").innerHTML = `✅ <b>Rack sesuai data teknis.</b><br><button class="btn primary" id="cgmove" style="margin-top:.4rem">🗄️ Pindahkan rack ke Baris C · slot 07</button>`;
+    $("#cgmove").onclick = cgMoveRack;
+  })(t0);
+}
+function cgMoveRack() {
+  const run = cg.run; $("#cgmove").disabled = true;
+  const X = i => 40 + i * 30, Y = r => 22 + r * 32;
+  let g = `<text x="8" y="12" fill="#9fb0c8" font-size="9">Denah data hall (tampak atas)</text>`;
+  "ABCD".split("").forEach((row, r) => {
+    g += `<text x="10" y="${Y(r) + 12}" fill="#e8eef7" font-size="11" font-weight="700">${row}</text>`;
+    for (let k = 0; k < 10; k++) {
+      const target = row === "C" && k === 6, used = !target && (k + r) % 3 !== 0;
+      g += `<rect ${target ? 'id="cgslot"' : ""} x="${X(k)}" y="${Y(r)}" width="22" height="16" rx="2" fill="${used ? "#2b4672" : "#0a1222"}" stroke="${target ? "#ffc542" : "#33507f"}" stroke-width="${target ? 2 : 1}" ${target ? 'stroke-dasharray="3 2"' : ""}/>`;
+    }
   });
+  g += `<text x="${X(6) + 11}" y="${Y(2) - 3}" fill="#ffc542" font-size="8" text-anchor="middle">slot 07</text>`;
+  g += `<rect x="330" y="128" width="28" height="18" rx="3" fill="#22385e"/><text x="344" y="140" fill="#9fb0c8" font-size="7" text-anchor="middle">dock</text>`;
+  g += `<text id="cgmover" x="344" y="132" font-size="16" text-anchor="middle">🗄️</text>`;
+  $("#cgscene").innerHTML = `<b>🗄️ Memindahkan rack ke posisinya</b><svg viewBox="0 0 365 150" width="100%" style="margin-top:.3rem">${g}</svg>`;
+  const pts = [[344, 132], [344, Y(3) - 5], [X(6) + 11, Y(3) - 5], [X(6) + 11, Y(2) + 12]];
+  let k = 0, t0 = performance.now();
+  (function f(t) {
+    if (cg.run !== run) return;
+    const a = pts[k], b = pts[k + 1], d = Math.hypot(b[0] - a[0], b[1] - a[1]), r = Math.min(1, Math.max(0, (t - t0) / (d * 14)));
+    const m = $("#cgmover"); m.setAttribute("x", a[0] + (b[0] - a[0]) * r); m.setAttribute("y", a[1] + (b[1] - a[1]) * r);
+    if (r >= 1) { k++; t0 = t; }
+    if (k < pts.length - 1) return requestAnimationFrame(f);
+    const sl = $("#cgslot"); sl.setAttribute("fill", "#1d6b4f"); sl.setAttribute("stroke", "#3ddc84"); sl.removeAttribute("stroke-dasharray");
+    $("#cgckmsg").innerHTML = "✅ <b>Rack terpasang di Baris C · slot 07</b> sesuai data teknis. Lanjut cabling…";
+    setTimeout(() => { if (cg.run !== run) return; $("#cgpre").style.display = "none"; $("#cg").style.display = ""; cgStage(2); cgMidSheet(); setTimeout(() => cgDraw(), 60); }, 1300);
+  })(t0);
 }
 function cgMidSheet(res, msg) {
   $("#cgmid").innerHTML = `<h3>📋 Data koneksi</h3><table><tr><th>Switch</th><th>Uplink</th>${res ? "<th>Hasil test</th>" : ""}</tr>${Object.entries(cg.map).map(([a, b]) => `<tr><td>${a}</td><td>${b}</td>${res ? `<td>${res[a]}</td>` : ""}</tr>`).join("")}</table>
@@ -2391,10 +2454,10 @@ function cgTest() {
   const st = {}, res = {}; let ok = 0, dim = false;
   Object.keys(cg.map).forEach((a, i) => {
     let s2;
-    if (!cg.conn[a]) { s2 = "bad"; res[a] = "🔴 No link"; }
-    else if (cg.conn[a] !== cg.map[a]) { s2 = "bad"; res[a] = `🔴 Salah port (${cg.conn[a]})`; }
-    else if (i === cg.dirty && !cg.cleaned) { s2 = "dim"; dim = true; res[a] = "🟡 −14,2 dBm lemah"; }
-    else { s2 = "ok"; ok++; res[a] = `🟢 −${(1.5 + Math.random() * 1.5).toFixed(1).replace(".", ",")} dBm`; }
+    if (!cg.conn[a]) { s2 = "bad"; res[a] = `<b style="color:var(--red)">🔴 No link</b>`; }
+    else if (cg.conn[a] !== cg.map[a]) { s2 = "bad"; res[a] = `<b style="color:var(--red)">🔴 Salah port (${cg.conn[a]})</b>`; }
+    else if (i === cg.dirty && !cg.cleaned) { s2 = "dim"; dim = true; res[a] = `<b style="color:var(--amber)">🟡 −14,2 dBm lemah</b>`; }
+    else { s2 = "ok"; ok++; res[a] = `<span style="color:var(--green)">🟢 −${(1.5 + Math.random() * 1.5).toFixed(1).replace(".", ",")} dBm</span>`; }
     st[a] = s2;
     const L = $(`#cgl [data-p="${a}"]`); L.classList.remove("ok", "bad", "dim"); L.classList.add(s2);
     if (cg.conn[a]) { const R = $(`#cgr [data-p="${cg.conn[a]}"]`); R.classList.remove("ok", "bad", "dim"); R.classList.add(s2); }
@@ -2839,6 +2902,7 @@ $("#story").onclick = e => { const c = e.target.closest(".story"); if (c) go(sli
 /* ---------- less emoji: strip decorative emoji from text (icon-only elements are kept) ---------- */
 const EMO = /(?:\p{Regional_Indicator}{2}|[0-9#*]️?⃣|\p{Extended_Pictographic}[️\u{1F3FB}-\u{1F3FF}]?(?:‍\p{Extended_Pictographic}[️]?)*)️?\s?/gu;
 const EMO_SKIP = "svg,canvas,script,style,.big-emoji,.e,.copy,.srv,.face,#nav,.ctrl,.opt,#tcloud,.ti,.float,.rain,#gmap,#scico,#lgtr,#lgdust,#cgtruck,#cgrack,#e2rack,#qrov,#poll,.keepemo,#react,.k";
+const EMO_KEEP = new Set(["✅", "❌", "⚠", "⛔", "🟢", "🟡", "🔴", "✔", "⬜", "🚨", "🛑", "⏳", "⭐", "☆", "🏆", "🔒", "💥", "💡", "🔵", "📌", "❗"]);
 let emoBusy = false;
 function deEmoji(root) {
   if (emoBusy) return; emoBusy = true;
@@ -2846,7 +2910,7 @@ function deEmoji(root) {
   for (let n = w.currentNode.nodeType === 3 ? w.currentNode : w.nextNode(); n; n = w.nextNode()) {
     const p = n.parentElement; if (!p || p.closest(EMO_SKIP)) continue;
     const t = n.nodeValue; if (!/\p{Extended_Pictographic}|\p{Regional_Indicator}/u.test(t)) continue;
-    const c = t.replace(EMO, "");
+    const c = t.replace(EMO, m => EMO_KEEP.has(m.trim().replace(/️/g, "")) ? m : "");
     if (!c.trim() && p.textContent.trim() === t.trim()) continue;
     if (c !== t) n.nodeValue = c;
   }
