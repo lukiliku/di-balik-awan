@@ -232,7 +232,7 @@ svg text{font-family:system-ui,sans-serif}
 table{border-collapse:collapse;width:100%;font-size:.9rem}
 td,th{border:1px solid var(--line);padding:.3rem .45rem;text-align:left}
 th{background:var(--panel2)}
-/* dceo */
+/* fac */
 .pwr{text-align:center;padding:.8rem;border-radius:14px;border:2px solid var(--line);background:var(--panel);transition:.4s}
 .pwr .e{font-size:2.4rem}
 .pwr.live{border-color:var(--green);box-shadow:0 0 18px #3ddc8455}
@@ -606,12 +606,12 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
   </div>
 </div>
   <div class="mission" id="m-dep" style="display:none">
-    <h3 style="font-size:1.25rem">🚀 Misi: rack baru harus <span class="acc">LIVE</span> sebelum <b>deadline tugas 23:59</b> — semua bakal serbu Kumpulin!</h3>
+    <h3 style="font-size:1.25rem">🚀 Misi: jaringan baru harus <span class="acc">LIVE</span> sebelum <b>deadline tugas 23:59</b> — semua bakal serbu Kumpulin!</h3>
   <div class="row"><div class="steps row" id="cgstages"></div><span class="pill" id="cgclock">⏱️ 0:00</span><span class="pill" id="cgusers" style="display:none"></span></div>
   <div id="cgpre" class="grid2" style="grid-template-columns:1.2fr 1fr"></div>
   <div id="cg">
     <svg id="cglines"></svg>
-    <div><h3>🔀 Switch rack baru</h3><div class="ports" id="cgl"></div></div>
+    <div><h3>🔀 Switch baru</h3><div class="ports" id="cgl"></div></div>
     <div class="card" style="padding:.8rem" id="cgmid"></div>
     <div><h3>🔼 Uplink (ke jaringan)</h3><div class="ports" id="cgr"></div></div>
   </div>
@@ -632,7 +632,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
     </div>
   </div>
 </div>
-  <div class="mission" id="m-dceo" style="display:none">
+  <div class="mission" id="m-fac" style="display:none">
     <h3 style="font-size:1.25rem">⚡ Facility team · Skenario 1: <span class="acc">listrik PLN padam!</span> 🚨</h3>
   <p class="mute" style="margin:0">Tugasmu: pastikan rack <b>tidak pernah mati</b>. UPS hanya bisa menahan beberapa menit — generator harus mengambil alih sebelum baterai habis.</p>
   <div class="row" style="display:grid;grid-template-columns:1fr 50px 1fr 50px 1fr;align-items:stretch;gap:.4rem">
@@ -1285,7 +1285,7 @@ zoom(0);
 /* ---------- journey of a click ---------- */
 const J = [
   { e: "📱", n: "HP kamu", ms: 0, d: "Kamu klik “Upload” atau “Play” di aplikasi Kumpulin." },
-  { e: "🔎", n: "DNS", ms: 2, d: "Sebelum kirim, HP bertanya ke DNS: “kumpulin.app itu alamatnya di mana?” — dijawab alamat CloudFront terdekat. Seperti cari alamat di Google Maps dulu." },
+  { e: "🔎", n: "DNS", ms: 2, d: "Sebelum kirim, HP bertanya ke DNS: “kumpulin.app itu alamatnya di mana?” — dijawab alamat CloudFront terdekat. Seperti cari alamat di aplikasi peta dulu." },
   { e: "📶", n: "Wi-Fi / 4G", ms: 8, d: "Paket data lewat udara ke router Wi-Fi atau menara seluler." },
   { e: "🔀", n: "ISP", ms: 6, d: "Router-router operator internet (ISP) mencari rute terbaik menuju AWS." },
   { e: "⚡", n: "CloudFront", ms: 3, d: "CloudFront di Jakarta. Kalau isinya sudah ada di sini (misal video populer = cache hit), langsung dijawab dari sini! Kalau belum ada / data baru (misal upload tugas), lanjut ke Region." },
@@ -1503,18 +1503,18 @@ const GS = [
   { t: "08:00", e: "🦺", n: "Toolbox meeting", txt: "Sebelum kerja, semua tim ikut toolbox meeting (safety briefing): bahas pekerjaan hari ini, risikonya, dan siapa kerja dengan siapa. Hari ini ada perangkat berat yang harus dipindah ke rack. Kamu…",
     a: ["Minta partner & pakai alat bantu angkat", true, "Benar! Barang berat = minimal 2 orang / pakai alat. Punggung cuma satu. 💪"], b: ["Angkat sendiri biar cepat", false, "Jangan! Cedera punggung bisa bikin kamu cuti berbulan-bulan. Safety nomor satu."] },
   { t: "09:00", e: "📦", n: "Logistik", m: "log", txt: "Truk datang ke loading dock! Bantu tim Logistik mencocokkan barang dengan manifest." },
-  { t: "10:30", e: "🚚", n: "Deployer", m: "dep", txt: "Saatnya ikut tim Deployment: deploy new rack network — terima rack baru, cek dengan data teknis, cabling ke uplink, test, konfigurasi lewat workflow, sampai LIVE!" },
+  { t: "10:30", e: "🚚", n: "Deployer", m: "dep", txt: "Saatnya ikut tim Deployment: pasang jaringan baru. Terima perangkat jaringan, cek dengan data teknis, cabling ke uplink, test, konfigurasi lewat workflow, sampai LIVE!" },
   { t: "12:00", e: "🍱", n: "Makan siang", txt: "Perut keroncongan! Mau makan di mana?",
     a: ["Di pantry / kantin", true, "Sip! Makan yang kenyang. ⚡ Energi terisi!", 30], b: ["Bawa nasi bungkus ke data hall", false, "Eits! Makanan & minuman dilarang di data hall — tumpahan + listrik = bahaya.", 30] },
   { t: "12:40", e: "🎮", n: "Istirahat", ps: true, txt: "Masih ada 20 menit istirahat. Tim ngajak main PS! 🎮 Tekan ✕ saat bola masuk zona hijau. 3 kesempatan!" },
   { t: "14:00", e: "🔧", n: "Technician", m: "tech", txt: "Tiket masuk! Ikut tim Data Center Technician: baca diagnosa di WF, ambil spare yang cocok, lalu ganti part rusak (disk, power supply, atau RAM) tanpa bikin aplikasi yang sedang jalan ikut mati." },
-  { t: "15:30", e: "⚡", n: "Facility", m: "dceo", txt: "🚨 Alarm! Latihan darurat bersama Facility team: listrik PLN padam, lalu ada rack yang kepanasan. Jaga rack tetap menyala!" },
+  { t: "15:30", e: "⚡", n: "Facility", m: "fac", txt: "🚨 Alarm! Latihan darurat bersama Facility team: listrik PLN padam, lalu ada rack yang kepanasan. Jaga rack tetap menyala!" },
   { t: "16:30", e: "📝", n: "Serah terima", txt: "Shift hampir selesai, tapi masih ada pekerjaan yang belum beres.",
     a: ["Tulis catatan serah terima yang jelas", true, "Mantap! Shift berikutnya tahu persis harus lanjut dari mana."], b: ["Pulang aja, besok lanjut", false, "Shift berikutnya bingung… Kalau tidak dicatat, dianggap tidak pernah terjadi."] },
   { t: "17:00", e: "🏠", n: "Pulang", end: true }
 ];
-const MNAME = { sec: "🛡️ Security · boleh masuk?", log: "📦 Logistik · cocokkan manifest", dep: "🚚 Deployer · deploy new rack network", tech: "🔧 Technician · tiket perbaikan", dceo: "⚡ Facility team · PLN padam & rack panas" };
-const MINIT = { sec: () => { vi = 0; vs = 0; visShow(); }, log: () => lgNew(), dep: () => { cgNew(); setTimeout(cgDraw, 60); }, tech: () => techNew(), dceo: () => pwInit() };
+const MNAME = { sec: "🛡️ Security · boleh masuk?", log: "📦 Logistik · cocokkan manifest", dep: "🚚 Deployer · pasang jaringan baru", tech: "🔧 Technician · tiket perbaikan", fac: "⚡ Facility team · PLN padam & rack panas" };
+const MINIT = { sec: () => { vi = 0; vs = 0; visShow(); }, log: () => lgNew(), dep: () => { cgNew(); setTimeout(cgDraw, 60); }, tech: () => techNew(), fac: () => pwInit() };
 function gStartMission() {
   const k = GS[G.i].m;
   G.mActive = k; G.mDone = false; G.mXp = 0; G.mReady = false;
@@ -1674,7 +1674,7 @@ gIntro();
 
 /* ---------- roles ---------- */
 const ROLES = [
-  ["🚚", "Deployment", "Tim saya! 🙋", "<b>Deploy new rack & network</b>: dari rack baru datang, dipasang, dihubungkan ke jaringan, dites, sampai <b>live</b> dipakai aplikasi orang.", "Network testing tools, alat ukur & pembersih fiber optik, laptop + kabel console", "Networking (switch, optic, fiber), troubleshooting link, membaca desain jaringan, teliti & kerja tim", "suka melihat jaringan yang kamu bangun langsung <b>live</b> dipakai jutaan orang"],
+  ["🚚", "Deployment", "", "<b>Pasang jaringan baru</b>: dari perangkat jaringan datang, dipasang, dihubungkan ke jaringan, dites, sampai <b>live</b> dipakai aplikasi orang.", "Network testing tools, alat ukur & pembersih fiber optik, laptop + kabel console", "Networking (switch, optic, fiber), troubleshooting link, membaca desain jaringan, teliti & kerja tim", "suka melihat jaringan yang kamu bangun langsung <b>live</b> dipakai jutaan orang"],
   ["🔧", "Data Center Technician", "", "Merawat server yang sudah berjalan: ganti disk, memori, atau part rusak sesuai tiket — pakai workflow supaya aplikasi yang jalan tidak terganggu.", "Workflow & sistem tiket, gelang anti-statis, part pengganti, laptop", "Troubleshooting hardware, ketelitian, mengikuti prosedur", "suka memecahkan masalah seperti detektif"],
   ["⚡", "Facility team", "", "Menjaga listrik, generator, UPS, dan pendingin supaya tidak pernah berhenti.", "Alat ukur listrik, sistem kontrol gedung", "Teknik elektro/mesin, K3, tenang saat darurat", "suka mesin besar & sistem kelistrikan"],
   ["🛡️", "Security", "", "Menjaga akses fisik 24/7: siapa boleh masuk, ke mana, dan kapan.", "Sistem kartu akses, kamera, radio", "Tegas, teliti, komunikasi yang baik", "suka menjaga & melindungi"],
@@ -2232,7 +2232,7 @@ const QZ = [
   ["Kamu simpan tugas di Amazon S3, lalu satu gedung (AZ) kebanjiran. Tugasmu…", ["Hilang, ikut hanyut kebawa banjir 🌊", "Tetap aman — S3 otomatis menyimpan salinan di minimal 3 AZ", "Harus di-upload ulang sambil nangis 😭", "Pindah sendiri ke HP dosen 📱"], 1],
   ["Kamu cuma menyalakan 1 server EC2. Supaya tetap jalan walau satu gedung mati, kamu harus…", ["Tidak perlu apa-apa, berdoa saja 🙏", "Menyalakan server di 2 AZ + load balancer", "Beli server yang lebih mahal biar sakti ✨", "Matikan server tiap malam biar istirahat 😴"], 1],
   ["CloudFront membuat video materi cepat dibuka di mana-mana dengan cara…", ["Menambah RAM di HP kamu 📱", "Menyimpan salinan (cache) di lokasi yang dekat dengan pengguna", "Memindahkan server ke bulan 🌕", "Kualitas videonya diturunkan jadi 144p 🥔"], 1],
-  ["Kamu lihat rekan mau mengangkat server berat sendirian. Yang benar…", ["Biarkan aja, kamu memang tegaan orangnya 😈", "Bilang STOP — angkat berdua atau pakai alat 💪", "Rekam dulu buat konten TikTok 📱", "Kasih semangat dari jauh: “Ayo kamu pasti bisa!” 📣"], 1]
+  ["Kamu lihat rekan mau mengangkat server berat sendirian. Yang benar…", ["Biarkan aja, kamu memang tegaan orangnya 😈", "Bilang STOP — angkat berdua atau pakai alat 💪", "Rekam dulu buat konten medsos 📱", "Kasih semangat dari jauh: “Ayo kamu pasti bisa!” 📣"], 1]
 ];
 let qi = 0, qs = 0;
 function quiz() {
@@ -2410,10 +2410,10 @@ $("#cfreset").onclick = () => { if (!cf.busy) cfInit(); };
 cfInit();
 
 
-/* ---------- deploy new rack network mission ---------- */
+/* ---------- deployer: pasang jaringan baru ---------- */
 const CN = 4, PP = ["A", "B", "C", "D"];
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
-const CST = ["🚚 Terima rack", "🔍 Cek rack", "🧵 Cabling", "🧪 Network test", "⚙️ Konfigurasi", "🚀 LIVE"];
+const CST = ["🚚 Terima perangkat", "🔍 Cek perangkat", "🧵 Cabling", "🧪 Network test", "⚙️ Konfigurasi", "🚀 LIVE"];
 const cg = {};
 let cgClock = null, cgUserT = null;
 function cgStage(n) {
@@ -2431,18 +2431,18 @@ function cgNew() {
   cgStage(0); cgMidSheet(); cgReceive();
   cgClock = setInterval(() => { if (cg.live) return; const t = (Date.now() - cg.start) / 1000 | 0; $("#cgclock").textContent = `⏱️ ${t / 60 | 0}:${String(t % 60).padStart(2, "0")}`; }, 500);
 }
-const RCHK = [["🏷️ Rack ID", "R-NEW-07", "R-NEW-07"], ["📍 Posisi di lantai", "Baris C · slot 07", "Baris C · slot 07"], ["🔢 Nomor seri switch", "SW-8F21A9", "SW-8F21A9"], ["📦 Kondisi rack", "Tidak penyok, pintu & roda baik", "OK 👍"]];
+const RCHK = [["🏷️ ID perangkat", "NET-07", "NET-07"], ["📍 Posisi di lantai", "Baris C · slot 07", "Baris C · slot 07"], ["🔢 Nomor seri", "DEMO-0007", "DEMO-0007"], ["📦 Kondisi fisik", "Tidak penyok, pintu & roda baik", "OK 👍"]];
 function cgReceive() {
   const pre = $("#cgpre"); pre.style.display = ""; $("#cg").style.display = "none"; $("#cgcfg").innerHTML = "";
   const run = cg.run = Math.random();
   pre.innerHTML = `<div class="card" id="cgscene" style="position:relative;height:190px;overflow:hidden;padding:.6rem">
-      <b>🚚 Rack baru datang ke loading dock</b>
+      <b>🚚 Kiriman perangkat jaringan datang ke loading dock</b>
       <div style="position:absolute;left:0;right:0;bottom:18px;height:4px;background:repeating-linear-gradient(90deg,#4a5670 0 26px,transparent 26px 46px)"></div>
       <div style="position:absolute;right:14px;bottom:26px;text-align:center"><div style="font-size:2rem">🏭</div><small class="mute">Loading dock</small></div>
       <span id="cgtruck" style="position:absolute;left:-120px;bottom:22px;font-size:3rem;display:inline-block;transform:scaleX(-1)">🚚</span>
       <span id="cgrack" style="position:absolute;right:120px;bottom:26px;font-size:2.6rem;opacity:0">🗄️</span>
     </div>
-    <div class="card" id="cgchk" style="position:relative;overflow:hidden"><b>🔍 Cek rack vs data teknis</b><p class="mute" style="margin:.3rem 0 0">Tunggu truk sampai…</p></div>`;
+    <div class="card" id="cgchk" style="position:relative;overflow:hidden"><b>🔍 Cek perangkat vs data teknis</b><p class="mute" style="margin:.3rem 0 0">Tunggu truk sampai…</p></div>`;
   const tr = $("#cgtruck"), sc = $("#cgscene"), t0 = performance.now(), D = 2600;
   (function drive(t) {
     if (cg.run !== run) return;
@@ -2454,9 +2454,9 @@ function cgReceive() {
   })(t0);
 }
 function cgCheckRender(rows = 0) {
-  $("#cgchk").innerHTML = `<b>🔍 Cek rack vs data teknis</b><p class="mute" style="margin:.2rem 0 .4rem;font-size:.85rem">Scan label rack, lalu cocokkan dengan data teknis.</p>
-    <button class="btn primary" id="cgscan" ${cg.scanned ? "disabled" : ""}>📟 Scan rack</button>
-    <table id="cgcktb" style="margin-top:.4rem"><tr><th>Item</th><th>Data teknis</th><th>Rack yang datang</th></tr>${RCHK.map(([n, a, b], i) => `<tr><td>${i < rows ? "✅" : "⬜"} ${n}</td><td>${a}</td><td>${i < rows ? `<span style="color:var(--green)">${b}</span>` : "<span class='mute'>—</span>"}</td></tr>`).join("")}</table>
+  $("#cgchk").innerHTML = `<b>🔍 Cek perangkat vs data teknis</b><p class="mute" style="margin:.2rem 0 .4rem;font-size:.85rem">Scan labelnya, lalu cocokkan dengan data teknis.</p>
+    <button class="btn primary" id="cgscan" ${cg.scanned ? "disabled" : ""}>📟 Scan label</button>
+    <table id="cgcktb" style="margin-top:.4rem"><tr><th>Item</th><th>Data teknis</th><th>Yang datang</th></tr>${RCHK.map(([n, a, b], i) => `<tr><td>${i < rows ? "✅" : "⬜"} ${n}</td><td>${a}</td><td>${i < rows ? `<span style="color:var(--green)">${b}</span>` : "<span class='mute'>—</span>"}</td></tr>`).join("")}</table>
     <div id="cglaser" style="position:absolute;left:0;right:0;height:3px;background:#ff3b3b;box-shadow:0 0 12px #ff3b3b;display:none"></div>
     <div id="cgckmsg" style="margin:.4rem 0 0"></div>`;
   $("#cgscan").onclick = cgScanRack;
@@ -2473,7 +2473,7 @@ function cgScanRack() {
     if (want > shown) { shown = want; cg.scanned = true; const keep = L.style.top; cgCheckRender(shown); $("#cgscan").disabled = true; const L2 = $("#cglaser"); L2.style.display = ""; L2.style.top = keep; }
     if (r < 1) return requestAnimationFrame(sweep);
     $("#cglaser").style.display = "none"; cgCheckRender(RCHK.length);
-    $("#cgckmsg").innerHTML = `✅ <b>Rack sesuai data teknis.</b><br><button class="btn primary" id="cgmove" style="margin-top:.4rem">🗄️ Pindahkan rack ke Baris C · slot 07</button>`;
+    $("#cgckmsg").innerHTML = `✅ <b>Perangkat sesuai data teknis.</b><br><button class="btn primary" id="cgmove" style="margin-top:.4rem">🗄️ Pindahkan ke Baris C · slot 07</button>`;
     $("#cgmove").onclick = cgMoveRack;
   })(t0);
 }
@@ -2491,7 +2491,7 @@ function cgMoveRack() {
   g += `<text x="${X(6) + 11}" y="${Y(2) - 3}" fill="#ffc542" font-size="8" text-anchor="middle">slot 07</text>`;
   g += `<rect x="330" y="128" width="28" height="18" rx="3" fill="#22385e"/><text x="344" y="140" fill="#9fb0c8" font-size="7" text-anchor="middle">dock</text>`;
   g += `<text id="cgmover" x="344" y="132" font-size="16" text-anchor="middle">🗄️</text>`;
-  $("#cgscene").innerHTML = `<b>🗄️ Memindahkan rack ke posisinya</b><svg viewBox="0 0 365 150" width="100%" style="margin-top:.3rem">${g}</svg>`;
+  $("#cgscene").innerHTML = `<b>🗄️ Memindahkan perangkat ke posisinya</b><svg viewBox="0 0 365 150" width="100%" style="margin-top:.3rem">${g}</svg>`;
   const pts = [[344, 132], [344, Y(3) - 5], [X(6) + 11, Y(3) - 5], [X(6) + 11, Y(2) + 12]];
   let k = 0, t0 = performance.now();
   (function f(t) {
@@ -2501,7 +2501,7 @@ function cgMoveRack() {
     if (r >= 1) { k++; t0 = t; }
     if (k < pts.length - 1) return requestAnimationFrame(f);
     const sl = $("#cgslot"); sl.setAttribute("fill", "#1d6b4f"); sl.setAttribute("stroke", "#3ddc84"); sl.removeAttribute("stroke-dasharray");
-    $("#cgckmsg").innerHTML = "✅ <b>Rack terpasang di Baris C · slot 07</b> sesuai data teknis. Lanjut cabling…";
+    $("#cgckmsg").innerHTML = "✅ <b>Terpasang di Baris C · slot 07</b> sesuai data teknis. Lanjut cabling…";
     setTimeout(() => { if (cg.run !== run) return; $("#cgpre").style.display = "none"; $("#cg").style.display = ""; cgStage(2); cgMidSheet(); setTimeout(() => cgDraw(), 60); }, 1300);
   })(t0);
 }
@@ -2558,8 +2558,8 @@ function cgTest() {
 function cgLabel(res) {
   cgStage(4);
   cgMidSheet(res, "✅ <b>Semua link lolos test!</b> Kabel sudah benar, tapi port switch masih <b>mati</b>. Konfigurasi lewat workflow di bawah 👇");
-  $("#cgcfg").innerHTML = `<div class="card"><h3>⚙️ Konfigurasi: nyalakan port rack baru lewat workflow</h3>
-    <div class="row"><span>Device:</span><select id="wfdev" style="width:auto"><option value="">— pilih device —</option><option value="prod">rack-1-sw1 (rack lama — sedang menjalankan aplikasi orang)</option><option value="new">rack-baru-sw1 (rack baru)</option></select>
+  $("#cgcfg").innerHTML = `<div class="card"><h3>⚙️ Konfigurasi: nyalakan port switch baru lewat workflow</h3>
+    <div class="row"><span>Device:</span><select id="wfdev" style="width:auto"><option value="">— pilih device —</option><option value="prod">switch-lama (sedang menjalankan aplikasi orang)</option><option value="new">switch-baru (perangkat baru)</option></select>
       <span>Port:</span><span class="pill mono">Ethernet1–${CN}</span>
       <button class="btn primary" id="wfrun">▶ Jalankan workflow</button>
       <label style="display:inline-flex;gap:.4rem;align-items:center;margin:0"><input type="checkbox" id="wfcli" style="width:auto"> tampilkan perintah di balik layar</label></div>
@@ -2594,7 +2594,7 @@ async function wfRun() {
   cg.wf[0] = "run"; wfRender(); await sleep(900);
   if (dev === "prod") {
     cg.wf[0] = "fail"; wfRender(); cg.wfBusy = false; $("#wfrun").disabled = false;
-    msg.innerHTML = "⛔ <b>Pre-check gagal:</b> rack-1-sw1 adalah rack lama yang sedang menjalankan aplikasi orang. Workflow menolak mengubahnya tanpa rencana & persetujuan. Untung pakai workflow! Pilih device yang benar.";
+    msg.innerHTML = "⛔ <b>Pre-check gagal:</b> switch-lama adalah switch yang sedang menjalankan aplikasi orang. Workflow menolak mengubahnya tanpa rencana & persetujuan. Untung pakai workflow! Pilih device yang benar.";
     return;
   }
   for (let k = 0; k < WF.length; k++) {
@@ -2617,7 +2617,7 @@ function cgGoLive() {
   cg.live = true; cgStage(6);
   const t = (Date.now() - cg.start) / 1000 | 0;
   $("#cgcfg").innerHTML = "";
-  $("#cgmid").innerHTML = `<h3>🟢 Rack baru LIVE!</h3><p>Waktu misi: <b class="acc">${t / 60 | 0}:${String(t % 60).padStart(2, "0")}</b></p><p>✔ Rack diterima & cocok dengan data teknis<br>✔ ${CN} uplink tersambung benar, cahaya bagus<br>✔ Dikonfigurasi lewat workflow & terverifikasi<br>✔ Konfigurasi tersimpan</p><p class="mute">Malam ini semua tugas terkumpul sebelum 23:59 — tidak ada yang teriak “Pak, servernya error!” 📚🚀 Di dunia nyata, satu rack bisa punya <b>ratusan</b> koneksi seperti ini.</p><button class="btn" id="cgagain">🔄 Main lagi</button>`;
+  $("#cgmid").innerHTML = `<h3>🟢 Jaringan baru LIVE!</h3><p>Waktu misi: <b class="acc">${t / 60 | 0}:${String(t % 60).padStart(2, "0")}</b></p><p>✔ Perangkat diterima & cocok dengan data teknis<br>✔ ${CN} uplink tersambung benar, cahaya bagus<br>✔ Dikonfigurasi lewat workflow & terverifikasi<br>✔ Konfigurasi tersimpan</p><p class="mute">Malam ini semua tugas terkumpul sebelum 23:59 — tidak ada yang teriak “Pak, servernya error!” 📚🚀 Di dunia nyata, satu jaringan bisa punya <b>ratusan</b> koneksi seperti ini.</p><button class="btn" id="cgagain">🔄 Main lagi</button>`;
   $("#cgagain").onclick = cgNew;
   missionDone("dep", 30);
   $("#cgusers").style.display = "";
@@ -2813,7 +2813,7 @@ $("#hact").onclick = async e => {
   if (ht.box && ht.door && (a === "box" || a === "door")) m.innerHTML = "✅ <b>Dua-duanya beres!</b> Lihat semua rack kembali adem… 📉 Lalu catat & laporkan.";
   if (a === "log") {
     if (Math.max(...ht.t[0], ...ht.t[1]) > 27) { m.innerHTML = "⏳ Tunggu semua rack kembali normal dulu, baru catat."; return; }
-    if (!ht.done) { ht.done = true; m.innerHTML = "📝 <b>Dicatat!</b> Kardus tidak boleh ditinggal di data hall, dan pintu containment harus selalu tertutup — jadi pelajaran untuk semua tim. 🎉"; confetti(); missionDone("dceo", 30); }
+    if (!ht.done) { ht.done = true; m.innerHTML = "📝 <b>Dicatat!</b> Kardus tidak boleh ditinggal di data hall, dan pintu containment harus selalu tertutup — jadi pelajaran untuk semua tim. 🎉"; confetti(); missionDone("fac", 30); }
   }
   heatActs(); heatRender();
 };
