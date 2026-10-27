@@ -141,6 +141,23 @@ label{font-size:.9rem;color:var(--mute);display:block;margin:.4rem 0 .2rem}
 /* visitor */
 .visitor{font-size:1.15rem}
 .visitor .face{font-size:4rem}
+.visitor{position:relative}
+.secscene{position:relative;height:170px;background:#0a1528;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:.5rem}
+.secscene .who{position:absolute;bottom:20px;font-size:2.8rem;transition:left .9s linear,transform .3s;line-height:1}
+.secscene .who.r{transform:scaleX(-1)}
+.secscene .who.bad{filter:drop-shadow(0 0 8px #ff5d5d)}
+.secscene #sdoor{position:absolute;left:62%;bottom:16px;width:16px;height:118px;background:#ffc542;border-radius:3px;transform-origin:top;transition:transform .5s}
+.secscene #sdoor.open{transform:scaleY(.06)}
+.secscene #swall{position:absolute;left:62%;top:0;width:16px;height:36px;background:#33507f}
+.secscene #sled{position:absolute;left:calc(62% - 30px);bottom:78px;width:18px;height:26px;border-radius:4px;background:#22385e;border:1px solid #4a6aa0}
+.secscene #sled::after{content:"";position:absolute;left:5px;top:4px;width:7px;height:7px;border-radius:50%;background:#555}
+.secscene #sled.ok::after{background:var(--green);box-shadow:0 0 10px var(--green)}
+.secscene #scap{position:absolute;left:10px;top:8px;right:10px;font-size:.95rem;font-weight:700}
+.secscene.alarm{animation:alarm .4s 4}
+@keyframes alarm{50%{background:#4a1010}}
+.stamp{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;z-index:3}
+.stamp b{font-size:3.2rem;font-weight:900;padding:.2rem 1.2rem;border:6px solid currentColor;border-radius:14px;background:rgba(5,10,20,.75);animation:stampin .55s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes stampin{0%{transform:scale(2.6) rotate(-14deg);opacity:0}100%{transform:scale(1) rotate(-8deg);opacity:1}}
 /* checklist */
 .lab1grid{columns:2;column-gap:1.2rem}
 .lab1grid .check{break-inside:avoid}
@@ -697,7 +714,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 <section class="slide" data-title="Game: jadi arsitek cloud">
   <div class="kicker"><span class="part">Bab 6</span>Let's deploy! · Game · tanpa akun · tanpa biaya</div>
   <h2>🏗️ Jadi arsitek cloud: bikin “Kumpulin” yang <span class="acc">anti down</span>!</h2>
-  <p class="mute" style="margin:0">Pilih komponen di kanan, taruh server di AZ, lalu tekan <b>🧪 Uji arsitektur</b>. 🏆 <b>Tantangan:</b> lulus <b>3 ujian</b> dengan tagihan sehemat mungkin <span class="src">(angka ilustrasi)</span>.</p>
+  <p class="mute" style="margin:0">Pilih komponen di kanan, taruh server di AZ, lalu tekan <b>🧪 Uji arsitektur</b>. 🏆 <b>Tantangan:</b> lulus <b>4 ujian</b> dengan tagihan sehemat mungkin <span class="src">(angka ilustrasi)</span>.</p>
   <div class="grid2" style="grid-template-columns:1.45fr 1fr">
     <div class="card" id="arch" style="padding:.8rem;position:relative"></div>
     <div>
@@ -824,7 +841,7 @@ $("#qrov").onclick = () => qrToggle(false);
 $("#mhome").onclick = () => { $("#menu").classList.remove("open"); go(0); };
 $("#mreset").onclick = () => {
   if (!confirm("Reset semua progres (game, checklist, skor) dan mulai dari slide 1?")) return;
-  ["lab1v2", "lab1v3", "lab1v4", "lab2v2", "c30", "lab0", "lab1", "lab2", "clean", "archBest"].forEach(k => localStorage.removeItem(k));
+  ["lab1v2", "lab1v3", "lab1v4", "lab2v2", "c30", "lab0", "lab1", "lab2", "clean", "archBest4"].forEach(k => localStorage.removeItem(k));
   location.href = location.pathname + "#1"; location.reload();
 };
 const typing = () => ["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement.tagName) && document.activeElement.type !== "range";
@@ -1746,7 +1763,7 @@ const TPWHY = {
   psu: { move: "Tidak perlu. PSU cadangan masih sehat, server tetap aman menyala.", off: "Tidak perlu! Mematikan server malah bikin gangguan. PSU bisa hot-swap." },
   ram: { hot: "BAHAYA! RAM tidak bisa dicabut saat server menyala, server bisa langsung crash.", move: "Belum cukup. RAM tidak bisa diganti saat menyala, jadi server harus dimatikan." }
 };
-const TSTEPS = ["🔍 Cek WF: baca log, cari part yang rusak & cara kerja yang aman", null, "📦 Ambil spare part yang cocok (part number)", null, null, null, null];
+const TSTEPS = ["🔍 Cek WF: baca log, cari part yang rusak & cara kerja yang aman", null, "📦 Ambil spare part dari gudang", null, null, null, null];
 const shuf = a => a.map(x => [Math.random(), x]).sort((p, q) => p[0] - q[0]).map(x => x[1]);
 function techNew() {
   const types = Object.keys(TT), ty = types[(types.indexOf(tg.type) + 1 + (Math.random() * (types.length - 1) | 0)) % types.length] || "disk";
@@ -1838,13 +1855,19 @@ $("#twf1").onclick = async () => {
   tg.step = 2; tg.busy = false; techSteps();
   $("#tmsg").innerHTML = "Server sudah aman dikerjakan. Sekarang <b>ambil spare part</b> yang cocok.";
 };
-$("#tspare").onclick = () => {
+$("#tspare").onclick = async () => {
   if (tg.step < 2) return techSoft(tg.step === 0 ? "🔍 Cek WF dulu supaya tahu part apa yang dibutuhkan." : "⚙️ Jalankan workflow dulu.");
-  if (tg.step !== 2) return;
+  if (tg.step !== 2 || tg.busy) return;
+  /* cukup satu klik: pura-pura ambil spare yang cocok dari gudang */
+  tg.busy = true; $("#tspare").disabled = true;
   const [ok] = tg.X.spare.filter(x => x[2]);
   $("#tdiag").style.display = "";
-  $("#tdiag").innerHTML = `<b>📦 Gudang spare</b> · WF minta part number <code>${ok[1]}</code><div class="row" style="margin-top:.4rem">${shuf(tg.X.spare.map((x, i) => [x, i])).map(([x, i]) => `<button class="btn" data-sp="${i}">${x[0]}<br><small>${x[1]}</small></button>`).join("")}</div>`;
-  $("#tmsg").innerHTML = "Pilih part yang <b>part number</b>-nya sama persis dengan WF.";
+  $("#tdiag").innerHTML = `<b>📦 Ke gudang spare…</b> <span class="mute">cari part number <code>${ok[1]}</code></span>`;
+  const r = $("#tspare").getBoundingClientRect(); floatEmoji("📦", r.left + r.width / 2, r.top);
+  await sleep(900);
+  $("#tdiag").innerHTML = `<b>📦 Spare diambil:</b> ${ok[0]} · <code>${ok[1]}</code> ✅ cocok dengan WF`;
+  tg.busy = false; tg.step = tg.glove ? 4 : 3; techSteps();
+  $("#tmsg").innerHTML = tg.glove ? `Spare siap. Cabut ${tg.T.part} yang rusak lagi di server dengan <b>lampu locator biru</b>.` : "Spare siap. Sekarang pakai <b>gelang anti-statis</b>.";
 };
 $("#tglove").onclick = () => {
   if (tg.step <= 1) return techWarn("⚠️ <b>Tunggu!</b> Cek WF & jalankan workflow dulu. Server masih menjalankan aplikasi orang.");
@@ -1904,32 +1927,75 @@ techNew();
 
 /* ---------- security game ---------- */
 const VIS = [
-  ["🧑‍🔧", "Rina, teknisi", "Kartu akses aktif ✅ · Ada tiket kerja di data hall hari ini ✅", true, "Benar! Identitas jelas, akses sesuai, ada tugas. Silakan masuk."],
-  ["🕵️", "Orang menempel di belakang Rina", "Pintu terbuka setelah Rina scan kartu, orang ini ikut masuk tanpa scan", false, "Benar, tolak! Ini namanya <b>tailgating</b>. Setiap orang wajib scan kartunya sendiri — tidak boleh “nebeng”, sekalipun kelihatan seperti karyawan."]
+  ["🧑‍🔧", "Rina, teknisi", "Kartu akses aktif ✅ · Ada tiket kerja di data hall hari ini ✅", true, "Benar! Identitas jelas, akses sesuai, ada tugas. Silakan masuk.", "Rina punya kartu aktif & tiket kerja hari ini, jadi dia <b>boleh masuk</b>. Keamanan itu tegas, tapi tetap adil."],
+  ["🕵️", "Orang menempel di belakang Rina", "Pintu terbuka setelah Rina scan kartu, orang ini ikut masuk tanpa scan", false, "Benar, tolak! Ini namanya <b>tailgating</b>. Setiap orang wajib scan kartunya sendiri — tidak boleh “nebeng”, sekalipun kelihatan seperti karyawan.", "Itu <b>tailgating</b>! Orang itu masuk tanpa scan kartu. Setiap orang wajib scan kartunya sendiri, jadi harusnya <b>ditolak</b>."]
 ];
-let vi = 0, vs = 0, vlock = false;
+let vi = 0, vs = 0, vlock = false, vrun = 0;
+const vEl = id => $("#" + id);
+const vMove = (id, left) => { const e = vEl(id); if (e) e.style.left = left + "%"; };
+const vCap = (t, col) => { const c = vEl("scap"); if (c) { c.innerHTML = t; c.style.color = col || "var(--ink)"; } };
+async function visIntro(i) {
+  const run = ++vrun, ok = () => run === vrun;
+  vlock = true;
+  vCap("🚶 Ada yang datang ke pintu data hall…");
+  vMove("sp1", 40); if (i === 1) { await sleep(250); vMove("sp2", 26); }
+  await sleep(1000); if (!ok()) return;
+  vCap("📟 Rina scan kartu… bip!"); vEl("sled").classList.add("ok"); await sleep(700); if (!ok()) return;
+  if (i === 0) { vCap("✅ Kartu Rina valid. Boleh masuk?"); vlock = false; return; }
+  vCap("🚪 Pintu terbuka, Rina masuk…"); vEl("sdoor").classList.add("open"); vMove("sp1", 86); await sleep(500); if (!ok()) return;
+  vEl("sp2").style.transition = "left .55s linear"; vMove("sp2", 55); await sleep(600); if (!ok()) return;
+  vEl("sp2").classList.add("bad");
+  vCap("⚠️ Orang ini ikut menempel masuk <u>tanpa scan kartu</u>!", "var(--red)");
+  vlock = false;
+}
+async function visOutcome(i, allow) {
+  if (i === 0 && allow) { vEl("sdoor").classList.add("open"); vMove("sp1", 86); vCap("🚪 Rina masuk ke data hall. 👍", "var(--green)"); await sleep(900); vEl("sdoor").classList.remove("open"); }
+  if (i === 0 && !allow) vCap("😕 Rina punya akses sah & tiket kerja… dia jadi tidak bisa bekerja.", "var(--amber)");
+  if (i === 1 && !allow) {
+    $("#secsc").insertAdjacentHTML("beforeend", `<span class="who" id="sguard" style="left:90%">👮</span>`);
+    await sleep(50); vMove("sguard", 66); vCap("⛔ “Stop! Scan kartumu sendiri dulu.”", "var(--green)");
+    await sleep(500); vEl("sp2").style.transition = "left .7s ease-out"; vEl("sp2").classList.remove("r"); vMove("sp2", 25);
+    await sleep(600); vEl("sdoor").classList.remove("open");
+  }
+  if (i === 1 && allow) { vMove("sp2", 86); await sleep(600); vEl("sdoor").classList.remove("open"); $("#secsc").classList.add("alarm"); vCap("🚨 Orang tanpa akses berhasil masuk ke data hall!", "var(--red)"); }
+}
+function visStamp(ok) {
+  const c = $("#vcard"); c.insertAdjacentHTML("beforeend", `<div class="stamp keepemo"><b style="color:${ok ? "var(--green)" : "var(--red)"}">${ok ? "BETUL! ✅" : "KURANG TEPAT ❌"}</b></div>`);
+  if (ok) { const r = c.getBoundingClientRect(); for (let k = 0; k < 6; k++) setTimeout(() => floatEmoji(k % 2 ? "⭐" : "✅", r.left + r.width * (.2 + Math.random() * .6), r.top + r.height * .6), k * 90); }
+  else { c.classList.remove("shake"); void c.offsetWidth; c.classList.add("shake"); }
+}
 function visShow() {
+  vrun++;
   if (vi >= VIS.length) {
     $("#vcard").innerHTML = `<div class="face">🏅</div><h3>Shift selesai!</h3><p>Skor: <b>${vs} / ${VIS.length}</b></p><button class="btn primary" id="vre">🔁 Main lagi</button>`;
     $("#vre").onclick = () => { vi = 0; vs = 0; visShow(); };
     $("#vres").textContent = vs === VIS.length ? "🎉 Kamu security yang hebat!" : "Keamanan itu soal disiplin, bukan curiga. 💪";
     if (vs === VIS.length) confetti();
     missionDone("sec", vs * 10);
-    $("#vscore").textContent = ""; return;
+    $("#vscore").textContent = ""; vlock = false; return;
   }
   const v = VIS[vi]; const c = $("#vcard");
   c.classList.remove("fadeup"); void c.offsetWidth; c.classList.add("fadeup");
-  c.innerHTML = `<div class="face">${v[0]}</div><h3>${v[1]}</h3><p class="mute">${v[2]}</p>`;
+  c.innerHTML = `<div class="secscene keepemo" id="secsc"><div id="scap"></div><div id="swall"></div><div id="sdoor"></div><div id="sled"></div>
+      <span class="who r" id="sp1" style="left:4%">🧑‍🔧</span>${vi === 1 ? `<span class="who r" id="sp2" style="left:-12%">🕵️</span>` : ""}
+      <div style="position:absolute;left:0;right:0;bottom:14px;height:3px;background:#33507f"></div><small class="mute" style="position:absolute;left:calc(62% + 22px);top:40px">data hall →</small></div>
+    <h3 style="margin:.2rem 0">${v[1]}</h3><p class="mute" style="margin:0">${v[2]}</p>`;
   $("#vscore").textContent = `Tamu ${vi + 1} / ${VIS.length} · Skor ${vs}`;
+  $("#vres").innerHTML = "Perhatikan pintunya, lalu putuskan. 👀";
+  visIntro(vi);
 }
-function visAns(allow) {
+async function visAns(allow) {
   if (vi >= VIS.length || vlock) return;
   vlock = true;
-  const v = VIS[vi], ok = allow === v[3];
+  const v = VIS[vi], ok = allow === v[3], run = vrun;
   if (ok) vs++;
-  $("#vres").innerHTML = (ok ? "✅ " : "❌ Kurang tepat. ") + v[4];
-  $("#vcard").classList.add(ok ? "pop" : "shake");
-  setTimeout(() => { vi++; vlock = false; visShow(); }, 2600);
+  $("#vscore").textContent = `Tamu ${vi + 1} / ${VIS.length} · Skor ${vs}`;
+  $("#vres").innerHTML = ok ? "✅ " + v[4] : "❌ " + v[5];
+  visStamp(ok);
+  await visOutcome(vi, allow);
+  await sleep(2400);
+  if (run !== vrun) return;
+  vi++; vlock = false; visShow();
 }
 $("#vin").onclick = () => visAns(true); $("#vout").onclick = () => visAns(false);
 visShow();
@@ -2043,7 +2109,7 @@ $("#wZip").onclick = () => dl(makeZip("index.html", siteHtml()), "site.zip");
 
 /* ---------- cloud architect game ---------- */
 const AC = { ec2: 350, lb: 300, db: 800, multi: 800, s3: 50, cf: 150, asg: 0 };
-const AP = [["ec2", "🖥️ EC2", "pilih lalu klik AZ"], ["lb", "⚖️ Load balancer"], ["asg", "📈 Auto Scaling"], ["del", "🗑️ Hapus server"]];
+const AP = [["ec2", "🖥️ EC2", "pilih lalu klik AZ"], ["lb", "⚖️ Load balancer"], ["asg", "📈 Auto Scaling"], ["cf", "⚡ CloudFront"], ["del", "🗑️ Hapus server"]];
 const ar = {};
 function arInit() { if ($("#atests")) $("#atests").innerHTML = ""; Object.assign(ar, { ec2: { a: 0, b: 0, c: 0 }, lb: false, db: false, multi: false, s3: false, cf: false, asg: false, sel: "ec2", res: [], down: null, busy: false, tips: 0 }); arRender(); arTests(); $("#amsg").innerHTML = "💡 Klik <b>🖥️ EC2</b>, lalu klik kolom AZ untuk menaruh server. Klik server yang sudah ada untuk tahu dia “tinggal” di mana."; }
 const arN = () => ar.ec2.a + ar.ec2.b + ar.ec2.c;
@@ -2062,7 +2128,7 @@ function arRender() {
   };
   $("#arch").innerHTML = `<div class="row" style="display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr;align-items:center;gap:.3rem">
       <div class="pwr live" id="a-users" style="padding:.45rem"><div style="font-size:1.6rem">👥</div><small>Mahasiswa</small></div><div class="wire ${ar.cf || ar.lb ? "on" : ""}"></div>
-      <div></div><div class="wire ${ar.lb ? "on" : ""}"></div>${slot(ar.lb, "⚖️", "Load balancer", "lb")}</div>
+      ${slot(ar.cf, "⚡", "CloudFront", "cf")}<div class="wire ${ar.lb ? "on" : ""}"></div>${slot(ar.lb, "⚖️", "Load balancer", "lb")}</div>
     <div class="card" style="margin-top:.5rem;padding:.5rem;background:#0a1528"><div class="row" style="justify-content:space-between"><b>🏙️ Region Jakarta</b><span class="row">${slot(ar.asg, "📈", "Auto Scaling", "asg")}</span></div>
       <div class="grid3" style="margin-top:.4rem">${["a", "b", "c"].map(col).join("")}</div></div>`;
   $("#arch").insertAdjacentHTML("beforeend", `<svg id="aflow" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible"></svg>`);
@@ -2081,8 +2147,9 @@ function arRender() {
 }
 const AT = [
   ["👥 Hari biasa · server + load balancer", () => !arN() ? "Belum ada server sama sekali!" : arN() > 1 && !ar.lb ? "2+ server butuh ⚖️ Load balancer untuk membagi pengunjung." : "", 0],
-  ["💥 AZ-a mati (banjir!) · Multi-AZ", () => ar.ec2.b + ar.ec2.c < 1 ? "Semua server ada di AZ-a → ikut mati. Sebar server ke AZ lain!" : !ar.lb ? "Tanpa ⚖️ Load balancer, pengunjung tidak dialihkan ke AZ yang masih hidup." : "", 2],
-  ["⏰ Deadline 23:59 (50×) · hemat", () => ar.asg ? "" : arN() >= 8 ? `Lolos, tapi boros! ${arN()} server menyala 24 jam = ${rp(arCost())}/jam. Pakai 📈 Auto Scaling: server ditambah hanya saat ramai.` : "Server kewalahan! Nyalakan 📈 Auto Scaling supaya server ditambah otomatis saat ramai.", 1]
+  ["💥 AZ-a mati (banjir!) · Multi-AZ + load balancer", () => ar.ec2.b + ar.ec2.c < 1 ? "Semua server ada di AZ-a → ikut mati. Sebar server ke AZ lain!" : !ar.lb ? "Tanpa ⚖️ Load balancer, pengunjung tidak dialihkan ke AZ yang masih hidup." : "", 2],
+  ["⏰ Deadline 23:59 (50×) · Auto Scaling", () => ar.asg ? "" : arN() >= (ar.cf ? 4 : 8) ? `Lolos, tapi boros! ${arN()} server menyala 24 jam = ${rp(arCost())}/jam. Pakai 📈 Auto Scaling: server ditambah hanya saat ramai.` : "Server kewalahan! Nyalakan 📈 Auto Scaling supaya server ditambah otomatis saat ramai.", 1],
+  ["🌏 Dibuka dari mana saja · CloudFront", () => ar.cf ? "" : "Mahasiswa dari kota lain menunggu lama. Tambah ⚡ CloudFront supaya materi di-cache dekat mereka.", 5]
 ];
 function arTests() {
   const box = $("#atests");
@@ -2121,9 +2188,9 @@ $("#arun").onclick = async () => {
   }
   ar.busy = false;
   const pass = ar.res.filter(r => !r).length;
-  let rec = +(localStorage.getItem("archBest") || 0);
-  if (pass === AT.length && (!rec || arCost() < rec)) { rec = arCost(); localStorage.setItem("archBest", rec); }
-  $("#amsg").innerHTML = pass === AT.length ? `🏆 <b>3/3 — Arsitek cloud!</b> ⭐⭐⭐ Kumpulin tahan deadline, tahan banjir, dan hemat: <b>${rp(arCost())}/jam</b> (rekor di laptop ini: ${rp(rec)}/jam).` : `${pass}/3 ujian lolos. Baca pesan ❌ di daftar ujian, perbaiki, lalu uji lagi. 💪`;
+  let rec = +(localStorage.getItem("archBest4") || 0);
+  if (pass === AT.length && (!rec || arCost() < rec)) { rec = arCost(); localStorage.setItem("archBest4", rec); }
+  $("#amsg").innerHTML = pass === AT.length ? `🏆 <b>4/4 — Arsitek cloud!</b> ⭐⭐⭐⭐ Kumpulin tahan banjir, tahan deadline, cepat dari mana saja, dan hemat: <b>${rp(arCost())}/jam</b> (rekor di laptop ini: ${rp(rec)}/jam).` : `${pass}/${AT.length} ujian lolos. Baca pesan ❌ di daftar ujian, perbaiki, lalu uji lagi. 💪`;
   if (pass === AT.length) confetti();
 };
 function arFlood(on) {
@@ -2189,13 +2256,18 @@ async function arAnim(i) {
       await arStream([[$("#a-users"), aEl("cf"), $("#a-users")]], 5, 1000, "#ffdf6b", 260);
     } else await arStream([[$("#a-users"), aEl("s3"), $("#a-users")]], 3, 2600, "#ffdf6b", 500);
   }
+  if (i === 5) {
+    const zs5 = aAlive();
+    if (ar.cf) await arStream([[$("#a-users"), aEl("cf"), $("#a-users")]], 6, 900, "#ffdf6b", 200);
+    else { if (zs5.length) await arStream([aRoute(zs5[0]).concat([$("#a-users")])], 3, 3000, "#ff5d5d", 500); aFloat("🐢", $("#a-users")); await sleep(600); }
+  }
   if (i === 4) {
     const cb = $("#acost"); cb.classList.remove("pop"); void cb.offsetWidth; cb.classList.add("pop");
     for (let k = 0; k < 3; k++) setTimeout(() => aFloat("💸", cb), k * 200);
     await sleep(900);
   }
 }
-const ATIP = ["💡 Mulai dari 1 server. Lalu pikirkan: kalau AZ-a banjir, server mana yang masih hidup?", "💡 1 server di AZ a + 1 server di AZ b + ⚖️ Load balancer = tahan satu gedung mati.", "💡 Deadline ramai = 📈 Auto Scaling: server ditambah hanya saat dibutuhkan, jadi tetap hemat."];
+const ATIP = ["💡 Mulai dari 1 server. Lalu pikirkan: kalau AZ-a banjir, server mana yang masih hidup?", "💡 1 server di AZ a + 1 server di AZ b + ⚖️ Load balancer = tahan satu gedung mati.", "💡 Deadline ramai = 📈 Auto Scaling: server ditambah hanya saat dibutuhkan, jadi tetap hemat.", "💡 Mahasiswa dari banyak kota = ⚡ CloudFront: salinan materi disimpan dekat mereka."];
 $("#atip").onclick = () => { $("#amsg").innerHTML = ATIP[ar.tips++ % ATIP.length]; };
 $("#areset").onclick = arInit;
 arInit();
@@ -2242,11 +2314,11 @@ clInit();
 
 /* ---------- quiz ---------- */
 const QZ = [
-  ["Kenapa “Kumpulin” lebih baik pakai cloud daripada server di kamar kos?", ["Karena cloud pasti gratis selamanya 🤑", "Tidak perlu beli server; server bisa ditambah otomatis saat ramai & bayar sesuai pakai", "Karena server kos takut gelap 👻", "Karena cloud tidak butuh listrik, pakai tenaga dalam 🧘"], 1],
-  ["Kamu simpan tugas di Amazon S3, lalu satu gedung (AZ) kebanjiran. Tugasmu…", ["Hilang, ikut hanyut kebawa banjir 🌊", "Tetap aman — S3 otomatis menyimpan salinan di minimal 3 AZ", "Harus di-upload ulang sambil nangis 😭", "Pindah sendiri ke HP dosen 📱"], 1],
-  ["Kamu cuma menyalakan 1 server EC2. Supaya tetap jalan walau satu gedung mati, kamu harus…", ["Tidak perlu apa-apa, berdoa saja 🙏", "Menyalakan server di 2 AZ + load balancer", "Beli server yang lebih mahal biar sakti ✨", "Matikan server tiap malam biar istirahat 😴"], 1],
-  ["CloudFront membuat video materi cepat dibuka di mana-mana dengan cara…", ["Menambah RAM di HP kamu 📱", "Menyimpan salinan (cache) di lokasi yang dekat dengan pengguna", "Memindahkan server ke bulan 🌕", "Kualitas videonya diturunkan jadi 144p 🥔"], 1],
-  ["Kamu lihat rekan mau mengangkat server berat sendirian. Yang benar…", ["Biarkan aja, kamu memang tegaan orangnya 😈", "Bilang STOP — angkat berdua atau pakai alat 💪", "Rekam dulu buat konten medsos 📱", "Kasih semangat dari jauh: “Ayo kamu pasti bisa!” 📣"], 1]
+  ["Apa keuntungan utama “Kumpulin” pindah dari server di kamar kos ke cloud?", ["Aplikasinya otomatis jadi bebas bug", "Tidak perlu beli server di awal, server bisa ditambah saat ramai, dan bayar sesuai pakai", "Kumpulin bisa dibuka tanpa koneksi internet", "Semua layanan cloud gratis tanpa batas"], 1],
+  ["Kamu simpan tugas di Amazon S3, lalu satu gedung (AZ) kebanjiran. Tugasmu…", ["Hilang, karena file hanya disimpan di satu gedung", "Tetap aman, karena S3 otomatis menyimpan salinan di minimal 3 AZ", "Aman, tapi hanya kalau kamu sudah backup manual ke laptop", "Baru bisa dibuka lagi setelah gedungnya pulih"], 1],
+  ["Kamu cuma menyalakan 1 server EC2. Supaya tetap jalan walau satu gedung mati, kamu harus…", ["Memilih ukuran server yang lebih besar", "Menyalakan server di 2 AZ + load balancer", "Memindahkan file-file aplikasi ke S3 saja", "Mematikan server setiap malam supaya awet"], 1],
+  ["CloudFront membuat video materi cepat dibuka di mana-mana dengan cara…", ["Memperbesar kecepatan internet di HP pengguna", "Menyimpan salinan (cache) di lokasi yang dekat dengan pengguna", "Menurunkan kualitas video untuk semua orang", "Memindahkan server utama ke setiap kota"], 1],
+  ["Kamu lihat rekan mau mengangkat server berat sendirian. Yang benar…", ["Bantu angkat dari satu sisi supaya cepat selesai", "Bilang STOP, lalu angkat berdua atau pakai alat bantu", "Biarkan saja, dia sudah berpengalaman", "Lanjut kerja, nanti dilaporkan kalau terjadi sesuatu"], 1]
 ];
 let qi = 0, qs = 0;
 function quiz() {
@@ -2839,7 +2911,7 @@ $("#hact").onclick = async e => {
 pwInit();
 
 /* ---------- logistics receiving ---------- */
-const LGI = [["🔀", "Switch jaringan"], ["💡", "Optic 100G (isi 20)"], ["🧵", "Kabel fiber 3 m (isi 50)"], ["🧩", "Patch panel"]];
+const LGI = [["🔀", "Switch jaringan"], ["📡", "SFP optic (isi 20)"], ["🧵", "Kabel fiber 3 m (isi 50)"], ["🧩", "Panel kabel"]];
 const sn = () => "SN-" + Math.random().toString(16).slice(2, 8).toUpperCase();
 let lg;
 function lgNew() {
