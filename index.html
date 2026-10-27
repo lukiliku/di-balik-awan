@@ -239,7 +239,8 @@ svg text{font-family:system-ui,sans-serif}
 .gst circle{transition:.3s}.gst:hover circle{stroke:#ffc542;stroke-width:3}.gst.lit circle{fill:#3a2a0c;stroke:#ff9900;stroke-width:4}.gst.done circle{stroke:#3ddc84}
 /* cabling */
 #cg{position:relative;display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:2vw;align-items:start}
-#cglines{position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:0}
+#cglines,#cgdots{position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:0}
+#cgdots{z-index:3}
 #cgmid{position:relative;z-index:1}
 .ports{display:flex;flex-direction:column;gap:9px}
 .port{background:#0a1528;border:2px solid var(--line);border-radius:10px;padding:.45rem .7rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:ui-monospace,monospace}
@@ -603,7 +604,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
   <div class="row"><div class="steps row" id="cgstages"></div><span class="pill" id="cgclock">⏱️ 0:00</span><span class="pill" id="cgusers" style="display:none"></span></div>
   <div id="cgpre" class="grid2" style="grid-template-columns:1.2fr 1fr"></div>
   <div id="cg">
-    <svg id="cglines"></svg>
+    <svg id="cglines"></svg><svg id="cgdots"></svg>
     <div><h3>🔀 Switch baru</h3><div class="ports" id="cgl"></div></div>
     <div class="card" style="padding:.8rem" id="cgmid"></div>
     <div><h3>🔼 Uplink (ke jaringan)</h3><div class="ports" id="cgr"></div></div>
@@ -615,7 +616,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
   <div class="grid2" style="grid-template-columns:1fr 1.1fr">
     <div class="card" id="tsrv" style="padding:.7rem"></div>
     <div>
-      <div class="card hl" style="padding:.7rem 1rem"><b>🎫 <span id="tticket"></span></b></div>
+      <div class="card hl" style="padding:.7rem 1rem"><b>🎫 <span id="tticket"></span></b><div style="margin-top:.35rem"><span class="pill" id="tkum">📚 Kumpulin: online ✅</span></div></div>
       <div class="card" style="margin-top:.5rem;padding:.6rem 1rem" id="tsteps"></div>
       <div class="card" id="tdiag" style="margin-top:.5rem;padding:.6rem 1rem;display:none"></div>
       <div class="row" style="margin-top:.5rem"><button class="btn primary" id="tcheck">🔍 Cek WF</button><button class="btn" id="twf1">⚙️ WF: siapkan server</button><button class="btn" id="tspare">📦 Ambil spare</button><button class="btn" id="tglove">🧤 Gelang anti-statis</button><button class="btn" id="tnew" disabled>💽 Pasang disk baru</button><button class="btn" id="twf2" disabled>⚙️ WF: rebuild & tutup tiket</button><button class="btn" id="treset">🔄 Tiket baru</button></div>
@@ -1730,16 +1731,16 @@ const SV = n => "S-" + String(n + 1).padStart(2, "0");
 const TT = {
   disk: { slots: 4, unit: "slot", part: "disk", cls: "", title: "disk rusak", newBtn: "💽 Pasang disk baru",
     steps: ["⚙️ Workflow: cari lokasi & pindahkan aplikasi ke server lain", "🧤 Pakai gelang anti-statis", "🔍 Cabut disk yang benar (server dengan lampu biru)", "💽 Pasang disk baru", "⚙️ Workflow: rebuild data, tes, kembalikan aplikasi"],
-    wf1: s => [[`📍 Mencari ${s}… ketemu. Lampu locator biru dinyalakan 🔵`, 700, "loc"], [`🛑 Memindahkan aplikasi yang jalan di ${s} ke server lain…`, 900], [`✅ ${s} masuk mode maintenance — aman dikerjakan.`, 200, "maint"]],
-    wf2: s => [["🔄 Rebuild data dari disk lain…", 0, "bar"], ["🧪 Health check disk baru… OK", 600], [`🟢 ${s} kembali menjalankan aplikasi`, 600, "back"]] },
+    wf1: s => [[`📍 Mencari ${s}… ketemu. Lampu locator biru dinyalakan 🔵`, 700, "loc"], [`🛑 Memindahkan Kumpulin & aplikasi lain dari ${s} ke server lain…`, 900, "moved"], [`✅ ${s} masuk mode maintenance — aman dikerjakan.`, 200, "maint"]],
+    wf2: s => [["🔄 Rebuild data dari disk lain…", 0, "bar"], ["🧪 Health check disk baru… OK", 600], [`🟢 ${s} kembali menjalankan Kumpulin`, 600, "back"]] },
   psu: { slots: 2, unit: "PSU", part: "power supply", cls: "psu", title: "power supply (PSU) rusak", newBtn: "🔌 Pasang PSU baru",
     steps: ["⚙️ Workflow: cari lokasi & cek PSU cadangan", "🧤 Pakai gelang anti-statis", "🔍 Cabut PSU yang benar (server dengan lampu biru)", "🔌 Pasang PSU baru", "⚙️ Workflow: cek listrik kembali dobel, tutup tiket"],
-    wf1: s => [[`📍 Mencari ${s}… ketemu. Lampu locator biru dinyalakan 🔵`, 700, "loc"], [`🔋 Cek PSU cadangan di ${s}… sehat, server tetap menyala dari PSU cadangan`, 900], ["✅ Aman diganti SAMBIL MENYALA (hot-swap) — aplikasi tidak perlu dipindah.", 200, "hot"]],
+    wf1: s => [[`📍 Mencari ${s}… ketemu. Lampu locator biru dinyalakan 🔵`, 700, "loc"], [`🔋 Cek PSU cadangan di ${s}… sehat, server & Kumpulin tetap jalan dari PSU cadangan`, 900], ["✅ Aman diganti SAMBIL MENYALA (hot-swap) — aplikasi tidak perlu dipindah.", 200, "hot"]],
     wf2: s => [["⚡ Cek PSU baru… tegangan normal", 700], [`🟢 ${s} kembali punya 2 PSU sehat (redundan lagi)`, 600, "back"]] },
   ram: { slots: 4, unit: "DIMM", part: "RAM", cls: "ram", title: "RAM (memori) error", newBtn: "🧩 Pasang RAM baru",
     steps: ["⚙️ Workflow: pindahkan aplikasi & MATIKAN server", "🧤 Pakai gelang anti-statis", "🔍 Cabut RAM yang benar (server dengan lampu biru)", "🧩 Pasang RAM baru", "⚙️ Workflow: nyalakan server, tes memori, kembalikan aplikasi"],
-    wf1: s => [[`📍 Mencari ${s}… ketemu. Lampu locator biru dinyalakan 🔵`, 700, "loc"], [`🛑 Memindahkan aplikasi yang jalan di ${s} ke server lain…`, 900], [`🔌 RAM tidak bisa diganti saat menyala → ${s} dimatikan (power off).`, 200, "off"]],
-    wf2: s => [["⏻ Menyalakan server…", 600], ["🧪 Tes memori…", 0, "bar"], [`🟢 ${s} kembali menjalankan aplikasi`, 600, "back"]] }
+    wf1: s => [[`📍 Mencari ${s}… ketemu. Lampu locator biru dinyalakan 🔵`, 700, "loc"], [`🛑 Memindahkan Kumpulin & aplikasi lain dari ${s} ke server lain…`, 900, "moved"], [`🔌 RAM tidak bisa diganti saat menyala → ${s} dimatikan (power off).`, 200, "off"]],
+    wf2: s => [["⏻ Menyalakan server…", 600], ["🧪 Tes memori…", 0, "bar"], [`🟢 ${s} kembali menjalankan Kumpulin`, 600, "back"]] }
 };
 /* WF diagnosa: log per slot (❌ rusak, ⚠️ pengecoh yang masih normal), rencana kerja, spare part number */
 const TDX = {
@@ -1778,7 +1779,8 @@ function techNew() {
     h += `<span class="mute st" style="font-size:.7rem">menjalankan aplikasi</span></div>`;
   }
   $("#tsrv").innerHTML = `<b>🗄️ Rack R-12</b> <span class="mute" style="font-size:.8rem">· yang terlihat: ${T.part} tiap server · ada 2 lampu merah… hati-hati!</span>` + h;
-  $("#tticket").textContent = `Tiket #${tg.id}: ${T.title} di server ${SV(tg.s)}. Detail ada di WF.`;
+  $("#tticket").textContent = `Tiket #${tg.id}: ${T.title} di server ${SV(tg.s)}. Server ini sedang menjalankan Kumpulin. Detail ada di WF.`;
+  tkum("ok");
   $("#tnew").textContent = T.newBtn;
   $("#twf").textContent = ""; $("#tbar").style.width = "0"; $("#tbar").style.background = "var(--amber)";
   $("#tdiag").style.display = "none"; $("#tdiag").innerHTML = "";
@@ -1788,6 +1790,13 @@ function techNew() {
   $("#tmsg").textContent = "Baca tiketnya, lalu cek WF dulu.";
   const mt = $("#mtitle"); if (mt && G.mActive === "tech") mt.textContent = `🎯 Misi: Technician · ${T.title}`;
   techSteps();
+}
+/* status Kumpulin: tetap online kalau kerja sesuai workflow */
+function tkum(st, txt) {
+  const p = $("#tkum"); if (!p) return;
+  const M = { ok: ["📚 Kumpulin: online ✅", "var(--green)"], moved: ["📚 Kumpulin: online ✅ (sementara jalan di server lain)", "var(--green)"], err: ["📚 Kumpulin: ERROR ❌ mahasiswa gagal upload!", "var(--red)"] };
+  const [t, c] = M[st]; p.textContent = txt || t; p.style.borderColor = c; p.style.color = c;
+  if (st === "err") { p.classList.remove("shake"); void p.offsetWidth; p.classList.add("shake"); clearTimeout(tg.kt); tg.kt = setTimeout(() => tkum(tg.step >= 2 && tg.type !== "psu" && tg.step < 7 ? "moved" : "ok"), 2600); }
 }
 function techSteps() {
   const st = TSTEPS.map((x, i) => x || tg.T.steps[[0, 0, 0, 1, 2, 3, 4][i]]);
@@ -1807,11 +1816,12 @@ async function techRunWF(lines) {
   for (const [t, ms, fx] of lines) {
     $("#twf").textContent += t + "\n";
     if (fx === "loc") row.querySelector(".loc").classList.add("on");
+    if (fx === "moved") tkum("moved");
     if (fx === "maint") { row.classList.add("maint"); st.textContent = "maintenance"; }
     if (fx === "hot") st.textContent = "tetap jalan (PSU cadangan)";
     if (fx === "off") { row.classList.add("maint"); st.textContent = "MATI (power off)"; }
     if (fx === "bar") { for (let p = 0; p <= 100; p += 5) { $("#tbar").style.width = p + "%"; await sleep(60); } $("#tbar").style.background = "var(--green)"; }
-    if (fx === "back") { row.classList.remove("maint"); row.querySelector(".loc").classList.remove("on"); st.textContent = "menjalankan aplikasi"; }
+    if (fx === "back") { tkum("ok", tg.type === "psu" ? undefined : "📚 Kumpulin: online ✅ (kembali ke server ini)"); row.classList.remove("maint"); row.querySelector(".loc").classList.remove("on"); st.textContent = "menjalankan aplikasi"; }
     await sleep(ms);
   }
 }
@@ -1887,11 +1897,11 @@ $("#tsrv").onclick = e => {
     k.classList.remove("bad"); k.classList.add("empty"); tg.step = 5; $("#tnew").disabled = false; techSteps();
     $("#tmsg").innerHTML = `✅ ${T.part} yang benar dicabut. Pasang yang baru!`;
   } else if (s2 === tg.ds && d === tg.dd) {
-    techWarn(`🚨 <b>SALAH!</b> Itu memang rusak juga, tapi di <b>${SV(s2)}</b>. Server itu <b>masih menjalankan aplikasi orang</b> & bukan tiketmu. Cari lampu locator biru di ${SV(tg.s)}!`, k);
+    tkum("err"); techWarn(`🚨 <b>SALAH!</b> Itu memang rusak juga, tapi di <b>${SV(s2)}</b>. Server itu <b>masih menjalankan aplikasi orang</b> & bukan tiketmu. Cari lampu locator biru di ${SV(tg.s)}!`, k);
   } else if (s2 === tg.s) {
     techWarn(`⚠️ <b>Server benar, ${T.unit} salah!</b> ${T.unit} ${d + 1} masih sehat. WF bilang ${T.unit} ${tg.d + 1}.`, k);
   } else {
-    techWarn(`🚨 <b>SALAH!</b> ${SV(s2)} ${T.unit} ${d + 1} itu <b>sehat</b> di server yang sedang menjalankan aplikasi orang. Salah cabut = gangguan baru!`, k);
+    tkum("err"); techWarn(`🚨 <b>SALAH!</b> ${SV(s2)} ${T.unit} ${d + 1} itu <b>sehat</b> di server yang sedang menjalankan aplikasi orang. Salah cabut = gangguan baru!`, k);
   }
 };
 $("#tnew").onclick = () => {
@@ -1918,7 +1928,7 @@ $("#twf2").onclick = async () => {
   $("#twf").textContent += `📦 Part rusak dikirim ke vendor (RMA)${tg.doaHit ? " · termasuk 1 part DOA" : ""}\n🎫 Tiket #${tg.id} ditutup otomatis\n`;
   tg.step = 7; tg.busy = false; techSteps();
   const note = tg.type === "psu" ? " Server bahkan tidak perlu dimatikan (hot-swap)." : tg.type === "ram" ? " RAM harus dimatikan dulu, makanya aplikasinya dipindah sebelum server dimatikan." : "";
-  $("#tmsg").innerHTML = (tg.wrong ? `✅ Tiket selesai, tapi ada <b>${tg.wrong}× peringatan</b>. Di dunia nyata itu bisa bikin gangguan. Selalu baca WF & cek dua kali!` : "🏆 <b>Sempurna!</b> Tanpa satu pun peringatan.") + note;
+  $("#tmsg").innerHTML = (tg.wrong ? `✅ Tiket selesai, tapi ada <b>${tg.wrong}× peringatan</b>. Di dunia nyata itu bisa bikin gangguan. Selalu baca WF & cek dua kali!` : "🏆 <b>Sempurna!</b> Tanpa satu pun peringatan. 📚 Kumpulin tetap online selama perbaikan, mahasiswa bahkan tidak sadar ada server rusak.") + note;
   if (!tg.wrong) confetti();
   missionDone("tech", tg.wrong ? 15 : 30);
 };
@@ -2151,6 +2161,8 @@ const AT = [
   ["⏰ Deadline 23:59 (50×) · Auto Scaling", () => ar.asg ? "" : arN() >= (ar.cf ? 4 : 8) ? `Lolos, tapi boros! ${arN()} server menyala 24 jam = ${rp(arCost())}/jam. Pakai 📈 Auto Scaling: server ditambah hanya saat ramai.` : "Server kewalahan! Nyalakan 📈 Auto Scaling supaya server ditambah otomatis saat ramai.", 1],
   ["🌏 Dibuka dari mana saja · CloudFront", () => ar.cf ? "" : "Mahasiswa dari kota lain menunggu lama. Tambah ⚡ CloudFront supaya materi di-cache dekat mereka.", 5]
 ];
+/* komponen berubah: ✅ tetap, ❌ jadi ⬜ (perlu diuji lagi) */
+function arKeep() { ar.res = ar.res.map(r => r === "" ? "" : undefined); }
 function arTests() {
   const box = $("#atests");
   if (!box.querySelector(".trow")) box.innerHTML = `<b>🧪 Ujian</b>` + AT.map(([n], i) => `<div class="trow" id="tr${i}"><div class="row" style="gap:.4rem;flex-wrap:nowrap"><span class="ti">⬜</span><span>${n}</span></div><div class="tbar"><i></i></div><div class="tmsg"></div></div>`).join("");
@@ -2167,19 +2179,25 @@ $("#apal").onclick = e => {
   const k = b.dataset.k;
   if (k === "ec2" || k === "del") ar.sel = ar.sel === k ? null : k;
   else { ar[k] = !ar[k]; if (k === "db" && !ar.db) ar.multi = false; }
-  ar.res = []; arRender(); arTests();
+  arKeep(); arRender(); arTests();
 };
 $("#arch").onclick = e => {
   if (ar.busy) return;
   const sv = e.target.closest(".srv[data-z]"), slot = e.target.closest(".pwr[data-k]"), colz = e.target.closest(".azbox[data-z]");
-  if (sv && ar.sel === "del") { ar.ec2[sv.dataset.z]--; ar.res = []; arRender(); arTests(); return; }
+  if (sv && ar.sel === "del") { ar.ec2[sv.dataset.z]--; arKeep(); arRender(); arTests(); return; }
   if (sv) { $("#amsg").innerHTML = `🖥️ Server ini “tinggal” di <b>AZ ${sv.dataset.z}</b> → di salah satu gedung data center, di dalam rack yang <b>dipasang & dikabel tim Deployer</b>, dirawat <b>Technician</b>, dijaga <b>Security</b>, dan listriknya diurus <b>Facility team</b>. 😉`; return; }
-  if (slot) { ar[slot.dataset.k] = !ar[slot.dataset.k]; ar.res = []; arRender(); arTests(); return; }
-  if (colz && ar.sel === "ec2") { if (arN() >= 12) { $("#amsg").textContent = "Maksimal 12 server di game ini 😄"; return; } ar.ec2[colz.dataset.z]++; ar.res = []; arRender(); arTests(); }
+  if (slot) { ar[slot.dataset.k] = !ar[slot.dataset.k]; arKeep(); arRender(); arTests(); return; }
+  if (colz && ar.sel === "ec2") { if (arN() >= 12) { $("#amsg").textContent = "Maksimal 12 server di game ini 😄"; return; } ar.ec2[colz.dataset.z]++; arKeep(); arRender(); arTests(); }
 };
 $("#arun").onclick = async () => {
-  if (ar.busy) return; ar.busy = true; ar.res = [];
-  for (let i = 0; i < AT.length; i++) {
+  if (ar.busy) return; ar.busy = true;
+  /* lanjut dari ujian yang belum lolos: yang sudah ✅ dan masih lolos tidak diulang */
+  let start = 0;
+  while (start < AT.length && ar.res[start] === "" && AT[start][1]() === "") start++;
+  if (start === AT.length) start = 0;
+  ar.res = ar.res.slice(0, start);
+  if (start) $("#amsg").innerHTML = `▶️ Lanjut dari ujian ${start + 1}: <b>${AT[start][0]}</b>`;
+  for (let i = start; i < AT.length; i++) {
     ar.res[i] = "run"; arTests();
     await arAnim(AT[i][2]);
     ar.res[i] = AT[i][1](); arTests();
@@ -2522,7 +2540,7 @@ function cgReceive() {
   const pre = $("#cgpre"); pre.style.display = ""; $("#cg").style.display = "none"; $("#cgcfg").innerHTML = "";
   const run = cg.run = Math.random();
   pre.innerHTML = `<div class="card" id="cgscene" style="position:relative;height:190px;overflow:hidden;padding:.6rem">
-      <b>🚚 Kiriman perangkat jaringan datang ke loading dock</b>
+      <b>🚚 Kiriman perangkat jaringan datang ke loading dock</b><div class="mute" style="font-size:.85rem">Kumpulin makin ramai menjelang deadline. Jaringan baru ini menambah jalur untuk ribuan mahasiswa.</div>
       <div style="position:absolute;left:0;right:0;bottom:18px;height:4px;background:repeating-linear-gradient(90deg,#4a5670 0 26px,transparent 26px 46px)"></div>
       <div style="position:absolute;right:14px;bottom:26px;text-align:center"><div style="font-size:2rem">🏭</div><small class="mute">Loading dock</small></div>
       <span id="cgtruck" style="position:absolute;left:-120px;bottom:22px;font-size:3rem;display:inline-block;transform:scaleX(-1)">🚚</span>
@@ -2617,14 +2635,26 @@ async function cgAuto() {
 function cgDraw(status) {
   const box = $("#cg").getBoundingClientRect(), svg = $("#cglines");
   svg.setAttribute("width", box.width); svg.setAttribute("height", box.height);
+  let allDots = "";
   svg.innerHTML = Object.entries(cg.conn).map(([a, b]) => {
     const pa = $(`#cgl [data-p="${a}"]`).getBoundingClientRect(), pb = $(`#cgr [data-p="${b}"]`).getBoundingClientRect();
     const x1 = pa.right - box.left, y1 = pa.top + pa.height / 2 - box.top, x2 = pb.left - box.left, y2 = pb.top + pb.height / 2 - box.top;
     const d = `M${x1},${y1} C${x1 + 90},${y1} ${x2 - 90},${y2} ${x2},${y2}`;
-    if (cg.up) return `<path d="${d}" stroke="#3ddc84" stroke-opacity=".35" stroke-width="4" fill="none"/><path d="${d}" stroke="#3ddc84" stroke-width="3" fill="none" class="flow"/>`;
+    if (cg.up) {
+      /* paket data Kumpulin bolak-balik lewat kabel; makin ramai saat LIVE */
+      const n = cg.live ? 4 : 2, dur = cg.live ? 1.1 : 1.8;
+      let dots = "";
+      for (let k = 0; k < n; k++) {
+        dots += `<circle r="4.5" fill="#ffdf6b" style="filter:drop-shadow(0 0 5px #ffdf6b)"><animateMotion dur="${dur}s" begin="${(k * dur / n).toFixed(2)}s" repeatCount="indefinite" path="${d}"/></circle>`;
+        dots += `<circle r="3.5" fill="#2bd4c5" style="filter:drop-shadow(0 0 5px #2bd4c5)"><animateMotion dur="${dur}s" begin="${(k * dur / n + dur / 2 / n).toFixed(2)}s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear" path="${d}"/></circle>`;
+      }
+      allDots += dots;
+      return `<path d="${d}" stroke="#3ddc84" stroke-opacity=".35" stroke-width="4" fill="none"/><path d="${d}" stroke="#3ddc84" stroke-width="3" fill="none" class="flow"/>`;
+    }
     const col = status ? ({ ok: "#3ddc84", bad: "#ff5d5d", dim: "#ffc542" }[status[a]]) : "#ff9900";
     return `<path d="${d}" stroke="${col}" stroke-width="3" fill="none" opacity=".9"/>`;
   }).join("");
+  const dl = $("#cgdots"); if (dl) { dl.setAttribute("width", box.width); dl.setAttribute("height", box.height); dl.innerHTML = allDots; }
 }
 $("#cgl").onclick = e => {
   const p = e.target.closest(".port"); if (!p || cg.stage < 2 || cg.stage > 3) return;
@@ -2712,15 +2742,15 @@ async function wfRun() {
   }
   cg.wfBusy = false;
   $("#cglive").classList.add("primary");
-  msg.innerHTML = "✅ <b>Workflow selesai</b> — 5 langkah, tanpa salah ketik. Tekan <b>🚀 Go LIVE</b>!";
+  msg.innerHTML = "✅ <b>Workflow selesai</b> — 5 langkah, tanpa salah ketik. Lihat titik-titik di kabel: itu <b>trafik Kumpulin</b> yang mulai lewat (kuning = masuk, toska = balasan). Tekan <b>🚀 Go LIVE</b>!";
 }
 function cgGoLive() {
   if (cg.live) return;
   if (!cg.saved) { $("#wfmsg").innerHTML = "🛑 Jalankan workflow dulu sampai semua langkah ✅."; return; }
-  cg.live = true; cgStage(6);
+  cg.live = true; cgStage(6); cgDraw();
   const t = (Date.now() - cg.start) / 1000 | 0;
-  $("#cgcfg").innerHTML = "";
-  $("#cgmid").innerHTML = `<h3>🟢 Jaringan baru LIVE!</h3><p>Waktu misi: <b class="acc">${t / 60 | 0}:${String(t % 60).padStart(2, "0")}</b></p><p>✔ Perangkat diterima & cocok dengan data teknis<br>✔ ${CN} uplink tersambung benar, cahaya bagus<br>✔ Dikonfigurasi lewat workflow & terverifikasi<br>✔ Konfigurasi tersimpan</p><p class="mute">Malam ini semua tugas terkumpul sebelum 23:59 — tidak ada yang teriak “Pak, servernya error!” 📚🚀 Di dunia nyata, satu jaringan bisa punya <b>ratusan</b> koneksi seperti ini.</p><button class="btn" id="cgagain">🔄 Main lagi</button>`;
+  $("#cgmid").innerHTML = `<h3>🟢 Jaringan baru LIVE!</h3><p>Waktu misi: <b class="acc">${t / 60 | 0}:${String(t % 60).padStart(2, "0")}</b></p>`;
+  $("#cgcfg").innerHTML = `<div class="card"><p style="margin-top:0"><b>Titik-titik di kabel = trafik Kumpulin:</b> <span style="color:#ffdf6b">● kuning = tugas yang di-upload</span> · <span style="color:#2bd4c5">● toska = balasan server</span></p><p>✔ Perangkat diterima & cocok dengan data teknis<br>✔ ${CN} uplink tersambung benar, cahaya bagus<br>✔ Dikonfigurasi lewat workflow & terverifikasi<br>✔ Konfigurasi tersimpan</p><p class="mute">Malam ini semua tugas terkumpul sebelum 23:59 — tidak ada yang teriak “Pak, servernya error!” 📚🚀 Di dunia nyata, satu jaringan bisa punya <b>ratusan</b> koneksi seperti ini.</p><button class="btn" id="cgagain">🔄 Main lagi</button></div>`;
   $("#cgagain").onclick = cgNew;
   missionDone("dep", 30);
   $("#cgusers").style.display = "";
