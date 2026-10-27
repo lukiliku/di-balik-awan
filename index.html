@@ -178,6 +178,7 @@ svg text{font-family:system-ui,sans-serif}
 .role .e{font-size:2.2rem}
 .clockhand{transition:transform 1s cubic-bezier(.5,0,.3,1);transform-origin:100px 100px}
 .chip{display:inline-block;padding:.45rem .9rem;border-radius:999px;border:1px solid var(--line);background:var(--panel);cursor:pointer;margin:.2rem}
+.bridge::before{content:"→ "}
 .bridge{margin:auto 0 0;padding-top:.6rem;color:var(--teal);font-style:italic;font-size:1rem}
 .story{cursor:pointer;transition:.25s}.story:hover{border-color:var(--acc);transform:translateY(-3px)}
 /* scaling */
@@ -271,7 +272,6 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 .bridge{transition:color .3s}.bridge:hover{color:#7ff3e8}
 
 #chap{position:fixed;top:12px;right:16px;z-index:20;font-size:.78rem;color:var(--mute);background:rgba(11,21,38,.6);border:1px solid var(--line);border-radius:999px;padding:.2rem .7rem;transition:opacity .4s}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
 /* ===== print / Save as PDF: one slide per page ===== */
 @page{size:1440px 900px;margin:0}
@@ -378,7 +378,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 
 <section class="slide" data-title="Mau urus sebanyak apa?">
   <div class="kicker"><span class="part">Bab 1</span>Kenapa cloud? · Pilihan sewa</div>
-  <h2>Mau urus sebanyak apa? Analogi <span class="acc">anak kos</span> 🏠</h2>
+  <h2>Mau urus sebanyak apa? Analogi <span class="acc">makan</span></h2>
   <p class="mute" style="margin:0">Klik salah satu. Makin ke kanan, makin <b>sedikit</b> yang kamu urus sendiri.</p>
   <div class="grid4" id="pizzabtns"></div>
   <div class="grid2">
@@ -386,7 +386,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
     <div class="card hl"><h3>☁️ AWS yang urus</h3><div class="row" id="pzaws" style="min-height:3rem"></div></div>
   </div>
   <div class="card"><p id="pizzaD" style="margin:0"></p></div>
-  <p class="bridge">👉 Contoh “sewa rumah kosong” itu namanya EC2. Yuk kenalan!</p>
+  <p class="bridge">👉 Contoh “sewa dapur lengkap” itu namanya EC2. Yuk kenalan!</p>
 </section>
 
 <section class="slide" data-title="Kenalan: EC2 & S3">
@@ -395,7 +395,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
   <div class="grid2" style="grid-template-columns:1.25fr 1fr">
     <div class="card">
       <h3>🖥️ Amazon EC2 — sewa server di cloud</h3>
-      <p class="mute" style="margin:.2rem 0 .5rem;font-size:.98rem"><b>EC2</b> = <i>Elastic Compute Cloud</i>. Ingat “sewa rumah kosong” tadi? Pilih ukuran server, nyalakan dalam hitungan menit, bayar per jam, matikan kapan saja.</p>
+      <p class="mute" style="margin:.2rem 0 .5rem;font-size:.98rem"><b>EC2</b> = <i>Elastic Compute Cloud</i>. Ingat “sewa dapur lengkap” tadi? Pilih ukuran server, nyalakan dalam hitungan menit, bayar per jam, matikan kapan saja.</p>
       <div class="row" id="e2size"></div>
       <div class="row" style="margin-top:.5rem"><button class="btn primary" id="e2go">🚀 Launch server</button><button class="btn" id="e2stop" disabled>⏹️ Terminate</button><span class="src">(harga = ilustrasi)</span></div>
       <div class="grid2" style="grid-template-columns:auto 1fr;gap:1rem;margin-top:.6rem;align-items:center">
@@ -446,8 +446,8 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 
 <section class="slide" data-title="Availability: satu gedung mati?">
   <div class="kicker"><span class="part">Bab 3</span>Di mana datamu tinggal? · Ketersediaan (availability)</div>
-  <h2>Satu gedung mati… tugasmu tetap aman? 💪</h2>
-  <p class="mute" style="margin:0">Amazon S3 menyimpan file di <b>minimal 3 Availability Zone</b> (gedung berbeda). Coba: upload tugas, matikan AZ (banjir! listrik padam! 😱), lalu buka tugasmu.</p>
+  <h2>Simulasi: kalau satu gedung mati, tugasmu masih ada?</h2>
+  <p class="mute" style="margin:0">Di dunia nyata, Amazon S3 <b>otomatis</b> menyimpan setiap file di <b>minimal 3 Availability Zone</b> (gedung berbeda). Coba buktikan: <b>1)</b> upload tugas, <b>2)</b> klik satu gedung untuk “mematikannya” (banjir / listrik padam), <b>3)</b> buka tugasmu.</p>
   <div class="row"><button class="btn primary" id="azup">📤 Upload tugas</button><button class="btn" id="azopen">📲 Buka tugas</button><button class="btn" id="azreset">🔄 Reset</button></div>
   <div class="grid3" id="azs"></div>
   <div class="card" style="text-align:center"><div class="status" id="azstat"></div><p class="mute" id="azsub" style="margin:.3rem 0 0"></p></div>
@@ -594,12 +594,12 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
   <div id="lgroad" style="position:relative;height:64px;border-radius:12px;background:#0a1528;border:1px solid var(--line);overflow:hidden;margin:.3rem 0">
     <div style="position:absolute;left:0;right:0;bottom:10px;height:4px;background:repeating-linear-gradient(90deg,#4a5670 0 26px,transparent 26px 46px)"></div>
     <div style="position:absolute;right:10px;top:6px;text-align:center"><div style="font-size:1.8rem">🏭</div><small class="mute">Loading dock</small></div>
-    <span id="lgtr" style="position:absolute;left:-90px;top:6px;font-size:2.6rem;display:inline-block;transform:scaleX(-1);transition:left 2s cubic-bezier(.25,.8,.3,1)">🚚</span>
+    <span id="lgtr" style="position:absolute;left:-90px;top:6px;font-size:2.6rem;display:inline-block;transform:scaleX(-1)">🚚</span>
     <span id="lgdust" style="position:absolute;top:30px;left:0;opacity:0;transition:opacity .4s">💨</span>
     <span id="lgstat" style="position:absolute;left:12px;top:6px;font-size:.85rem" class="mute"></span>
   </div>
   <div class="grid2" style="grid-template-columns:1fr 2fr">
-    <div class="card"><h3>📄 Manifest <span class="mono" id="lgpo"></span></h3><table id="lgman"></table><p class="mute" style="font-size:.9rem;margin-bottom:0">Setiap barang harus cocok <b>nomor serinya</b> dan <b>kondisinya baik</b>. Kalau tidak, laporkan — jangan diterima begitu saja.</p></div>
+    <div class="card" style="position:relative;overflow:hidden"><h3>📄 Manifest <span class="mono" id="lgpo"></span></h3><button class="btn primary" id="lgscan" style="margin-bottom:.4rem">📟 Scan manifest</button><table id="lgman"></table><div id="lglaser" style="position:absolute;left:0;right:0;height:3px;background:#ff3b3b;box-shadow:0 0 12px #ff3b3b;display:none"></div><p class="mute" style="font-size:.9rem;margin-bottom:0">Setiap barang harus cocok <b>nomor serinya</b> dan <b>kondisinya baik</b>. Kalau tidak, laporkan — jangan diterima begitu saja.</p></div>
     <div><div class="grid2" id="lgbox"></div>
       <div class="row" style="margin-top:.6rem"><button class="btn" id="lgnew">🔄 Truk baru</button><span id="lgres"></span></div></div>
   </div>
@@ -651,6 +651,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
     <div class="grid2" style="grid-template-columns:1.3fr 1fr">
       <div class="card" style="padding:.5rem"><svg id="hside" viewBox="0 0 470 260" width="100%"></svg></div>
       <div class="card" style="text-align:center"><div class="mute">Suhu udara masuk R-07</div><div id="htemp" style="font-size:2.6rem;font-weight:800;transition:color .6s">38°C</div><div class="mute" style="font-size:.85rem">normal: 18–27°C</div>
+        <div style="text-align:left;margin-top:.5rem"><b style="font-size:.85rem">Monitoring</b><div id="hmon" class="mono" style="background:#050b16;border:1px solid var(--line);border-radius:8px;padding:.4rem .6rem;font-size:.76rem;min-height:5.2rem;margin-top:.2rem;color:#cfe3ff"></div></div>
         <div id="hexp" class="mute" style="text-align:left;font-size:.88rem;margin-top:.5rem">Gambar kiri = tampak <b>samping</b> rack R-07. Udara dingin 🔵 masuk dari depan, lewat server, keluar panas 🔴 di belakang.</div></div>
     </div>
     <div class="row" id="hact" style="margin-top:.5rem"></div>
@@ -770,7 +771,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 
 <section class="slide" data-title="Langkah selanjutnya">
   <div class="kicker">Langkah selanjutnya</div>
-  <h2>Cari jalur kariermu 🧭 <span class="mute" style="font-size:1rem">(pilih yang kamu suka, boleh lebih dari satu)</span></h2>
+  <h2>Cari jalur kariermu 🧭 <span class="mute" style="font-size:1rem">(pilih satu yang paling kamu suka)</span></h2>
   <div id="likes"></div>
   <div class="grid2">
     <div class="card hl fadeup" id="path"></div>
@@ -1039,12 +1040,12 @@ $("#scpre").onclick = e => { const b = e.target.closest("button[data-u]"); if (b
 scRender();
 
 /* ---------- "anak kos" service models ---------- */
-const LAYERS = ["🧑‍💻 Aplikasi & data", "🐧 Sistem operasi", "🖥️ Server", "🌐 Jaringan", "🏢 Gedung, listrik, AC"];
+const LAYERS = ["Aplikasi & data — masakannya", "Sistem operasi — resep & cara masak", "Server — kompor & panci", "Jaringan — gas & air", "Gedung, listrik, AC — dapurnya"];
 const MODELS = [
-  { you: 5, e: "🏗️", h: "Bangun rumah sendiri", t: "On-premise", full: "“di tempat sendiri”", ex: "server sendiri di kamar kos", d: "Beli tanah, bangun, bayar listrik, benerin genteng bocor sendiri. Seperti Kumpulin di kamar kos tadi — semua kamu yang urus." },
-  { you: 2, e: "🏠", h: "Sewa rumah kosong", t: "IaaS", full: "Infrastructure as a Service — sewa infrastruktur", ex: "contoh: Amazon EC2", d: "Rumahnya sudah ada, tapi isi perabot & bersih-bersih sendiri. Kamu dapat server virtual dalam hitungan menit, tinggal pasang sistem operasi & aplikasimu." },
-  { you: 1, e: "🛏️", h: "Kos full furnished", t: "PaaS", full: "Platform as a Service — sewa platform siap pakai", ex: "contoh: AWS Amplify (lab kita!)", d: "Tinggal bawa koper — alias kode/website kamu. Server, sistem operasi, dan scaling diurus. Ini yang kita pakai di lab nanti!" },
-  { you: 0, e: "🏨", h: "Nginap di hotel", t: "SaaS", full: "Software as a Service — tinggal pakai aplikasinya", ex: "contoh: email, streaming, chatbot", d: "Tinggal pakai. Semua diurus penyedianya — kamu cuma login." }
+  { you: 5, e: "🛒", h: "Masak dari nol", t: "On-premise", full: "“di tempat sendiri”", ex: "server sendiri di kamar kos", d: "Beli kompor, gas, panci, dan bahan, masak sendiri, lalu cuci piring sendiri. Seperti Kumpulin di kamar kos tadi — semua kamu yang urus." },
+  { you: 2, e: "🍳", h: "Sewa dapur lengkap", t: "IaaS", full: "Infrastructure as a Service — sewa infrastruktur", ex: "contoh: Amazon EC2", d: "Dapur, kompor, dan gas sudah disediakan. Kamu tinggal bawa resep & masak sendiri. Sama seperti EC2: servernya disewa, sistem operasi & aplikasinya kamu yang urus." },
+  { you: 1, e: "🍱", h: "Pesan katering", t: "PaaS", full: "Platform as a Service — sewa platform siap pakai", ex: "contoh: AWS Amplify (lab kita!)", d: "Kamu cukup pilih menu — alias bawa kode/website-mu — makanan datang siap saji. Server, sistem operasi, dan scaling diurus. Ini yang kita pakai di lab nanti!" },
+  { you: 0, e: "🍽️", h: "Makan di restoran", t: "SaaS", full: "Software as a Service — tinggal pakai aplikasinya", ex: "contoh: email, streaming, chatbot", d: "Tinggal datang, pesan, makan. Semua diurus restorannya — kamu cuma login & pakai." }
 ];
 $("#pizzabtns").innerHTML = MODELS.map((m, i) => `<div class="card role" data-m="${i}" style="padding:.8rem"><div class="e" style="font-size:2.4rem">${m.e}</div><b>${m.h}</b><div class="acc" style="font-weight:700">${m.t}</div><small style="display:block;font-size:.72rem;color:var(--teal)">${m.full}</small><small class="mute">${m.ex}</small></div>`).join("");
 function pizza(m) {
@@ -1110,7 +1111,7 @@ function azRender(serve = -1) {
   const up = az.down.filter(x => !x).length, s = $("#azstat"), sub = $("#azsub");
   if (!az.has) { s.textContent = "📤 Upload tugas dulu"; s.style.color = "var(--ink)"; sub.textContent = "Lihat: satu upload langsung jadi 3 salinan di 3 gedung."; }
   else if (up === 3) { s.textContent = "🟢 Tugasmu aman di 3 lokasi"; s.style.color = "var(--green)"; sub.textContent = "Sekarang coba klik satu AZ untuk “mematikannya”, lalu tekan 📲 Buka tugas."; }
-  else if (up > 0) { s.textContent = "🟢 Masih aman! Pengguna tidak sadar ada masalah"; s.style.color = "var(--green)"; sub.textContent = `${3 - up} AZ mati, ${up} AZ lain tetap melayani. Saat AZ pulih, salinan otomatis dibuat ulang.`; }
+  else if (up > 0) { s.textContent = "Tugasmu TETAP ADA — dibuka dari gedung lain"; s.style.color = "var(--green)"; sub.textContent = `${3 - up} gedung mati, tapi salinannya masih ada di ${up} gedung lain. Kamu bahkan tidak sadar ada masalah. Saat gedungnya pulih, salinan dibuat ulang otomatis.`; }
   else { s.textContent = "🔴 Ketiga AZ mati sekaligus = skenario yang sangat-sangat jarang"; s.style.color = "var(--red)"; sub.textContent = "Itulah kenapa AZ dibangun berjauhan, beda listrik, beda jalur fiber. Untuk data super penting, bisa disalin juga ke Region lain."; }
 }
 $("#azs").onclick = e => { const b = e.target.closest(".azbox"); if (b) { az.down[+b.dataset.i] = !az.down[+b.dataset.i]; azRender(); } };
@@ -1361,7 +1362,7 @@ const ZONES = {
 (function () {
   let s = `<rect x="2" y="2" width="636" height="396" rx="14" fill="#0a1222" stroke="#2a4270"/>`;
   for (const [k, [x, y, w, h, t, c]] of Object.entries(ZONES)) {
-    s += `<g class="hot" data-k="${k}"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="8" fill="${c}"/><text x="${x + w / 2}" y="${k === "hall" ? y + 22 : y + h / 2 + 5}" fill="#e8eef7" font-size="13" text-anchor="middle">${t}</text></g>`;
+    s += `<g class="hot" data-k="${k}"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="8" fill="${c}"/><text x="${x + w / 2}" y="${k === "hall" ? y + 22 : y >= 330 ? y + 17 : y + h / 2 + 5}" fill="#e8eef7" font-size="${y >= 330 ? 11.5 : 13}" text-anchor="middle">${t}</text></g>`;
   }
   for (let r = 0; r < 6; r++) for (let c = 0; c < 13; c++) {
     const x = 165 + c * 26, y = 45 + r * 42;
@@ -1372,11 +1373,12 @@ const ZONES = {
     const y = 45 + r * 42 + (r % 2 ? 31 : -7);
     a += `<line class="flow" x1="155" y1="${y}" x2="505" y2="${y}" stroke="${r % 2 ? "#ff5d5d" : "#5aa9ff"}" stroke-width="3"/>`;
   }
-  a += `<text x="327" y="312" fill="#9fb0c8" font-size="11" text-anchor="middle">biru = lorong dingin (udara masuk) · merah = lorong panas (udara keluar)</text>`;
+  a += `<text x="327" y="300" fill="#9fb0c8" font-size="11" text-anchor="middle">biru = lorong dingin (udara masuk) · merah = lorong panas (udara keluar)</text>`;
   a += `<path d="M515,60 L505,60" stroke="#5aa9ff" stroke-width="3"/>`;
   s += `<g id="air" style="display:none;pointer-events:none">${a}</g>`;
   s += `<g id="scan" style="display:none;pointer-events:none"><rect x="-30" y="-30" width="60" height="4" fill="#3ddc84" opacity=".9"><animate attributeName="y" values="-30;26;-30" dur="1.2s" repeatCount="indefinite"/></rect></g>`;
-  s += `<rect id="hdoor" x="305" y="316" width="50" height="7" rx="2" fill="#ffc542" style="transition:width .6s,x .6s"/><text x="330" y="313" fill="#ffd79a" font-size="9" text-anchor="middle" style="pointer-events:none">pintu data hall</text>`;
+  s += `<rect id="hdoor" x="305" y="316" width="50" height="7" rx="2" fill="#ffc542" style="transition:width .6s,x .6s"/><text x="360" y="321" fill="#ffd79a" font-size="9" style="pointer-events:none">← pintu data hall</text>`;
+  s += `<g style="pointer-events:none"><rect x="128" y="331" width="6" height="12" fill="#9fb0c8"/><g id="gatearm" style="transform-box:view-box;transform-origin:131px 334px;transition:transform .9s cubic-bezier(.4,0,.2,1)"><line x1="131" y1="334" x2="16" y2="334" stroke="#ff5d5d" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round"/><line x1="131" y1="334" x2="16" y2="334" stroke="#ffffff" stroke-width="5" stroke-dasharray="10 10" stroke-dashoffset="10" stroke-linecap="round"/></g></g>`;
   s += `<g id="walker" style="pointer-events:none" transform="translate(70,372)"><circle r="17" fill="#ff9900" opacity=".3" class="ring"/><text y="9" font-size="26" text-anchor="middle">🧑‍🔧</text></g>`;
   s += `<g id="bubble" style="pointer-events:none;display:none"><rect id="bubr" x="0" y="0" rx="10" height="26" fill="#e8eef7"/><path id="bubt" d="" fill="#e8eef7"/><text id="bubx" x="0" y="17" font-size="12" font-weight="700" fill="#0b1526" text-anchor="middle"></text></g>`;
   $("#dcsvg").innerHTML = s;
@@ -1456,7 +1458,9 @@ async function tourAt(i) {
   $("#tourstep").textContent = `Langkah ${i + 1} / ${TOUR.length}`;
   $("#dcT").textContent = "🚶 Berjalan…"; $("#dcD").textContent = ""; $("#dcF").textContent = "";
   if (i === 4) { const dr = $("#hdoor"); dr.setAttribute("width", 50); dr.setAttribute("x", 305); }
+  if (i === 1) { $("#gatearm").style.transform = "rotate(80deg)"; await sleep(700); }
   const ok = await twWalk(x, y); if (!ok || ts !== i) return false;
+  if (i === 1) setTimeout(() => { $("#gatearm").style.transform = ""; }, 200);
   if (i === 4) { const dr = $("#hdoor"); setTimeout(() => { dr.setAttribute("width", 4); dr.setAttribute("x", 351); }, 900); }
   if (scan) { const sc = $("#scan"); sc.setAttribute("transform", `translate(${x},${y})`); sc.style.display = ""; }
   if (air) { $("#air").style.display = ""; $("#airbtn").classList.add("on"); }
@@ -1476,7 +1480,7 @@ $("#tourauto").onclick = async () => {
 };
 $("#tourre").onclick = () => {
   tw.auto = false; tw.run++; ts = -1; twSay(""); twPlace(70, 372); $("#scan").style.display = "none";
-  tw.ppe.clear(); ppeBadge(); ppeShow(false); $("#tourgo").disabled = false;
+  tw.ppe.clear(); ppeBadge(); ppeShow(false); $("#tourgo").disabled = false; $("#gatearm").style.transform = "";
   const dr = $("#hdoor"); dr.setAttribute("width", 50); dr.setAttribute("x", 305);
   $$("#dcsvg .hot").forEach(g => g.classList.remove("sel"));
   $("#tourgo").textContent = "🚶 Mulai jalan"; $("#tourstep").textContent = `Langkah 0 / ${TOUR.length}`;
@@ -1494,7 +1498,7 @@ setTimeout(() => twSay("Halo! Klik 🚶 untuk mulai tur 👋"), 50);
 /* ---------- day-in-the-life game ---------- */
 const GS = [
   { t: "07:45", e: "🛡️", n: "Security", m: "sec", txt: "Hari pertamamu! Kamu magang keliling semua tim. Pertama: bantu tim Security jaga pintu data hall." },
-  { t: "08:00", e: "🦺", n: "Briefing", txt: "Briefing pagi: hari ini ada perangkat berat yang harus dipindah ke rack. Kamu…",
+  { t: "08:00", e: "🦺", n: "Toolbox meeting", txt: "Sebelum kerja, semua tim ikut toolbox meeting (safety briefing): bahas pekerjaan hari ini, risikonya, dan siapa kerja dengan siapa. Hari ini ada perangkat berat yang harus dipindah ke rack. Kamu…",
     a: ["Minta partner & pakai alat bantu angkat", true, "Benar! Barang berat = minimal 2 orang / pakai alat. Punggung cuma satu. 💪"], b: ["Angkat sendiri biar cepat", false, "Jangan! Cedera punggung bisa bikin kamu cuti berbulan-bulan. Safety nomor satu."] },
   { t: "09:00", e: "📦", n: "Logistik", m: "log", txt: "Truk datang ke loading dock! Bantu tim Logistik mencocokkan barang dengan manifest." },
   { t: "10:30", e: "🚚", n: "Deployer", m: "dep", txt: "Saatnya ikut tim Deployment: deploy new rack network — terima rack baru, cek dengan data teknis, cabling ke uplink, test, konfigurasi lewat workflow, sampai LIVE!" },
@@ -2174,7 +2178,7 @@ function pathRender() {
     ${ks.length > 1 ? `<p class="mute" style="margin:.5rem 0 0;font-size:.9rem">Juga kamu pilih: ${ks.slice(0, -1).map(k => `<span class="chip" data-k="${k}" style="padding:.2rem .6rem">${PATHS.find(p => p.k === k).n}</span>`).join(" ")} <i>(klik untuk lihat)</i></p>` : ""}`;
   $$("#path .chip").forEach(c => c.onclick = () => { like.delete(c.dataset.k); like.add(c.dataset.k); pathRender(); });
 }
-$("#likes").onclick = e => { const c = e.target.closest(".chip"); if (!c) return; const k = c.dataset.k; like.has(k) ? like.delete(k) : like.add(k); pathRender(); };
+$("#likes").onclick = e => { const c = e.target.closest(".chip"); if (!c) return; const k = c.dataset.k, was = like.has(k); like.clear(); if (!was) like.add(k); pathRender(); };
 pathRender();
 checklist($("#c30"), "c30", [
   "Minggu 1: daftar <b>AWS Skill Builder</b> / <b>AWS Educate</b>, selesaikan 1 kursus “Cloud Practitioner Essentials”",
@@ -2582,6 +2586,7 @@ function heatRender() {
     if (ht.found) g += `<rect x="318" y="226" width="120" height="18" rx="9" fill="#050b16" stroke="#ffc542"/><text x="378" y="239" fill="#ffc542" font-size="10" font-weight="700" text-anchor="middle">pintu terbuka → bocor!</text>`;
   }
   $("#hside").innerHTML = g;
+  if (ht.found && !(ht.box && ht.door)) $("#hside").insertAdjacentHTML("beforeend", `<g id="htech" transform="translate(452,120)"><circle r="13" fill="#ff9900" opacity=".25"/><text y="7" font-size="20" text-anchor="middle">🧑‍🔧</text></g>`);
   heatTemp();
 }
 function heatTemp() {
@@ -2593,6 +2598,26 @@ function heatTemp() {
   const h = ht.t[0][6];
   $("#htemp").textContent = h.toFixed(1).replace(".", ",") + "°C"; $("#htemp").style.color = h >= 35 ? "var(--red)" : h >= 28 ? "var(--amber)" : "var(--green)";
 }
+
+async function hMon(lines, gap = 420) {
+  const m = $("#hmon"); m.innerHTML = "";
+  for (const [t, c] of lines) { const d = document.createElement("div"); d.textContent = t; d.style.color = c || ""; d.className = "fadeup"; m.appendChild(d); await sleep(gap); }
+}
+function hTechWalk(pts) {
+  return new Promise(res => {
+    const svg = $("#hside"); let el = $("#htech");
+    if (!el) { svg.insertAdjacentHTML("beforeend", `<g id="htech"><circle r="13" fill="#ff9900" opacity=".25"/><text y="7" font-size="20" text-anchor="middle">🧑‍🔧</text></g>`); el = $("#htech"); }
+    let k = 0, cur = pts[0], t0 = performance.now();
+    (function f(t) {
+      if (k >= pts.length - 1) return res();
+      const a = pts[k], b = pts[k + 1], d = Math.hypot(b[0] - a[0], b[1] - a[1]), dur = d * 9, r = Math.min(1, Math.max(0, (t - t0) / dur));
+      cur = [a[0] + (b[0] - a[0]) * r, a[1] + (b[1] - a[1]) * r];
+      el.setAttribute("transform", `translate(${cur[0]},${cur[1] + Math.sin(t / 80) * 1.5})`);
+      if (r >= 1) { k++; t0 = t + (b[2] || 0); }
+      requestAnimationFrame(f);
+    })(t0);
+  });
+}
 function heatActs() {
   const fixed = ht.box && ht.door;
   const A = fixed ? [["📝 Catat & laporkan", "log"]] : ht.found
@@ -2601,7 +2626,8 @@ function heatActs() {
   $("#hact").innerHTML = A.map(([l, a]) => `<button class="btn ${l.startsWith("✅") ? "" : a === "cool" || a === "off" || a === "open" ? "" : "primary"}" data-a="${a}" ${l.startsWith("✅") ? "disabled" : ""}>${l}</button>`).join("");
 }
 function heatStart() {
-  Object.assign(ht, { found: false, box: false, door: false, done: false, key: null });
+  Object.assign(ht, { found: false, box: false, door: false, done: false, key: null, busy: false });
+  if ($("#hmon")) $("#hmon").innerHTML = "<div>› alarm: suhu R-07 naik</div>";
   ht.t = [0, 1].map(row => Array.from({ length: 8 }, (_, i) => heatTarget(row, i) - (row === 0 && i === 6 ? 6 : 2)));
   $("#heat").style.display = ""; heatRender(); heatActs();
   $("#hexp").innerHTML = "Gambar kiri = tampak <b>atas</b> dua baris rack. Rack menghisap udara dingin dari <b>depan</b> (lorong dingin) dan membuang panas ke <b>belakang</b>, ke lorong panas yang “dikurung”.";
@@ -2613,14 +2639,22 @@ function heatStart() {
   }, 300);
   setTimeout(() => $("#heat").scrollIntoView({ behavior: "smooth", block: "end" }), 100);
 }
-$("#hact").onclick = e => {
-  const b = e.target.closest("button[data-a]"); if (!b) return;
+$("#hact").onclick = async e => {
+  const b = e.target.closest("button[data-a]"); if (!b || ht.busy) return;
   const a = b.dataset.a, m = $("#hmsg");
   const warn = h => { m.innerHTML = h; m.parentElement.classList.remove("shake"); void m.offsetWidth; m.parentElement.classList.add("shake"); };
-  if (a === "cool") m.innerHTML = "❄️ Unit pendingin <b>normal</b> — udara dingin keluar 18°C. Jadi masalahnya bukan di pendingin… 🤔";
+  if (a === "cool") {
+    ht.busy = true; m.innerHTML = "Mengecek unit pendingin dari monitoring…";
+    await hMon([["› cek unit pendingin…"], ["CRAH-1   normal · udara keluar 18°C", "#3ddc84"], ["CRAH-2   normal · udara keluar 18°C", "#3ddc84"], ["kesimpulan: pendingin sehat", "#ffc542"]]);
+    m.innerHTML = "Unit pendingin <b>normal</b>. Jadi masalahnya bukan di pendingin… coba cek lorong & rack."; ht.busy = false;
+  }
   if (a === "off") warn("⛔ <b>Jangan!</b> Mematikan rack = semua aplikasi di rack itu ikut mati. Cari penyebabnya dulu.");
   if (a === "open") warn("⛔ <b>Jangan!</b> Udara panas & dingin malah bercampur, dan pintu terbuka = masalah keamanan.");
   if (a === "aisle") {
+    ht.busy = true; m.innerHTML = "Technician datang mengecek lorong…";
+    hMon([["› technician menuju lorong…"], ["R-07: ada benda di depan rack", "#ff5d5d"], ["pintu containment: TERBUKA", "#ff5d5d"]], 1100);
+    await hTechWalk([[10, 34], [HX(6) + 22, 34, 900], [445, 34], [452, 120, 700]]);
+    ht.busy = false;
     ht.found = true;
     m.innerHTML = "🔍 <b>Ketemu 2 penyebab!</b> ① Ada <b>kardus 📦 di depan R-07</b> — udara dingin terhalang, jadi R-07 kepanasan. ② <b>Pintu hot aisle containment tidak tertutup</b> — udara panas bocor ke lorong dingin, rack di dekat pintu ikut hangat.";
     $("#hexp").innerHTML = "<b>🔥 Hot aisle containment</b> = “kurungan” untuk lorong panas. Udara panas dari belakang rack dikumpulkan lalu langsung dibuang ke pendingin. Kalau pintunya terbuka, panas <b>bocor</b> ke lorong dingin dan <b>semua rack di sekitarnya</b> ikut menghisap udara panas.";
@@ -2646,21 +2680,58 @@ function lgNew() {
   const boxes = items.map((it, i) => ({ ...it, box: it.sn, ok: true, cond: "Kondisi baik 👍" }));
   boxes[bad[0]].box = sn(); boxes[bad[0]].ok = false; boxes[bad[0]].why = "Nomor seri di kardus <b>tidak ada di manifest</b> — bisa salah kirim.";
   boxes[bad[1]].cond = "Kardus penyok & basah 🫨"; boxes[bad[1]].ok = false; boxes[bad[1]].why = "Barang <b>rusak saat pengiriman</b> — difoto & dilaporkan, jangan dipasang.";
-  lg = { items, boxes: shuffle(boxes), done: 0, score: 0 };
+  lg = { items, boxes: shuffle(boxes), done: 0, score: 0, scanned: false, run: Math.random() };
+  const run = lg.run;
   $("#lgpo").textContent = "PO-" + (2026000 + (Math.random() * 999 | 0));
-  $("#lgman").innerHTML = "<tr><th>Barang</th><th>No. seri</th></tr>" + items.map(it => `<tr><td>${it.e} ${it.n}</td><td class="mono">${it.sn}</td></tr>`).join("");
-  const run = lg.run = Math.random(), tr = $("#lgtr"), du = $("#lgdust");
-  $("#lgbox").innerHTML = ""; $("#lgstat").textContent = "🚚 Truk sedang menuju loading dock…";
-  tr.style.transition = "none"; tr.style.left = "-90px"; void tr.offsetWidth; tr.style.transition = "";
-  setTimeout(() => { if (lg.run !== run) return; tr.style.left = "calc(100% - 190px)"; du.style.left = "calc(100% - 215px)"; du.style.opacity = 1; }, 150);
-  setTimeout(() => { if (lg.run !== run) return; du.style.opacity = 0; $("#lgstat").textContent = "📦 Barang diturunkan… cek satu per satu!"; lgBoxes(); }, 2300);
-  $("#lgres").textContent = "";
+  lgManifest(false);
+  $("#lgscan").disabled = true; $("#lgbox").innerHTML = ""; $("#lgres").textContent = "";
+  $("#lgstat").textContent = "Truk sedang menuju loading dock…";
+  const tr = $("#lgtr"), du = $("#lgdust"), road = $("#lgroad"), t0 = performance.now(), D = 2600;
+  du.style.opacity = 1;
+  (function drive(t) {
+    if (lg.run !== run) return;
+    const W = road.clientWidth || 600, end = W - 190, r = Math.min(1, Math.max(0, (t - t0) / D)), e = 1 - Math.pow(1 - r, 3);
+    const x = -90 + (end + 90) * e;
+    tr.style.left = x + "px"; du.style.left = (x - 24) + "px"; tr.style.top = (6 + (r < 1 ? Math.sin(t / 60) : 0)) + "px";
+    if (r < 1) return requestAnimationFrame(drive);
+    du.style.opacity = 0;
+    $("#lgstat").textContent = "Truk sampai! Scan manifest dulu, lalu scan tiap kardus.";
+    $("#lgscan").disabled = false; lgBoxes();
+  })(t0);
 }
+function lgManifest(show) {
+  $("#lgman").innerHTML = "<tr><th>Barang</th><th>No. seri</th></tr>" + lg.items.map((it, k) => `<tr><td>${it.e} ${it.n}</td><td class="mono" id="lgm${k}">${show ? it.sn : "••••••••"}</td></tr>`).join("");
+}
+$("#lgscan").onclick = () => {
+  if (lg.scanned) return;
+  const L = $("#lglaser"), tb = $("#lgman"), card = tb.closest(".card"), top0 = tb.offsetTop, h = tb.offsetHeight, t0 = performance.now(), D = 1400, run = lg.run;
+  $("#lgscan").disabled = true; L.style.display = "";
+  (function sweep(t) {
+    if (lg.run !== run) return;
+    const r = Math.min(1, Math.max(0, (t - t0) / D));
+    L.style.top = (top0 + h * r) + "px";
+    lg.items.forEach((it, k) => { if (r > (k + 1.5) / (lg.items.length + 1.5)) $("#lgm" + k).textContent = it.sn; });
+    if (r < 1) return requestAnimationFrame(sweep);
+    L.style.display = "none"; lg.scanned = true; lgManifest(true);
+    $("#lgstat").textContent = "Manifest terbaca. Sekarang scan nomor seri tiap kardus.";
+    $$("#lgbox .lgsc").forEach(b => b.disabled = false);
+  })(t0);
+};
 function lgBoxes() {
-  $("#lgbox").innerHTML = lg.boxes.map((b, i) => `<div class="box pop" data-i="${i}" style="animation-delay:${i * 220}ms"><div style="font-size:2rem">📦</div><b>${b.e} ${b.n}</b><div class="mono" style="font-size:.85rem">${b.box}</div><div class="mute" style="font-size:.85rem">${b.cond}</div>
-    <div class="row" style="justify-content:center;margin-top:.4rem"><button class="btn" data-a="1">✅ Terima</button><button class="btn" data-a="0">🚩 Laporkan</button></div><div class="res-t" style="font-size:.85rem;margin-top:.3rem"></div></div>`).join("");
-  $("#lgres").textContent = "";
+  $("#lgbox").innerHTML = lg.boxes.map((b, i) => `<div class="box pop" data-i="${i}" style="animation-delay:${i * 220}ms"><div style="font-size:2rem">📦</div><b>${b.e} ${b.n}</b>
+    <div class="mono" style="font-size:.85rem" id="lgb${i}">— belum di-scan —</div><div class="mute" style="font-size:.85rem">${b.cond}</div>
+    <div class="row lgact" style="justify-content:center;margin-top:.4rem"><button class="btn lgsc" data-s="${i}" ${lg.scanned ? "" : "disabled"}>📟 Scan kardus</button></div><div class="res-t" style="font-size:.85rem;margin-top:.3rem"></div></div>`).join("");
 }
+$("#lgbox").addEventListener("click", e => {
+  const sb = e.target.closest(".lgsc"); if (!sb) return;
+  e.stopPropagation();
+  const i = +sb.dataset.s, b = lg.boxes[i], el = $("#lgb" + i);
+  el.textContent = "📟 bip…";
+  setTimeout(() => {
+    el.textContent = b.box; el.style.color = lg.items.some(it => it.sn === b.box) ? "var(--green)" : "var(--red)";
+    sb.closest(".lgact").innerHTML = `<button class="btn" data-a="1">✅ Terima</button><button class="btn" data-a="0">🚩 Laporkan</button>`;
+  }, 450);
+}, true);
 $("#lgbox").onclick = e => {
   const b = e.target.closest("button[data-a]"); if (!b) return;
   const card = b.closest(".box"), x = lg.boxes[+card.dataset.i];
@@ -2763,6 +2834,27 @@ const STORY = [
 ];
 $("#story").innerHTML = STORY.map((x, i) => `<div class="card story pop" data-t="${esc(x[3])}" style="animation-delay:${i * 120}ms"><div style="font-size:2.4rem">${x[0]}</div><h3>${x[1]}</h3><p class="mute" style="margin:0">${x[2]}</p></div>`).join("");
 $("#story").onclick = e => { const c = e.target.closest(".story"); if (c) go(slides.findIndex(s => s.dataset.title === c.dataset.t)); };
+
+
+/* ---------- less emoji: strip decorative emoji from text (icon-only elements are kept) ---------- */
+const EMO = /(?:\p{Regional_Indicator}{2}|[0-9#*]️?⃣|\p{Extended_Pictographic}[️\u{1F3FB}-\u{1F3FF}]?(?:‍\p{Extended_Pictographic}[️]?)*)️?\s?/gu;
+const EMO_SKIP = "svg,canvas,script,style,.big-emoji,.e,.copy,.srv,.face,#nav,.ctrl,.opt,#tcloud,.ti,.float,.rain,#gmap,#scico,#lgtr,#lgdust,#cgtruck,#cgrack,#e2rack,#qrov,#poll,.keepemo,#react,.k";
+let emoBusy = false;
+function deEmoji(root) {
+  if (emoBusy) return; emoBusy = true;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  for (let n = w.currentNode.nodeType === 3 ? w.currentNode : w.nextNode(); n; n = w.nextNode()) {
+    const p = n.parentElement; if (!p || p.closest(EMO_SKIP)) continue;
+    const t = n.nodeValue; if (!/\p{Extended_Pictographic}|\p{Regional_Indicator}/u.test(t)) continue;
+    const c = t.replace(EMO, "");
+    if (!c.trim() && p.textContent.trim() === t.trim()) continue;
+    if (c !== t) n.nodeValue = c;
+  }
+  emoBusy = false;
+}
+deEmoji(document.body);
+new MutationObserver(ms => { for (const m of ms) { if (m.type === "characterData") deEmoji(m.target.parentNode || m.target); else m.addedNodes.forEach(x => deEmoji(x.nodeType === 1 ? x : x.parentNode || x)); } })
+  .observe(document.body, { childList: true, subtree: true, characterData: true });
 
 /* ---------- start ---------- */
 go(Math.max(0, (parseInt(location.hash.slice(1)) || 1) - 1));
