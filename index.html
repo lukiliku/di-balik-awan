@@ -314,6 +314,16 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
   .card{backdrop-filter:none!important}
 }
 .slide.bonus{display:none!important}
+.stg .it{position:absolute;transition:left .8s cubic-bezier(.4,0,.2,1),top .8s cubic-bezier(.4,0,.2,1),opacity .4s,transform .4s;line-height:1}
+.stg .lbl{position:absolute;font-size:.8rem;color:var(--mute);transform:translateX(-50%)}
+.stg.dark{background:#020408!important}
+.res.tick{animation:rtick .4s}@keyframes rtick{50%{border-color:var(--amber);box-shadow:0 0 12px rgba(255,197,66,.35)}}
+#cbill.pop{animation:pop .35s}
+#ppeav{position:relative;height:330px;background:#0a1528;border:1px solid var(--line);border-radius:14px}
+#ppeav .body{position:absolute;left:50%;top:18px;transform:translateX(-50%);font-size:15rem;line-height:1}
+#ppeav .slot{position:absolute;transform:translate(-50%,-50%) scale(0);font-size:2.6rem;transition:transform .45s cubic-bezier(.2,1.6,.4,1)}
+#ppeav .slot.on{transform:translate(-50%,-50%) scale(1)}
+#ppeav .slot small{display:block;font-size:.7rem;color:var(--mute);text-align:center;white-space:nowrap}
 .ginfo{margin:.25rem 0 .5rem;padding:.4rem .75rem;border-radius:10px;background:rgba(43,212,197,.08);border-left:3px solid var(--teal);font-size:.95rem}
 #dcgate{position:absolute;inset:0;z-index:20;overflow:hidden;pointer-events:auto}
 #dcgate .gl,#dcgate .gr{position:absolute;top:0;bottom:0;width:50.5%;background:repeating-linear-gradient(90deg,#2b3a55 0 14px,#1b263b 14px 28px);box-shadow:inset 0 0 40px rgba(0,0,0,.6);transition:transform 1.4s cubic-bezier(.6,.05,.3,1)}
@@ -391,7 +401,8 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
     <div class="card">
       <h3>🎲 Uji nasib! Apa yang terjadi kalau…</h3>
       <div class="row" id="opev"></div>
-      <div class="card" style="margin-top:.8rem;background:#071022"><p id="opres" style="margin:0">Pilih kebutuhan di kiri dulu, lalu uji nasib di sini. 😈</p></div>
+      <div id="opstage" class="stg keepemo" style="position:relative;height:130px;margin-top:.5rem;background:#0a1528;border:1px solid var(--line);border-radius:12px;overflow:hidden"><span class="it" style="left:46%;top:38px;font-size:2.6rem">🖥️</span></div>
+      <div class="card" style="margin-top:.6rem;background:#071022"><p id="opres" style="margin:0">Pilih kebutuhan di kiri dulu, lalu uji nasib di sini. 😈</p></div>
     </div>
   </div>
   <p class="src" style="margin:0">Harga = perkiraan kasar untuk 1 server kecil. Yang paling mahal ternyata bukan listrik, tapi <b>orang yang jaga 24 jam</b>.</p>
@@ -475,7 +486,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
         <li>Ada <b>Region di Jakarta</b> sejak Desember 2021, jadi data kita bisa disimpan dekat.</li>
       </ul>
     </div>
-    <div class="card"><b>🧰 Yang bakal kita pakai hari ini</b> <span class="mute" style="font-size:.85rem">(klik)</span><div class="grid3" id="awssv" style="margin-top:.5rem"></div><p id="awsd" class="mute" style="margin:.5rem 0 0;min-height:2.6em"></p></div>
+    <div class="card"><b>🧰 Yang bakal kita pakai hari ini</b> <span class="mute" style="font-size:.85rem">(klik)</span><div class="grid3" id="awssv" style="margin-top:.5rem"></div><div id="awsstage" class="stg keepemo" style="position:relative;height:150px;margin-top:.5rem;background:#0a1528;border:1px solid var(--line);border-radius:12px;overflow:hidden"><div class="lbl" style="left:50%;top:60px">Klik salah satu layanan 👆</div></div><p id="awsd" class="mute" style="margin:.5rem 0 0;min-height:2.6em"></p></div>
   </div>
   <p class="src">Sumber: aws.amazon.com/what-is-aws & aws.amazon.com/about-aws/global-infrastructure, dicek Oktober 2026.</p>
   <p class="bridge">👉 Gedung-gedung AWS itu sebenarnya ada di mana aja?</p>
@@ -559,7 +570,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
   <div class="kicker"><span class="part">Bab 2</span>Kenalan AWS · Data aman</div>
   <h2>Datamu aman nggak? <span class="acc">Dijaga berlapis</span></h2>
   <div class="grid2" style="grid-template-columns:1fr 1fr;align-items:center">
-    <svg id="onion" viewBox="-12 -12 424 424" width="100%" style="max-height:56vh;overflow:visible;animation:zin .8s ease both"></svg>
+    <svg id="onion" viewBox="-12 -12 424 424" width="100%" style="max-height:56vh;overflow:visible"></svg>
     <div>
       <p class="mute" style="margin-top:0">Klik tiap lapisan, dari luar ke dalam 👆</p>
       <div class="card"><h3 id="onT">👆 Pilih lapisan</h3><p id="onD" class="mute" style="margin-bottom:0"></p></div>
@@ -573,10 +584,14 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 <section class="slide" data-title="Safety nomor satu">
   <div class="kicker"><span class="part">Bab 3</span>Masuk ke gedung · Safety dulu</div>
   <p class="beat">📖 Lama-lama kamu penasaran: server sewaanmu itu sebenarnya ada di gedung kayak apa, dan siapa yang jagain? Kebetulan ada program <b>magang sehari</b> di data center.</p>
-  <h2>Sebelum kerja: <span class="acc">safety dulu</span></h2>
-  <p class="mute" style="margin:0">Pilih semua kebiasaan yang aman, lalu tekan <b>Cek jawaban</b>.</p>
-  <div class="grid3" id="hz" style="grid-template-columns:repeat(5,1fr)"></div>
-  <div class="row"><button class="btn primary" id="hzchk">✅ Cek jawaban</button><button class="btn" id="hzre">🔄 Ulang</button><span id="hzres"></span></div>
+  <h2>Sebelum masuk data hall: pakai <span class="acc">PPE</span> dulu</h2>
+  <p class="mute" style="margin:0">Klik perlengkapan yang wajib dipakai. Hati-hati, ada yang bukan PPE.</p>
+  <div class="grid2" style="grid-template-columns:.9fr 1.1fr;align-items:start">
+    <div id="ppeav" class="keepemo"><div class="body">🧍</div></div>
+    <div><div class="grid3" id="ppeit"></div>
+      <div class="row" style="margin-top:.6rem"><button class="btn primary" id="ppeall">⚡ Pakai semua</button><button class="btn" id="ppere">🔄 Ulang</button></div>
+      <p id="ppemsg" style="margin:.5rem 0 0">Pilih satu per satu, atau tekan <b>Pakai semua</b>.</p></div>
+  </div>
   <div class="card hl"><p style="margin:0">💬 <i>“Nggak ada deadline atau server yang lebih penting daripada semua orang <b>pulang dengan selamat</b>.”</i> Siapa pun boleh bilang <b>STOP</b> kalau lihat bahaya.</p></div>
   <p class="bridge">👉 Siap? Gerbangnya kita buka.</p>
 </section>
@@ -593,8 +608,9 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
     <span class="pill">⭐ XP <b id="gXp">0</b></span>
     <span class="mute" style="font-size:.85rem">👆 Klik ikon stasiun untuk langsung ke sana · ▶ jalan · ✕ / ○ pilih · △ ulang</span>
   </div>
-  <div class="card" id="gmapc" style="padding:.3rem"><svg id="gmap" viewBox="0 0 1000 135" width="100%"></svg></div>
-  <div class="grid2" id="gplay" style="grid-template-columns:1fr auto;align-items:stretch">
+  <div class="card" id="gmapc" style="padding:.2rem"><svg id="gmap" viewBox="0 0 1000 135" width="100%" style="max-height:14vh"></svg></div>
+  <div class="grid2" id="gplay" style="grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) auto;align-items:stretch">
+    <div class="card" style="padding:.3rem"><svg id="gdc" viewBox="0 0 640 400" width="100%"></svg></div>
     <div class="gdlg" id="gdlg"></div>
     <div class="ctrl">
       <div class="dpad"><span></span><button class="pbtn dbtn" data-k="up" title="atas">▲</button><span></span><button class="pbtn dbtn" data-k="left" title="kiri">◀</button><span class="dcen"></span><button class="pbtn dbtn go" data-k="next" title="jalan">▶</button><span></span><button class="pbtn dbtn" data-k="down" title="bawah">▼</button><span></span></div>
@@ -702,12 +718,11 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
     </div>
   </div>
   <div class="card"><p id="amsg" style="margin:0">💡 Klik <b>🖥️ EC2</b>, lalu klik kolom AZ untuk menaruh server. Klik server yang sudah ada untuk tahu dia “tinggal” di mana.</p></div>
-  <p class="bridge">👉 Desainnya sudah oke. Sekarang deploy beneran, pakai cara yang lebih gampang.</p>
+  <p class="bridge">👉 Desainnya sudah oke. Sekarang deploy beneran.</p>
 </section>
 
-<section class="slide" data-title="Mau urus sebanyak apa?">
+<section class="slide bonus" data-title="Mau urus sebanyak apa?">
   <div class="kicker"><span class="part">Bab 5</span>Let's deploy! · Kenapa Amplify?</div>
-  <p class="beat">📖 Kumpulin sudah siap dipakai. Sekarang giliran kalian online-kan <b>website pertama</b> sendiri.</p>
   <h2>Mau masak sendiri, atau <span class="acc">tinggal makan?</span></h2>
   <p class="mute" style="margin:0">Di game tadi kamu merakit server sendiri pakai EC2. Itu ibarat <b>sewa dapur</b>: masih masak sendiri. Buat website sederhana ada cara yang lebih gampang. Klik salah satu, makin ke kanan makin <b>sedikit</b> yang perlu kamu urus.</p>
   <div class="grid4" id="pizzabtns"></div>
@@ -721,6 +736,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 
 <section class="slide" data-title="Akun AWS: gimana caranya?">
   <div class="kicker"><span class="part">Bab 5</span>Let's deploy! · Siapkan akun</div>
+  <p class="beat">📖 Kumpulin sudah siap dipakai. Sekarang giliran kalian online-kan <b>website pertama</b> sendiri.</p>
   <h2>Butuh akun AWS? Cari jalur yang cocok untukmu 🧭</h2>
   <div class="grid2">
     <div class="card">
@@ -1036,7 +1052,31 @@ $("#opev").onclick = e => {
   const r = $("#opres");
   r.innerHTML = OPE[+b.dataset.i][1](opHave) + `<br><span class="mute" style="font-size:.9rem">Kesimpulan: punya server sendiri = <b>mahal, repot, dan gampang mati</b>. Lalu…? 👉 slide berikutnya</span>`;
   r.parentElement.classList.remove("shake"); void r.offsetWidth; r.parentElement.classList.add("shake");
+  opScene(+b.dataset.i, opHave);
 };
+/* adegan kecil untuk tiap kejadian; hasilnya tergantung kebutuhan yang dicentang */
+let opRun = 0;
+async function opScene(i, h) {
+  const run = ++opRun, ok = () => run === opRun, st = $("#opstage"); st.classList.remove("dark");
+  if (!h.has("pc")) { st.innerHTML = `<span class="it" style="left:46%;top:34px;font-size:2.6rem">❓</span>` + lb("belum ada server", 50, 95); return; }
+  st.innerHTML = it("osv", "🖥️", 45, 38, 2.6) + lb("server Kumpulin", 50, 100);
+  const srv = $("#osv"), sh = () => { srv.classList.remove("shake"); void srv.offsetWidth; srv.classList.add("shake"); };
+  await sleep(250); if (!ok()) return;
+  if (i === 0) { st.classList.add("dark"); st.insertAdjacentHTML("beforeend", it("ob", "💡", 15, 40) + lb("PLN padam", 18, 95)); await sleep(500); $("#ob").textContent = "🌑";
+    if (h.has("power")) { st.insertAdjacentHTML("beforeend", it("obt", "🔋", 75, 40) + lb("UPS", 78, 95)); await sleep(1200); if (!ok()) return; $("#obt").textContent = "🪫"; }
+    await sleep(500); if (!ok()) return; srv.style.opacity = .25; }
+  if (i === 1) { for (let k = 0; k < 10; k++) { if (!ok()) return; const id = "ou" + k; st.insertAdjacentHTML("beforeend", it(id, "👤", 2, 20 + (k % 4) * 22, 1.3)); await sleep(30); mv(id, 38 + Math.random() * 4); await sleep(110); }
+    await sleep(600); sh(); srv.textContent = "🔥"; }
+  if (i === 2) { st.insertAdjacentHTML("beforeend", it("od", "💽", 64, 42, 2)); await sleep(500); if (!ok()) return; $("#od").textContent = "💥"; sh();
+    if (h.has("backup")) { st.insertAdjacentHTML("beforeend", it("obk", "💾", 86, 42, 1.8) + lb("backup", 89, 95)); } else { await sleep(500); srv.style.opacity = .3; } }
+  if (i === 3) { st.classList.add("dark"); st.insertAdjacentHTML("beforeend", `<div class="it" style="left:6%;top:12px;font-size:1rem">🌙 02:00</div>`); await sleep(400); srv.textContent = "😵"; st.insertAdjacentHTML("beforeend", it("oz", "💤", 58, 20, 1.6));
+    if (h.has("ops")) { st.insertAdjacentHTML("beforeend", it("oop", "👨‍🔧", 92, 40, 2)); await sleep(60); mv("oop", 60); await sleep(900); if (!ok()) return; srv.textContent = "🖥️"; $("#oz").remove(); } }
+  if (i === 4) { st.insertAdjacentHTML("beforeend", `<div class="it" id="otm" style="left:72%;top:40px;font-size:1.4rem">🌡️ 25°C</div>`);
+    for (let t = 25; t <= 48; t += 3) { if (!ok()) return; $("#otm").textContent = `🌡️ ${t}°C`; $("#otm").style.color = t > 35 ? "var(--red)" : ""; await sleep(150); } sh(); srv.textContent = "🫠"; }
+  if (i === 5) { st.insertAdjacentHTML("beforeend", it("oth", "🦹", 92, 38, 2.4)); await sleep(60); mv("oth", 60); await sleep(900); if (!ok()) return;
+    if (h.has("sec")) { st.insertAdjacentHTML("beforeend", it("ocam", "📹", 20, 10, 1.6) + it("olk", "🔒", 53, 40, 1.8)); await sleep(300); mv("oth", 92); }
+    else { srv.style.left = "64%"; await sleep(300); mv("oth", 104); srv.style.left = "106%"; } }
+}
 opRender();
 
 /* ---------- AWS arrives (scaling), step by step ---------- */
@@ -1620,6 +1660,23 @@ const GS = [
   { t: "17:00", e: "🏠", n: "Pulang", end: true }
 ];
 const GINFO = {"Security": ["Gerbang & lobby", "Nggak ada papan nama besar di depan gedung. Penjaga 24 jam cek identitas dan jadwal kunjungan, kartu di-scan, dan tamu wajib didampingi."], "Toolbox meeting": ["Sebelum masuk data hall", "Di dalam berisik dan banyak barang berat, jadi wajib pakai pelindung telinga, sepatu safety, dan sarung tangan."], "Logistik": ["Loading dock", "Semua barang masuk lewat sini. Tiap kardus di-scan dan dicocokkan dengan manifest."], "Deployer": ["Data hall", "Baris-baris rack berisi server dan switch, tersambung kabel fiber. Rack disusun membentuk lorong dingin dan lorong panas."], "Makan siang": ["Pantry", "Makanan dan minuman cuma boleh di pantry, jauh dari server."], "Technician": ["Data hall & ruang monitoring", "Ribuan sensor memantau server 24 jam. Kalau ada part yang rusak, tiket perbaikan muncul."], "Facility": ["Ruang listrik, generator & pendingin", "Listrik masuk lewat trafo, lalu UPS, lalu ke rack, lewat dua jalur. Generator siap kalau PLN padam, dan pendingin punya unit cadangan."], "Serah terima": ["Ruang monitoring", "Semua kejadian hari ini dicatat, supaya shift berikutnya tahu harus lanjut dari mana."]};
+/* denah data center di game magang: pion jalan ke ruangan tiap stasiun */
+const GZONES = { ...ZONES, noc: [415, 330, 110, 60, "👀 Monitoring", "#22385e"], pantry: [535, 330, 95, 60, "🍽️ Pantry", "#22385e"] };
+const GZ = { "Security": [["gate", "lobby"], 70, 360], "Toolbox meeting": [["lobby"], 205, 360], "Logistik": [["dock"], 340, 360], "Deployer": [["hall"], 300, 170],
+  "Makan siang": [["pantry"], 582, 362], "Istirahat": [["pantry"], 600, 350], "Technician": [["hall", "noc"], 420, 110], "Facility": [["power", "gen", "cool"], 70, 90],
+  "Serah terima": [["noc"], 470, 362], "Pulang": [["gate"], 40, 372] };
+(function () {
+  let s = `<rect x="2" y="2" width="636" height="396" rx="14" fill="#0a1222" stroke="#2a4270"/>`;
+  for (const [k, [x, y, w, h, t, c]] of Object.entries(GZONES)) s += `<g data-z="${k}"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="8" fill="${c}" stroke="#2a4270" stroke-width="2"/><text x="${x + w / 2}" y="${k === "hall" ? y + 22 : y >= 330 ? y + 17 : y + h / 2 + 5}" fill="#e8eef7" font-size="${y >= 330 ? 11 : 13}" text-anchor="middle" font-weight="700">${t}</text></g>`;
+  for (let r = 0; r < 6; r++) for (let c = 0; c < 13; c++) { const x = 165 + c * 26, y = 45 + r * 42; s += `<rect x="${x}" y="${y}" width="19" height="24" rx="2" fill="#2b4672"/><rect x="${x}" y="${y}" width="19" height="4" fill="#2d6b5f"/>`; }
+  s += `<g id="gdcw" style="transition:transform 1s cubic-bezier(.4,0,.2,1)" transform="translate(30,372)"><circle r="17" fill="#ff9900" opacity=".3"/><text y="9" font-size="26" text-anchor="middle">🧑‍🎓</text></g>`;
+  $("#gdc").innerHTML = s;
+})();
+function gdcGo(n) {
+  const z = GZ[n];
+  $$("#gdc [data-z] rect").forEach(r => { const on = z && z[0].includes(r.parentNode.dataset.z); r.setAttribute("stroke", on ? "#ff9900" : "#2a4270"); r.setAttribute("stroke-width", on ? 4 : 2); });
+  $("#gdcw").setAttribute("transform", z ? `translate(${z[1]},${z[2]})` : "translate(30,372)");
+}
 const MNAME = { sec: "🛡️ Security · boleh masuk?", log: "📦 Logistik · cocokkan manifest", dep: "🚚 Deployer · pasang jaringan baru", tech: "🔧 Technician · tiket perbaikan", fac: "⚡ Facility team · PLN padam & rack panas" };
 const MINIT = { sec: () => { vi = 0; vs = 0; visShow(); }, log: () => lgNew(), dep: () => { cgNew(); setTimeout(cgDraw, 60); }, tech: () => techNew(), fac: () => pwInit() };
 function gStartMission() {
@@ -1673,7 +1730,7 @@ function gIntro() {
   $("#gmapc").style.display = "";
   Object.assign(G, { i: -1, xp: 0, en: 100, mood: 70, ans: true, ps: null, mActive: null, mReady: false, mDone: false });
   GS.forEach((_, k) => $("#gst" + k).classList.remove("lit", "done"));
-  $("#gwalk").style.transform = `translate(${GX(0) - 60}px,0)`; $("#gTime").textContent = "07:30"; gHud();
+  $("#gwalk").style.transform = `translate(${GX(0) - 60}px,0)`; gdcGo(null); $("#gTime").textContent = "07:30"; gHud();
   $("#gdlg").innerHTML = `<div class="who">🎮 HARI PERTAMA DI DATA CENTER</div><p>Kamu orang baru, dan hari ini magang keliling <b>semua tim</b>: Security, Logistik, Deployer, Technician, Facility. Selesaikan misinya, ambil keputusan yang tepat, kumpulkan ⭐ XP!</p><p class="acc">Tekan ▶ (atau Enter) untuk mulai.</p>`;
 }
 function gNext() {
@@ -1685,7 +1742,7 @@ function gNext() {
   const i = ++G.i, g = GS[i];
   if (i > 0) $("#gst" + (i - 1)).classList.replace("lit", "done");
   $("#gst" + i).classList.add("lit");
-  $("#gwalk").style.transform = `translate(${GX(i)}px,0)`;
+  $("#gwalk").style.transform = `translate(${GX(i)}px,0)`; gdcGo(g.n);
   $("#gTime").textContent = g.t;
   if (!g.end && i > 0) G.en = Math.max(0, G.en - 9);
   gHud();
@@ -2098,31 +2155,30 @@ async function visAns(allow) {
 $("#vin").onclick = () => visAns(true); $("#vout").onclick = () => visAns(false);
 visShow();
 
-/* ---------- safety hazards ---------- */
-const HZ = [
-  ["🦺", "Pakai sepatu safety + pelindung telinga", true, "Benar! Perlengkapan wajib di data hall yang berisik & banyak barang berat."],
-  ["👀", "Melihat langsung ke ujung kabel fiber yang menyala", false, "Jangan! Laser fiber tidak terlihat mata tapi bisa merusak mata."],
-  ["👫", "Angkat server berat berdua / pakai alat", true, "Benar! Barang berat selalu diangkat bersama atau pakai alat bantu."],
-  ["🥤", "Bawa kopi ke data hall", false, "Jangan! Tumpahan cairan + listrik = bahaya besar."],
-  ["🛑", "Bilang STOP saat lihat bahaya", true, "Benar! Siapa pun berhak menghentikan pekerjaan yang tidak aman."]
+/* ---------- safety: pakai PPE di avatar ---------- */
+const PPEL = [
+  ["🥽", "Kacamata safety", true, "Melindungi mata, termasuk dari sinar laser di ujung kabel fiber.", 50, 15],
+  ["🎧", "Pelindung telinga / earplug", true, "Data hall berisik karena ribuan kipas server.", 50, 9],
+  ["🧤", "Sarung tangan", true, "Melindungi tangan dari sisi rack yang tajam.", 40, 47],
+  ["🥾", "Sepatu safety", true, "Kaki aman kalau ada barang berat jatuh.", 50, 73],
+  ["🩴", "Sandal jepit", false, "Kaki harus tertutup sepatu safety, bukan sandal."],
+  ["💍", "Cincin & gelang", false, "Perhiasan logam bisa tersangkut atau kena listrik. Dilepas dulu."]
 ];
-const hzFlag = new Set(); let hzDone = false;
-function hzRender() {
-  $("#hz").innerHTML = HZ.map((h, i) => {
-    let cls = hzFlag.has(i) ? "flag" : "";
-    if (hzDone) cls = (hzFlag.has(i) === h[2]) ? "right" : "wrong";
-    return `<div class="tile ${cls}" data-i="${i}"><div class="e">${h[0]}</div><b>${h[1]}</b>${hzDone ? `<small>${h[2] ? "✅ " : "⚠️ "}${h[3]}</small>` : ""}</div>`;
-  }).join("");
+const ppeOn = new Set();
+function ppeRender() {
+  $("#ppeit").innerHTML = PPEL.map((x, i) => `<button class="tile ${ppeOn.has(i) ? "sel" : ""}" data-i="${i}" style="color:var(--ink);padding:.5rem"><div style="font-size:1.8rem">${x[0]}</div><b style="font-size:.85rem">${x[1]}</b></button>`).join("");
+  $("#ppeav").innerHTML = `<div class="body">🧍</div>` + PPEL.map((x, i) => x[2] ? `<div class="slot ${ppeOn.has(i) ? "on" : ""}" style="left:${x[4]}%;top:${x[5]}%">${x[0]}</div>${x[0] === "🧤" ? `<div class="slot ${ppeOn.has(i) ? "on" : ""}" style="left:60%;top:47%">🧤</div>` : ""}` : "").join("");
 }
-$("#hz").onclick = e => { const t = e.target.closest(".tile"); if (!t || hzDone) return; const i = +t.dataset.i; hzFlag.has(i) ? hzFlag.delete(i) : hzFlag.add(i); hzRender(); };
-$("#hzchk").onclick = () => {
-  hzDone = true; hzRender();
-  const right = HZ.filter((h, i) => hzFlag.has(i) === h[2]).length;
-  $("#hzres").innerHTML = `<b>${right} / ${HZ.length}</b> benar ${right === HZ.length ? "🏆" : ""}`;
-  if (right === HZ.length) confetti();
-};
-$("#hzre").onclick = () => { hzFlag.clear(); hzDone = false; $("#hzres").textContent = ""; hzRender(); };
-hzRender();
+function ppeWear(i) {
+  const x = PPEL[i], t = $(`#ppeit [data-i="${i}"]`);
+  if (!x[2]) { $("#ppemsg").innerHTML = `⛔ <b>${x[1]}</b>: ${x[3]}`; if (t) { t.classList.remove("shake"); void t.offsetWidth; t.classList.add("shake"); } return; }
+  ppeOn.add(i); ppeRender(); $("#ppemsg").innerHTML = `✅ <b>${x[1]}</b>: ${x[3]}`;
+  if (PPEL.every((y, k) => !y[2] || ppeOn.has(k))) { $("#ppemsg").innerHTML += `<br>🎉 <b>PPE lengkap, siap masuk data hall!</b>`; confetti(); }
+}
+$("#ppeit").onclick = e => { const b = e.target.closest("[data-i]"); if (b) ppeWear(+b.dataset.i); };
+$("#ppeall").onclick = async () => { $("#ppeall").disabled = true; for (let i = 0; i < PPEL.length; i++) if (PPEL[i][2] && !ppeOn.has(i)) { ppeWear(i); await sleep(500); } $("#ppeall").disabled = false; };
+$("#ppere").onclick = () => { ppeOn.clear(); ppeRender(); $("#ppemsg").innerHTML = "Pilih satu per satu, atau tekan <b>Pakai semua</b>."; };
+ppeRender();
 
 /* ---------- account chooser ---------- */
 const ac = { a: null, b: null };
@@ -2406,18 +2462,32 @@ $("#cres").onclick = e => {
   const b = e.target.closest("button[data-a]"); if (!b) return;
   if (!cl.t && !cl.hour) { clMsg("Tekan <b>▶️ Mulai argo</b> dulu ya 🙂"); return; }
   const id = b.closest(".res").dataset.id, a = b.dataset.a, R = k => cl.res.find(x => x.id === k);
+  const before = new Set(cl.res.filter(r => r.gone).map(r => r.id));
+  if (id === "s3" && a === "empty") { const bb = b.closest(".res").getBoundingClientRect(); for (let k = 0; k < 4; k++) setTimeout(() => floatEmoji("📄", bb.left + bb.width * (.3 + k * .12), bb.top), k * 90); }
   if (id === "ec2" && a === "stop") { const r = R("ec2"); r.st = "stopped"; r.cost = 0; r.acts = [["🗑️ Terminate", "term"]]; clMsg("⏸️ Server di-<b>stop</b>: biaya server berhenti… tapi lihat, <b>disk-nya masih ditagih</b>! Stop ≠ hapus."); }
   if (id === "ec2" && a === "term") { R("ec2").gone = true; R("ebs").gone = true; clMsg("🗑️ <b>Terminate</b>: server dihapus, dan disk-nya ikut terhapus (opsi <i>Delete on termination</i> aktif secara default). 👍"); }
   if (id === "s3" && a === "del") { const r = R("s3"); if (r.st !== "kosong") { clMsg("❌ Gudang file harus <b>dikosongkan dulu</b> sebelum dihapus!"); b.closest(".res").classList.add("shake"); setTimeout(() => b.closest(".res")?.classList.remove("shake"), 500); } else { r.gone = true; clMsg("🪣 Gudang file dihapus. 👍"); } }
   if (id === "s3" && a === "empty") { const r = R("s3"); r.st = "kosong"; r.cost = 0; r.n = "Gudang file · tugas-kuliah (0 file)"; r.acts = [["🗑️ Hapus gudang", "del"]]; clMsg("🧺 Gudang file dikosongkan. Sekarang bisa dihapus."); }
   if (id === "amp") { R("amp").gone = true; clMsg("🌐 Website dihapus. Tidak bisa dibuka lagi. 👍"); }
+  const newly = cl.res.filter(r => r.gone && !before.has(r.id));
+  if (newly.length) {
+    newly.forEach(r => { const el = $(`#cres .res[data-id="${r.id}"]`); if (el) { const bb = el.getBoundingClientRect(); floatEmoji("💨", bb.left + bb.width / 2, bb.top + bb.height / 2); el.classList.add("gone"); } });
+    setTimeout(clAfter, 450);
+  } else clAfter();
+};
+function clAfter() {
   clRender();
   if (!clRate() && cl.res.every(r => r.gone)) { clearInterval(cl.t); cl.t = null; clMsg(`🎉 <b>Bersih total!</b> Tagihanmu berhenti di <b>${rp(cl.bill)}</b> setelah ${cl.hour} jam. Di akun asli, cek lagi di <b>Billing → Bills</b> besoknya.`); confetti(); }
 };
 $("#cstart").onclick = () => {
   if (cl.t) return;
   $("#cstart").disabled = true;
-  cl.t = setInterval(() => { cl.hour++; cl.bill += clRate(); $("#chour").textContent = `Jam ke-${cl.hour}`; $("#cbill").textContent = rp(cl.bill); }, 400);
+  cl.t = setInterval(() => {
+    cl.hour++; cl.bill += clRate(); $("#chour").textContent = `Jam ke-${cl.hour}`; $("#cbill").textContent = rp(cl.bill);
+    /* tiap "jam": yang masih ditagih berkedip, angka tagihan berdetak */
+    $$("#cres .res:not(.gone)").forEach(el => { const r = cl.res.find(x => x.id === el.dataset.id); if (r && r.cost) { el.classList.remove("tick"); void el.offsetWidth; el.classList.add("tick"); } });
+    if (clRate()) { const cb = $("#cbill"); cb.classList.remove("pop"); void cb.offsetWidth; cb.classList.add("pop"); }
+  }, 400);
   clMsg("⏱️ Argo jalan! Hapus semuanya. Hati-hati: tidak semua tombol menyelesaikan masalah… 😏");
 };
 $("#creset").onclick = clInit;
@@ -3206,7 +3276,7 @@ const AWSV = [["🖥️", "EC2", "Sewa server. Seperti komputer yang kamu pinjam
   ["⚡", "CloudFront", "Menaruh salinan konten dekat pengguna, supaya cepat dibuka dari mana saja.", "Bab 2"], ["⚖️", "Load balancer", "Membagi pengunjung ke beberapa server, dan mengalihkan kalau ada yang mati.", "Bab 2"],
   ["📈", "Auto Scaling", "Menambah server otomatis saat ramai, mengurangi lagi saat sepi.", "Bab 2"], ["🌐", "Amplify", "Online-kan website tanpa mengurus server. Kita pakai di lab!", "Bab 5"]];
 $("#awssv").innerHTML = AWSV.map(([e, n], i) => `<button class="tile" data-i="${i}" style="padding:.5rem;color:var(--ink)"><div style="font-size:1.6rem">${e}</div><b>${n}</b></button>`).join("");
-$("#awssv").onclick = ev => { const b = ev.target.closest("[data-i]"); if (!b) return; const [e, n, d, bab] = AWSV[+b.dataset.i]; $$("#awssv .tile").forEach(x => x.classList.toggle("sel", x === b)); $("#awsd").innerHTML = `<b>${e} ${n}</b>: ${d} <span class="acc">· ketemu di ${bab}</span>`; };
+$("#awssv").onclick = ev => { const b = ev.target.closest("[data-i]"); if (!b) return; const [e, n, d, bab] = AWSV[+b.dataset.i]; $$("#awssv .tile").forEach(x => x.classList.toggle("sel", x === b)); $("#awsd").innerHTML = `<b>${e} ${n}</b>: ${d} <span class="acc">· ketemu di ${bab}</span>`; awsAnim(n); };
 
 /* ---------- load balancer & auto scaling ---------- */
 const lbs = { down: false, busy: false };
@@ -3240,6 +3310,48 @@ function gateOpen() { const g = $("#dcgate"); if (!g || g.classList.contains("op
 $("#gateopen").onclick = gateOpen;
 hooks["Sehari kerja di data center"] = () => { const g = $("#dcgate"); g.classList.remove("open", "gone"); clearTimeout(gateT); gateT = setTimeout(gateOpen, 2600); };
 
+/* ---------- animasi kecil tiap layanan AWS ---------- */
+let awsRun = 0;
+const it = (id, e, l, t, fs = 2) => `<span class="it" id="${id}" style="left:${l}%;top:${t}px;font-size:${fs}rem">${e}</span>`;
+const lb = (txt, l, t) => `<div class="lbl" style="left:${l}%;top:${t}px">${txt}</div>`;
+const mv = (id, l, t) => { const x = $("#" + id); if (x) { x.style.left = l + "%"; if (t !== undefined) x.style.top = t + "px"; } };
+const dotPath = (d, n, dur, col = "#ffdf6b", rev) => Array.from({ length: n }, (_, k) => `<circle r="4.5" fill="${col}"><animateMotion dur="${dur}s" begin="${(k * dur / n).toFixed(2)}s" repeatCount="indefinite" path="${d}" ${rev ? 'keyPoints="1;0" keyTimes="0;1" calcMode="linear"' : ""}/></circle>`).join("");
+async function awsAnim(n) {
+  const run = ++awsRun, ok = () => run === awsRun, st = $("#awsstage");
+  if (n === "EC2") {
+    st.innerHTML = `<div style="position:absolute;left:12%;top:10px;width:90px;border:3px solid #4a5670;border-radius:8px;padding:4px;background:#060d1a">${Array.from({ length: 6 }, (_, k) => `<div id="e2s${k}" style="height:14px;margin:3px 0;border-radius:3px;background:#22385e;transition:.5s"></div>`).join("")}</div>` + lb("rack di data center", 17, 128) + `<div class="it" id="e2t" style="left:40%;top:45px;font-size:1.15rem">⏳ Menyiapkan server…</div>`;
+    await sleep(900); if (!ok()) return;
+    const sl = $("#e2s3"); sl.style.background = "#1d6b4f"; sl.style.boxShadow = "0 0 14px #3ddc84";
+    $("#e2t").innerHTML = `✅ Server kamu nyala!<br><small class="mute">nyala dalam hitungan menit · bayar per jam</small>`;
+  }
+  if (n === "S3") {
+    st.innerHTML = it("s3p", "📱", 8, 50) + it("s3b", "🪣", 78, 40, 3) + lb("gudang file", 82, 110) + `<div class="it" id="s3c" style="left:60%;top:118px;font-size:.9rem">0 file</div>`;
+    for (let k = 0; k < 4; k++) {
+      if (!ok()) return; const id = "s3f" + k; st.insertAdjacentHTML("beforeend", it(id, "📄", 12, 55, 1.6)); await sleep(40); mv(id, 76, 50);
+      await sleep(820); const f = $("#" + id); if (f) f.style.opacity = 0; $("#s3c").textContent = `${k + 1} file tersimpan`;
+    }
+  }
+  if (n === "CloudFront") {
+    st.innerHTML = `<svg viewBox="25 25 350 100" width="100%" height="150" style="position:absolute;inset:0"><path d="M50,62 L200,62" stroke="#2bd4c5" stroke-width="3"/><path d="M200,62 L350,62" stroke="#33507f" stroke-width="3" stroke-dasharray="6 5"/>${dotPath("M50,62 L200,62", 3, .9, "#ffdf6b")}${dotPath("M200,62 L350,62", 1, 3, "#ff9900")}
+      <text x="50" y="72" font-size="28" text-anchor="middle">📱</text><text x="200" y="72" font-size="28" text-anchor="middle">⚡</text><text x="350" y="72" font-size="28" text-anchor="middle">🏢</text>
+      <g fill="#9fb0c8" font-size="10" text-anchor="middle"><text x="50" y="110">kamu</text><text x="200" y="110">CloudFront dekat · ±5 ms</text><text x="350" y="110">server asal jauh · ±220 ms</text></g></svg>`;
+  }
+  if (n === "Load balancer") {
+    st.innerHTML = `<svg viewBox="25 15 350 120" width="100%" height="150" style="position:absolute;inset:0"><g stroke="#33507f" stroke-width="3" fill="none"><path d="M60,75 L190,75 L330,35"/><path d="M60,75 L190,75 L330,115"/></g>${dotPath("M60,75 L190,75 L330,35", 3, 1.6)}${dotPath("M60,75 L190,75 L330,115", 3, 1.6).replace(/begin="/g, 'begin="0.27')}
+      <text x="50" y="85" font-size="28" text-anchor="middle">👥</text><text x="190" y="85" font-size="26" text-anchor="middle">⚖️</text><text x="345" y="44" font-size="24" text-anchor="middle">🖥️</text><text x="345" y="124" font-size="24" text-anchor="middle">🖥️</text>
+      <text x="190" y="110" fill="#9fb0c8" font-size="10" text-anchor="middle">load balancer membagi pengunjung</text></svg>`;
+  }
+  if (n === "Auto Scaling") {
+    const show = (k, txt) => { st.innerHTML = `<div style="position:absolute;left:0;right:0;top:30px;text-align:center;font-size:2rem;letter-spacing:.3rem">${Array.from({ length: k }, (_, j) => `<span class="pop" style="display:inline-block;animation-delay:${j * 90}ms">🖥️</span>`).join("")}</div>` + lb(txt, 50, 100); };
+    show(2, "🙂 sepi: 2 server"); await sleep(1300); if (!ok()) return; show(6, "⏰ deadline: otomatis jadi 6 server"); await sleep(1800); if (!ok()) return; show(2, "🌙 sepi lagi: balik ke 2 server, hemat");
+  }
+  if (n === "Amplify") {
+    st.innerHTML = it("amz", "📦", 8, 50) + it("amc", "☁️", 46, 45, 2.6) + lb("site.zip", 12, 105) + lb("Amplify", 50, 105);
+    await sleep(300); if (!ok()) return; mv("amz", 44, 50); await sleep(900); if (!ok()) return; $("#amz").style.opacity = 0;
+    st.insertAdjacentHTML("beforeend", `<div class="it pop" style="left:68%;top:40px;font-size:1rem;background:#13233d;border:1px solid var(--green);border-radius:10px;padding:.4rem .6rem">🌐 website-ku.amplifyapp.com<br><small style="color:var(--green)">✅ online!</small></div>`);
+  }
+}
+
 /* ---------- story map ---------- */
 const STORY = [
   ["👋", "Mulai", "Satu pertanyaan pembuka, lalu cerita Kumpulin dimulai.", "Perkenalan", 1, 2],
@@ -3247,7 +3359,7 @@ const STORY = [
   ["🧰", "Bab 2 · Kenalan AWS", "AWS itu apa, Region & AZ, EC2 & S3, load balancer, CloudFront, data aman.", "AWS itu apa?", 3, 2],
   ["🏢", "Bab 3 · Masuk ke gedung", "Safety dulu, lalu magang sehari keliling gedung & semua tim.", "Safety nomor satu", 4, 2],
   ["🏗️", "Bab 4 · Satukan semua", "Rakit Kumpulin yang anti down pakai semua yang sudah dipelajari.", "Game: jadi arsitek cloud", 4, 1],
-  ["🚀", "Bab 5 · Let's deploy!", "Kenapa Amplify, bikin akun, lalu online-kan website pertamamu.", "Mau urus sebanyak apa?", 3, 1],
+  ["🚀", "Bab 5 · Let's deploy!", "Bikin akun, lalu online-kan website pertamamu.", "Akun AWS: gimana caranya?", 3, 1],
   ["🏆", "Bab 6 · Kuis", "Buktikan kamu sudah jadi orang cloud!", "Kuis", 2, 1],
   ["🏁", "Selesai", "Cari jalur kariermu.", "Langkah selanjutnya", 1, 1]
 ];
