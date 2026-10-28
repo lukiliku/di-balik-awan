@@ -71,7 +71,7 @@ label{font-size:.9rem;color:var(--mute);display:block;margin:.4rem 0 .2rem}
 .reveal{max-height:0;overflow:hidden;opacity:0;transition:max-height .7s var(--ease),opacity .5s var(--ease)}
 .reveal.show{max-height:900px;opacity:1}
 .zoomin{animation:zin .7s var(--ease) both}
-@keyframes zin{from{transform:scale(.35);opacity:0;filter:blur(6px)}to{transform:none;opacity:1;filter:none}}
+@keyframes zin{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
 .pop{animation:pop .45s var(--ease-back) both}
 @keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
 .fadeup{animation:fu .6s var(--ease) both}
@@ -428,7 +428,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
       <button class="btn primary" id="opcloud" style="margin-top:.6rem">☁️ Coba pakai cloud →</button>
     </div>
   </div>
-  <p class="src" style="margin:0">Harga = perkiraan kasar untuk 1 server kecil. Yang paling mahal ternyata bukan listrik, tapi <b>orang yang jaga 24 jam</b>.</p>
+  <p class="src" style="margin:0">Harga = perkiraan kasar untuk 1 server kecil. Yang paling mahal ternyata bukan listrik, tapi <b>orang yang merawat servernya</b>.</p>
   <p class="mute" style="margin:0">Cara ini disebut <b>on-premise</b> (“di tempat sendiri”): semua kamu beli, pasang, dan jaga sendiri.</p>
   <p class="bridge">👉 Mahal, repot, dan mudah mati. Adakah cara lain?</p>
 </section>
@@ -455,7 +455,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 <section class="slide" data-title="Hitung setahun">
   <div class="kicker"><span class="part">Bab 1</span>Dasar cloud · Hitung-hitungan setahun</div>
   <h2>Setahun memakai server sendiri vs cloud, <span class="acc">berapa biayanya?</span></h2>
-  <p class="mute" style="margin:0">Server sendiri: modal awal <b>Rp 23 juta</b> + <b>Rp 16,6 juta/bulan</b> (angka dari slide Kumpulin tadi). Cloud: sekitar <b>Rp 1 juta/bulan</b> untuk Kumpulin, termasuk tambahan server saat deadline. <span class="src">(angka ilustrasi)</span></p>
+  <p class="mute" style="margin:0">Server sendiri: modal awal <b>Rp 23 juta</b> (server Rp 12 juta + UPS, AC, backup) + <b>Rp 4,6 juta/bulan</b> (listrik, internet, teknisi). Cloud: 1 server EC2 <b>t3.medium</b> menyala 24 jam ≈ <b>Rp 0,64 juta/bulan</b>, ditambah server ekstra saat deadline dan storage, jadi sekitar <b>Rp 1 juta/bulan</b>.</p>
   <div class="row"><button class="btn primary" id="costplay">▶️ Putar 12 bulan</button><span class="mute" id="costmon" style="font-size:.95rem"></span></div>
   <div class="grid2" style="grid-template-columns:1.5fr 1fr">
     <div class="card" style="padding:.6rem .8rem">
@@ -469,6 +469,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
       <div class="card hl" style="text-align:center"><div class="mute">Selisihnya</div><div id="costD" style="font-size:2rem;font-weight:900;color:var(--green)">Rp 0</div><div id="costwh" class="mute" style="font-size:.9rem"></div></div>
     </div>
   </div>
+  <p class="src" style="margin:0">Sumber harga AWS: aws.amazon.com/ec2/pricing/on-demand · EC2 t3.medium (2 vCPU, 4 GiB), Linux, Region Jakarta (ap-southeast-3) = US$0,0528/jam × 730 jam ≈ US$38,5/bulan, dicek Oktober 2026. Kurs asumsi Rp 16.500/US$. Biaya server sendiri = perkiraan.</p>
   <p class="bridge">👉 Cloud memang lebih murah, asal ingat satu hal: tagihannya berjalan terus selama resource masih menyala.</p>
 </section>
 
@@ -1075,7 +1076,7 @@ const OPI = [
   { k: "net", e: "🌐", n: "Internet khusus + IP publik", c: 500e3, m: 1e6 },
   { k: "sec", e: "🔒", n: "Kunci pintu + CCTV", c: 1.5e6, m: 0 },
   { k: "backup", e: "💾", n: "Backup di tempat lain", c: 3e6, m: 0 },
-  { k: "ops", e: "👨‍🔧", n: "Orang jaga 24/7 (3 shift)", c: 0, m: 15e6 }
+  { k: "ops", e: "👨‍🔧", n: "Teknisi IT (paruh waktu)", c: 0, m: 3e6 }
 ];
 const opHave = new Set();
 $("#opitems").innerHTML = OPI.map(o => `<div class="need" data-k="${o.k}"><span class="e">${o.e}</span><span>${o.n}<br><small class="mute">${o.c ? rp(o.c) : ""}${o.c && o.m ? " + " : ""}${o.m ? rp(o.m) + "/bln" : ""}</small></span></div>`).join("");
@@ -1430,10 +1431,29 @@ const ZOOM = [
       });
       return `<svg viewBox="0 0 400 310" width="100%">${g}<text x="200" y="292" fill="#9fb0c8" font-size="11" text-anchor="middle">⚡ listrik · ❄️ pendingin · 🌐 jaringan sendiri-sendiri, terhubung fiber 🟧</text></svg>`; } },
   { k: "🗄️ Data center", t: "Data center: baris demi baris rack", d: "Di dalam gedung ada ruangan besar (data hall) berisi baris-baris rack. Switch jaringan juga ada di sini, menghubungkan semua rack dengan fiber.", f: "Ribuan kabel fiber menghubungkan rack-rack ini. Setiap kabel tercatat dan berlabel.",
-    v: () => { let s = ""; for (let r = 0; r < 5; r++) for (let c = 0; c < 14; c++) s += `<rect x="${20 + c * 26}" y="${20 + r * 52}" width="20" height="36" rx="2" fill="#22385e" class="pop" style="animation-delay:${(r * 14 + c) * 12}ms;transform-box:fill-box;transform-origin:center"/><circle cx="${30 + c * 26}" cy="${28 + r * 52}" r="2" fill="${Math.random() < .1 ? "#ffc542" : "#3ddc84"}" class="blink" style="animation-delay:${Math.random() * 2}s"/>`; return `<svg viewBox="0 0 400 280" width="100%">${s}</svg>`; } },
-  { k: "🧱 Rack", t: "Rack: lemari besi setinggi ±2 meter (42U)", d: "Isinya banyak server, dengan switch jaringan di bagian atas. Setiap rack mendapat kabel listrik dan kabel jaringan.", f: "Satu rack penuh bisa seberat lebih dari setengah ton!",
-    v: () => `<div style="width:160px;border:4px solid #556;border-radius:6px;padding:5px;background:#0a1222">${Array.from({ length: 16 }, (_, i) => `<div class="fadeup" style="animation-delay:${i * 60}ms;height:13px;margin:3px 0;border-radius:2px;background:${i < 2 ? "#2d6b5f" : "#2b4672"};display:flex;justify-content:flex-end;align-items:center;padding-right:4px"><i class="blink" style="width:5px;height:5px;border-radius:50%;background:#3ddc84;animation-delay:${Math.random()}s"></i></div>`).join("")}</div>` },
-  { k: "🖥️ Server", t: "Server: tempat ‘cloud’-mu jalan", d: "Satu server fisik bisa menjalankan banyak server virtual (instance EC2). Saat kamu klik ‘Launch instance’, kamu menyewa sebagian dari mesin seperti ini.", f: "Di bonus lab nanti, kamu akan tahu server-mu ada di AZ yang mana.",
+    v: () => { let g = "";
+      for (let r = 0; r < 5; r++) {
+        const y = 22 + r * 50; let row = "";
+        for (let c = 0; c < 11; c++) row += `<rect x="${24 + c * 27}" y="${y}" width="22" height="32" rx="2" fill="#22385e" stroke="#2f4b78"/><circle cx="${35 + c * 27}" cy="${y + 8}" r="2.2" fill="${(r * 11 + c) % 9 === 4 ? "#ffc542" : "#3ddc84"}"${(r * 11 + c) % 7 === 3 ? ` class="blink" style="animation-delay:${(c % 5) * .3}s"` : ""}/>`;
+        g += `<g class="fadeup" style="animation-delay:${r * 90}ms">${row}<line x1="318" y1="${y + 16}" x2="350" y2="${y + 16}" stroke="#ff9900" stroke-width="2"/></g>`;
+      }
+      g += `<line x1="350" y1="38" x2="350" y2="238" stroke="#ff9900" stroke-width="2"/><rect x="336" y="120" width="56" height="36" rx="5" fill="#1d3b2c" stroke="#3ddc84" stroke-width="2"/><text x="364" y="142" fill="#3ddc84" font-size="11" font-weight="700" text-anchor="middle">Switch</text>`;
+      g += `<text x="170" y="282" fill="#9fb0c8" font-size="11" text-anchor="middle">🗄️ baris-baris rack</text><text x="350" y="262" fill="#ffd79a" font-size="10" text-anchor="middle">🟧 kabel fiber</text>`;
+      return `<svg viewBox="0 0 400 290" width="100%">${g}</svg>`; } },
+  { k: "🧱 Rack", t: "Rack", d: "Isinya banyak server, dengan switch jaringan di bagian atas. Setiap rack mendapat kabel listrik dan kabel jaringan.", f: "Satu rack penuh bisa seberat lebih dari setengah ton!",
+    v: () => { let g = `<rect x="110" y="10" width="120" height="282" rx="6" fill="#0a1222" stroke="#5a6680" stroke-width="4"/>`;
+      for (let i = 0; i < 14; i++) {
+        const y = 22 + i * 19, sw = i < 2; let u = `<rect x="120" y="${y}" width="100" height="15" rx="2" fill="${sw ? "#1d3b2c" : "#2b4672"}" stroke="${sw ? "#3ddc84" : "#3b5a8c"}"/>`;
+        if (sw) for (let k = 0; k < 8; k++) u += `<rect x="${126 + k * 10}" y="${y + 4}" width="6" height="6" fill="#0a1222"/>`;
+        else u += `<line x1="128" y1="${y + 7.5}" x2="190" y2="${y + 7.5}" stroke="#3b5a8c" stroke-width="5" stroke-dasharray="2 3"/>`;
+        u += `<circle cx="212" cy="${y + 7.5}" r="2.4" fill="#3ddc84"${i % 4 === 1 ? ` class="blink" style="animation-delay:${i * .2}s"` : ""}/>`;
+        g += `<g class="fadeup" style="animation-delay:${i * 45}ms">${u}</g>`;
+      }
+      g += `<path d="M232,32 H262" stroke="#3ddc84" stroke-width="2"/><text x="268" y="30" fill="#3ddc84" font-size="17" font-weight="800">🔀 Switch</text><text x="268" y="48" fill="#9fb0c8" font-size="12">jaringan</text>`;
+      g += `<path d="M236,62 h8 V286 h-8" fill="none" stroke="#5aa9ff" stroke-width="2"/><text x="254" y="170" fill="#8fc4ff" font-size="17" font-weight="800">🖥️ Server</text><text x="254" y="188" fill="#9fb0c8" font-size="12">banyak, ditumpuk</text>`;
+      g += `<path d="M92,12 V290" stroke="#9fb0c8" stroke-width="1.5" stroke-dasharray="3 3"/><text x="84" y="155" fill="#9fb0c8" font-size="12" text-anchor="end">±2 m</text>`;
+      return `<svg viewBox="30 0 380 300" width="100%" style="max-height:480px">${g}</svg>`; } },
+  { k: "🖥️ Server", t: "Server: tempat Kumpulin jalan", d: "Satu server fisik bisa menjalankan banyak server virtual (instance EC2). Saat kamu klik ‘Launch instance’, kamu menyewa sebagian dari mesin seperti ini.", f: "Di bonus lab nanti, kamu akan tahu server-mu ada di AZ yang mana.",
     v: () => `<div style="text-align:center"><div style="font-size:4rem">🖥️</div><div class="row" style="justify-content:center">${["VM teman", "VM toko online", "VM <b class='acc'>Kumpulin</b>", "VM game"].map((n, i) => `<span class="pill pop" style="animation-delay:${300 + i * 200}ms">📦 ${n}</span>`).join("")}</div><p class="mute">CPU · RAM · Disk · Kartu jaringan</p></div>` }
 ];
 let zl = 0, zTimer = null;
@@ -3422,15 +3442,17 @@ async function awsAnim(n) {
 }
 
 /* ---------- hitung setahun: server sendiri vs cloud (kumulatif, juta rupiah) ---------- */
-const COST = Array.from({ length: 13 }, (_, k) => ({ m: k, a: 23 + 16.6 * k, b: 1.05 * k }));
-const CX = k => 50 + k * 40, CY = v => 250 - v / 240 * 225;
+/* server sendiri = total OPI (modal + bulanan); cloud = t3.medium Jakarta US$0,0528/jam × 730 × Rp16.500 ≈ 0,64 jt + ekstra ≈ 1 jt/bulan */
+const OP_C = OPI.reduce((t, o) => t + o.c, 0) / 1e6, OP_M = OPI.reduce((t, o) => t + o.m, 0) / 1e6;
+const COST = Array.from({ length: 13 }, (_, k) => ({ m: k, a: OP_C + OP_M * k, b: 1.0 * k }));
+const CX = k => 50 + k * 40, CY = v => 250 - v / 100 * 225;
 const jt = v => "Rp " + (v >= 10 ? Math.round(v) : v.toFixed(1).replace(".", ",")) + " juta";
 let costN = 0, costRun = 0;
 const costAt = (key, n) => { const k = Math.floor(n), f = n - k, a = COST[k][key], b = COST[Math.min(12, k + 1)][key]; return a + (b - a) * f; };
 function costDraw(n) {
   costN = n;
   let g = "";
-  for (const v of [0, 60, 120, 180, 240]) g += `<line x1="50" x2="530" y1="${CY(v)}" y2="${CY(v)}" stroke="#2a4270" stroke-width="1"/><text x="44" y="${CY(v) + 4}" fill="#9fb0c8" font-size="11" text-anchor="end">${v}</text>`;
+  for (const v of [0, 20, 40, 60, 80, 100]) g += `<line x1="50" x2="530" y1="${CY(v)}" y2="${CY(v)}" stroke="#2a4270" stroke-width="1"/><text x="44" y="${CY(v) + 4}" fill="#9fb0c8" font-size="11" text-anchor="end">${v}</text>`;
   for (let k = 0; k <= 12; k += 2) g += `<text x="${CX(k)}" y="270" fill="#9fb0c8" font-size="11" text-anchor="middle">${k}</text>`;
   g += `<text x="290" y="287" fill="#9fb0c8" font-size="11" text-anchor="middle">bulan ke-</text><text x="50" y="14" fill="#9fb0c8" font-size="11">(juta Rp)</text>`;
   const pts = key => COST.slice(0, Math.floor(n) + 1).map(d => `${CX(d.m)},${CY(d[key])}`).concat(`${CX(n)},${CY(costAt(key, n))}`).join(" ");
