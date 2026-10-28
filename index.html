@@ -199,7 +199,7 @@ svg text{font-family:system-ui,sans-serif}
 .bridge::before{content:"→ "}
 .bridge{margin:auto 0 0;padding-top:.6rem;color:var(--teal);font-style:italic;font-size:1rem}
 .story{cursor:pointer;transition:.25s}.story:hover{border-color:var(--acc);transform:translateY(-3px)}
-.board{position:relative;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,minmax(220px,auto));gap:1.6rem 1.2rem;margin-top:1rem}
+.board{position:relative;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,minmax(200px,auto));gap:1.6rem 1.2rem;margin-top:1rem}
 .board .sq{position:relative;z-index:1;border-radius:16px;padding:.7rem .9rem;border:2px solid var(--line);background:var(--panel);cursor:pointer;transition:transform .25s,border-color .25s,box-shadow .25s}
 .board .sq:hover{border-color:var(--acc);transform:translateY(-3px)}
 .board .sq .no{position:absolute;top:4px;right:12px;font-weight:900;font-size:2rem;opacity:.22}
@@ -321,6 +321,12 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 #cbill.pop{animation:pop .35s}
 #ppeav{position:relative;height:330px;background:#0a1528;border:1px solid var(--line);border-radius:14px}
 #ppeav .body{position:absolute;left:27%;top:14px;transform:translateX(-50%);font-size:14rem;line-height:1}
+#ppeav .body{transition:filter .4s}
+#ppeav .body.glow{animation:ppepulse .6s ease}
+#ppeav .body.ready{filter:drop-shadow(0 0 18px rgba(61,220,132,.75))}
+@keyframes ppepulse{40%{transform:translateX(-50%) scale(1.06);filter:drop-shadow(0 0 22px rgba(61,220,132,.9))}}
+#ppeav .spark{position:absolute;font-size:1.6rem;pointer-events:none;animation:sparkup .9s ease forwards}
+@keyframes sparkup{0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}30%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}100%{opacity:0;transform:translate(-50%,-90%) scale(1)}}
 #ppeav .pline{position:absolute;left:39%;width:20%;border-top:2px dashed #33507f}
 #ppeav .pline.on{border-top:2px solid var(--green)}
 #ppeav .pslot{position:absolute;left:59%;transform:translateY(-50%);padding:.35rem .7rem;border:2px dashed #33507f;border-radius:10px;font-size:1rem;white-space:nowrap;background:#0b1526}
@@ -348,12 +354,12 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
   <div class="kicker">Sharing knowledge</div>
   <h1>Di Balik <span class="acc">Awan</span></h1>
   <p><span id="presenter"></span></p>
-  <div class="row" style="justify-content:center;gap:.8rem;align-items:center;margin-top:.2rem"><div style="background:#fff;border-radius:14px;padding:7px;width:164px;height:164px"><svg width="150" height="150" width="33mm" height="33mm" version="1.1" viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg"><path d="M2,2H3V3H2zM3,2H4V3H3zM4,2H5V3H4zM5,2H6V3H5zM6,2H7V3H6zM7,2H8V3H7zM8,2H9V3H8zM11,2H12V3H11zM13,2H14V3H13zM14,2H15V3H14zM16,2H17V3H16zM17,2H18V3H17zM20,2H21V3H20zM21,2H22V3H21zM24,2H25V3H24zM25,2H26V3H25zM26,2H27V3H26zM27,2H28V3H27zM28,2H29V3H28zM29,2H30V3H29zM30,2H31V3H30zM2,3H3V4H2zM8,3H9V4H8zM13,3H14V4H13zM14,3H15V4H14zM17,3H18V4H17zM22,3H23V4H22zM24,3H25V4H24zM30,3H31V4H30zM2,4H3V5H2zM4,4H5V5H4zM5,4H6V5H5zM6,4H7V5H6zM8,4H9V5H8zM11,4H12V5H11zM14,4H15V5H14zM16,4H17V5H16zM19,4H20V5H19zM20,4H21V5H20zM22,4H23V5H22zM24,4H25V5H24zM26,4H27V5H26zM27,4H28V5H27zM28,4H29V5H28zM30,4H31V5H30zM2,5H3V6H2zM4,5H5V6H4zM5,5H6V6H5zM6,5H7V6H6zM8,5H9V6H8zM12,5H13V6H12zM16,5H17V6H16zM21,5H22V6H21zM22,5H23V6H22zM24,5H25V6H24zM26,5H27V6H26zM27,5H28V6H27zM28,5H29V6H28zM30,5H31V6H30zM2,6H3V7H2zM4,6H5V7H4zM5,6H6V7H5zM6,6H7V7H6zM8,6H9V7H8zM11,6H12V7H11zM13,6H14V7H13zM14,6H15V7H14zM15,6H16V7H15zM17,6H18V7H17zM19,6H20V7H19zM20,6H21V7H20zM24,6H25V7H24zM26,6H27V7H26zM27,6H28V7H27zM28,6H29V7H28zM30,6H31V7H30zM2,7H3V8H2zM8,7H9V8H8zM10,7H11V8H10zM12,7H13V8H12zM13,7H14V8H13zM17,7H18V8H17zM18,7H19V8H18zM19,7H20V8H19zM20,7H21V8H20zM21,7H22V8H21zM22,7H23V8H22zM24,7H25V8H24zM30,7H31V8H30zM2,8H3V9H2zM3,8H4V9H3zM4,8H5V9H4zM5,8H6V9H5zM6,8H7V9H6zM7,8H8V9H7zM8,8H9V9H8zM10,8H11V9H10zM12,8H13V9H12zM14,8H15V9H14zM16,8H17V9H16zM18,8H19V9H18zM20,8H21V9H20zM22,8H23V9H22zM24,8H25V9H24zM25,8H26V9H25zM26,8H27V9H26zM27,8H28V9H27zM28,8H29V9H28zM29,8H30V9H29zM30,8H31V9H30zM11,9H12V10H11zM12,9H13V10H12zM16,9H17V10H16zM18,9H19V10H18zM19,9H20V10H19zM2,10H3V11H2zM5,10H6V11H5zM7,10H8V11H7zM8,10H9V11H8zM10,10H11V11H10zM12,10H13V11H12zM13,10H14V11H13zM15,10H16V11H15zM16,10H17V11H16zM17,10H18V11H17zM18,10H19V11H18zM21,10H22V11H21zM23,10H24V11H23zM25,10H26V11H25zM4,11H5V12H4zM5,11H6V12H5zM7,11H8V12H7zM10,11H11V12H10zM13,11H14V12H13zM14,11H15V12H14zM15,11H16V12H15zM18,11H19V12H18zM22,11H23V12H22zM23,11H24V12H23zM24,11H25V12H24zM27,11H28V12H27zM30,11H31V12H30zM2,12H3V13H2zM6,12H7V13H6zM8,12H9V13H8zM10,12H11V13H10zM13,12H14V13H13zM14,12H15V13H14zM15,12H16V13H15zM16,12H17V13H16zM18,12H19V13H18zM20,12H21V13H20zM21,12H22V13H21zM22,12H23V13H22zM23,12H24V13H23zM24,12H25V13H24zM25,12H26V13H25zM26,12H27V13H26zM27,12H28V13H27zM28,12H29V13H28zM29,12H30V13H29zM7,13H8V14H7zM9,13H10V14H9zM14,13H15V14H14zM15,13H16V14H15zM17,13H18V14H17zM20,13H21V14H20zM21,13H22V14H21zM23,13H24V14H23zM26,13H27V14H26zM28,13H29V14H28zM29,13H30V14H29zM3,14H4V15H3zM5,14H6V15H5zM7,14H8V15H7zM8,14H9V15H8zM9,14H10V15H9zM10,14H11V15H10zM12,14H13V15H12zM13,14H14V15H13zM15,14H16V15H15zM17,14H18V15H17zM18,14H19V15H18zM19,14H20V15H19zM23,14H24V15H23zM24,14H25V15H24zM27,14H28V15H27zM29,14H30V15H29zM30,14H31V15H30zM2,15H3V16H2zM3,15H4V16H3zM4,15H5V16H4zM7,15H8V16H7zM10,15H11V16H10zM11,15H12V16H11zM12,15H13V16H12zM13,15H14V16H13zM15,15H16V16H15zM21,15H22V16H21zM22,15H23V16H22zM23,15H24V16H23zM4,16H5V17H4zM5,16H6V17H5zM6,16H7V17H6zM8,16H9V17H8zM15,16H16V17H15zM16,16H17V17H16zM18,16H19V17H18zM22,16H23V17H22zM27,16H28V17H27zM28,16H29V17H28zM29,16H30V17H29zM30,16H31V17H30zM4,17H5V18H4zM6,17H7V18H6zM9,17H10V18H9zM11,17H12V18H11zM12,17H13V18H12zM14,17H15V18H14zM15,17H16V18H15zM17,17H18V18H17zM18,17H19V18H18zM19,17H20V18H19zM20,17H21V18H20zM21,17H22V18H21zM25,17H26V18H25zM26,17H27V18H26zM27,17H28V18H27zM29,17H30V18H29zM2,18H3V19H2zM3,18H4V19H3zM5,18H6V19H5zM8,18H9V19H8zM9,18H10V19H9zM10,18H11V19H10zM16,18H17V19H16zM17,18H18V19H17zM19,18H20V19H19zM20,18H21V19H20zM22,18H23V19H22zM23,18H24V19H23zM29,18H30V19H29zM3,19H4V20H3zM5,19H6V20H5zM9,19H10V20H9zM10,19H11V20H10zM11,19H12V20H11zM14,19H15V20H14zM16,19H17V20H16zM18,19H19V20H18zM19,19H20V20H19zM23,19H24V20H23zM24,19H25V20H24zM25,19H26V20H25zM27,19H28V20H27zM30,19H31V20H30zM2,20H3V21H2zM4,20H5V21H4zM5,20H6V21H5zM7,20H8V21H7zM8,20H9V21H8zM9,20H10V21H9zM15,20H16V21H15zM19,20H20V21H19zM25,20H26V21H25zM26,20H27V21H26zM29,20H30V21H29zM30,20H31V21H30zM5,21H6V22H5zM7,21H8V22H7zM9,21H10V22H9zM10,21H11V22H10zM12,21H13V22H12zM16,21H17V22H16zM17,21H18V22H17zM18,21H19V22H18zM19,21H20V22H19zM20,21H21V22H20zM21,21H22V22H21zM22,21H23V22H22zM29,21H30V22H29zM30,21H31V22H30zM2,22H3V23H2zM4,22H5V23H4zM5,22H6V23H5zM7,22H8V23H7zM8,22H9V23H8zM10,22H11V23H10zM11,22H12V23H11zM14,22H15V23H14zM18,22H19V23H18zM22,22H23V23H22zM23,22H24V23H23zM24,22H25V23H24zM25,22H26V23H25zM26,22H27V23H26zM28,22H29V23H28zM10,23H11V24H10zM13,23H14V24H13zM18,23H19V24H18zM19,23H20V24H19zM21,23H22V24H21zM22,23H23V24H22zM26,23H27V24H26zM28,23H29V24H28zM29,23H30V24H29zM30,23H31V24H30zM2,24H3V25H2zM3,24H4V25H3zM4,24H5V25H4zM5,24H6V25H5zM6,24H7V25H6zM7,24H8V25H7zM8,24H9V25H8zM11,24H12V25H11zM12,24H13V25H12zM13,24H14V25H13zM22,24H23V25H22zM24,24H25V25H24zM26,24H27V25H26zM29,24H30V25H29zM2,25H3V26H2zM8,25H9V26H8zM10,25H11V26H10zM12,25H13V26H12zM13,25H14V26H13zM14,25H15V26H14zM16,25H17V26H16zM22,25H23V26H22zM26,25H27V26H26zM27,25H28V26H27zM28,25H29V26H28zM2,26H3V27H2zM4,26H5V27H4zM5,26H6V27H5zM6,26H7V27H6zM8,26H9V27H8zM14,26H15V27H14zM18,26H19V27H18zM19,26H20V27H19zM22,26H23V27H22zM23,26H24V27H23zM24,26H25V27H24zM25,26H26V27H25zM26,26H27V27H26zM2,27H3V28H2zM4,27H5V28H4zM5,27H6V28H5zM6,27H7V28H6zM8,27H9V28H8zM10,27H11V28H10zM12,27H13V28H12zM14,27H15V28H14zM22,27H23V28H22zM24,27H25V28H24zM26,27H27V28H26zM27,27H28V28H27zM28,27H29V28H28zM29,27H30V28H29zM2,28H3V29H2zM4,28H5V29H4zM5,28H6V29H5zM6,28H7V29H6zM8,28H9V29H8zM11,28H12V29H11zM12,28H13V29H12zM13,28H14V29H13zM15,28H16V29H15zM16,28H17V29H16zM19,28H20V29H19zM20,28H21V29H20zM21,28H22V29H21zM22,28H23V29H22zM23,28H24V29H23zM26,28H27V29H26zM27,28H28V29H27zM28,28H29V29H28zM30,28H31V29H30zM2,29H3V30H2zM8,29H9V30H8zM12,29H13V30H12zM13,29H14V30H13zM15,29H16V30H15zM17,29H18V30H17zM18,29H19V30H18zM19,29H20V30H19zM20,29H21V30H20zM21,29H22V30H21zM22,29H23V30H22zM25,29H26V30H25zM29,29H30V30H29zM2,30H3V31H2zM3,30H4V31H3zM4,30H5V31H4zM5,30H6V31H5zM6,30H7V31H6zM7,30H8V31H7zM8,30H9V31H8zM10,30H11V31H10zM12,30H13V31H12zM13,30H14V31H13zM14,30H15V31H14zM15,30H16V31H15zM17,30H18V31H17zM19,30H20V31H19zM20,30H21V31H20zM21,30H22V31H21zM22,30H23V31H22zM23,30H24V31H23zM25,30H26V31H25zM27,30H28V31H27zM29,30H30V31H29z" id="qr-path" fill="#000000" fill-opacity="1" fill-rule="nonzero" stroke="none"/></svg></div><div style="text-align:left"><b style="font-size:1.2rem">📲 Scan & ikuti di HP-mu</b><br><span class="mute" style="font-size:.9rem">Main game-nya bareng-bareng!</span><br><span class="mono acc" style="font-size:.95rem">lukiliku.github.io/di-balik-awan/</span></div></div>
+  <div class="row" style="justify-content:center;gap:.8rem;align-items:center;margin-top:.2rem"><div style="background:#fff;border-radius:14px;padding:7px;width:164px;height:164px"><svg width="150" height="150" width="33mm" height="33mm" version="1.1" viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg"><path d="M2,2H3V3H2zM3,2H4V3H3zM4,2H5V3H4zM5,2H6V3H5zM6,2H7V3H6zM7,2H8V3H7zM8,2H9V3H8zM11,2H12V3H11zM13,2H14V3H13zM14,2H15V3H14zM16,2H17V3H16zM17,2H18V3H17zM20,2H21V3H20zM21,2H22V3H21zM24,2H25V3H24zM25,2H26V3H25zM26,2H27V3H26zM27,2H28V3H27zM28,2H29V3H28zM29,2H30V3H29zM30,2H31V3H30zM2,3H3V4H2zM8,3H9V4H8zM13,3H14V4H13zM14,3H15V4H14zM17,3H18V4H17zM22,3H23V4H22zM24,3H25V4H24zM30,3H31V4H30zM2,4H3V5H2zM4,4H5V5H4zM5,4H6V5H5zM6,4H7V5H6zM8,4H9V5H8zM11,4H12V5H11zM14,4H15V5H14zM16,4H17V5H16zM19,4H20V5H19zM20,4H21V5H20zM22,4H23V5H22zM24,4H25V5H24zM26,4H27V5H26zM27,4H28V5H27zM28,4H29V5H28zM30,4H31V5H30zM2,5H3V6H2zM4,5H5V6H4zM5,5H6V6H5zM6,5H7V6H6zM8,5H9V6H8zM12,5H13V6H12zM16,5H17V6H16zM21,5H22V6H21zM22,5H23V6H22zM24,5H25V6H24zM26,5H27V6H26zM27,5H28V6H27zM28,5H29V6H28zM30,5H31V6H30zM2,6H3V7H2zM4,6H5V7H4zM5,6H6V7H5zM6,6H7V7H6zM8,6H9V7H8zM11,6H12V7H11zM13,6H14V7H13zM14,6H15V7H14zM15,6H16V7H15zM17,6H18V7H17zM19,6H20V7H19zM20,6H21V7H20zM24,6H25V7H24zM26,6H27V7H26zM27,6H28V7H27zM28,6H29V7H28zM30,6H31V7H30zM2,7H3V8H2zM8,7H9V8H8zM10,7H11V8H10zM12,7H13V8H12zM13,7H14V8H13zM17,7H18V8H17zM18,7H19V8H18zM19,7H20V8H19zM20,7H21V8H20zM21,7H22V8H21zM22,7H23V8H22zM24,7H25V8H24zM30,7H31V8H30zM2,8H3V9H2zM3,8H4V9H3zM4,8H5V9H4zM5,8H6V9H5zM6,8H7V9H6zM7,8H8V9H7zM8,8H9V9H8zM10,8H11V9H10zM12,8H13V9H12zM14,8H15V9H14zM16,8H17V9H16zM18,8H19V9H18zM20,8H21V9H20zM22,8H23V9H22zM24,8H25V9H24zM25,8H26V9H25zM26,8H27V9H26zM27,8H28V9H27zM28,8H29V9H28zM29,8H30V9H29zM30,8H31V9H30zM11,9H12V10H11zM12,9H13V10H12zM16,9H17V10H16zM18,9H19V10H18zM19,9H20V10H19zM2,10H3V11H2zM5,10H6V11H5zM7,10H8V11H7zM8,10H9V11H8zM10,10H11V11H10zM12,10H13V11H12zM13,10H14V11H13zM15,10H16V11H15zM16,10H17V11H16zM17,10H18V11H17zM18,10H19V11H18zM21,10H22V11H21zM23,10H24V11H23zM25,10H26V11H25zM4,11H5V12H4zM5,11H6V12H5zM7,11H8V12H7zM10,11H11V12H10zM13,11H14V12H13zM14,11H15V12H14zM15,11H16V12H15zM18,11H19V12H18zM22,11H23V12H22zM23,11H24V12H23zM24,11H25V12H24zM27,11H28V12H27zM30,11H31V12H30zM2,12H3V13H2zM6,12H7V13H6zM8,12H9V13H8zM10,12H11V13H10zM13,12H14V13H13zM14,12H15V13H14zM15,12H16V13H15zM16,12H17V13H16zM18,12H19V13H18zM20,12H21V13H20zM21,12H22V13H21zM22,12H23V13H22zM23,12H24V13H23zM24,12H25V13H24zM25,12H26V13H25zM26,12H27V13H26zM27,12H28V13H27zM28,12H29V13H28zM29,12H30V13H29zM7,13H8V14H7zM9,13H10V14H9zM14,13H15V14H14zM15,13H16V14H15zM17,13H18V14H17zM20,13H21V14H20zM21,13H22V14H21zM23,13H24V14H23zM26,13H27V14H26zM28,13H29V14H28zM29,13H30V14H29zM3,14H4V15H3zM5,14H6V15H5zM7,14H8V15H7zM8,14H9V15H8zM9,14H10V15H9zM10,14H11V15H10zM12,14H13V15H12zM13,14H14V15H13zM15,14H16V15H15zM17,14H18V15H17zM18,14H19V15H18zM19,14H20V15H19zM23,14H24V15H23zM24,14H25V15H24zM27,14H28V15H27zM29,14H30V15H29zM30,14H31V15H30zM2,15H3V16H2zM3,15H4V16H3zM4,15H5V16H4zM7,15H8V16H7zM10,15H11V16H10zM11,15H12V16H11zM12,15H13V16H12zM13,15H14V16H13zM15,15H16V16H15zM21,15H22V16H21zM22,15H23V16H22zM23,15H24V16H23zM4,16H5V17H4zM5,16H6V17H5zM6,16H7V17H6zM8,16H9V17H8zM15,16H16V17H15zM16,16H17V17H16zM18,16H19V17H18zM22,16H23V17H22zM27,16H28V17H27zM28,16H29V17H28zM29,16H30V17H29zM30,16H31V17H30zM4,17H5V18H4zM6,17H7V18H6zM9,17H10V18H9zM11,17H12V18H11zM12,17H13V18H12zM14,17H15V18H14zM15,17H16V18H15zM17,17H18V18H17zM18,17H19V18H18zM19,17H20V18H19zM20,17H21V18H20zM21,17H22V18H21zM25,17H26V18H25zM26,17H27V18H26zM27,17H28V18H27zM29,17H30V18H29zM2,18H3V19H2zM3,18H4V19H3zM5,18H6V19H5zM8,18H9V19H8zM9,18H10V19H9zM10,18H11V19H10zM16,18H17V19H16zM17,18H18V19H17zM19,18H20V19H19zM20,18H21V19H20zM22,18H23V19H22zM23,18H24V19H23zM29,18H30V19H29zM3,19H4V20H3zM5,19H6V20H5zM9,19H10V20H9zM10,19H11V20H10zM11,19H12V20H11zM14,19H15V20H14zM16,19H17V20H16zM18,19H19V20H18zM19,19H20V20H19zM23,19H24V20H23zM24,19H25V20H24zM25,19H26V20H25zM27,19H28V20H27zM30,19H31V20H30zM2,20H3V21H2zM4,20H5V21H4zM5,20H6V21H5zM7,20H8V21H7zM8,20H9V21H8zM9,20H10V21H9zM15,20H16V21H15zM19,20H20V21H19zM25,20H26V21H25zM26,20H27V21H26zM29,20H30V21H29zM30,20H31V21H30zM5,21H6V22H5zM7,21H8V22H7zM9,21H10V22H9zM10,21H11V22H10zM12,21H13V22H12zM16,21H17V22H16zM17,21H18V22H17zM18,21H19V22H18zM19,21H20V22H19zM20,21H21V22H20zM21,21H22V22H21zM22,21H23V22H22zM29,21H30V22H29zM30,21H31V22H30zM2,22H3V23H2zM4,22H5V23H4zM5,22H6V23H5zM7,22H8V23H7zM8,22H9V23H8zM10,22H11V23H10zM11,22H12V23H11zM14,22H15V23H14zM18,22H19V23H18zM22,22H23V23H22zM23,22H24V23H23zM24,22H25V23H24zM25,22H26V23H25zM26,22H27V23H26zM28,22H29V23H28zM10,23H11V24H10zM13,23H14V24H13zM18,23H19V24H18zM19,23H20V24H19zM21,23H22V24H21zM22,23H23V24H22zM26,23H27V24H26zM28,23H29V24H28zM29,23H30V24H29zM30,23H31V24H30zM2,24H3V25H2zM3,24H4V25H3zM4,24H5V25H4zM5,24H6V25H5zM6,24H7V25H6zM7,24H8V25H7zM8,24H9V25H8zM11,24H12V25H11zM12,24H13V25H12zM13,24H14V25H13zM22,24H23V25H22zM24,24H25V25H24zM26,24H27V25H26zM29,24H30V25H29zM2,25H3V26H2zM8,25H9V26H8zM10,25H11V26H10zM12,25H13V26H12zM13,25H14V26H13zM14,25H15V26H14zM16,25H17V26H16zM22,25H23V26H22zM26,25H27V26H26zM27,25H28V26H27zM28,25H29V26H28zM2,26H3V27H2zM4,26H5V27H4zM5,26H6V27H5zM6,26H7V27H6zM8,26H9V27H8zM14,26H15V27H14zM18,26H19V27H18zM19,26H20V27H19zM22,26H23V27H22zM23,26H24V27H23zM24,26H25V27H24zM25,26H26V27H25zM26,26H27V27H26zM2,27H3V28H2zM4,27H5V28H4zM5,27H6V28H5zM6,27H7V28H6zM8,27H9V28H8zM10,27H11V28H10zM12,27H13V28H12zM14,27H15V28H14zM22,27H23V28H22zM24,27H25V28H24zM26,27H27V28H26zM27,27H28V28H27zM28,27H29V28H28zM29,27H30V28H29zM2,28H3V29H2zM4,28H5V29H4zM5,28H6V29H5zM6,28H7V29H6zM8,28H9V29H8zM11,28H12V29H11zM12,28H13V29H12zM13,28H14V29H13zM15,28H16V29H15zM16,28H17V29H16zM19,28H20V29H19zM20,28H21V29H20zM21,28H22V29H21zM22,28H23V29H22zM23,28H24V29H23zM26,28H27V29H26zM27,28H28V29H27zM28,28H29V29H28zM30,28H31V29H30zM2,29H3V30H2zM8,29H9V30H8zM12,29H13V30H12zM13,29H14V30H13zM15,29H16V30H15zM17,29H18V30H17zM18,29H19V30H18zM19,29H20V30H19zM20,29H21V30H20zM21,29H22V30H21zM22,29H23V30H22zM25,29H26V30H25zM29,29H30V30H29zM2,30H3V31H2zM3,30H4V31H3zM4,30H5V31H4zM5,30H6V31H5zM6,30H7V31H6zM7,30H8V31H7zM8,30H9V31H8zM10,30H11V31H10zM12,30H13V31H12zM13,30H14V31H13zM14,30H15V31H14zM15,30H16V31H15zM17,30H18V31H17zM19,30H20V31H19zM20,30H21V31H20zM21,30H22V31H21zM22,30H23V31H22zM23,30H24V31H23zM25,30H26V31H25zM27,30H28V31H27zM29,30H30V31H29z" id="qr-path" fill="#000000" fill-opacity="1" fill-rule="nonzero" stroke="none"/></svg></div><div style="text-align:left"><b style="font-size:1.2rem">📲 Scan & ikuti di HP-mu</b><br><span class="mute" style="font-size:.9rem">Ikuti game-nya bersama-sama.</span><br><span class="mono acc" style="font-size:.95rem">lukiliku.github.io/di-balik-awan/</span></div></div>
   <p class="mute" style="font-size:.85rem">⌨️ ← → / spasi pindah slide · <b>M</b> menu & reset · <b>F</b> layar penuh · <b>Q</b> QR code · 🏠 kembali ke sini</p>
 </section>
 
 <section class="slide" data-title="Perkenalan">
-  <h2>Hari ini kalian sudah pakai cloud belum?</h2>
+  <h2>Apakah hari ini kalian sudah memakai cloud?</h2>
   <div style="text-align:center"><button class="big-emoji" id="pcloud" title="klik awannya" style="font-size:clamp(5rem,12vw,9rem)">☁️</button><p class="mute" id="psub" style="margin:0">👆 Klik awannya. Sebenarnya ada apa di baliknya?</p></div>
   <div class="reveal" id="pollans">
     <div class="grid4" style="margin-top:1rem">
@@ -362,8 +368,8 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
       <div class="card pop" style="animation-delay:.35s"><h3>📁 Kirim tugas kelompok</h3><p class="mute">File-nya disimpan di storage di data center.</p></div>
       <div class="card pop" style="animation-delay:.5s"><h3>🤖 Tanya chatbot AI</h3><p class="mute">Ribuan GPU di data center yang menjawab.</p></div>
     </div>
-    <p style="margin-top:1rem;font-size:1.3rem">Tebakanku, hari ini kalian sudah pakai cloud sekitar <b class="acc" id="pollcnt" style="font-size:2rem">0</b> kali. Cuma gedungnya aja yang nggak kelihatan.</p>
-    <p style="max-width:900px;margin:.6rem 0 0">Ternyata cloud itu bukan di langit. Isinya <b>gedung, listrik, kabel fiber, dan orang-orang</b> yang jagain 24 jam. Hari ini kita bahas dari dasar, jalan-jalan ke dalam data center, nyobain kerjaan orang DC, terus kalian <b>deploy website sendiri</b>.</p>
+    <p style="margin-top:1rem;font-size:1.3rem">Kemungkinan besar hari ini kalian sudah memakai cloud sekitar <b class="acc" id="pollcnt" style="font-size:2rem">0</b> kali. Hanya saja gedungnya tidak terlihat.</p>
+    <p style="max-width:900px;margin:.6rem 0 0">Ternyata cloud itu bukan di langit. Isinya <b>gedung, listrik, kabel fiber, dan orang-orang</b> yang menjaga 24 jam. Hari ini kita bahas dari dasar, berkeliling di dalam data center, mencoba pekerjaan orang DC, lalu kalian <b>men-deploy website sendiri</b>.</p>
   </div>
   <p class="bridge">👉 Ini rute perjalanan kita hari ini.</p>
 </section>
@@ -377,9 +383,9 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 
 <section class="slide" data-title="Dulu: punya server sendiri">
   <div class="kicker"><span class="part">Bab 1</span>Dasar cloud · Project pertama</div>
-  <p class="beat">📖 Bayangin kamu seorang developer. Kamu punya ide aplikasi <b>Kumpulin</b> buat kampus: tempat mahasiswa ngumpulin tugas, nggak lewat chat grup lagi. Sebelum nawarin ke kampus, kamu hitung dulu: kalau pakai server sendiri (on-premise), butuh apa aja dan berapa biayanya?</p>
-  <h2>Supaya <span class="acc">Kumpulin</span> bisa dibuka 24 jam, butuh apa aja?</h2>
-  <p class="mute" style="margin:0">Kumpulin harus jalan di komputer (<b>server</b>) yang nyala terus. Kira-kira butuh apa aja? Klik yang menurutmu perlu:</p>
+  <p class="beat">📖 Bayangkan kamu seorang developer. Kamu punya ide aplikasi <b>Kumpulin</b> untuk kampus: tempat mahasiswa mengumpulkan tugas, tidak lewat chat grup lagi. Sebelum menawarkan ke kampus, kamu hitung dulu: kalau memakai server sendiri (on-premise), butuh apa saja dan berapa biayanya?</p>
+  <h2>Supaya <span class="acc">Kumpulin</span> bisa dibuka 24 jam, butuh apa saja?</h2>
+  <p class="mute" style="margin:0">Kumpulin harus berjalan di komputer (<b>server</b>) yang menyala terus. Kira-kira butuh apa saja? Klik yang menurutmu perlu:</p>
   <div class="grid2">
     <div>
       <div class="grid2" style="gap:.5rem" id="opitems"></div>
@@ -399,53 +405,37 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
       <div class="row" id="opev"></div>
       <div id="opstage" class="stg keepemo" style="position:relative;height:130px;margin-top:.5rem;background:#0a1528;border:1px solid var(--line);border-radius:12px;overflow:hidden"><span class="it" style="left:46%;top:38px;font-size:2.6rem">🖥️</span></div>
       <div class="card" style="margin-top:.6rem;background:#071022"><p id="opres" style="margin:0">Pilih kebutuhan di kiri dulu, lalu klik case di atas.</p></div>
-      <button class="btn primary" id="opcloud" style="margin-top:.6rem">☁️ Yuk coba pakai cloud →</button>
+      <button class="btn primary" id="opcloud" style="margin-top:.6rem">☁️ Coba pakai cloud →</button>
     </div>
   </div>
   <p class="src" style="margin:0">Harga = perkiraan kasar untuk 1 server kecil. Yang paling mahal ternyata bukan listrik, tapi <b>orang yang jaga 24 jam</b>.</p>
   <p class="mute" style="margin:0">Cara ini disebut <b>on-premise</b> (“di tempat sendiri”): semua kamu beli, pasang, dan jaga sendiri.</p>
-  <p class="bridge">👉 Mahal, repot, gampang mati. Ada cara lain nggak sih?</p>
+  <p class="bridge">👉 Mahal, repot, dan mudah mati. Adakah cara lain?</p>
 </section>
 
 <section class="slide" data-title="Lalu AWS hadir">
   <div class="kicker"><span class="part">Bab 1</span>Dasar cloud · Cloud hadir</div>
-  <h2>Terus muncul <span class="acc">cloud</span>: nggak perlu beli, tinggal <span class="acc">sewa</span></h2>
+  <h2>Lalu muncul <span class="acc">cloud</span>: tidak perlu membeli, cukup <span class="acc">menyewa</span></h2>
   <div class="row" id="scmode" style="display:none">
     <button class="btn on" data-m="kos">1️⃣ Pakai server sendiri</button>
     <span class="mute">→</span>
     <button class="btn" data-m="aws">2️⃣ Pakai cloud</button>
   </div>
-  <p class="mute" style="margin:0" id="schint">Ingat server sendiri tadi tumbang waktu deadline? Sekarang kejadian yang sama, tapi pakai cloud:</p>
+  <p class="mute" style="margin:0" id="schint">Ingat server sendiri tadi tumbang saat deadline? Sekarang kejadian yang sama, tetapi memakai cloud:</p>
   <div class="row" id="scpre"></div>
   <div class="grid2" style="grid-template-columns:1.4fr 1fr">
     <div class="card" id="scstage" style="min-height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center"></div>
     <div class="card" id="scinfo"></div>
   </div>
-  <p class="bridge">👉 Sewa memang enak, tapi argonya jalan terus lho.</p>
+  <p class="bridge">👉 Kalau dihitung setahun, selisih server sendiri dan cloud berapa?</p>
 </section>
 
-<section class="slide" data-title="Latihan bersih-bersih">
-  <div class="kicker"><span class="part">Bab 1</span>Dasar cloud · Bayar sesuai pakai</div>
-  <h2>Cloud itu kayak naik taksi: argonya jalan terus selama masih nyala</h2>
-  <p class="mute" style="margin:0">Walaupun nggak kamu pakai, selama masih nyala tetap ditagih per jam. Tekan <b>Mulai</b>, terus matikan semuanya secepat mungkin dengan cara yang benar. <span class="src">(angka rupiah = ilustrasi)</span></p>
-  <div class="grid2">
-    <div class="card" id="cres"></div>
-    <div class="card" style="text-align:center">
-      <p class="mute" style="margin:0" id="chour">Jam ke-0</p>
-      <div class="bill" id="cbill">Rp 0</div>
-      <p id="crate" class="acc" style="margin:.2rem 0"></p>
-      <div class="row" style="justify-content:center"><button class="btn primary" id="cstart">▶️ Mulai argo</button><button class="btn" id="creset">🔄 Ulang</button></div>
-      <p id="cmsg" style="text-align:left"></p>
-    </div>
-  </div>
-  <p class="mute" style="margin:0">Nanti di lab (Bab 5), kita praktikkan ini di akun asli: hapus website setelah selesai. 🧹</p>
-  <p class="bridge">👉 Coba kita hitung: setahun pakai server sendiri vs cloud, bedanya berapa?</p>
-</section>
+
 
 <section class="slide" data-title="Hitung setahun">
   <div class="kicker"><span class="part">Bab 1</span>Dasar cloud · Hitung-hitungan setahun</div>
-  <h2>Setahun pakai server sendiri vs cloud, <span class="acc">habis berapa?</span></h2>
-  <p class="mute" style="margin:0">Server sendiri: modal awal <b>Rp 23 juta</b> + <b>Rp 16,6 juta/bulan</b> (angka dari slide Kumpulin tadi). Cloud: sekitar <b>Rp 1 juta/bulan</b> untuk Kumpulin, termasuk tambahan server waktu deadline. <span class="src">(angka ilustrasi)</span></p>
+  <h2>Setahun memakai server sendiri vs cloud, <span class="acc">berapa biayanya?</span></h2>
+  <p class="mute" style="margin:0">Server sendiri: modal awal <b>Rp 23 juta</b> + <b>Rp 16,6 juta/bulan</b> (angka dari slide Kumpulin tadi). Cloud: sekitar <b>Rp 1 juta/bulan</b> untuk Kumpulin, termasuk tambahan server saat deadline. <span class="src">(angka ilustrasi)</span></p>
   <div class="row"><button class="btn primary" id="costplay">▶️ Putar 12 bulan</button><span class="mute" id="costmon" style="font-size:.95rem"></span></div>
   <div class="grid2" style="grid-template-columns:1.5fr 1fr">
     <div class="card" style="padding:.6rem .8rem">
@@ -459,15 +449,33 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
       <div class="card hl" style="text-align:center"><div class="mute">Selisihnya</div><div id="costD" style="font-size:2rem;font-weight:900;color:var(--green)">Rp 0</div><div id="costwh" class="mute" style="font-size:.9rem"></div></div>
     </div>
   </div>
-  <p class="bridge">👉 Oke, bayar sesuai pakai. Terus, waktu kamu tap “Play”, datanya jalan ke mana?</p>
+  <p class="bridge">👉 Cloud memang lebih murah, asal ingat satu hal: tagihannya berjalan terus selama resource masih menyala.</p>
+</section>
+
+<section class="slide" data-title="Latihan bersih-bersih">
+  <div class="kicker"><span class="part">Bab 1</span>Dasar cloud · Bayar sesuai pakai</div>
+  <h2>Cloud itu seperti naik taksi: argonya berjalan terus selama resource masih menyala</h2>
+  <p class="mute" style="margin:0">Walaupun tidak kamu pakai, selama masih menyala tetap ditagih per jam. Tekan <b>Mulai</b>, lalu matikan semuanya secepat mungkin dengan cara yang benar. <span class="src">(angka rupiah = ilustrasi)</span></p>
+  <div class="grid2">
+    <div class="card" id="cres"></div>
+    <div class="card" style="text-align:center">
+      <p class="mute" style="margin:0" id="chour">Jam ke-0</p>
+      <div class="bill" id="cbill">Rp 0</div>
+      <p id="crate" class="acc" style="margin:.2rem 0"></p>
+      <div class="row" style="justify-content:center"><button class="btn primary" id="cstart">▶️ Mulai argo</button><button class="btn" id="creset">🔄 Ulang</button></div>
+      <p id="cmsg" style="text-align:left"></p>
+    </div>
+  </div>
+  <p class="mute" style="margin:0">Nanti di lab (Bab 5), kita praktikkan ini di akun asli: hapus website setelah selesai. 🧹</p>
+  <p class="bridge">👉 Sekarang, waktu kamu menekan “Play”, datanya berjalan ke mana?</p>
 </section>
 
 <section class="slide" data-title="Perjalanan satu klik">
   <div class="kicker"><span class="part">Bab 1</span>Dasar cloud · Perjalanan cahaya di kabel</div>
-  <h2>Kamu tap “Play”… lalu apa yang terjadi? ⚡</h2>
-  <div class="row"><button class="btn primary" id="jplay">📤 Upload tugas (sampai server)</button><button class="btn" id="jplay2" style="display:none">🎬 Nonton video populer (cache hit)</button><span class="pill" id="jms">0 ms</span><span class="mute" style="font-size:.9rem">(diperlambat ±1000× supaya kelihatan)</span></div>
+  <h2>Saat kamu menekan “Play”, apa yang terjadi?</h2>
+  <div class="row"><button class="btn primary" id="jplay">📤 Upload tugas (sampai server)</button><button class="btn" id="jplay2" style="display:none">🎬 Nonton video populer (cache hit)</button><span class="pill" id="jms">0 ms</span><span class="mute" style="font-size:.9rem">(diperlambat ±1000× supaya terlihat)</span></div>
   <div class="card" style="padding:.3rem"><svg id="jsvg" viewBox="0 0 1000 250" width="100%" style="max-height:30vh"></svg></div>
-  <div class="card" style="padding:.6rem 1rem"><b id="jT">Klik ▶️ atau klik salah satu lingkaran</b> <span id="jD" class="mute">Semua ini biasanya cuma puluhan milidetik, lebih cepat dari kedipan mata.</span></div>
+  <div class="card" style="padding:.6rem 1rem"><b id="jT">Klik ▶️ atau klik salah satu lingkaran</b> <span id="jD" class="mute">Semua ini biasanya hanya puluhan milidetik, lebih cepat dari kedipan mata.</span></div>
   <div class="grid2">
     <div class="card" style="padding:.7rem 1rem">
       <b>💡 Garis-garis itu kabel fiber. Isinya apa?</b>
@@ -491,22 +499,22 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 
 <section class="slide" data-title="AWS itu apa?">
   <div class="kicker"><span class="part">Bab 2</span>Kenalan AWS · AWS itu apa?</div>
-  <p class="beat">📖 Pihak kampus tertarik, asal biayanya masuk akal dan Kumpulin nggak gampang mati. Jadi kamu pakai cloud dari <b>AWS</b>.</p>
+  <p class="beat">📖 Pihak kampus tertarik, asal biayanya masuk akal dan Kumpulin tidak mudah mati. Jadi kamu memakai cloud dari <b>AWS</b>.</p>
   <h2>Jadi, <span class="acc">AWS</span> itu apa?</h2>
-  <p style="margin:0;font-size:1.15rem">AWS singkatan dari <b>Amazon Web Services</b>. Gampangnya, tempat kita bisa pakai <b>resource</b> komputer (server, penyimpanan, database, jaringan) lewat internet, dan bayar sesuai pakai.</p>
+  <p style="margin:0;font-size:1.15rem">AWS singkatan dari <b>Amazon Web Services</b>. Sederhananya, tempat kita bisa memakai <b>resource</b> komputer (server, penyimpanan, database, jaringan) lewat internet, dan bayar sesuai pakai.</p>
   <div class="grid2" style="grid-template-columns:1fr 1.15fr">
     <div class="card">
       <ul style="margin:.2rem 0;padding-left:1.2rem;line-height:1.7">
         <li>Punya Amazon, sudah ada sejak <b>2006</b>.</li>
-        <li>Bisa sewa <b>server</b>, <b>tempat simpan file</b>, <b>database</b>, sampai <b>jaringan</b>. Nggak perlu beli hardware sendiri.</li>
-        <li>Layanannya ada <b>200 lebih</b>. Bayarnya sesuai pakai, kayak argo taksi tadi.</li>
+        <li>Kita bisa menyewa <b>server</b>, <b>tempat simpan file</b>, <b>database</b>, sampai <b>jaringan</b>. Tidak perlu membeli hardware sendiri.</li>
+        <li>Layanannya lebih dari <b>200</b>. Bayarnya sesuai pemakaian, seperti argo taksi tadi.</li>
         <li><b>Region Jakarta</b> berdiri sejak Desember 2021.</li>
       </ul>
     </div>
-    <div class="card keepemo" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;text-align:center"><svg viewBox="0 0 304 182" width="210" role="img" aria-label="AWS"> <g> <path fill="#ffffff" d="M86.4,66.4c0,3.7,0.4,6.7,1.1,8.9c0.8,2.2,1.8,4.6,3.2,7.2c0.5,0.8,0.7,1.6,0.7,2.3c0,1-0.6,2-1.9,3l-6.3,4.2 c-0.9,0.6-1.8,0.9-2.6,0.9c-1,0-2-0.5-3-1.4C76.2,90,75,88.4,74,86.8c-1-1.7-2-3.6-3.1-5.9c-7.8,9.2-17.6,13.8-29.4,13.8 c-8.4,0-15.1-2.4-20-7.2c-4.9-4.8-7.4-11.2-7.4-19.2c0-8.5,3-15.4,9.1-20.6c6.1-5.2,14.2-7.8,24.5-7.8c3.4,0,6.9,0.3,10.6,0.8 c3.7,0.5,7.5,1.3,11.5,2.2v-7.3c0-7.6-1.6-12.9-4.7-16c-3.2-3.1-8.6-4.6-16.3-4.6c-3.5,0-7.1,0.4-10.8,1.3c-3.7,0.9-7.3,2-10.8,3.4 c-1.6,0.7-2.8,1.1-3.5,1.3c-0.7,0.2-1.2,0.3-1.6,0.3c-1.4,0-2.1-1-2.1-3.1v-4.9c0-1.6,0.2-2.8,0.7-3.5c0.5-0.7,1.4-1.4,2.8-2.1 c3.5-1.8,7.7-3.3,12.6-4.5c4.9-1.3,10.1-1.9,15.6-1.9c11.9,0,20.6,2.7,26.2,8.1c5.5,5.4,8.3,13.6,8.3,24.6V66.4z M45.8,81.6 c3.3,0,6.7-0.6,10.3-1.8c3.6-1.2,6.8-3.4,9.5-6.4c1.6-1.9,2.8-4,3.4-6.4c0.6-2.4,1-5.3,1-8.7v-4.2c-2.9-0.7-6-1.3-9.2-1.7 c-3.2-0.4-6.3-0.6-9.4-0.6c-6.7,0-11.6,1.3-14.9,4c-3.3,2.7-4.9,6.5-4.9,11.5c0,4.7,1.2,8.2,3.7,10.6 C37.7,80.4,41.2,81.6,45.8,81.6z M126.1,92.4c-1.8,0-3-0.3-3.8-1c-0.8-0.6-1.5-2-2.1-3.9L96.7,10.2c-0.6-2-0.9-3.3-0.9-4 c0-1.6,0.8-2.5,2.4-2.5h9.8c1.9,0,3.2,0.3,3.9,1c0.8,0.6,1.4,2,2,3.9l16.8,66.2l15.6-66.2c0.5-2,1.1-3.3,1.9-3.9c0.8-0.6,2.2-1,4-1 h8c1.9,0,3.2,0.3,4,1c0.8,0.6,1.5,2,1.9,3.9l15.8,67l17.3-67c0.6-2,1.3-3.3,2-3.9c0.8-0.6,2.1-1,3.9-1h9.3c1.6,0,2.5,0.8,2.5,2.5 c0,0.5-0.1,1-0.2,1.6c-0.1,0.6-0.3,1.4-0.7,2.5l-24.1,77.3c-0.6,2-1.3,3.3-2.1,3.9c-0.8,0.6-2.1,1-3.8,1h-8.6c-1.9,0-3.2-0.3-4-1 c-0.8-0.7-1.5-2-1.9-4L156,23l-15.4,64.4c-0.5,2-1.1,3.3-1.9,4c-0.8,0.7-2.2,1-4,1H126.1z M254.6,95.1c-5.2,0-10.4-0.6-15.4-1.8 c-5-1.2-8.9-2.5-11.5-4c-1.6-0.9-2.7-1.9-3.1-2.8c-0.4-0.9-0.6-1.9-0.6-2.8v-5.1c0-2.1,0.8-3.1,2.3-3.1c0.6,0,1.2,0.1,1.8,0.3 c0.6,0.2,1.5,0.6,2.5,1c3.4,1.5,7.1,2.7,11,3.5c4,0.8,7.9,1.2,11.9,1.2c6.3,0,11.2-1.1,14.6-3.3c3.4-2.2,5.2-5.4,5.2-9.5 c0-2.8-0.9-5.1-2.7-7c-1.8-1.9-5.2-3.6-10.1-5.2L246,52c-7.3-2.3-12.7-5.7-16-10.2c-3.3-4.4-5-9.3-5-14.5c0-4.2,0.9-7.9,2.7-11.1 c1.8-3.2,4.2-6,7.2-8.2c3-2.3,6.4-4,10.4-5.2c4-1.2,8.2-1.7,12.6-1.7c2.2,0,4.5,0.1,6.7,0.4c2.3,0.3,4.4,0.7,6.5,1.1 c2,0.5,3.9,1,5.7,1.6c1.8,0.6,3.2,1.2,4.2,1.8c1.4,0.8,2.4,1.6,3,2.5c0.6,0.8,0.9,1.9,0.9,3.3v4.7c0,2.1-0.8,3.2-2.3,3.2 c-0.8,0-2.1-0.4-3.8-1.2c-5.7-2.6-12.1-3.9-19.2-3.9c-5.7,0-10.2,0.9-13.3,2.8c-3.1,1.9-4.7,4.8-4.7,8.9c0,2.8,1,5.2,3,7.1 c2,1.9,5.7,3.8,11,5.5l14.2,4.5c7.2,2.3,12.4,5.5,15.5,9.6c3.1,4.1,4.6,8.8,4.6,14c0,4.3-0.9,8.2-2.6,11.6 c-1.8,3.4-4.2,6.4-7.3,8.8c-3.1,2.5-6.8,4.3-11.1,5.6C264.4,94.4,259.7,95.1,254.6,95.1z"/> <g> <path fill="#FF9900" fill-rule="evenodd" d="M273.5,143.7c-32.9,24.3-80.7,37.2-121.8,37.2c-57.6,0-109.5-21.3-148.7-56.7c-3.1-2.8-0.3-6.6,3.4-4.4 c42.4,24.6,94.7,39.5,148.8,39.5c36.5,0,76.6-7.6,113.5-23.2C274.2,133.6,278.9,139.7,273.5,143.7z"/> <path fill="#FF9900" fill-rule="evenodd" d="M287.2,128.1c-4.2-5.4-27.8-2.6-38.5-1.3c-3.2,0.4-3.7-2.4-0.8-4.5c18.8-13.2,49.7-9.4,53.3-5 c3.6,4.5-1,35.4-18.6,50.2c-2.7,2.3-5.3,1.1-4.1-1.9C282.5,155.7,291.4,133.4,287.2,128.1z"/> </g> </g> </svg> <div class="mute" style="font-size:.9rem">Yang bakal kita pakai hari ini</div><div class="row" style="justify-content:center"><span class="pill">🖥️ EC2</span><span class="pill">🪣 S3</span><span class="pill">⚖️ Load balancer</span><span class="pill">📈 Auto Scaling</span><span class="pill">⚡ CloudFront</span><span class="pill">🌐 Amplify</span></div><div hidden><div id="awssv"></div><div id="awsstage"></div><p id="awsd"></p></div></div>
+    <div class="card keepemo" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;text-align:center"><svg viewBox="0 0 304 182" width="210" role="img" aria-label="AWS"> <g> <path fill="#ffffff" d="M86.4,66.4c0,3.7,0.4,6.7,1.1,8.9c0.8,2.2,1.8,4.6,3.2,7.2c0.5,0.8,0.7,1.6,0.7,2.3c0,1-0.6,2-1.9,3l-6.3,4.2 c-0.9,0.6-1.8,0.9-2.6,0.9c-1,0-2-0.5-3-1.4C76.2,90,75,88.4,74,86.8c-1-1.7-2-3.6-3.1-5.9c-7.8,9.2-17.6,13.8-29.4,13.8 c-8.4,0-15.1-2.4-20-7.2c-4.9-4.8-7.4-11.2-7.4-19.2c0-8.5,3-15.4,9.1-20.6c6.1-5.2,14.2-7.8,24.5-7.8c3.4,0,6.9,0.3,10.6,0.8 c3.7,0.5,7.5,1.3,11.5,2.2v-7.3c0-7.6-1.6-12.9-4.7-16c-3.2-3.1-8.6-4.6-16.3-4.6c-3.5,0-7.1,0.4-10.8,1.3c-3.7,0.9-7.3,2-10.8,3.4 c-1.6,0.7-2.8,1.1-3.5,1.3c-0.7,0.2-1.2,0.3-1.6,0.3c-1.4,0-2.1-1-2.1-3.1v-4.9c0-1.6,0.2-2.8,0.7-3.5c0.5-0.7,1.4-1.4,2.8-2.1 c3.5-1.8,7.7-3.3,12.6-4.5c4.9-1.3,10.1-1.9,15.6-1.9c11.9,0,20.6,2.7,26.2,8.1c5.5,5.4,8.3,13.6,8.3,24.6V66.4z M45.8,81.6 c3.3,0,6.7-0.6,10.3-1.8c3.6-1.2,6.8-3.4,9.5-6.4c1.6-1.9,2.8-4,3.4-6.4c0.6-2.4,1-5.3,1-8.7v-4.2c-2.9-0.7-6-1.3-9.2-1.7 c-3.2-0.4-6.3-0.6-9.4-0.6c-6.7,0-11.6,1.3-14.9,4c-3.3,2.7-4.9,6.5-4.9,11.5c0,4.7,1.2,8.2,3.7,10.6 C37.7,80.4,41.2,81.6,45.8,81.6z M126.1,92.4c-1.8,0-3-0.3-3.8-1c-0.8-0.6-1.5-2-2.1-3.9L96.7,10.2c-0.6-2-0.9-3.3-0.9-4 c0-1.6,0.8-2.5,2.4-2.5h9.8c1.9,0,3.2,0.3,3.9,1c0.8,0.6,1.4,2,2,3.9l16.8,66.2l15.6-66.2c0.5-2,1.1-3.3,1.9-3.9c0.8-0.6,2.2-1,4-1 h8c1.9,0,3.2,0.3,4,1c0.8,0.6,1.5,2,1.9,3.9l15.8,67l17.3-67c0.6-2,1.3-3.3,2-3.9c0.8-0.6,2.1-1,3.9-1h9.3c1.6,0,2.5,0.8,2.5,2.5 c0,0.5-0.1,1-0.2,1.6c-0.1,0.6-0.3,1.4-0.7,2.5l-24.1,77.3c-0.6,2-1.3,3.3-2.1,3.9c-0.8,0.6-2.1,1-3.8,1h-8.6c-1.9,0-3.2-0.3-4-1 c-0.8-0.7-1.5-2-1.9-4L156,23l-15.4,64.4c-0.5,2-1.1,3.3-1.9,4c-0.8,0.7-2.2,1-4,1H126.1z M254.6,95.1c-5.2,0-10.4-0.6-15.4-1.8 c-5-1.2-8.9-2.5-11.5-4c-1.6-0.9-2.7-1.9-3.1-2.8c-0.4-0.9-0.6-1.9-0.6-2.8v-5.1c0-2.1,0.8-3.1,2.3-3.1c0.6,0,1.2,0.1,1.8,0.3 c0.6,0.2,1.5,0.6,2.5,1c3.4,1.5,7.1,2.7,11,3.5c4,0.8,7.9,1.2,11.9,1.2c6.3,0,11.2-1.1,14.6-3.3c3.4-2.2,5.2-5.4,5.2-9.5 c0-2.8-0.9-5.1-2.7-7c-1.8-1.9-5.2-3.6-10.1-5.2L246,52c-7.3-2.3-12.7-5.7-16-10.2c-3.3-4.4-5-9.3-5-14.5c0-4.2,0.9-7.9,2.7-11.1 c1.8-3.2,4.2-6,7.2-8.2c3-2.3,6.4-4,10.4-5.2c4-1.2,8.2-1.7,12.6-1.7c2.2,0,4.5,0.1,6.7,0.4c2.3,0.3,4.4,0.7,6.5,1.1 c2,0.5,3.9,1,5.7,1.6c1.8,0.6,3.2,1.2,4.2,1.8c1.4,0.8,2.4,1.6,3,2.5c0.6,0.8,0.9,1.9,0.9,3.3v4.7c0,2.1-0.8,3.2-2.3,3.2 c-0.8,0-2.1-0.4-3.8-1.2c-5.7-2.6-12.1-3.9-19.2-3.9c-5.7,0-10.2,0.9-13.3,2.8c-3.1,1.9-4.7,4.8-4.7,8.9c0,2.8,1,5.2,3,7.1 c2,1.9,5.7,3.8,11,5.5l14.2,4.5c7.2,2.3,12.4,5.5,15.5,9.6c3.1,4.1,4.6,8.8,4.6,14c0,4.3-0.9,8.2-2.6,11.6 c-1.8,3.4-4.2,6.4-7.3,8.8c-3.1,2.5-6.8,4.3-11.1,5.6C264.4,94.4,259.7,95.1,254.6,95.1z"/> <g> <path fill="#FF9900" fill-rule="evenodd" d="M273.5,143.7c-32.9,24.3-80.7,37.2-121.8,37.2c-57.6,0-109.5-21.3-148.7-56.7c-3.1-2.8-0.3-6.6,3.4-4.4 c42.4,24.6,94.7,39.5,148.8,39.5c36.5,0,76.6-7.6,113.5-23.2C274.2,133.6,278.9,139.7,273.5,143.7z"/> <path fill="#FF9900" fill-rule="evenodd" d="M287.2,128.1c-4.2-5.4-27.8-2.6-38.5-1.3c-3.2,0.4-3.7-2.4-0.8-4.5c18.8-13.2,49.7-9.4,53.3-5 c3.6,4.5-1,35.4-18.6,50.2c-2.7,2.3-5.3,1.1-4.1-1.9C282.5,155.7,291.4,133.4,287.2,128.1z"/> </g> </g> </svg> <div class="mute" style="font-size:.9rem">Yang akan kita pakai hari ini</div><div class="row" style="justify-content:center"><span class="pill">🖥️ EC2</span><span class="pill">🪣 S3</span><span class="pill">⚖️ Load balancer</span><span class="pill">📈 Auto Scaling</span><span class="pill">⚡ CloudFront</span><span class="pill">🌐 Amplify</span></div><div hidden><div id="awssv"></div><div id="awsstage"></div><p id="awsd"></p></div></div>
   </div>
   <p class="src">Sumber: aws.amazon.com/what-is-aws & aws.amazon.com/about-aws/global-infrastructure, dicek Oktober 2026.</p>
-  <p class="bridge">👉 Gedung-gedung AWS itu sebenarnya ada di mana aja?</p>
+  <p class="bridge">👉 Gedung-gedung AWS itu sebenarnya ada di mana saja?</p>
 </section>
 
 <section class="slide" data-title="Infrastruktur global (zoom)">
@@ -520,16 +528,16 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
       <div class="row"><button class="btn" id="zout">➖ Zoom out</button><button class="btn primary" id="zin">🔍 Zoom in</button><button class="btn" id="zauto">🎬 Putar otomatis</button></div>
     </div>
   </div>
-  <p class="bridge">👉 Di gedung-gedung itulah kamu bisa sewa server dan tempat simpan file.</p>
+  <p class="bridge">👉 Di gedung-gedung itulah kamu bisa menyewa server dan tempat menyimpan file.</p>
 </section>
 
 <section class="slide" data-title="Kenalan: EC2 & S3">
   <div class="kicker"><span class="part">Bab 2</span>Kenalan AWS · Server & gudang file</div>
-  <h2><span class="acc">EC2</span> buat server, <span class="acc">S3</span> buat file</h2>
+  <h2><span class="acc">EC2</span> untuk server, <span class="acc">S3</span> untuk file</h2>
   <div class="grid2" style="grid-template-columns:1.25fr 1fr">
     <div class="card">
       <h3>🖥️ Amazon EC2: sewa server</h3>
-      <p class="mute" style="margin:.2rem 0 .5rem;font-size:.98rem"><b>EC2</b> (<i>Elastic Compute Cloud</i>) itu tempat sewa server. Pilih ukurannya, nyala dalam hitungan menit, bayar per jam, dan bisa dimatikan kapan aja.</p>
+      <p class="mute" style="margin:.2rem 0 .5rem;font-size:.98rem"><b>EC2</b> (<i>Elastic Compute Cloud</i>) itu tempat menyewa server. Pilih ukurannya, menyala dalam hitungan menit, bayar per jam, dan bisa dimatikan kapan saja.</p>
       <div class="row" id="e2size"></div>
       <div class="row" style="margin-top:.5rem"><button class="btn primary" id="e2go">🚀 Launch server</button><button class="btn" id="e2stop" disabled>⏹️ Terminate</button><span class="src">(harga = ilustrasi)</span></div>
       <div class="grid2" style="grid-template-columns:auto 1fr;gap:1rem;margin-top:.6rem;align-items:center">
@@ -539,60 +547,60 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
     </div>
     <div class="card">
       <h3>🪣 Amazon S3: gudang file</h3>
-      <p class="mute" style="margin:.2rem 0 .5rem;font-size:.98rem"><b>S3</b> (<i>Simple Storage Service</i>) buat nyimpen tugas, foto, video, sebanyak apa pun. Bedanya sama EC2, di sini kamu <b>nggak ngurus server</b> sama sekali. Tinggal upload.</p>
+      <p class="mute" style="margin:.2rem 0 .5rem;font-size:.98rem"><b>S3</b> (<i>Simple Storage Service</i>) untuk menyimpan tugas, foto, video, sebanyak apa pun. Bedanya dengan EC2, di sini kamu <b>tidak mengurus server</b> sama sekali. Tinggal upload.</p>
       <button class="btn primary" id="s3up">📤 Upload tugas.pdf</button>
       <div class="grid3" id="s3az" style="margin-top:.6rem"></div>
       <p id="s3msg" class="mute" style="margin:.5rem 0 0;font-size:.92rem"></p>
     </div>
   </div>
-  <p class="mute" style="margin:0">💡 EC2 dan S3 bakal dipakai lagi di <b>game arsitek</b> di Bab 4.</p>
-  <p class="bridge">👉 Satu server di satu gedung itu rawan. Gimana kalau pakai lebih dari satu?</p>
+  <p class="mute" style="margin:0">💡 EC2 dan S3 akan dipakai lagi di <b>game arsitek</b> di Bab 4.</p>
+  <p class="bridge">👉 Satu server di satu gedung itu rawan. Bagaimana kalau memakai lebih dari satu?</p>
 </section>
 
 <section class="slide" data-title="Load balancer & Auto Scaling">
   <div class="kicker"><span class="part">Bab 2</span>Kenalan AWS · Load balancer & Auto Scaling</div>
-  <h2>Satu server nggak cukup? Pakai <span class="acc">load balancer</span> & <span class="acc">auto scaling</span></h2>
+  <h2>Satu server tidak cukup? Gunakan <span class="acc">load balancer</span> & <span class="acc">auto scaling</span></h2>
   <div class="grid2">
     <div class="card"><h3 style="margin-top:0">⚖️ Load balancer</h3>
-      <p class="mute" style="margin:.2rem 0 .5rem">Mirip petugas di pintu masuk yang mengarahkan antrean ke kasir yang lagi kosong. Kalau satu kasir tutup, antreannya dialihkan ke kasir lain.</p>
+      <p class="mute" style="margin:.2rem 0 .5rem">Mirip petugas di pintu masuk yang mengarahkan antrean ke kasir yang sedang kosong. Kalau satu kasir tutup, antreannya dialihkan ke kasir lain.</p>
       <svg id="lbsvg" viewBox="0 0 420 170" width="100%" style="max-height:30vh"></svg>
       <div class="row"><button class="btn" id="lbkill">💥 Matikan server di AZ a</button></div>
       <p id="lbmsg" style="margin:.4rem 0 0"></p></div>
     <div class="card"><h3 style="margin-top:0">📈 Auto Scaling</h3>
-      <p class="mute" style="margin:.2rem 0 .5rem">Waktu ramai, server ditambah sendiri. Habis ramai, dikurangi lagi. Jadi kamu nggak bayar server yang nganggur.</p>
+      <p class="mute" style="margin:.2rem 0 .5rem">Saat ramai, server ditambah otomatis. Setelah sepi, dikurangi lagi. Jadi kamu tidak membayar server yang menganggur.</p>
       <div class="row"><button class="btn on" id="asn">🙂 Hari biasa</button><button class="btn" id="asd">⏰ Malam deadline</button></div>
       <div id="asbox" style="font-size:2rem;min-height:5.5rem;margin:.5rem 0;letter-spacing:.2rem"></div>
       <p id="asmsg" style="margin:0"></p></div>
   </div>
   <p class="src">Harga = ilustrasi.</p>
-  <p class="bridge">👉 Servernya sudah kuat. Tapi kalau yang buka Kumpulin ada di kota yang jauh, gimana supaya tetap cepat?</p>
+  <p class="bridge">👉 Servernya sudah kuat. Tetapi kalau pengguna Kumpulin berada di kota yang jauh, bagaimana supaya tetap cepat?</p>
 </section>
 
 <section class="slide" data-title="Cache: CloudFront">
   <div class="kicker"><span class="part">Bab 2</span>Kenalan AWS · Cepat dari mana saja</div>
   <h2>CloudFront: taruh salinannya <span class="acc">dekat kamu</span></h2>
-  <p class="mute" style="margin:0">Contohnya layanan nonton film <b>NONTONIN</b> (fiktif). Servernya di <b>Amerika</b>, penontonnya di <b>Jakarta</b>. Film yang lagi ramai disimpan salinannya di CloudFront dekat kotamu. Coba nyalakan atau matikan CloudFront, terus klik <b>Tonton film</b> beberapa kali.</p>
+  <p class="mute" style="margin:0">Contohnya layanan nonton film <b>NONTONIN</b> (fiktif). Servernya di <b>Amerika</b>, penontonnya di <b>Jakarta</b>. Film yang sedang ramai disimpan salinannya di CloudFront dekat kotamu. Coba nyalakan atau matikan CloudFront, lalu klik <b>Tonton film</b> beberapa kali.</p>
   <div class="row"><button class="btn on" id="cfon">⚡ CloudFront: ON</button><button class="btn primary" id="cfvis">▶️ Tonton film</button><button class="btn" id="cfburst">🔥 100 penonton sekaligus</button><button class="btn" id="cfinv">🆕 Rilis episode baru</button><button class="btn" id="cfreset">🧹 Reset</button></div>
   <div class="card" style="padding:.4rem"><svg id="cfsvg" viewBox="0 25 900 155" width="100%"></svg></div>
   <div class="grid4" id="cfstat"></div>
   <div class="grid2">
-    <div class="card"><p id="cfmsg" style="margin:0">👆 Coba klik <b>Buka website</b>.</p></div>
-    <div class="card"><p style="margin:0">📠 <b>Cache itu kayak tukang fotokopi depan kampus.</b> Satu orang ambil materi aslinya jauh-jauh ke server di Amerika, terus salinannya disimpan dekat kalian (CloudFront Jakarta). Yang lain tinggal ambil di situ. Lebih cepat, dan server aslinya nggak kewalahan.</p></div>
+    <div class="card"><p id="cfmsg" style="margin:0">👆 Coba klik <b>Tonton film</b>.</p></div>
+    <div class="card"><p style="margin:0">📠 <b>Cache itu seperti tukang fotokopi depan kampus.</b> Satu orang ambil materi aslinya jauh-jauh ke server di Amerika, lalu salinannya disimpan dekat kalian (CloudFront Jakarta). Yang lain tinggal ambil di situ. Lebih cepat, dan server aslinya tidak kewalahan.</p></div>
   </div>
   <p class="src">CloudFront: 750+ Points of Presence di 100+ kota, 50+ negara, termasuk Jakarta (aws.amazon.com/cloudfront/features, dicek Oktober 2026). Angka waktu = ilustrasi.</p>
-  <p class="bridge">👉 Datanya cepat sampai. Tapi aman nggak sih di sana?</p>
+  <p class="bridge">👉 Datanya cepat sampai. Tetapi, apakah data di sana aman?</p>
 </section>
 
 <section class="slide" data-title="Kepercayaan: data kamu aman?">
   <div class="kicker"><span class="part">Bab 2</span>Kenalan AWS · Data aman</div>
-  <h2>Datamu aman nggak? <span class="acc">Dijaga berlapis</span></h2>
+  <h2>Apakah datamu aman? <span class="acc">Dijaga berlapis</span></h2>
   <div class="grid2" style="grid-template-columns:1fr 1fr;align-items:center">
     <svg id="onion" viewBox="-12 -12 424 424" width="100%" style="max-height:56vh;overflow:visible"></svg>
     <div>
       <p class="mute" style="margin-top:0">Klik tiap lapisan, dari luar ke dalam 👆 <button class="btn" id="onxbtn" style="margin-left:.4rem">🦹 Orang asing coba masuk</button></p>
       <div class="card"><h3 id="onT">👆 Pilih lapisan</h3><p id="onD" class="mute" style="margin-bottom:0"></p></div>
-      <div class="card" style="margin-top:.8rem">📚 Di <b>Kumpulin</b> ada tugas, nilai, dan data pribadi teman-temanmu. Yang jagain ya <b>lapisan-lapisan di kiri</b>, dan lapisan terakhirnya: <b>kamu sendiri</b>.</div>
-      <div class="card hl" style="margin-top:.8rem"><b>Shared responsibility:</b> AWS jagain <i>cloud-nya</i> (gedung, hardware, jaringan). Kamu jagain <i>apa yang kamu taruh di sana</i> (password, izin akses, data yang kamu buka ke publik).</div>
+      <div class="card" style="margin-top:.8rem">📚 Di <b>Kumpulin</b> ada tugas, nilai, dan data pribadi teman-temanmu. Yang menjaganya adalah <b>lapisan-lapisan di kiri</b>, dan lapisan terakhirnya: <b>kamu sendiri</b>.</div>
+      <div class="card hl" style="margin-top:.8rem"><b>Shared responsibility:</b> AWS menjaga <i>cloud-nya</i> (gedung, hardware, jaringan). Kamu menjaga <i>apa yang kamu taruh di sana</i> (password, izin akses, data yang kamu buka ke publik).</div>
     </div>
   </div>
   <p class="bridge">👉 Lapisan paling luar itu gedungnya. Sebelum masuk, satu hal paling penting dulu.</p>
@@ -600,7 +608,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 
 <section class="slide" data-title="Safety nomor satu">
   <div class="kicker"><span class="part">Bab 3</span>Masuk ke gedung · Safety dulu</div>
-  <p class="beat">📖 Lama-lama kamu penasaran: server sewaanmu itu sebenarnya ada di gedung kayak apa, dan siapa yang jagain? Kebetulan ada program <b>magang sehari</b> di data center.</p>
+  <p class="beat">📖 Lama-lama kamu penasaran: server sewaanmu itu sebenarnya ada di gedung seperti apa, dan siapa yang menjaga? Kebetulan ada program <b>magang sehari</b> di data center.</p>
   <h2>Sebelum masuk data hall: pakai <span class="acc">PPE</span> dulu</h2>
   <p class="mute" style="margin:0">Klik perlengkapan yang wajib dipakai. Hati-hati, ada yang bukan PPE.</p>
   <div class="grid2" style="grid-template-columns:.9fr 1.1fr;align-items:start">
@@ -609,7 +617,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
       <div class="row" style="margin-top:.6rem"><button class="btn primary" id="ppeall">⚡ Pakai semua</button><button class="btn" id="ppere">🔄 Ulang</button></div>
       <p id="ppemsg" style="margin:.5rem 0 0">Pilih satu per satu, atau tekan <b>Pakai semua</b>.</p></div>
   </div>
-  <div class="card hl"><p style="margin:0">💬 <i>“Nggak ada deadline atau server yang lebih penting daripada semua orang <b>pulang dengan selamat</b>.”</i> Siapa pun boleh bilang <b>STOP</b> kalau lihat bahaya.</p></div>
+  <div class="card hl"><p style="margin:0">💬 <i>“Tidak ada deadline atau server yang lebih penting daripada semua orang <b>pulang dengan selamat</b>.”</i> Siapa pun boleh mengatakan <b>STOP</b> kalau melihat bahaya.</p></div>
   <p class="bridge">👉 Siap? Gerbangnya kita buka.</p>
 </section>
 
@@ -637,7 +645,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 
   <div id="mbar" class="card hl row" style="display:none;justify-content:space-between;padding:.6rem 1rem"><b id="mtitle"></b><span id="mstat" class="mute">Selesaikan misinya…</span><span class="row"><button class="btn" id="mskip">⏭ Lewati</button><button class="btn" id="mback" disabled>▶ Kembali ke peta</button></span></div>
   <div class="mission" id="m-sec" style="display:none">
-    <h3 style="font-size:1.25rem">Kamu jaga pintu data hall. Boleh masuk atau tidak? 🚪</h3>
+    <h3 style="font-size:1.25rem">Kamu menjaga pintu data hall. Boleh masuk atau tidak? 🚪</h3>
   <div class="grid2">
     <div class="card visitor" id="vcard"></div>
     <div>
@@ -663,7 +671,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
   </div>
 </div>
   <div class="mission" id="m-dep" style="display:none">
-    <h3 style="font-size:1.25rem">🚀 Misi: jaringan baru harus <span class="acc">LIVE</span> sebelum <b>deadline tugas 23:59</b>, semua bakal serbu Kumpulin!</h3>
+    <h3 style="font-size:1.25rem">🚀 Misi: jaringan baru harus <span class="acc">LIVE</span> sebelum <b>deadline tugas 23:59</b>, karena semua mahasiswa akan membuka Kumpulin.</h3>
   <div class="row"><div class="steps row" id="cgstages"></div><span class="pill" id="cgclock">⏱️ 0:00</span><span class="pill" id="cgusers" style="display:none"></span></div>
   <div id="cgpre" class="grid2" style="grid-template-columns:1.2fr 1fr"></div>
   <div id="cg">
@@ -675,7 +683,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
   <div id="cgcfg" style="margin-top:.6rem"></div>
 </div>
   <div class="mission" id="m-tech" style="display:none">
-    <h3 style="font-size:1.25rem">🎫 Technician: ada tiket perbaikan, ganti part rusak tanpa bikin aplikasi yang sedang jalan ikut mati</h3>
+    <h3 style="font-size:1.25rem">🎫 Technician: ada tiket perbaikan, ganti part yang rusak tanpa membuat aplikasi yang sedang berjalan ikut mati</h3>
   <div class="grid2" style="grid-template-columns:1fr 1.1fr">
     <div class="card" id="tsrv" style="padding:.7rem"></div>
     <div>
@@ -691,7 +699,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 </div>
   <div class="mission" id="m-fac" style="display:none">
     <h3 style="font-size:1.25rem">⚡ Facility team · Skenario 1: <span class="acc">listrik PLN padam!</span> 🚨</h3>
-  <p class="mute" style="margin:0">Tugasmu: pastikan rack <b>tidak pernah mati</b>. UPS cuma kuat beberapa menit, jadi generator harus ambil alih sebelum baterainya habis.</p>
+  <p class="mute" style="margin:0">Tugasmu: pastikan rack <b>tidak pernah mati</b>. UPS hanya kuat beberapa menit, jadi generator harus mengambil alih sebelum baterainya habis.</p>
   <div class="row" style="display:grid;grid-template-columns:1fr 50px 1fr 50px 1fr;align-items:stretch;gap:.4rem">
     <div class="pwr live" id="pPln"><div class="e">🏭</div><b>Listrik PLN</b><div id="pPlnS">Normal</div></div>
     <div class="wire on" id="w1"></div>
@@ -714,17 +722,17 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
         <div id="hexp" class="mute" style="text-align:left;font-size:.88rem;margin-top:.5rem">Gambar kiri = tampak <b>samping</b> rack 7. Udara dingin 🔵 masuk dari depan, lewat server, keluar panas 🔴 di belakang.</div></div>
     </div>
     <div class="row" id="hact" style="margin-top:.5rem"></div>
-    <div class="card" style="margin-top:.5rem"><p id="hmsg" style="margin:0">Suhu terus naik! Apa yang kamu lakukan? 🤔</p></div>
+    <div class="card" style="margin-top:.5rem"><p id="hmsg" style="margin:0">Suhu terus naik! Apa yang kamu lakukan?</p></div>
   </div>
 </div>
-  <p class="bridge">👉 Sisi gedungnya sudah kelihatan. Sekarang rakit Kumpulin yang anti down pakai semua yang sudah dipelajari.</p>
+  <p class="bridge">👉 Sisi gedungnya sudah terlihat. Sekarang rakit Kumpulin yang anti down dengan semua yang sudah dipelajari.</p>
 </section>
 
 <section class="slide" data-title="Game: jadi arsitek cloud">
   <div class="kicker"><span class="part">Bab 4</span>Satukan semua · Kumpulin anti down</div>
-  <p class="beat">📖 Kumpulin makin terkenal, sekarang dipakai 3 kampus. Saatnya bikin Kumpulin yang <b>tahan banting</b>.</p>
-  <h2>🏗️ Jadi arsitek cloud: bikin “Kumpulin” yang <span class="acc">anti down</span>!</h2>
-  <p class="mute" style="margin:0">Pilih komponen di kanan, taruh server di AZ, lalu tekan <b>🧪 Uji arsitektur</b>. Targetnya: selesaikan <b>5 task</b> pakai semua yang sudah kamu pelajari, dengan tagihan sehemat mungkin <span class="src">(angka ilustrasi)</span>.</p>
+  <p class="beat">📖 Kumpulin makin terkenal, sekarang dipakai 3 kampus. Saatnya membuat Kumpulin yang <b>tahan banting</b>.</p>
+  <h2>🏗️ Jadi arsitek cloud: rakit Kumpulin yang <span class="acc">anti down</span></h2>
+  <p class="mute" style="margin:0">Pilih komponen di kanan, taruh server di AZ, lalu tekan <b>🧪 Uji arsitektur</b>. Targetnya: selesaikan <b>5 task</b> dengan semua yang sudah kamu pelajari, dengan tagihan sehemat mungkin <span class="src">(angka ilustrasi)</span>.</p>
   <div class="grid2" style="grid-template-columns:1.45fr 1fr">
     <div class="card" id="arch" style="padding:.8rem;position:relative"></div>
     <div>
@@ -735,13 +743,13 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
     </div>
   </div>
   <div class="card"><p id="amsg" style="margin:0">💡 Klik <b>🖥️ EC2</b>, lalu klik kolom AZ untuk menaruh server. Klik server yang sudah ada untuk tahu dia “tinggal” di mana.</p></div>
-  <p class="bridge">👉 Desainnya sudah oke. Sekarang deploy beneran.</p>
+  <p class="bridge">👉 Desainnya sudah baik. Sekarang deploy website sungguhan.</p>
 </section>
 
 <section class="slide bonus" data-title="Mau urus sebanyak apa?">
   <div class="kicker"><span class="part">Bab 5</span>Let's deploy! · Kenapa Amplify?</div>
   <h2>Mau masak sendiri, atau <span class="acc">tinggal makan?</span></h2>
-  <p class="mute" style="margin:0">Di game tadi kamu merakit server sendiri pakai EC2. Itu ibarat <b>sewa dapur</b>: masih masak sendiri. Buat website sederhana ada cara yang lebih gampang. Klik salah satu, makin ke kanan makin <b>sedikit</b> yang perlu kamu urus.</p>
+  <p class="mute" style="margin:0">Di game tadi kamu merakit server sendiri pakai EC2. Itu ibarat <b>sewa dapur</b>: masih masak sendiri. Buat website sederhana ada cara yang lebih mudah. Klik salah satu, makin ke kanan makin <b>sedikit</b> yang perlu kamu urus.</p>
   <div class="grid4" id="pizzabtns"></div>
   <div class="grid2">
     <div class="card"><h3>👤 Kamu yang urus</h3><div class="row" id="pzyou" style="min-height:3rem"></div></div>
@@ -751,9 +759,8 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
   <p class="bridge">👉 Kita pakai cara “bawa ikan ke warung”: Amplify. Siapkan akunnya dulu.</p>
 </section>
 
-<section class="slide" data-title="Akun AWS: gimana caranya?">
+<section class="slide bonus" data-title="Akun AWS: bagaimana caranya?">
   <div class="kicker"><span class="part">Bab 5</span>Let's deploy! · Siapkan akun</div>
-  <p class="beat">📖 Kumpulin sudah siap dipakai. Sekarang giliran kalian online-kan <b>website pertama</b> sendiri.</p>
   <h2>Butuh akun AWS? Cari jalur yang cocok untukmu 🧭</h2>
   <div class="grid2">
     <div class="card">
@@ -770,15 +777,16 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
       <p>💳 <b>Akun AWS pribadi</b>, butuh kartu untuk verifikasi. Akun baru (Free plan): <b>kredit sampai US$200</b>, berlaku <b>6 bulan</b>. Wajib pasang budget alert.</p>
       <p>🎮 <b>Tanpa akun</b>, latihan deploy & game “arsitek cloud” di deck ini, lalu ikuti demo live.</p>
       <p class="src">Dicek di aws.amazon.com/free & aws.amazon.com/education/awseducate (Oktober 2026).</p>
-      <p class="acc" style="margin-bottom:0">Jangan pernah kasih password, access key, atau kode MFA ke siapa pun, termasuk ke aku 😄</p>
+      <p class="acc" style="margin-bottom:0">Jangan pernah memberikan password, access key, atau kode MFA ke siapa pun, termasuk kepada saya 😄</p>
     </div>
   </div>
-  <p class="bridge">👉 Akun siap? Kita bikin website pertama kalian.</p>
+  <p class="bridge">👉 Akun siap? Kita membuat website pertama kalian.</p>
 </section>
 
 <section class="slide" data-title="Lab: website online (Amplify)">
   <div class="kicker"><span class="part">Bab 5</span>Let's deploy! · Lab utama · ±10 menit · AWS Amplify (tanpa coding)</div>
-  <h2>Bikin website pribadimu, lalu online-kan 🌍</h2>
+  <p class="beat">📖 Kumpulin sudah siap dipakai. Sekarang giliran kalian mempublikasikan <b>website pertama</b> kalian.</p>
+  <h2>Buat website pribadimu, lalu publikasikan 🌍</h2>
   <div class="grid2">
     <div class="card">
       <div class="grid2" style="gap:.6rem;grid-template-columns:2fr 1fr">
@@ -786,7 +794,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
         <div><label>Emoji</label><input id="wEmoji" value="🚀"><div id="wEpick" class="row keepemo" style="gap:.25rem;margin-top:.3rem"></div></div>
       </div>
       <label>Tagline</label><input id="wTag" value="Mahasiswa Teknik Informatika · calon cloud engineer">
-      <label>Tentang kamu</label><textarea id="wAbout" rows="2">Hari ini aku deploy website pertamaku ke AWS!</textarea>
+      <label>Tentang kamu</label><textarea id="wAbout" rows="2">Hari ini saya men-deploy website pertama saya ke AWS!</textarea>
       <label>Warna</label><select id="wColor"><option value="#ff9900">Oranye</option><option value="#2bd4c5">Toska</option><option value="#8b5cf6">Ungu</option><option value="#ef4444">Merah</option><option value="#22c55e">Hijau</option></select>
       <div class="row" style="margin-top:.7rem"><button class="btn primary" id="wZip">⬇️ 1. Download site.zip</button></div>
     </div>
@@ -809,10 +817,10 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 
 <section class="slide" data-title="Kuis">
   <div class="kicker"><span class="part">Bab 6</span>Kuis kilat 🏆</div>
-  <p class="beat">📖 Terakhir, kuis kecil. Siapa yang paling nyimak?</p>
+  <p class="beat">📖 Terakhir, kuis kecil. Siapa yang paling menyimak?</p>
   <h2 id="qh">Siap?</h2>
   <div class="card" id="quiz"></div>
-  <p class="bridge">👉 Terus, mulai dari mana kalau mau kerja di bidang ini?</p>
+  <p class="bridge">👉 Lalu, mulai dari mana kalau ingin bekerja di bidang ini?</p>
 </section>
 
 <section class="slide" data-title="Langkah selanjutnya">
@@ -823,13 +831,29 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
     <div class="card hl fadeup" id="path"></div>
     <div class="card"><h3>🔥 Tantangan 30 hari</h3><div id="c30"></div></div>
   </div>
-  <p class="mute" style="margin:0;font-size:.95rem">📚 Gratis & resmi: AWS Skill Builder · AWS Educate · AWS Academy (lewat kampus) · AWS re/Start. Tips: catat setiap lab di GitHub atau LinkedIn. Portofolio lebih ngomong daripada nilai.</p>
+  <p class="mute" style="margin:0;font-size:.95rem">📚 Gratis & resmi: AWS Skill Builder · AWS Educate · AWS Academy (lewat kampus) · AWS re/Start. Tips: catat setiap lab di GitHub atau LinkedIn. Portofolio lebih berbicara daripada nilai.</p>
+  <p class="bridge">👉 Sebelum mencoba sendiri di rumah, baca catatan ini dulu.</p>
+</section>
+
+<section class="slide" data-title="Sebelum mencoba sendiri">
+  <div class="kicker">Catatan penting</div>
+  <h2>Sebelum mencoba <span class="acc">sendiri</span></h2>
+  <div class="grid2">
+    <div class="card"><h3 style="margin-top:0">🔑 Akun & biaya</h3><ul style="margin:.2rem 0;padding-left:1.2rem;line-height:1.7">
+      <li>Lab memakai akun AWS milik kalian sendiri: akun pribadi, <b>AWS Academy</b> lewat kampus, atau <b>AWS Educate</b>. Langkahnya ada di panduan lab.</li>
+      <li>Akun pribadi memerlukan kartu debit/kredit untuk verifikasi. Syarat kredit untuk akun baru bisa dicek di <b>aws.amazon.com/free</b>.</li>
+      <li>Pasang <b>budget alert</b>, dan hapus resource setelah selesai supaya tidak ada tagihan.</li></ul></div>
+    <div class="card"><h3 style="margin-top:0">🛡️ Keamanan & sumber</h3><ul style="margin:.2rem 0;padding-left:1.2rem;line-height:1.7">
+      <li>Jangan pernah membagikan password, access key, atau kode MFA kepada siapa pun.</li>
+      <li>Harga dan angka di presentasi ini adalah ilustrasi. Informasi program dicek Oktober 2026 dan bisa berubah.</li>
+      <li>Materi ini untuk edukasi. Gambar data center adalah ilustrasi umum, bukan denah asli.</li></ul></div>
+  </div>
 </section>
 
 <section class="slide center" data-title="Terima kasih">
   <div class="big-emoji">🙏☁️🏢</div>
   <h1>Terima kasih!</h1>
-  <p class="mute">Ada pertanyaan? Tanya aja, asal jangan alamat data center-nya 😉</p>
+  <p class="mute">Ada pertanyaan? Silakan, asal bukan alamat data center-nya.</p>
   <div class="row" id="react" style="justify-content:center"></div>
   <p id="presenter2"></p>
   <p class="mute" style="max-width:760px"><i>“Website yang kamu deploy hari ini jalan di server nyata, di dalam rack nyata, yang dipasang orang-orang nyata. Suatu hari, mungkin kamu yang memasangnya.”</i></p>
@@ -837,7 +861,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
 
 <section class="slide bonus" data-title="Tur: masuk ke data center">
   <div class="kicker"><span class="part">Bab 3</span>Masuk ke gedung · Tur & kenalan tim</div>
-  <h2>Yuk masuk ke data center <span class="mute" style="font-size:1rem">(ilustrasi umum, bukan denah asli)</span></h2>
+  <h2>Masuk ke data center <span class="mute" style="font-size:1rem">(ilustrasi umum, bukan denah asli)</span></h2>
   <div class="grid2" style="grid-template-columns:1.45fr 1fr">
     <div class="card" style="padding:.5rem">
       <svg id="dcsvg" viewBox="0 0 640 400" width="100%"></svg>
@@ -852,7 +876,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
       <div id="ppe" class="row" style="display:none"></div>
     </div>
   </div>
-  <p class="bridge">👉 Kamu sudah ketemu 5 tim. Sebelum ikut kerja, ada satu hal paling penting.</p>
+  <p class="bridge">👉 Kamu sudah bertemu 5 tim. Sebelum ikut kerja, ada satu hal paling penting.</p>
 </section>
 
 <section class="slide bonus" data-title="Availability: satu gedung mati?">
@@ -878,7 +902,7 @@ h1 .acc,h2 .acc{background:linear-gradient(90deg,#ffc15e,#ff9900 60%,#ff7a00);-w
     <div class="card" id="ntxt"></div>
   </div>
   <p class="src">Sumber: Amazon Compute SLA (EC2: 99,5% per instance; 99,99% untuk instance di 2+ AZ) & Amazon S3 Storage Classes (S3 Standard: data di ≥3 AZ, durability 11 sembilan), aws.amazon.com, dicek Oktober 2026.</p>
-  <p class="bridge">👉 Gedung-gedung ini terhubung kabel. Yuk lihat perjalanan data saat kamu tap “Play”!</p>
+  <p class="bridge">👉 Gedung-gedung ini terhubung kabel. Mari lihat perjalanan data saat kamu tap “Play”!</p>
 </section>
 
 <section class="slide bonus" data-title="Role-role di data center">
@@ -1039,7 +1063,7 @@ $("#opitems").onclick = e => {
   opRender();
 };
 $("#opall").onclick = async () => {
-  /* centang semua kebutuhan satu per satu, biar kelihatan biayanya naik */
+  /* centang semua kebutuhan satu per satu, agar terlihat biayanya naik */
   $("#opall").disabled = true;
   for (const o of OPI) { if (opHave.has(o.k)) continue; opHave.add(o.k); const d = $(`#opitems .need[data-k="${o.k}"]`); d.classList.add("on"); d.classList.remove("pop"); void d.offsetWidth; d.classList.add("pop"); opRender(); await sleep(280); }
   $("#opall").disabled = false;
@@ -1063,9 +1087,9 @@ async function opCase(i) {
   await sleep(1200); if (!ok()) return;
   const srv = $("#osv");
   if (down) { srv.textContent = "🔥"; srv.classList.add("shakeloop");
-    r.innerHTML = `💥 <b>DOWN!</b> ${u.toLocaleString("id-ID")} mahasiswa login bareng, server cuma kuat 2.000. Sekitar <b>${Math.round((1 - 2000 / u) * 100)}% tugas gagal terkirim</b>. Mau tambah server? Beli, kirim, pasang… <b>berminggu-minggu</b>. Deadline keburu lewat.<br><span class="mute" style="font-size:.9rem">Kesimpulan: server sendiri itu <b>mahal, repot, dan susah ditambah</b> waktu ramai.</span>`; }
+    r.innerHTML = `💥 <b>DOWN!</b> ${u.toLocaleString("id-ID")} mahasiswa login bersama, server hanya kuat 2.000. Sekitar <b>${Math.round((1 - 2000 / u) * 100)}% tugas gagal terkirim</b>. Mau tambah server? Beli, kirim, pasang… <b>berminggu-minggu</b>. Deadline keburu lewat.<br><span class="mute" style="font-size:.9rem">Kesimpulan: server sendiri itu <b>mahal, repot, dan susah ditambah</b> waktu ramai.</span>`; }
   else if (load > 70) { srv.textContent = "🥵"; r.innerHTML = `🐢 Beban <b>${Math.round(load)}%</b>. Masih jalan, tapi mulai <b>lemot</b>. Mahasiswa mulai protes upload-nya lama.`; }
-  else r.innerHTML = `✅ Beban <b>${Math.round(load)}%</b>. Aman. Tapi servernya tetap nyala 24 jam dan tetap dibayar, walaupun sepi.`;
+  else r.innerHTML = `✅ Beban <b>${Math.round(load)}%</b>. Aman. Tapi servernya tetap menyala 24 jam dan tetap dibayar, walaupun sepi.`;
 }
 $("#opev").onclick = e => { const b = e.target.closest("button[data-i]"); if (b) opCase(+b.dataset.i); };
 $("#opcloud").onclick = () => go(cur + 1);
@@ -1101,7 +1125,7 @@ function scRender() {
     infoKey = "kos" + sc.tried;
     if (inf.dataset.k !== infoKey) {
       inf.dataset.k = infoKey;
-      inf.innerHTML = `<h3>🖥️ Server sendiri</h3><p style="margin:.3rem 0">Cuma <b>1 server</b>. Kuat ±${CAP.toLocaleString("id-ID")} mahasiswa per jam.</p>
+      inf.innerHTML = `<h3>🖥️ Server sendiri</h3><p style="margin:.3rem 0">Hanya <b>1 server</b>. Kuat ±${CAP.toLocaleString("id-ID")} mahasiswa per jam.</p>
         <p class="mute" style="margin:.3rem 0">💸 Biaya tetap sama, ramai atau sepi.<br>🐢 Mau tambah server? Beli, kirim, pasang… <b>berminggu-minggu</b>.</p>
         ${sc.tried ? `<button class="btn primary pop" id="scgo" style="margin-top:.5rem">☁️ Sekarang coba pakai cloud →</button>` : `<p class="acc" style="margin:.3rem 0">👆 Coba klik <b>⏰ Detik-detik 23:59</b>!</p>`}`;
       const g = $("#scgo"); if (g) g.onclick = () => scMode("aws");
@@ -1147,17 +1171,17 @@ scRender();
 /* ---------- service models (analogi makan) ---------- */
 const LAYERS = ["Aplikasi & data, bahan makanannya", "Sistem operasi, resep & cara masak", "Server, kompor & panci", "Jaringan, gas & air", "Gedung, listrik, AC, dapurnya"];
 const MODELS = [
-  { you: 5, e: "🛒", h: "Masak dari nol", t: "On-premise", full: "“di tempat sendiri”", ex: "beli & pasang server sendiri", d: "Beli kompor, gas, panci, belanja bahan, masak sendiri, lalu cuci piring sendiri. Persis kayak Kumpulin dengan server sendiri tadi: semua kamu yang urus." },
+  { you: 5, e: "🛒", h: "Masak dari nol", t: "On-premise", full: "“di tempat sendiri”", ex: "beli & pasang server sendiri", d: "Beli kompor, gas, panci, belanja bahan, masak sendiri, lalu cuci piring sendiri. Persis seperti Kumpulin dengan server sendiri tadi: semua kamu yang urus." },
   { you: 2, e: "🍳", h: "Sewa dapur", t: "IaaS", full: "Infrastructure as a Service, sewa infrastruktur", ex: "contoh: Amazon EC2", d: "Dapur, kompor, dan gas sudah disediakan. Kamu tinggal bawa resep & masak sendiri. Sama seperti EC2: servernya disewa, sistem operasi & aplikasinya kamu yang urus." },
   { you: 1, e: "🐟", h: "Bawa ikan ke warung bakar", t: "PaaS", full: "Platform as a Service, sewa platform siap pakai", ex: "contoh: AWS Amplify (lab kita!)", d: "Kamu cukup bawa <b>ikannya</b> (website/aplikasimu). Warung yang membakar, menyajikan, dan cuci piring. Sama seperti Amplify: kamu upload website, server & sistem operasinya diurus AWS. Bedanya dengan restoran: <b>bahannya punyamu sendiri</b>. Ini yang kita pakai di lab nanti!" },
-  { you: 0, e: "🍽️", h: "Makan di restoran", t: "SaaS", full: "Software as a Service, tinggal pakai aplikasinya", ex: "contoh: email, streaming, chatbot", d: "Tinggal datang, pilih dari menu, makan. Bahan & masakannya <b>punya restoran</b>, kamu cuma login & pakai aplikasi orang lain." }
+  { you: 0, e: "🍽️", h: "Makan di restoran", t: "SaaS", full: "Software as a Service, tinggal pakai aplikasinya", ex: "contoh: email, streaming, chatbot", d: "Tinggal datang, pilih dari menu, makan. Bahan & masakannya <b>punya restoran</b>, kamu hanya login & pakai aplikasi orang lain." }
 ];
 $("#pizzabtns").innerHTML = MODELS.map((m, i) => `<div class="card role" data-m="${i}" style="padding:.8rem"><div class="e" style="font-size:2.4rem">${m.e}</div><b>${m.h}</b><div class="acc" style="font-weight:700">${m.t}</div><small style="display:block;font-size:.72rem;color:var(--teal)">${m.full}</small><small class="mute">${m.ex}</small></div>`).join("");
 function pizza(m) {
   $$("#pizzabtns .role").forEach((b, i) => b.classList.toggle("sel", i === m));
   const M = MODELS[m];
   const chip = (l, i, aws) => `<span class="pill pop" style="animation-delay:${i * 70}ms;font-size:.95rem;padding:.35rem .8rem;${aws ? "border-color:var(--teal)" : "border-color:var(--acc)"}">${l}${aws && i >= 2 ? " 👷" : ""}</span>`;
-  $("#pzyou").innerHTML = LAYERS.slice(0, M.you).map((l, i) => chip(l, i, false)).join("") || `<span class="mute pop">Tidak ada, tinggal pakai! 🎉</span>`;
+  $("#pzyou").innerHTML = LAYERS.slice(0, M.you).map((l, i) => chip(l, i, false)).join("") || `<span class="mute pop">Tidak ada, tinggal pakai.</span>`;
   $("#pzaws").innerHTML = LAYERS.map((l, i) => i >= M.you ? chip(l, i, true) : "").join("") || `<span class="mute pop">Tidak ada, semua kamu sendiri 😵</span>`;
   $("#pizzaD").innerHTML = `<b>${M.e} ${M.h} = ${M.t}</b> <span class="teal">(${M.full})</span>. ${M.d}${m > 0 ? ` <span class="mute">Bagian “AWS yang urus” dikerjakan orang-orang data center (sudah kita lihat di Bab 3).</span>` : ""}`;
 }
@@ -1170,7 +1194,7 @@ const ON = [
   ["🚪", "Pintu masuk gedung", "Verifikasi identitas, kartu akses, dan tamu wajib didampingi. Semua tercatat.", "#1d4e7a"],
   ["🗄️", "Ruang server", "Akses tambahan khusus untuk orang yang punya tugas di sana, untuk waktu terbatas. Kamera & alarm di mana-mana.", "#1b6585"],
   ["💽", "Perangkat & disk", "Setiap perangkat penyimpan data dilacak. Disk yang rusak/pensiun dihancurkan dengan prosedur khusus, tidak dibuang begitu saja.", "#197a83"],
-  ["🔒", "Enkripsi", "Data bisa dienkripsi saat disimpan dan saat dikirim. Tanpa kuncinya, isi disk cuma terlihat seperti angka acak.", "#1a8f78"],
+  ["🔒", "Enkripsi", "Data bisa dienkripsi saat disimpan dan saat dikirim. Tanpa kuncinya, isi disk hanya terlihat seperti angka acak.", "#1a8f78"],
   ["👤", "Kamu sendiri", "Password kuat, MFA, tidak membagikan password, tidak membuka data ke publik tanpa sengaja. Lapisan ini sepenuhnya di tanganmu!", "#ff9900"]
 ];
 const ONR = [190, 160, 130, 100, 70, 38];
@@ -1211,7 +1235,7 @@ const AVM = [
   { b: "🪣 File di S3", at: [1, 1, 1], ic: "📄", big: "Otomatis 3 salinan", sub: "durability 99,999999999% (11 sembilan)", col: "var(--green)",
     t: "<b>S3 otomatis menyalin file-mu ke minimal 3 gedung (AZ).</b> Kamu tidak perlu ngapa-ngapain.<br><span class='mute'>Simpan 10 juta file → rata-rata kehilangan 1 file per ±10.000 tahun.</span>" },
   { b: "🖥️ 1 server EC2", at: [1, 0, 0], ic: "🖥️", big: "± 3,6 jam / bulan", sub: "boleh mati (SLA 99,5%) ≈ nonton 2 film 🎬", col: "var(--amber)",
-    t: "<b>EC2 TIDAK otomatis disalin.</b> Kalau kamu cuma bikin 1 server, dia tinggal di 1 gedung. Gedungnya bermasalah → aplikasimu ikut mati." },
+    t: "<b>EC2 TIDAK otomatis disalin.</b> Kalau kamu hanya membuat 1 server, dia tinggal di 1 gedung. Gedungnya bermasalah → aplikasimu ikut mati." },
   { b: "🖥️🖥️ 2 server EC2 + ⚖️", at: [1, 1, 0], ic: "🖥️", big: "± 4,3 menit / bulan", sub: "boleh mati (SLA 99,99%) ≈ masak mie instan 🍜", col: "var(--green)",
     t: "<b>Kamu sendiri</b> yang menyalakan 2 server di 2 gedung + <b>load balancer</b>. Satu mati, satunya tetap melayani. Ini yang nanti kamu bangun di <b>game arsitek</b>." }
 ];
@@ -1239,7 +1263,7 @@ $("#avopen").onclick = e => {
   }
   const pick = alive[Math.random() * alive.length | 0]; avRender(pick);
   s1.textContent = `✅ Kumpulin terbuka! Dilayani dari AZ ${"abc"[pick]}`; s1.style.color = "var(--green)";
-  sub.textContent = av.down.some(Boolean) ? "Ada gedung yang mati, tapi kamu bahkan tidak sadar. Itulah gunanya beberapa AZ." : "Semua gedung hidup. Coba matikan satu gedung dulu!";
+  sub.textContent = av.down.some(Boolean) ? "Ada gedung yang mati, tapi kamu bahkan tidak sadar. Ini gunanya punya beberapa AZ." : "Semua gedung hidup. Coba matikan satu gedung dulu!";
   floatEmoji(M.ic, e.clientX, e.clientY);
 };
 avRender();
@@ -1249,7 +1273,7 @@ const NC = [
   { b: "🪣 Tugas di S3", az: [["📄"], ["📄"], ["📄"]], big: "Otomatis 3 salinan", sub: "durability 99,999999999% (11 sembilan)", col: "var(--green)",
     t: "<b>S3 otomatis menyalin file-mu ke minimal 3 gedung (AZ).</b> Kamu tidak perlu ngapa-ngapain. Satu gedung banjir? Dua salinan lain masih ada.<br><span class='mute'>Simpan 10 juta file → rata-rata kehilangan 1 file per ±10.000 tahun.</span>" },
   { b: "🖥️ Server EC2 · 1 gedung", az: [["🖥️"], [], []], big: "± 3,6 jam / bulan", sub: "boleh mati (SLA 99,5%) ≈ nonton 2 film 🎬", col: "var(--amber)",
-    t: "<b>EC2 TIDAK otomatis disalin.</b> Kalau kamu cuma bikin 1 server, dia tinggal di 1 gedung. Hardware rusak atau gedungnya bermasalah → aplikasimu ikut mati." },
+    t: "<b>EC2 TIDAK otomatis disalin.</b> Kalau kamu hanya membuat 1 server, dia tinggal di 1 gedung. Hardware rusak atau gedungnya bermasalah → aplikasimu ikut mati." },
   { b: "🖥️🖥️ Server EC2 · 2 gedung", az: [["🖥️"], ["🖥️"], []], big: "± 4,3 menit / bulan", sub: "boleh mati (SLA 99,99%) ≈ masak mie instan 🍜", col: "var(--green)",
     t: "<b>Kamu sendiri</b> yang menyalakan 2 server di 2 gedung (AZ) + <b>load balancer</b>. Satu mati, satunya tetap melayani. Peluang keduanya mati <i>bersamaan</i> sangat kecil, makanya janjinya naik jauh." }
 ];
@@ -1379,7 +1403,7 @@ const ZOOM = [
     v: () => { let s = ""; for (let r = 0; r < 5; r++) for (let c = 0; c < 14; c++) s += `<rect x="${20 + c * 26}" y="${20 + r * 52}" width="20" height="36" rx="2" fill="#22385e" class="pop" style="animation-delay:${(r * 14 + c) * 12}ms;transform-box:fill-box;transform-origin:center"/><circle cx="${30 + c * 26}" cy="${28 + r * 52}" r="2" fill="${Math.random() < .1 ? "#ffc542" : "#3ddc84"}" class="blink" style="animation-delay:${Math.random() * 2}s"/>`; return `<svg viewBox="0 0 400 280" width="100%">${s}</svg>`; } },
   { k: "🧱 Rack", t: "Rack: lemari besi setinggi ±2 meter (42U)", d: "Satu rack berisi switch jaringan (biasanya di atas) dan banyak server. Listrik datang dari PDU, jaringan lewat fiber.", f: "Satu rack penuh bisa seberat lebih dari setengah ton!",
     v: () => `<div style="width:160px;border:4px solid #556;border-radius:6px;padding:5px;background:#0a1222">${Array.from({ length: 16 }, (_, i) => `<div class="fadeup" style="animation-delay:${i * 60}ms;height:13px;margin:3px 0;border-radius:2px;background:${i < 2 ? "#2d6b5f" : "#2b4672"};display:flex;justify-content:flex-end;align-items:center;padding-right:4px"><i class="blink" style="width:5px;height:5px;border-radius:50%;background:#3ddc84;animation-delay:${Math.random()}s"></i></div>`).join("")}</div>` },
-  { k: "🖥️ Server", t: "Server: di sinilah ‘cloud’-mu hidup", d: "Satu server fisik bisa menjalankan banyak server virtual (instance EC2). Saat kamu klik ‘Launch instance’, kamu menyewa sebagian dari mesin seperti ini.", f: "Di bonus lab nanti, kamu akan tahu server-mu ada di AZ yang mana. 😉",
+  { k: "🖥️ Server", t: "Server: tempat ‘cloud’-mu jalan", d: "Satu server fisik bisa menjalankan banyak server virtual (instance EC2). Saat kamu klik ‘Launch instance’, kamu menyewa sebagian dari mesin seperti ini.", f: "Di bonus lab nanti, kamu akan tahu server-mu ada di AZ yang mana.",
     v: () => `<div style="text-align:center"><div style="font-size:4rem">🖥️</div><div class="row" style="justify-content:center">${["VM teman", "VM toko online", "VM <b class='acc'>Kumpulin</b>", "VM game"].map((n, i) => `<span class="pill pop" style="animation-delay:${300 + i * 200}ms">📦 ${n}</span>`).join("")}</div><p class="mute">CPU · RAM · Disk · Kartu jaringan</p></div>` }
 ];
 let zl = 0, zTimer = null;
@@ -1464,7 +1488,7 @@ async function jgo(last, color) {
   }
   jshow(0); $("#jms").textContent = `✅ ±${Math.round(ms)} ms bolak-balik`;
   $("#jT").textContent = last === 4 ? "🎬 Video langsung diputar!" : "✅ Tugas terkirim!";
-  $("#jD").textContent = last === 4 ? `Cuma ±${Math.round(ms)} ms karena tidak perlu sampai ke server. Itulah gunanya CloudFront.` : `Perjalanan pulang-pergi ±${Math.round(ms)} ms, kedipan mata saja butuh ±100–150 ms. Semua jalur ini dijaga orang & mesin 24/7.`;
+  $("#jD").textContent = last === 4 ? `Hanya ±${Math.round(ms)} ms karena tidak perlu sampai ke server. Itulah gunanya CloudFront.` : `Perjalanan pulang-pergi ±${Math.round(ms)} ms, kedipan mata saja butuh ±100–150 ms. Semua jalur ini dijaga orang & mesin 24/7.`;
   $("#jpkt").style.display = "none";
 }
 $("#jplay").onclick = () => jgo(J.length - 1, "#ff9900");
@@ -1520,13 +1544,13 @@ const TOUR = [
   ["lobby", 250, 345, "🦺 Pakai PPE dulu", "Data hall itu <b>berisik</b> (ribuan kipas server!) dan banyak barang berat. Sebelum masuk, wajib pakai perlengkapan keselamatan (PPE). Klik semua perlengkapannya 👇", "Tanpa PPE lengkap, tidak boleh masuk, siapa pun orangnya.", false, false, true],
   ["dock", 340, 362, "📦 Loading dock", "Semua barang masuk lewat sini: server, perangkat jaringan, dan part pengganti. Setiap kardus di-scan dan dicocokkan dengan daftar kiriman (manifest).", "Barang yang tidak cocok dengan manifest tidak boleh masuk."],
   ["hall", 330, 300, "🚪 Pintu data hall", "Masih ada pintu dan scan tambahan. Hanya orang yang punya tugas di dalam yang bisa lewat.", "Banyak lapisan = satu kartu hilang tidak langsung jadi bencana.", true],
-  ["hall", 330, 165, "🗄️ Data hall", "Baris-baris rack dengan server dan switch jaringan (kotak hijau di atas tiap rack). Semua terhubung fiber. Rack disusun membentuk lorong dingin & lorong panas.", "Berisik banget! Untung sudah pakai pelindung telinga 🎧", false, true],
+  ["hall", 330, 165, "🗄️ Data hall", "Baris-baris rack dengan server dan switch jaringan (kotak hijau di atas tiap rack). Semua terhubung fiber. Rack disusun membentuk lorong dingin & lorong panas.", "Berisik sekali! Untung sudah pakai pelindung telinga 🎧", false, true],
   ["power", 70, 90, "🔋 Ruang listrik & UPS", "Listrik masuk lewat trafo, lalu ke UPS (baterai besar), lalu ke tiap rack. Ada dua jalur listrik supaya satu rusak tidak mematikan server.", "Saat PLN padam, UPS menahan beban sampai generator siap."],
   ["gen", 70, 250, "⛽ Generator cadangan", "Generator besar menyala otomatis kalau listrik utama hilang, dengan cadangan bahan bakar untuk waktu lama.", "Generator dites rutin, kalau tidak pernah dites, belum tentu menyala saat dibutuhkan."],
   ["cool", 575, 170, "❄️ Sistem pendingin", "Server menghasilkan panas luar biasa. Pendingin menjaga suhu & kelembapan stabil, dengan unit cadangan kalau satu rusak.", "Di lorong dingin terasa sejuk, di lorong panas bisa gerah! 🥵"],
   ["noc", 520, 365, "👀 Ruang monitoring", "Ribuan sensor memantau suhu, listrik, jaringan, dan server 24/7. Ada yang aneh? Tim langsung diberi tahu, banyak masalah diperbaiki otomatis.", "Selesai tur! Saat keluar, kamu & barangmu diperiksa lagi. 👋"]
 ];
-const SAY = ["Selamat datang! Identitas dulu ya 🪪", "Scan kartu… bip! ✅", "Barang bawaanmu dicek dulu 🎒", "Pakai PPE dulu ya! 🦺🎧", "Barang masuk dicek di sini 📦", "Pintu khusus, butuh akses lagi 🔐", "Wah, berisik! Ini ribuan server 🗄️", "Listrik & baterai cadangan ⚡", "Kalau PLN padam, ini yang nyala ⛽", "Brrr… ini yang bikin server adem ❄️", "Semua dipantau 24 jam 👀 Tur selesai!"];
+const SAY = ["Selamat datang! Identitas dulu ya 🪪", "Scan kartu… bip! ✅", "Barang bawaanmu dicek dulu 🎒", "Pakai PPE dulu ya! 🦺🎧", "Barang masuk dicek di sini 📦", "Pintu khusus, butuh akses lagi 🔐", "Wah, berisik! Ini ribuan server 🗄️", "Listrik & baterai cadangan ⚡", "Kalau PLN padam, ini yang menyala ⛽", "Brrr… ini yang membuat server adem ❄️", "Semua dipantau 24 jam 👀 Tur selesai!"];
 const tw = { x: 70, y: 372, run: 0, i: -1, auto: false };
 /* tim yang ditemui di tiap titik tur (nama = ROLES[i][1]) */
 const TROLE = [["Security"], ["Security"], ["Security"], [], ["Logistik & inventaris", "Deployment"], ["Security"], ["Deployment", "Data Center Technician"], ["Facility team"], ["Facility team"], ["Facility team"], []];
@@ -1534,7 +1558,7 @@ function tourRoles(i) {
   const box = $("#dcR"); if (!box) return;
   const meet = TROLE[i] || [], last = i === TOUR.length - 1;
   const chip = r => `<div class="card pop" style="padding:.45rem .7rem;margin-top:.4rem"><b>${r[0]} ${r[1]}</b> <span class="mute" style="font-size:.9rem">${r[3]}</span></div>`;
-  box.innerHTML = last ? `<p style="margin:.4rem 0 0"><b>👋 Kamu sudah ketemu 5 tim:</b> ${ROLES.map(r => `${r[0]} ${r[1]}`).join(" · ")}. Di Bab 5, kamu ikut kerja bareng mereka!</p>`
+  box.innerHTML = last ? `<p style="margin:.4rem 0 0"><b>👋 Kamu sudah bertemu 5 tim:</b> ${ROLES.map(r => `${r[0]} ${r[1]}`).join(" · ")}. Di Bab 5, kamu ikut kerja bersama mereka!</p>`
     : meet.length ? `<p class="mute" style="margin:.4rem 0 0;font-size:.85rem">👋 Tim yang kerja di sini:</p>` + meet.map(n => ROLES.find(r => r[1] === n)).filter(Boolean).map(chip).join("") : "";
 }
 const CORR = 325;
@@ -1639,19 +1663,19 @@ setTimeout(() => twSay("Halo! Klik 🚶 untuk mulai tur 👋"), 50);
 const GS = [
   { t: "07:45", e: "🛡️", n: "Security", m: "sec", txt: "Hari pertamamu! Kamu magang keliling semua tim. Pertama: bantu tim Security jaga pintu data hall." },
   { t: "08:00", e: "🦺", n: "Toolbox meeting", txt: "Sebelum kerja, semua tim ikut toolbox meeting (safety briefing): bahas pekerjaan hari ini, risikonya, dan siapa kerja dengan siapa. Hari ini ada perangkat berat yang harus dipindah ke rack. Kamu…",
-    a: ["Minta partner & pakai alat bantu angkat", true, "Benar! Barang berat = minimal 2 orang / pakai alat. Punggung cuma satu. 💪"], b: ["Angkat sendiri biar cepat", false, "Jangan! Cedera punggung bisa bikin kamu cuti berbulan-bulan. Safety nomor satu."] },
+    a: ["Minta partner & pakai alat bantu angkat", true, "Betul. Barang berat minimal diangkat 2 orang atau pakai alat. Punggung hanya satu."], b: ["Angkat sendiri agar cepat", false, "Jangan! Cedera punggung bisa membuat kamu cuti berbulan-bulan. Safety nomor satu."] },
   { t: "09:00", e: "📦", n: "Logistik", m: "log", txt: "Truk datang ke loading dock! Bantu tim Logistik mencocokkan barang dengan manifest." },
   { t: "10:30", e: "🚚", n: "Deployer", m: "dep", txt: "Saatnya ikut tim Deployment: pasang jaringan baru. Terima perangkat jaringan, cek dengan data teknis, cabling ke uplink, test, konfigurasi lewat workflow, sampai LIVE!" },
   { t: "12:00", e: "🍱", n: "Makan siang", txt: "Perut keroncongan! Mau makan di mana?",
     a: ["Di pantry / kantin", true, "Sip! Makan yang kenyang. ⚡ Energi terisi!", 30], b: ["Bawa nasi bungkus ke data hall", false, "Eits! Makanan & minuman dilarang di data hall, tumpahan + listrik = bahaya.", 30] },
   { t: "12:40", e: "🎮", n: "Istirahat", ps: true, txt: "Masih ada 20 menit istirahat. Tim ngajak main PS! 🎮 Tekan ✕ saat bola masuk zona hijau. 3 kesempatan!" },
-  { t: "14:00", e: "🔧", n: "Technician", m: "tech", txt: "Tiket masuk! Ikut tim Data Center Technician: baca diagnosa di WF, ambil spare yang cocok, lalu ganti part rusak (disk, power supply, atau RAM) tanpa bikin aplikasi yang sedang jalan ikut mati." },
+  { t: "14:00", e: "🔧", n: "Technician", m: "tech", txt: "Tiket masuk! Ikut tim Data Center Technician: baca diagnosa di WF, ambil spare yang cocok, lalu ganti part rusak (disk, power supply, atau RAM) tanpa membuat aplikasi yang sedang jalan ikut mati." },
   { t: "15:30", e: "⚡", n: "Facility", m: "fac", txt: "🚨 Alarm! Latihan darurat bersama Facility team: listrik PLN padam, lalu ada rack yang kepanasan. Jaga rack tetap menyala!" },
   { t: "16:30", e: "📝", n: "Serah terima", txt: "Shift hampir selesai, tapi masih ada pekerjaan yang belum beres.",
-    a: ["Tulis catatan serah terima yang jelas", true, "Mantap! Shift berikutnya tahu persis harus lanjut dari mana."], b: ["Pulang aja, besok lanjut", false, "Shift berikutnya bingung… Kalau tidak dicatat, dianggap tidak pernah terjadi."] },
+    a: ["Tulis catatan serah terima yang jelas", true, "Bagus. Shift berikutnya jadi tahu harus lanjut dari mana."], b: ["Pulang saja, besok lanjut", false, "Shift berikutnya bingung… Kalau tidak dicatat, dianggap tidak pernah terjadi."] },
   { t: "17:00", e: "🏠", n: "Pulang", end: true }
 ];
-const GINFO = {"Security": ["Gerbang & lobby", "Nggak ada papan nama besar di depan gedung. Penjaga 24 jam cek identitas dan jadwal kunjungan, kartu di-scan, dan tamu wajib didampingi."], "Toolbox meeting": ["Ruang tim", "Briefing pagi sebelum kerja: bahas pekerjaan hari ini, risikonya, dan PPE yang wajib dipakai di data hall."], "Logistik": ["Loading dock", "Semua barang masuk lewat sini. Tiap kardus di-scan dan dicocokkan dengan manifest."], "Deployer": ["Data hall", "Baris-baris rack berisi server dan switch, tersambung kabel fiber. Rack disusun membentuk lorong dingin dan lorong panas."], "Makan siang": ["Pantry", "Makanan dan minuman cuma boleh di pantry, jauh dari server."], "Technician": ["Data hall", "Ribuan sensor memantau server 24 jam. Kalau ada part yang rusak, tiket perbaikan muncul."], "Facility": ["Ruang listrik, generator & pendingin", "Listrik masuk lewat trafo, lalu UPS, lalu ke rack, lewat dua jalur. Generator siap kalau PLN padam, dan pendingin punya unit cadangan."], "Serah terima": ["Ruang tim", "Semua kejadian hari ini dicatat, supaya shift berikutnya tahu harus lanjut dari mana."]};
+const GINFO = {"Security": ["Gerbang & lobby", "Tidak ada papan nama besar di depan gedung. Penjaga 24 jam cek identitas dan jadwal kunjungan, kartu di-scan, dan tamu wajib didampingi."], "Toolbox meeting": ["Ruang tim", "Briefing pagi sebelum kerja: bahas pekerjaan hari ini, risikonya, dan PPE yang wajib dipakai di data hall."], "Logistik": ["Loading dock", "Semua barang masuk lewat sini. Tiap kardus di-scan dan dicocokkan dengan manifest."], "Deployer": ["Data hall", "Baris-baris rack berisi server dan switch, tersambung kabel fiber. Rack disusun membentuk lorong dingin dan lorong panas."], "Makan siang": ["Pantry", "Makanan dan minuman hanya boleh di pantry, jauh dari server."], "Technician": ["Data hall", "Ribuan sensor memantau server 24 jam. Kalau ada part yang rusak, tiket perbaikan muncul."], "Facility": ["Ruang listrik, generator & pendingin", "Listrik masuk lewat trafo, lalu UPS, lalu ke rack, lewat dua jalur. Generator siap kalau PLN padam, dan pendingin punya unit cadangan."], "Serah terima": ["Ruang tim", "Semua kejadian hari ini dicatat, supaya shift berikutnya tahu harus lanjut dari mana."]};
 /* denah data center di game magang: pion jalan ke ruangan tiap stasiun */
 const GZONES = { ...ZONES, team: [415, 330, 110, 60, "🧑‍💼 Ruang tim", "#22385e"], pantry: [535, 330, 95, 60, "🍽️ Pantry", "#22385e"] };
 const GZ = { "Security": [["gate", "lobby"], 70, 360], "Toolbox meeting": [["team"], 450, 362], "Logistik": [["dock"], 340, 360], "Deployer": [["hall"], 300, 170],
@@ -1783,7 +1807,7 @@ function gPsHit() {
   if (p.round >= 3) {
     p.run = false; G.ans = true;
     G.mood = Math.min(100, G.mood + p.hits * 10); G.xp += p.hits * 5; gHud();
-    $("#gpsr").innerHTML = `<span style="color:var(--green)">🎮 Selesai! ${p.hits}/3 kena → +${p.hits * 5} XP, 😊 mood naik!</span> Istirahat yang cukup bikin kerja lebih fokus & aman.<br><span class="acc">▶ lanjut</span>`;
+    $("#gpsr").innerHTML = `<span style="color:var(--green)">🎮 Selesai! ${p.hits}/3 kena → +${p.hits * 5} XP, 😊 mood naik!</span> Istirahat yang cukup membuat kerja lebih fokus & aman.<br><span class="acc">▶ lanjut</span>`;
     if (p.hits === 3) confetti();
   } else {
     p.z = 10 + Math.random() * 70; $("#gopts .zone").style.left = p.z + "%";
@@ -1852,21 +1876,21 @@ const SV = n => "S-" + String(n + 1).padStart(2, "0");
 const TT = {
   disk: { slots: 4, unit: "slot", part: "disk", cls: "", title: "disk rusak", newBtn: "💽 Pasang disk baru",
     steps: ["⚙️ Workflow: cari lokasi & pindahkan aplikasi ke server lain", "🧤 Pakai gelang anti-statis", "🔍 Cabut disk yang benar (server dengan lampu biru)", "💽 Pasang disk baru", "⚙️ Workflow: rebuild data, tes, kembalikan aplikasi"],
-    wf1: s => [[`📍 Mencari ${s}… ketemu. Lampu locator biru dinyalakan 🔵`, 700, "loc"], [`🛑 Memindahkan Kumpulin & aplikasi lain dari ${s} ke server lain…`, 900, "moved"], [`✅ ${s} masuk mode maintenance, aman dikerjakan.`, 200, "maint"]],
+    wf1: s => [[`📍 Mencari ${s}… bertemu. Lampu locator biru dinyalakan 🔵`, 700, "loc"], [`🛑 Memindahkan Kumpulin & aplikasi lain dari ${s} ke server lain…`, 900, "moved"], [`✅ ${s} masuk mode maintenance, aman dikerjakan.`, 200, "maint"]],
     wf2: s => [["🔄 Rebuild data dari disk lain…", 0, "bar"], ["🧪 Health check disk baru… OK", 600], [`🟢 ${s} kembali menjalankan Kumpulin`, 600, "back"]] },
   psu: { slots: 2, unit: "PSU", part: "power supply", cls: "psu", title: "power supply (PSU) rusak", newBtn: "🔌 Pasang PSU baru",
     steps: ["⚙️ Workflow: cari lokasi & cek PSU cadangan", "🧤 Pakai gelang anti-statis", "🔍 Cabut PSU yang benar (server dengan lampu biru)", "🔌 Pasang PSU baru", "⚙️ Workflow: cek listrik kembali dobel, tutup tiket"],
-    wf1: s => [[`📍 Mencari ${s}… ketemu. Lampu locator biru dinyalakan 🔵`, 700, "loc"], [`🔋 Cek PSU cadangan di ${s}… sehat, server & Kumpulin tetap jalan dari PSU cadangan`, 900], ["✅ Aman diganti SAMBIL MENYALA (hot-swap), aplikasi tidak perlu dipindah.", 200, "hot"]],
+    wf1: s => [[`📍 Mencari ${s}… bertemu. Lampu locator biru dinyalakan 🔵`, 700, "loc"], [`🔋 Cek PSU cadangan di ${s}… sehat, server & Kumpulin tetap jalan dari PSU cadangan`, 900], ["✅ Aman diganti SAMBIL MENYALA (hot-swap), aplikasi tidak perlu dipindah.", 200, "hot"]],
     wf2: s => [["⚡ Cek PSU baru… tegangan normal", 700], [`🟢 ${s} kembali punya 2 PSU sehat (redundan lagi)`, 600, "back"]] },
   ram: { slots: 4, unit: "keping", part: "RAM", cls: "ram", title: "RAM (memori) error", newBtn: "🧩 Pasang RAM baru",
     steps: ["⚙️ Workflow: pindahkan aplikasi & MATIKAN server", "🧤 Pakai gelang anti-statis", "🔍 Cabut RAM yang benar (server dengan lampu biru)", "🧩 Pasang RAM baru", "⚙️ Workflow: nyalakan server, tes memori, kembalikan aplikasi"],
-    wf1: s => [[`📍 Mencari ${s}… ketemu. Lampu locator biru dinyalakan 🔵`, 700, "loc"], [`🛑 Memindahkan Kumpulin & aplikasi lain dari ${s} ke server lain…`, 900, "moved"], [`🔌 RAM tidak bisa diganti saat menyala → ${s} dimatikan (power off).`, 200, "off"]],
+    wf1: s => [[`📍 Mencari ${s}… bertemu. Lampu locator biru dinyalakan 🔵`, 700, "loc"], [`🛑 Memindahkan Kumpulin & aplikasi lain dari ${s} ke server lain…`, 900, "moved"], [`🔌 RAM tidak bisa diganti saat menyala → ${s} dimatikan (power off).`, 200, "off"]],
     wf2: s => [["⏻ Menyalakan server…", 600], ["🧪 Tes memori…", 0, "bar"], [`🟢 ${s} kembali menjalankan Kumpulin`, 600, "back"]] }
 };
 /* WF diagnosa: log per slot (❌ rusak, ⚠️ pengecoh yang masih normal), rencana kerja, spare part number */
 const TDX = {
   disk: { ok: "OK · suhu 38°C", warn: "⚠️ suhu 47°C (masih dalam batas normal)", bad: "❌ banyak error baca/tulis → rusak",
-    warnWhy: "Itu cuma peringatan suhu, masih normal. Cari yang ❌.", plan: "move",
+    warnWhy: "Itu hanya peringatan suhu, masih normal. Cari yang ❌.", plan: "move",
     spare: [["Disk pengganti", "PART-A1", 1]] },
   psu: { ok: "OK · listrik keluar normal", warn: "⚠️ kipas agak berisik (masih normal)", bad: "❌ tidak mengeluarkan listrik → rusak",
     warnWhy: "Kipas berisik masih normal. PSU yang ❌ yang tidak mengeluarkan listrik.", plan: "hot",
@@ -1882,7 +1906,7 @@ const TPLAN = {
 };
 const TPWHY = {
   disk: { hot: "Jangan langsung cabut! Disk menyimpan data aplikasi. Pindahkan aplikasinya dulu.", off: "Bisa, tapi tidak perlu. Disk bisa diganti saat menyala setelah aplikasi dipindah." },
-  psu: { move: "Tidak perlu. PSU cadangan masih sehat, server tetap aman menyala.", off: "Tidak perlu! Mematikan server malah bikin gangguan. PSU bisa hot-swap." },
+  psu: { move: "Tidak perlu. PSU cadangan masih sehat, server tetap aman menyala.", off: "Tidak perlu! Mematikan server malah membuat gangguan. PSU bisa hot-swap." },
   ram: { hot: "BAHAYA! RAM tidak bisa dicabut saat server menyala, server bisa langsung crash.", move: "Belum cukup. RAM tidak bisa diganti saat menyala, jadi server harus dimatikan." }
 };
 const TSTEPS = ["🔍 Cek WF: baca log, cari part yang rusak & cara kerja yang aman", null, "📦 Ambil spare part dari gudang", null, null, null, null];
@@ -2057,7 +2081,7 @@ $("#twf2").onclick = async () => {
     k.classList.remove("rebuild"); k.classList.add("bad");
     $("#tdiag").innerHTML = `<b>📦 WF:</b> ${tg.T.part} baru DOA ❌ · ambil 1 spare lagi dengan part number yang sama.`;
     tg.doaHit = true; tg.step = 2; tg.busy = false; $("#tspare").disabled = false; techSteps();
-    $("#tmsg").innerHTML = "😮 Part barunya ternyata <b>cacat dari pabrik (DOA)</b>. Ini bisa terjadi! Ambil spare lain, lalu ganti lagi. Itulah kenapa WF selalu <b>tes ulang</b>.";
+    $("#tmsg").innerHTML = "😮 Part barunya ternyata <b>cacat dari pabrik (DOA)</b>. Ini bisa terjadi! Ambil spare lain, lalu ganti lagi. Makanya WF selalu <b>tes ulang</b>.";
     return;
   }
   await techRunWF(tg.T.wf2(SV(tg.s)));
@@ -2065,7 +2089,7 @@ $("#twf2").onclick = async () => {
   $("#twf").textContent += `📦 Part rusak dikirim balik ke vendor (retur)${tg.doaHit ? " · termasuk 1 part DOA" : ""}\n🎫 Tiket #${tg.id} ditutup otomatis\n`;
   tg.step = 7; tg.busy = false; techSteps();
   const note = tg.type === "psu" ? " Server bahkan tidak perlu dimatikan (hot-swap)." : tg.type === "ram" ? " RAM harus dimatikan dulu, makanya aplikasinya dipindah sebelum server dimatikan." : "";
-  $("#tmsg").innerHTML = (tg.wrong ? `✅ Tiket selesai, tapi ada <b>${tg.wrong}× peringatan</b>. Di dunia nyata itu bisa bikin gangguan. Selalu baca WF & cek dua kali!` : "🏆 <b>Sempurna!</b> Tanpa satu pun peringatan. 📚 Kumpulin tetap online selama perbaikan, mahasiswa bahkan tidak sadar ada server rusak.") + note;
+  $("#tmsg").innerHTML = (tg.wrong ? `✅ Tiket selesai, tapi ada <b>${tg.wrong}× peringatan</b>. Di dunia nyata itu bisa membuat gangguan. Selalu baca WF & cek dua kali!` : "🏆 <b>Sempurna!</b> Tanpa satu pun peringatan. 📚 Kumpulin tetap online selama perbaikan, mahasiswa bahkan tidak sadar ada server rusak.") + note;
   if (!tg.wrong) confetti();
   missionDone("tech", tg.wrong ? 15 : 30);
 };
@@ -2074,8 +2098,8 @@ techNew();
 
 /* ---------- security game ---------- */
 const VIS = [
-  ["🧑‍🔧", "Rina, teknisi", "Kartu akses aktif ✅ · Ada tiket kerja di data hall hari ini ✅", true, "Benar! Identitas jelas, akses sesuai, ada tugas. Silakan masuk.", "Rina punya kartu aktif & tiket kerja hari ini, jadi dia <b>boleh masuk</b>. Keamanan itu tegas, tapi tetap adil."],
-  ["🕵️", "Orang menempel di belakang Rina", "Pintu terbuka setelah Rina scan kartu, orang ini ikut masuk tanpa scan", false, "Benar, tolak! Ini namanya <b>tailgating</b>. Setiap orang wajib scan kartunya sendiri, tidak boleh “nebeng”, sekalipun kelihatan seperti karyawan.", "Itu <b>tailgating</b>! Orang itu masuk tanpa scan kartu. Setiap orang wajib scan kartunya sendiri, jadi harusnya <b>ditolak</b>."]
+  ["🧑‍🔧", "Rina, teknisi", "Kartu akses aktif ✅ · Ada tiket kerja di data hall hari ini ✅", true, "Betul. Identitas jelas, akses sesuai, ada tugas. Silakan masuk.", "Rina punya kartu aktif & tiket kerja hari ini, jadi dia <b>boleh masuk</b>. Tegas boleh, tapi tetap adil."],
+  ["🕵️", "Orang menempel di belakang Rina", "Pintu terbuka setelah Rina scan kartu, orang ini ikut masuk tanpa scan", false, "Betul, tolak. Ini namanya <b>tailgating</b>. Setiap orang wajib scan kartunya sendiri, tidak boleh “nebeng”, sekalipun terlihat seperti karyawan.", "Itu <b>tailgating</b>! Orang itu masuk tanpa scan kartu. Setiap orang wajib scan kartunya sendiri, jadi harusnya <b>ditolak</b>."]
 ];
 let vi = 0, vs = 0, vlock = false, vrun = 0;
 const vEl = id => $("#" + id);
@@ -2116,7 +2140,7 @@ function visShow() {
   if (vi >= VIS.length) {
     $("#vcard").innerHTML = `<div class="face">🏅</div><h3>Shift selesai!</h3><p>Skor: <b>${vs} / ${VIS.length}</b></p><button class="btn primary" id="vre">🔁 Main lagi</button>`;
     $("#vre").onclick = () => { vi = 0; vs = 0; visShow(); };
-    $("#vres").textContent = vs === VIS.length ? "🎉 Kamu security yang hebat!" : "Keamanan itu soal disiplin, bukan curiga. 💪";
+    $("#vres").textContent = vs === VIS.length ? "🎉 Kamu security yang hebat!" : "Tegas sama aturan, tetap sopan sama orang.";
     if (vs === VIS.length) confetti();
     missionDone("sec", vs * 10);
     $("#vscore").textContent = ""; vlock = false; return;
@@ -2165,8 +2189,23 @@ function ppeRender() {
 function ppeWear(i) {
   const x = PPEL[i], t = $(`#ppeit [data-i="${i}"]`);
   if (!x[2]) { $("#ppemsg").innerHTML = `⛔ <b>${x[1]}</b>: ${x[3]}`; if (t) { t.classList.remove("shake"); void t.offsetWidth; t.classList.add("shake"); } return; }
+  /* efek: ikon terbang dari tombol ke kotaknya, avatar berdenyut, kilau di bagian badan */
+  const from = t ? t.getBoundingClientRect() : null;
   ppeOn.add(i); ppeRender(); $("#ppemsg").innerHTML = `✅ <b>${x[1]}</b>: ${x[3]}`;
-  if (PPEL.every((y, k) => !y[2] || ppeOn.has(k))) { $("#ppemsg").innerHTML += `<br>🎉 <b>PPE lengkap, siap masuk data hall!</b>`; confetti(); }
+  const slot = $$("#ppeav .pslot")[PPEL.slice(0, i).filter(y => y[2]).length], body = $("#ppeav .body");
+  if (from && slot) {
+    const to = slot.getBoundingClientRect(), fly = document.createElement("div");
+    fly.textContent = x[0]; fly.className = "keepemo";
+    Object.assign(fly.style, { position: "fixed", left: from.left + from.width / 2 - 20 + "px", top: from.top + 6 + "px", fontSize: "2.4rem", zIndex: 50, pointerEvents: "none", transition: "left .55s cubic-bezier(.4,0,.2,1), top .55s cubic-bezier(.4,0,.2,1), opacity .2s .5s" });
+    document.body.appendChild(fly); requestAnimationFrame(() => { fly.style.left = to.left + 8 + "px"; fly.style.top = to.top - 6 + "px"; fly.style.opacity = 0; });
+    setTimeout(() => fly.remove(), 800);
+  }
+  setTimeout(() => {
+    if (!body) return; body.classList.remove("glow"); void body.offsetWidth; body.classList.add("glow");
+    $("#ppeav").insertAdjacentHTML("beforeend", `<div class="spark keepemo" style="left:27%;top:${x[5]}%">✨</div>`);
+    setTimeout(() => $("#ppeav .spark")?.remove(), 950);
+  }, 450);
+  if (PPEL.every((y, k) => !y[2] || ppeOn.has(k))) { $("#ppemsg").innerHTML += `<br>🎉 <b>PPE lengkap, siap masuk data hall.</b>`; confetti(); setTimeout(() => $("#ppeav .body")?.classList.add("ready"), 500); }
 }
 $("#ppeit").onclick = e => { const b = e.target.closest("[data-i]"); if (b) ppeWear(+b.dataset.i); };
 $("#ppeall").onclick = async () => { $("#ppeall").disabled = true; for (let i = 0; i < PPEL.length; i++) if (PPEL[i][2] && !ppeOn.has(i)) { ppeWear(i); await sleep(500); } $("#ppeall").disabled = false; };
@@ -2181,8 +2220,8 @@ function acRender() {
   const r = $("#acrec");
   let t = "👆 Jawab dua pertanyaan di atas.";
   if (ac.a === 1) t = "🎓 <b>Pakai AWS Academy Learner Lab.</b> Minta dosen membuka kelas & mengundangmu. Ada kredit lab, tanpa kartu, dan aman dari tagihan.";
-  else if (ac.a === 0 && ac.b === 1) t = "💳 <b>Bikin akun AWS pribadi.</b> Daftar di aws.amazon.com → aktifkan MFA → buat budget alert (template “Zero spend budget”) → pilih Region Jakarta. Lalu lanjut ke lab.";
-  else if (ac.a === 0 && ac.b === 0) t = "📘 <b>Daftar AWS Educate</b> (gratis, tanpa kartu) untuk belajar lanjut, dan hari ini main <b>latihan deploy</b> + <b>game arsitek cloud</b> di deck ini, lalu ikuti demo live. Website-nya tetap bisa kamu bikin & download!";
+  else if (ac.a === 0 && ac.b === 1) t = "💳 <b>Buat akun AWS pribadi.</b> Daftar di aws.amazon.com → aktifkan MFA → buat budget alert (template “Zero spend budget”) → pilih Region Jakarta. Lalu lanjut ke lab.";
+  else if (ac.a === 0 && ac.b === 0) t = "📘 <b>Daftar AWS Educate</b> (gratis, tanpa kartu) untuk belajar lanjut, dan hari ini main <b>latihan deploy</b> + <b>game arsitek cloud</b> di deck ini, lalu ikuti demo live. Website-nya tetap bisa kamu membuat & download!";
   r.classList.remove("fadeup"); void r.offsetWidth; r.classList.add("fadeup");
   r.innerHTML = `<b>Rekomendasi untukmu:</b><br>${t}`;
 }
@@ -2296,7 +2335,7 @@ function arRender() {
   const parts = [arN() ? `🖥️ ${arN()} server × ${rp(AC.ec2)} = ${rp(arN() * AC.ec2)}` : "", ar.lb ? `⚖️ ${rp(AC.lb)}` : "", ar.db ? `🗄️ ${rp(AC.db)}` : "", ar.db && ar.multi ? `🔁 +${rp(AC.multi)}` : "", ar.s3 ? `🪣 ${rp(AC.s3)}` : "", ar.cf ? `⚡ ${rp(AC.cf)}` : "", ar.asg ? "📈 gratis" : ""].filter(Boolean);
   $("#abrk").innerHTML = parts.length ? parts.map(x => `<span class="pill" style="margin:.1rem;font-size:.75rem">${x}</span>`).join("") : "";
   const need = ar.cf ? 4 : 8, extra = ar.asg ? Math.max(0, need - arN()) : 0;
-  $("#apeak").innerHTML = ar.asg && extra ? `📈 Saat deadline: Auto Scaling menambah <b>${extra} server</b> → +${rp(extra * AC.ec2)}/jam <b>sementara</b>. Kalau ramainya ±2 jam/hari, tambahannya cuma ±${rp(extra * AC.ec2 * 2 * 30)}/bulan, jauh lebih hemat daripada ${need} server menyala terus (+${rp(extra * AC.ec2 * 24 * 30)}/bulan). Auto Scaling-nya gratis; yang dibayar hanya server tambahannya.` : ar.asg ? "📈 Auto Scaling siap menambah server saat ramai (fitur ini gratis, yang dibayar hanya server tambahannya)." : "";
+  $("#apeak").innerHTML = ar.asg && extra ? `📈 Saat deadline: Auto Scaling menambah <b>${extra} server</b> → +${rp(extra * AC.ec2)}/jam <b>sementara</b>. Kalau ramainya ±2 jam/hari, tambahannya hanya ±${rp(extra * AC.ec2 * 2 * 30)}/bulan, jauh lebih hemat daripada ${need} server menyala terus (+${rp(extra * AC.ec2 * 24 * 30)}/bulan). Auto Scaling-nya gratis; yang dibayar hanya server tambahannya.` : ar.asg ? "📈 Auto Scaling siap menambah server saat ramai (fitur ini gratis, yang dibayar hanya server tambahannya)." : "";
 }
 const AT = [
   ["👥 Hari biasa · server EC2", () => !arN() ? "Belum ada server sama sekali! Klik 🖥️ EC2, lalu klik kolom AZ." : arN() > 1 && !ar.lb ? "2+ server butuh ⚖️ Load balancer untuk membagi pengunjung." : "", 0],
@@ -2354,7 +2393,7 @@ $("#arun").onclick = async () => {
   const pass = ar.res.filter(r => !r).length;
   let rec = +(localStorage.getItem("archBest5") || 0);
   if (pass === AT.length && (!rec || arCost() < rec)) { rec = arCost(); localStorage.setItem("archBest5", rec); }
-  $("#amsg").innerHTML = pass === AT.length ? `🏆 <b>5/5, Arsitek cloud!</b> ⭐⭐⭐⭐⭐ Kumpulin menyimpan tugas dengan aman, cepat dari mana saja, tahan banjir, tahan deadline, dan hemat: <b>${rp(arCost())}/jam</b> (rekor di laptop ini: ${rp(rec)}/jam).` : `${pass}/${AT.length} task lolos. Baca pesan ❌ di daftar task, perbaiki, lalu uji lagi. 💪`;
+  $("#amsg").innerHTML = pass === AT.length ? `🏆 <b>5/5, Arsitek cloud!</b> ⭐⭐⭐⭐⭐ Kumpulin menyimpan tugas dengan aman, cepat dari mana saja, tahan banjir, tahan deadline, dan hemat: <b>${rp(arCost())}/jam</b> (rekor di laptop ini: ${rp(rec)}/jam).` : `${pass}/${AT.length} task lolos. Baca pesan ❌ di daftar task, perbaiki, lalu uji lagi.`;
   if (pass === AT.length) { confetti(); clearInterval(arTimer); if (ar.t0) $("#amsg").innerHTML += ` ⏱️ Waktumu: <b>${$("#atimer").textContent.replace("⏱️ ", "")}</b>`; }
 };
 function arFlood(on) {
@@ -2489,7 +2528,7 @@ $("#cstart").onclick = () => {
     $$("#cres .res:not(.gone)").forEach(el => { const r = cl.res.find(x => x.id === el.dataset.id); if (r && r.cost) { el.classList.remove("tick"); void el.offsetWidth; el.classList.add("tick"); } });
     if (clRate()) { const cb = $("#cbill"); cb.classList.remove("pop"); void cb.offsetWidth; cb.classList.add("pop"); }
   }, 400);
-  clMsg("⏱️ Argo jalan! Hapus semuanya. Hati-hati: tidak semua tombol menyelesaikan masalah… 😏");
+  clMsg("⏱️ Argo jalan. Hapus semuanya. Hati-hati, tidak semua tombol benar-benar menghentikan tagihan.");
 };
 $("#creset").onclick = clInit;
 clInit();
@@ -2498,7 +2537,7 @@ clInit();
 const QZ = [
   ["Apa keuntungan utama “Kumpulin” pindah dari server sendiri ke cloud?", ["Aplikasinya otomatis jadi bebas bug", "Tidak perlu beli server di awal, server bisa ditambah saat ramai, dan bayar sesuai pakai", "Kumpulin bisa dibuka tanpa koneksi internet", "Semua layanan cloud gratis tanpa batas"], 1],
   ["Kamu simpan tugas di Amazon S3, lalu satu gedung (AZ) kebanjiran. Tugasmu…", ["Hilang, karena file hanya disimpan di satu gedung", "Tetap aman, karena S3 otomatis menyimpan salinan di minimal 3 AZ", "Aman, tapi hanya kalau kamu sudah backup manual ke laptop", "Baru bisa dibuka lagi setelah gedungnya pulih"], 1],
-  ["Kamu cuma menyalakan 1 server EC2. Supaya tetap jalan walau satu gedung mati, kamu harus…", ["Memilih ukuran server yang lebih besar", "Menyalakan server di 2 AZ + load balancer", "Memindahkan file-file aplikasi ke S3 saja", "Mematikan server setiap malam supaya awet"], 1],
+  ["Kamu hanya menyalakan 1 server EC2. Supaya tetap jalan walau satu gedung mati, kamu harus…", ["Memilih ukuran server yang lebih besar", "Menyalakan server di 2 AZ + load balancer", "Memindahkan file-file aplikasi ke S3 saja", "Mematikan server setiap malam supaya awet"], 1],
   ["CloudFront membuat video materi cepat dibuka di mana-mana dengan cara…", ["Memperbesar kecepatan internet di HP pengguna", "Menyimpan salinan (cache) di lokasi yang dekat dengan pengguna", "Menurunkan kualitas video untuk semua orang", "Memindahkan server utama ke setiap kota"], 1],
   ["Kamu lihat rekan mau mengangkat server berat sendirian. Yang benar…", ["Bantu angkat dari satu sisi supaya cepat selesai", "Bilang STOP, lalu angkat berdua atau pakai alat bantu", "Biarkan saja, dia sudah berpengalaman", "Lanjut kerja, nanti dilaporkan kalau terjadi sesuatu"], 1]
 ];
@@ -2507,7 +2546,7 @@ function quiz() {
   const box = $("#quiz");
   if (qi >= QZ.length) {
     $("#qh").textContent = `Skor kamu: ${qs} / ${QZ.length} ${qs === QZ.length ? "🏆" : qs >= 4 ? "🎉" : "💪"}`;
-    box.innerHTML = `<p>${qs === QZ.length ? "Sempurna! Siap jadi orang cloud & data center." : "Keren! Ulangi untuk skor sempurna."}</p><button class="btn primary" id="qre">🔁 Ulangi</button>`;
+    box.innerHTML = `<p>${qs === QZ.length ? "Semua benar. Kalian sudah siap belajar cloud lebih jauh." : "Cukup baik. Coba lagi agar semuanya benar."}</p><button class="btn primary" id="qre">🔁 Ulangi</button>`;
     $("#qre").onclick = () => { qi = 0; qs = 0; quiz(); };
     if (qs >= 4) confetti(); return;
   }
@@ -2528,13 +2567,13 @@ function quiz() {
 quiz();
 
 /* ---------- career path finder ---------- */
-const LIKES = [["hw", "🔧 Pegang hardware"], ["net", "🌐 Jaringan & internet"], ["cloud", "☁️ Bikin aplikasi di cloud"], ["sec", "🔐 Keamanan"], ["people", "🗣️ Ngatur orang & proyek"]];
+const LIKES = [["hw", "🔧 Pegang hardware"], ["net", "🌐 Jaringan & internet"], ["cloud", "☁️ Buat aplikasi di cloud"], ["sec", "🔐 Keamanan"], ["people", "🗣️ Ngatur orang & proyek"]];
 const PATHS = [
   { k: "hw", n: "🔧 Data Center Technician", r: ["Bulan 1–2: dasar hardware komputer (CPU, RAM, disk), rakit & bongkar PC", "Bulan 3–4: Linux dasar, troubleshooting, K3/safety kerja", "Bulan 5–6: AWS Cloud Practitioner, magang/part-time di bidang IT support"] },
   { k: "net", n: "🌐 Deployer / Network Engineer", r: ["Bulan 1–2: TCP/IP, subnetting, cara kerja internet", "Bulan 3–4: switching & routing (materi setara CCNA), fiber optik, lab pakai simulator", "Bulan 5–6: AWS Cloud Practitioner + script Python sederhana untuk otomatisasi"] },
   { k: "cloud", n: "☁️ Cloud Engineer / Solutions Architect", r: ["Bulan 1–2: Linux, Git, satu bahasa (Python/JS)", "Bulan 3–4: AWS Cloud Practitioner, deploy aplikasi sendiri (EC2, S3, CloudFront)", "Bulan 5–6: rancang arsitektur multi-AZ, lanjut AWS Solutions Architect Associate"] },
   { k: "sec", n: "🔐 Security", r: ["Bulan 1–2: dasar jaringan & Linux", "Bulan 3–4: keamanan dasar (password, enkripsi, IAM), ikut CTF pemula", "Bulan 5–6: keamanan di AWS + sertifikasi security tingkat dasar"] },
-  { k: "people", n: "📋 Project Manager", r: ["Bulan 1–2: belajar cara mengelola proyek, bikin jadwal, bagi tugas, catat risiko. Latihan langsung: jadi ketua kelompok/panitia, pakai Trello atau Notion", "Bulan 3–4: pahami “bahasa” tim teknis, dasar cloud (AWS Cloud Practitioner) & cara kerja data center, supaya nyambung saat ngobrol dengan engineer", "Bulan 5–6: pimpin satu proyek nyata dari awal sampai selesai (lomba, magang, proyek kampus), lalu tulis ceritanya: target, kendala, solusi → jadi portofolio"] }
+  { k: "people", n: "📋 Project Manager", r: ["Bulan 1–2: belajar cara mengelola proyek, membuat jadwal, bagi tugas, catat risiko. Latihan langsung: jadi ketua kelompok/panitia, pakai Trello atau Notion", "Bulan 3–4: pahami “bahasa” tim teknis, dasar cloud (AWS Cloud Practitioner) & cara kerja data center, supaya nyambung saat ngobrol dengan engineer", "Bulan 5–6: pimpin satu proyek nyata dari awal sampai selesai (lomba, magang, proyek kampus), lalu tulis ceritanya: target, kendala, solusi → jadi portofolio"] }
 ];
 const like = new Set();
 $("#likes").innerHTML = LIKES.map(([k, n]) => `<span class="chip" data-k="${k}">${n}</span>`).join("");
@@ -2615,7 +2654,7 @@ $("#cfvis").onclick = async () => {
     ms = 230; cf.origin++; msg = "🐢 Tanpa cache, setiap pengunjung harus jalan jauh ke Amerika dan balik lagi.";
   } else if (cf.cached) {
     await cfLeg(CFX.v, CFX.e, 2.5, "#ff9900"); await cfLeg(CFX.e, CFX.v, 2.5, "#3ddc84");
-    ms = 5; cf.hit++; msg = "✅ <b>Cache HIT!</b> Salinan sudah ada di CloudFront Jakarta → langsung dikirim. Server di Amerika bahkan tidak tahu ada pengunjung. 😎";
+    ms = 5; cf.hit++; msg = "✅ <b>Cache HIT!</b> Salinan sudah ada di CloudFront Jakarta → langsung dikirim. Server di Amerika tidak perlu kerja sama sekali.";
   } else {
     await cfLeg(CFX.v, CFX.e, 2.5, "#ff9900"); await cfLeg(CFX.e, CFX.o, 110, "#ff9900");
     await cfLeg(CFX.o, CFX.e, 110, "#3ddc84"); $("#cfbox").style.display = ""; $("#cfbox").classList.add("pop");
@@ -2783,7 +2822,7 @@ function cgMidSheet(res, msg) {
   $("#cgtest").onclick = cgTest; $("#cgnew").onclick = cgNew;
   if ($("#cgauto")) $("#cgauto").onclick = cgAuto;
 }
-/* cabling otomatis sesuai data koneksi, satu per satu supaya kelihatan */
+/* cabling otomatis sesuai data koneksi, satu per satu supaya terlihat */
 async function cgAuto() {
   if (cg.stage !== 2 || cg.auto) return;
   cg.auto = true; $("#cgauto").disabled = true; const run = cg.run;
@@ -2891,7 +2930,7 @@ async function wfRun() {
   cg.wf[0] = "run"; wfRender(); await sleep(900);
   if (dev === "prod") {
     cg.wf[0] = "fail"; wfRender(); cg.wfBusy = false; $("#wfrun").disabled = false;
-    msg.innerHTML = "⛔ <b>Pre-check gagal:</b> switch-lama adalah switch yang sedang menjalankan aplikasi orang. Workflow menolak mengubahnya tanpa rencana & persetujuan. Untung pakai workflow! Pilih device yang benar.";
+    msg.innerHTML = "⛔ <b>Pre-check gagal:</b> switch-lama adalah switch yang sedang menjalankan aplikasi orang. Workflow menolak mengubahnya tanpa rencana & persetujuan. Ini gunanya workflow. Pilih device yang benar.";
     return;
   }
   for (let k = 0; k < WF.length; k++) {
@@ -2953,7 +2992,7 @@ $("#pOut").onclick = async () => {
       if (pw2.bat <= 0) {
         clearInterval(tick); pw2.down = true; $("#w2").classList.remove("on");
         pwSet("pRack", "dead", "MATI 💀"); pwSet("pUps", "dead", "Baterai habis");
-        $("#pMsg").innerHTML = "💀 <b>Baterai habis, rack mati.</b> Generator cadangan terlambat dinyalakan. Itulah kenapa Facility team rutin latihan seperti ini! Tekan <b>Reset</b> dan coba lagi.";
+        $("#pMsg").innerHTML = "💀 <b>Baterai habis, rack mati.</b> Generator cadangan terlambat dinyalakan. Makanya Facility team rutin latihan seperti ini. Tekan <b>Reset</b> dan coba lagi.";
         $("#pStart2").disabled = true;
       }
     } else if (pw2.bat < 100) { pw2.bat = Math.min(100, pw2.bat + 2); $("#pBat").style.width = pw2.bat + "%"; $("#pUpsS").textContent = `Mengisi ulang ${Math.round(pw2.bat)}%`; }
@@ -2975,13 +3014,13 @@ $("#pStart2").onclick = async () => {
   const id = pwRun; $("#pStart2").disabled = true; pwSet("pG2", "warn", "Starting… 🔄");
   await sleep(1500); if (id !== pwRun || pw2.down) return;
   pw2.src = "g2"; pwSet("pG2", "live", "Menyala ✅ menyuplai rack"); pwSet("pUps", "live");
-  $("#pMsg").innerHTML = `✅ <b>Generator 2 mengambil alih</b> dengan sisa baterai ${Math.round(pw2.bat)}%. Fiuh! Inilah gunanya <b>cadangan dari cadangan</b>. Sekarang catat & laporkan.`;
+  $("#pMsg").innerHTML = `✅ <b>Generator 2 mengambil alih</b> dengan sisa baterai ${Math.round(pw2.bat)}%. Aman. Untung ada <b>cadangan dari cadangan</b>. Sekarang catat & laporkan.`;
   $("#pLog").disabled = false;
 };
 $("#pLog").onclick = () => {
   $("#pLog").disabled = true;
   heatStart();
-  $("#pMsg").innerHTML = "📝 <b>Kejadian dicatat & dilaporkan.</b> Generator 1 dijadwalkan diperbaiki, dan tim mencari tahu penyebabnya supaya tidak terulang. 🎉 <b>Rack tidak mati sedetik pun!</b>";
+  $("#pMsg").innerHTML = "📝 <b>Kejadian dicatat & dilaporkan.</b> Generator 1 dijadwalkan diperbaiki, dan tim mencari tahu penyebabnya supaya tidak terulang. <b>Rack tidak mati sedetik pun!</b>";
   confetti();
 };
 $("#pReset").onclick = pwInit;
@@ -3068,7 +3107,7 @@ function heatActs() {
   const fixed = ht.box && ht.door;
   const A = fixed ? [["📝 Catat & laporkan", "log"]] : ht.found
     ? [[ht.box ? "✅ Kardus sudah disingkirkan" : "📦 Singkirkan kardus dari depan rack 7", "box"], [ht.door ? "✅ Pintu containment tertutup" : "🚪 Tutup pintu containment", "door"]]
-    : [["🔍 Cek unit pendingin", "cool"], ["🔍 Cek lorong & rack", "aisle"], ["🔌 Matikan rack 7", "off"], ["🌬️ Buka pintu data hall biar adem", "open"]];
+    : [["🔍 Cek unit pendingin", "cool"], ["🔍 Cek lorong & rack", "aisle"], ["🔌 Matikan rack 7", "off"], ["🌬️ Buka pintu data hall agar adem", "open"]];
   $("#hact").innerHTML = A.map(([l, a]) => `<button class="btn ${l.startsWith("✅") ? "" : a === "cool" || a === "off" || a === "open" ? "" : "primary"}" data-a="${a}" ${l.startsWith("✅") ? "disabled" : ""}>${l}</button>`).join("");
 }
 function heatStart() {
@@ -3077,7 +3116,7 @@ function heatStart() {
   ht.t = [0, 1].map(row => Array.from({ length: 8 }, (_, i) => heatTarget(row, i) - (row === 0 && i === 6 ? 6 : 2)));
   $("#heat").style.display = ""; heatRender(); heatActs();
   $("#hexp").innerHTML = "Gambar kiri = tampak <b>atas</b> dua baris rack. Rack menghisap udara dingin dari <b>depan</b> (lorong dingin) dan membuang panas ke <b>belakang</b>, ke lorong panas yang “dikurung”.";
-  $("#hmsg").innerHTML = "🚨 <b>Alarm baru!</b> Suhu rack 7 terus naik, rack di ujung baris juga mulai hangat. Apa yang kamu lakukan? 🤔";
+  $("#hmsg").innerHTML = "🚨 <b>Alarm baru!</b> Suhu rack 7 terus naik, rack di ujung baris juga mulai hangat. Apa yang kamu lakukan?";
   clearInterval(ht.timer);
   ht.timer = setInterval(() => {
     for (const row of [0, 1]) for (let i = 0; i < 8; i++) ht.t[row][i] += (heatTarget(row, i) - ht.t[row][i]) * .06;
@@ -3110,7 +3149,7 @@ $("#hact").onclick = async e => {
   if (ht.box && ht.door && (a === "box" || a === "door")) m.innerHTML = "✅ <b>Dua-duanya beres!</b> Lihat semua rack kembali adem… 📉 Lalu catat & laporkan.";
   if (a === "log") {
     if (Math.max(...ht.t[0], ...ht.t[1]) > 27) { m.innerHTML = "⏳ Tunggu semua rack kembali normal dulu, baru catat."; return; }
-    if (!ht.done) { ht.done = true; m.innerHTML = "📝 <b>Dicatat!</b> Kardus tidak boleh ditinggal di data hall, dan pintu containment harus selalu tertutup, jadi pelajaran untuk semua tim. 🎉"; confetti(); missionDone("fac", 30); }
+    if (!ht.done) { ht.done = true; m.innerHTML = "📝 <b>Dicatat!</b> Kardus tidak boleh ditinggal di data hall, dan pintu containment harus selalu tertutup, jadi pelajaran untuk semua tim."; confetti(); missionDone("fac", 30); }
   }
   heatActs(); heatRender();
 };
@@ -3125,7 +3164,7 @@ function lgNew() {
   const bad = shuffle(items.map((_, i) => i)).slice(0, 2);
   const boxes = items.map((it, i) => ({ ...it, box: it.sn, ok: true, cond: "Kondisi baik 👍" }));
   boxes[bad[0]].box = sn(); boxes[bad[0]].ok = false; boxes[bad[0]].why = "Nomor seri di kardus <b>tidak ada di manifest</b>, bisa salah kirim.";
-  boxes[bad[1]].cond = "Kardus penyok & basah 🫨"; boxes[bad[1]].ok = false; boxes[bad[1]].why = "Barang <b>rusak saat pengiriman</b>, difoto & dilaporkan, jangan dipasang.";
+  boxes[bad[1]].cond = "Kardus penyok & basah"; boxes[bad[1]].ok = false; boxes[bad[1]].why = "Barang <b>rusak saat pengiriman</b>, difoto & dilaporkan, jangan dipasang.";
   lg = { items, boxes: shuffle(boxes), done: 0, score: 0, scanned: false, run: Math.random() };
   const run = lg.run;
   $("#lgpo").textContent = "PO-" + (2026000 + (Math.random() * 999 | 0));
@@ -3165,7 +3204,7 @@ $("#lgscan").onclick = () => {
 };
 function lgBoxes() {
   $("#lgbox").innerHTML = lg.boxes.map((b, i) => `<div class="box pop" data-i="${i}" style="animation-delay:${i * 220}ms"><div style="font-size:2rem">📦</div><b>${b.e} ${b.n}</b>
-    <div class="mono" style="font-size:.85rem" id="lgb${i}">— belum di-scan —</div><div class="mute" style="font-size:.85rem">${b.cond}</div>
+    <div class="mono" style="font-size:.85rem" id="lgb${i}">belum di-scan</div><div class="mute" style="font-size:.85rem">${b.cond}</div>
     <div class="row lgact" style="justify-content:center;margin-top:.4rem"><button class="btn lgsc" data-s="${i}" ${lg.scanned ? "" : "disabled"}>📟 Scan kardus</button></div><div class="res-t" style="font-size:.85rem;margin-top:.3rem"></div></div>`).join("");
 }
 $("#lgbox").addEventListener("click", e => {
@@ -3188,7 +3227,7 @@ $("#lgbox").onclick = e => {
   card.querySelector(".row").remove();
   card.querySelector(".res-t").innerHTML = (right ? "✅ " : "❌ ") + (x.ok ? "Seri cocok & kondisi baik → diterima & dicatat." : x.why);
   if (++lg.done === lg.boxes.length) {
-    $("#lgres").innerHTML = `<b>Skor ${lg.score} / ${lg.boxes.length}</b> ${lg.score === lg.boxes.length ? "🏆 Logistik teliti!" : "— teliti itu kunci!"}`;
+    $("#lgres").innerHTML = `<b>Skor ${lg.score} / ${lg.boxes.length}</b> ${lg.score === lg.boxes.length ? "🏆 Semua kardus dicek dengan benar." : "Masih ada yang kelewat. Cek lagi pelan-pelan."}`;
     if (lg.score === lg.boxes.length) confetti();
     missionDone("log", lg.score * 5);
   }
@@ -3215,7 +3254,7 @@ async function ampRun(file) {
   }
   ampRender(AMS.length);
   const id = "d" + Math.random().toString(36).slice(2, 9);
-  $("#ampurl").innerHTML = `🌐 <span class="mono acc">https://main.${id}.amplifyapp.com</span> <button class="btn" id="ampopen">👀 Buka (preview)</button><div class="mute" style="font-size:.8rem">Di lab asli, link ini bisa dibuka siapa saja, kirim ke grup kelas! 🎉</div>`;
+  $("#ampurl").innerHTML = `🌐 <span class="mono acc">https://main.${id}.amplifyapp.com</span> <button class="btn" id="ampopen">👀 Buka (preview)</button><div class="mute" style="font-size:.8rem">Di lab asli, link ini bisa dibuka siapa saja, kirim ke grup kelas.</div>`;
   $("#ampopen").onclick = () => { const u = URL.createObjectURL(new Blob([siteHtml()], { type: "text/html" })); window.open(u, "_blank"); };
   confetti(); ampBusy = false;
 }
@@ -3250,14 +3289,14 @@ $("#e2go").onclick = async () => {
   await sleep(1500);
   e2.st = "run"; e2Render();
   $("#e2st").innerHTML = `<span style="color:var(--green)">✅ Server ${E2[e2.size][0]} menyala!</span>`;
-  $("#e2note").innerHTML = "Cuma ±1 menit, dulu beli server fisik butuh <b>berminggu-minggu</b>. Server-mu tinggal di rack yang dipasang tim Deployment 👷";
+  $("#e2note").innerHTML = "Hanya ±1 menit, dulu beli server fisik butuh <b>berminggu-minggu</b>. Server-mu tinggal di rack yang dipasang tim Deployment 👷";
   clearInterval(e2.t);
-  e2.t = setInterval(() => { e2.hour++; e2.bill += E2[e2.size][2]; $("#e2bill").textContent = `⏱️ Jam ke-${e2.hour} · 💸 ${rp(e2.bill)} (argo jalan selama server nyala)`; }, 600);
+  e2.t = setInterval(() => { e2.hour++; e2.bill += E2[e2.size][2]; $("#e2bill").textContent = `⏱️ Jam ke-${e2.hour} · 💸 ${rp(e2.bill)} (argo jalan selama server menyala)`; }, 600);
 };
 $("#e2stop").onclick = () => {
   if (e2.st !== "run") return;
   clearInterval(e2.t); e2.st = "off"; e2Render();
-  $("#e2st").textContent = "⏹️ Server dimatikan"; $("#e2note").textContent = "Argo berhenti. Bayar hanya selama dipakai, itulah enaknya cloud. 💸✋";
+  $("#e2st").textContent = "⏹️ Server dimatikan"; $("#e2note").textContent = "Argo berhenti. Bayar hanya selama dipakai. Ini enaknya cloud.";
 };
 const s3s = { n: 0 };
 function s3Render() {
@@ -3266,16 +3305,16 @@ function s3Render() {
 }
 $("#s3up").onclick = () => {
   s3s.n = Math.min(4, s3s.n + 1); s3Render();
-  $("#s3msg").innerHTML = `✅ <b>tugas.pdf</b> tersimpan. Tidak perlu pilih server, tidak perlu atur disk. Bayar sesuai ukuran file. <span class="mute">(Rahasia S3 yang bikin file-nya susah hilang? Kita lihat di Bab 3.)</span>`;
+  $("#s3msg").innerHTML = `✅ <b>tugas.pdf</b> tersimpan. Tidak perlu pilih server, tidak perlu atur disk. Bayar sesuai ukuran file. <span class="mute">(Rahasia S3 yang membuat file-nya susah hilang? Kita lihat di Bab 3.)</span>`;
 };
 e2Render(); s3Render();
 
 /* ---------- AWS itu apa: layanan yang dipakai di cerita ---------- */
-const AWSV = [["🖥️", "EC2", "Sewa server. Seperti komputer yang kamu pinjam, nyala dalam hitungan menit.", "Bab 2"], ["🪣", "S3", "Gudang file: tugas, foto, video. Otomatis disalin supaya tidak hilang.", "Bab 2"],
+const AWSV = [["🖥️", "EC2", "Sewa server. Seperti komputer yang kamu pinjam, menyala dalam hitungan menit.", "Bab 2"], ["🪣", "S3", "Gudang file: tugas, foto, video. Otomatis disalin supaya tidak hilang.", "Bab 2"],
   ["⚡", "CloudFront", "Menaruh salinan konten dekat pengguna, supaya cepat dibuka dari mana saja.", "Bab 2"], ["⚖️", "Load balancer", "Membagi pengunjung ke beberapa server, dan mengalihkan kalau ada yang mati.", "Bab 2"],
   ["📈", "Auto Scaling", "Menambah server otomatis saat ramai, mengurangi lagi saat sepi.", "Bab 2"], ["🌐", "Amplify", "Online-kan website tanpa mengurus server. Kita pakai di lab!", "Bab 5"]];
 $("#awssv").innerHTML = AWSV.map(([e, n], i) => `<button class="tile" data-i="${i}" style="padding:.5rem;color:var(--ink)"><div style="font-size:1.6rem">${e}</div><b>${n}</b></button>`).join("");
-$("#awssv").onclick = ev => { const b = ev.target.closest("[data-i]"); if (!b) return; const [e, n, d, bab] = AWSV[+b.dataset.i]; $$("#awssv .tile").forEach(x => x.classList.toggle("sel", x === b)); $("#awsd").innerHTML = `<b>${e} ${n}</b>: ${d} <span class="acc">· ketemu di ${bab}</span>`; awsAnim(n); };
+$("#awssv").onclick = ev => { const b = ev.target.closest("[data-i]"); if (!b) return; const [e, n, d, bab] = AWSV[+b.dataset.i]; $$("#awssv .tile").forEach(x => x.classList.toggle("sel", x === b)); $("#awsd").innerHTML = `<b>${e} ${n}</b>: ${d} <span class="acc">· bertemu di ${bab}</span>`; awsAnim(n); };
 
 /* ---------- load balancer & auto scaling ---------- */
 const lbs = { down: false, busy: false };
@@ -3298,7 +3337,7 @@ function asRender(deadline) {
   $("#asn").classList.toggle("on", !deadline); $("#asd").classList.toggle("on", deadline);
   const n = deadline ? 6 : 2;
   $("#asbox").innerHTML = Array.from({ length: n }, (_, i) => `<span class="pop keepemo" style="display:inline-block;animation-delay:${i * 120}ms">🖥️</span>`).join("");
-  $("#asmsg").innerHTML = deadline ? `👥 Pengunjung naik 50×. Auto Scaling menambah server jadi <b>6</b> (${rp(6 * 350)}/jam), cuma selama ramai.` : `👥 Pengunjung normal. Cukup <b>2</b> server (${rp(2 * 350)}/jam).`;
+  $("#asmsg").innerHTML = deadline ? `👥 Pengunjung naik 50×. Auto Scaling menambah server jadi <b>6</b> (${rp(6 * 350)}/jam), hanya selama ramai.` : `👥 Pengunjung normal. Cukup <b>2</b> server (${rp(2 * 350)}/jam).`;
 }
 $("#asn").onclick = () => asRender(false); $("#asd").onclick = () => asRender(true);
 lbRender(); asRender(false);
@@ -3321,7 +3360,7 @@ async function awsAnim(n) {
     st.innerHTML = `<div style="position:absolute;left:12%;top:10px;width:90px;border:3px solid #4a5670;border-radius:8px;padding:4px;background:#060d1a">${Array.from({ length: 6 }, (_, k) => `<div id="e2s${k}" style="height:14px;margin:3px 0;border-radius:3px;background:#22385e;transition:.5s"></div>`).join("")}</div>` + lb("rack di data center", 17, 128) + `<div class="it" id="e2t" style="left:40%;top:45px;font-size:1.15rem">⏳ Menyiapkan server…</div>`;
     await sleep(900); if (!ok()) return;
     const sl = $("#e2s3"); sl.style.background = "#1d6b4f"; sl.style.boxShadow = "0 0 14px #3ddc84";
-    $("#e2t").innerHTML = `✅ Server kamu nyala!<br><small class="mute">nyala dalam hitungan menit · bayar per jam</small>`;
+    $("#e2t").innerHTML = `✅ Server kamu menyala!<br><small class="mute">menyala dalam hitungan menit · bayar per jam</small>`;
   }
   if (n === "S3") {
     st.innerHTML = it("s3p", "📱", 8, 50) + it("s3b", "🪣", 78, 40, 3) + lb("gudang file", 82, 110) + `<div class="it" id="s3c" style="left:60%;top:118px;font-size:.9rem">0 file</div>`;
@@ -3356,14 +3395,15 @@ const COST = Array.from({ length: 13 }, (_, k) => ({ m: k, a: 23 + 16.6 * k, b: 
 const CX = k => 50 + k * 40, CY = v => 250 - v / 240 * 225;
 const jt = v => "Rp " + (v >= 10 ? Math.round(v) : v.toFixed(1).replace(".", ",")) + " juta";
 let costN = 0, costRun = 0;
+const costAt = (key, n) => { const k = Math.floor(n), f = n - k, a = COST[k][key], b = COST[Math.min(12, k + 1)][key]; return a + (b - a) * f; };
 function costDraw(n) {
   costN = n;
   let g = "";
   for (const v of [0, 60, 120, 180, 240]) g += `<line x1="50" x2="530" y1="${CY(v)}" y2="${CY(v)}" stroke="#2a4270" stroke-width="1"/><text x="44" y="${CY(v) + 4}" fill="#9fb0c8" font-size="11" text-anchor="end">${v}</text>`;
   for (let k = 0; k <= 12; k += 2) g += `<text x="${CX(k)}" y="270" fill="#9fb0c8" font-size="11" text-anchor="middle">${k}</text>`;
   g += `<text x="290" y="287" fill="#9fb0c8" font-size="11" text-anchor="middle">bulan ke-</text><text x="50" y="14" fill="#9fb0c8" font-size="11">(juta Rp)</text>`;
-  const pts = key => COST.slice(0, n + 1).map(d => `${CX(d.m)},${CY(d[key])}`).join(" ");
-  const last = COST[n];
+  const pts = key => COST.slice(0, Math.floor(n) + 1).map(d => `${CX(d.m)},${CY(d[key])}`).concat(`${CX(n)},${CY(costAt(key, n))}`).join(" ");
+  const last = { a: costAt("a", n), b: costAt("b", n) }, nm = Math.floor(n);
   g += `<polyline points="${pts("a")}" fill="none" stroke="#c87500" stroke-width="2.5" stroke-linejoin="round"/><polyline points="${pts("b")}" fill="none" stroke="#1aa89c" stroke-width="2.5" stroke-linejoin="round"/>`;
   g += `<circle cx="${CX(n)}" cy="${CY(last.a)}" r="5" fill="#c87500" stroke="#13233d" stroke-width="2"/><circle cx="${CX(n)}" cy="${CY(last.b)}" r="5" fill="#1aa89c" stroke="#13233d" stroke-width="2"/>`;
   g += `<text x="${Math.min(CX(n) + 8, 470)}" y="${CY(last.a) - 8}" fill="#e8eef7" font-size="12" font-weight="700">${jt(last.a)}</text><text x="${Math.min(CX(n) + 8, 470)}" y="${CY(last.b) - 8}" fill="#e8eef7" font-size="12" font-weight="700">${jt(last.b)}</text>`;
@@ -3371,9 +3411,9 @@ function costDraw(n) {
   for (let k = 0; k <= 12; k++) g += `<rect data-k="${k}" x="${CX(k) - 20}" y="20" width="40" height="235" fill="transparent"/>`;
   $("#costsvg").innerHTML = g;
   $("#costA").textContent = jt(last.a); $("#costB").textContent = jt(last.b); $("#costD").textContent = jt(last.a - last.b);
-  $("#costmon").textContent = n ? `Bulan ke-${n}` : "Bulan ke-0: baru beli server";
-  $$(".costn").forEach(x => x.textContent = `· total sampai bulan ke-${n}`);
-  $("#costwh").textContent = n === 12 ? `Cloud cuma sekitar ${Math.round(last.b / last.a * 100)}% dari biaya server sendiri.` : "";
+  $("#costmon").textContent = nm ? `Bulan ke-${nm}` : "Bulan ke-0: baru membeli server";
+  $$(".costn").forEach(x => x.textContent = `· total sampai bulan ke-${nm}`);
+  $("#costwh").textContent = n >= 12 ? `Cloud hanya sekitar ${Math.round(last.b / last.a * 100)}% dari biaya server sendiri.` : "";
 }
 $("#costsvg").addEventListener("mousemove", e => {
   const r = e.target.closest("rect[data-k]"), tip = $("#costtip"), x = $("#costx"); if (!r) { tip.style.display = "none"; if (x) x.style.display = "none"; return; }
@@ -3385,7 +3425,10 @@ $("#costsvg").addEventListener("mousemove", e => {
 });
 $("#costsvg").addEventListener("mouseleave", () => { $("#costtip").style.display = "none"; const x = $("#costx"); if (x) x.style.display = "none"; });
 $("#costtab").innerHTML = `<table><tr><th>Bulan</th><th>Server sendiri</th><th>Cloud</th></tr>${COST.map(d => `<tr><td>${d.m}</td><td>${jt(d.a)}</td><td>${jt(d.b)}</td></tr>`).join("")}</table>`;
-async function costPlay() { const run = ++costRun; for (let k = 0; k <= 12; k++) { if (run !== costRun) return; costDraw(k); await sleep(k ? 280 : 700); } }
+async function costPlay() {
+  const run = ++costRun; costDraw(0); await sleep(600); const t0 = performance.now(), D = 4200;
+  (function f(t) { if (run !== costRun) return; const r = Math.min(1, (t - t0) / D), e = r < .5 ? 2 * r * r : 1 - Math.pow(-2 * r + 2, 2) / 2; costDraw(12 * e); if (r < 1) requestAnimationFrame(f); })(t0);
+}
 $("#costplay").onclick = costPlay;
 let costT = null;
 hooks["Hitung setahun"] = () => { costRun++; costDraw(0); clearTimeout(costT); costT = setTimeout(costPlay, 600); };
@@ -3400,7 +3443,7 @@ async function onionIntruder() {
     <g id="ongd" style="opacity:0;transition:opacity .4s"><text x="70" y="342" font-size="30" text-anchor="middle">👮</text></g>
     <g id="onmsg" style="opacity:0;transition:opacity .4s"><rect x="-10" y="384" width="230" height="26" rx="13" fill="#3a1414" stroke="#ff5d5d"/><text x="105" y="402" font-size="12" font-weight="800" fill="#ffb3b3" text-anchor="middle">⛔ Ditolak di perimeter</text></g></g>`);
   const th = $("#onth"), ring = svg.querySelector('.oring[data-i="0"] circle');
-  $("#onT").textContent = "🚨 Ada orang asing mendekat…"; $("#onD").textContent = "Dia nggak terdaftar, nggak punya jadwal kunjungan, dan nggak bawa kartu akses.";
+  $("#onT").textContent = "🚨 Ada orang asing mendekat…"; $("#onD").textContent = "Dia tidak terdaftar, tidak punya jadwal kunjungan, dan tidak bawa kartu akses.";
   await sleep(60); th.style.transform = "translate(38px,352px)"; await sleep(1700); if (!ok()) return;
   $("#ongd").style.opacity = 1; ring.setAttribute("stroke", "#ff5d5d"); ring.setAttribute("stroke-width", "7"); await sleep(500); if (!ok()) return;
   $("#onmsg").style.opacity = 1;
@@ -3413,16 +3456,14 @@ hooks["Kepercayaan: data kamu aman?"] = () => setTimeout(onionIntruder, 700);
 
 /* ---------- story map ---------- */
 const STORY = [
-  ["👋", "Mulai", "Satu pertanyaan pembuka, lalu cerita Kumpulin dimulai.", "Perkenalan", 1, 2],
-  ["☁️", "Bab 1 · Dasar cloud", "Project Kumpulin, server sendiri vs cloud, argo taksi, cahaya di kabel.", "Dulu: punya server sendiri", 2, 2],
-  ["🧰", "Bab 2 · Kenalan AWS", "AWS itu apa, Region & AZ, EC2 & S3, load balancer, CloudFront, data aman.", "AWS itu apa?", 3, 2],
-  ["🏢", "Bab 3 · Masuk ke gedung", "Safety dulu, lalu magang sehari keliling gedung & semua tim.", "Safety nomor satu", 4, 2],
-  ["🏗️", "Bab 4 · Satukan semua", "Rakit Kumpulin yang anti down pakai semua yang sudah dipelajari.", "Game: jadi arsitek cloud", 4, 1],
-  ["🚀", "Bab 5 · Let's deploy!", "Bikin akun, lalu online-kan website pertamamu.", "Akun AWS: gimana caranya?", 3, 1],
-  ["🏆", "Bab 6 · Kuis", "Buktikan kamu sudah jadi orang cloud!", "Kuis", 2, 1],
-  ["🏁", "Selesai", "Cari jalur kariermu.", "Langkah selanjutnya", 1, 1]
+  ["☁️", "Bab 1 · Dasar cloud", "", "Dulu: punya server sendiri", 1, 2],
+  ["🧰", "Bab 2 · Kenalan AWS", "", "AWS itu apa?", 2, 2],
+  ["🏢", "Bab 3 · Masuk ke gedung", "", "Safety nomor satu", 3, 2],
+  ["🏗️", "Bab 4 · Satukan semua", "", "Game: jadi arsitek cloud", 3, 1],
+  ["🚀", "Bab 5 · Let's deploy!", "", "Lab: website online (Amplify)", 2, 1],
+  ["🏆", "Bab 6 · Kuis", "", "Kuis", 1, 1]
 ];
-$("#story").innerHTML = STORY.map((x, i) => `<div class="sq story ${i === STORY.length - 1 ? "endsq" : ""}" data-t="${esc(x[3])}" style="grid-column:${x[4]};grid-row:${x[5]}"><span class="no">${i === 0 || i === STORY.length - 1 ? "" : i}</span><div style="font-size:2rem">${x[0]}</div><h3 style="margin:.2rem 0">${x[1]}</h3><p class="mute" style="margin:0;font-size:.9rem">${x[2]}</p></div>`).join("")
+$("#story").innerHTML = STORY.map((x, i) => `<div class="sq story" data-t="${esc(x[3])}" style="grid-column:${x[4]};grid-row:${x[5]}"><span class="no">${i + 1}</span><div style="font-size:2rem">${x[0]}</div><h3 style="margin:.2rem 0">${x[1]}</h3></div>`).join("")
   + `<span id="pawn" class="keepemo">🧑‍🎓</span>`;
 function pawnAt(i, hop) {
   const sq = $$("#story .sq")[i], p = $("#pawn"); if (!sq || !p) return;
